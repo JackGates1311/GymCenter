@@ -128,16 +128,16 @@ public class Workout {
     @Override
     public String toString() {
         return "Workout{" +
-                "workoutId=" + workoutId +
-                ", workoutTypeName='" + workoutTypeName + '\'' +
-                ", workoutCoaches='" + workoutCoaches + '\'' +
-                ", workoutDescription='" + workoutDescription + '\'' +
-                ", workoutPrice=" + workoutPrice +
-                ", workoutOrganizatonType=" + workoutOrganizatonType +
-                ", workoutLevel=" + workoutLevel +
-                ", workoutLength=" + workoutLength +
-                ", workoutAverageRate=" + workoutAverageRate +
-                ", isDeleted=" + isDeleted +
+                "workoutId=" + workoutId + "\n" +
+                ", workoutTypeName='" + workoutTypeName + '\'' + "\n" +
+                ", workoutCoaches='" + workoutCoaches + '\'' + "\n" +
+                ", workoutDescription='" + workoutDescription + '\'' + "\n" +
+                ", workoutPrice=" + workoutPrice + "\n" +
+                ", workoutOrganizatonType=" + workoutOrganizatonType + "\n" +
+                ", workoutLevel=" + workoutLevel + "\n" +
+                ", workoutLength=" + workoutLength + "\n" +
+                ", workoutAverageRate=" + workoutAverageRate + "\n" +
+                ", isDeleted=" + isDeleted + "\n" +
                 '}';
     }
 
