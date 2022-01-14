@@ -56,4 +56,20 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 
         return jdbcTemplate.query(sqlQuery, new WorkoutRowMapper());
     }
+
+    @Override
+    public int add(Workout workout) {
+
+        return 0;
+    }
+
+    @Override
+    public int update(Workout workout) {
+        return 0;
+    }
+
+    @Override
+    public int delete(Workout workout) {
+        return 0;
+    }
 }

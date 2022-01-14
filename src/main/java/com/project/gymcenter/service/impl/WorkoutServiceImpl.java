@@ -18,4 +18,19 @@ public class WorkoutServiceImpl implements WorkoutService {
     public List<Workout> findAll() {
         return workoutDAO.findAll();
     }
+
+    @Override
+    public int add(Workout workout) {
+        return 0;
+    }
+
+    @Override
+    public int update(Workout workout) {
+        return 0;
+    }
+
+    @Override
+    public int delete(Workout workout) {
+        return 0;
+    }
 }

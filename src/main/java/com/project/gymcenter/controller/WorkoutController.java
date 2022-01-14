@@ -1,7 +1,9 @@
 package com.project.gymcenter.controller;
 
 
+import com.project.gymcenter.model.RegisteredUser;
 import com.project.gymcenter.model.Workout;
+import com.project.gymcenter.service.RegisteredUserService;
 import com.project.gymcenter.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class WorkoutController {
     @Autowired
     private WorkoutService workoutService;
 
+    @Autowired
+    private RegisteredUserService registeredUserService;
+
     @GetMapping(value="/log")
     @ResponseBody
     public void index() throws IOException{
@@ -27,6 +32,10 @@ public class WorkoutController {
         List<Workout> workoutList = workoutService.findAll();
 
         System.out.println(workoutList.toString());
+
+        List<RegisteredUser> registeredUsers = registeredUserService.findAll();
+
+        System.out.println(registeredUsers.toString());
 
         return;
     }

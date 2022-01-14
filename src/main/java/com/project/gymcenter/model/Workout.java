@@ -127,7 +127,7 @@ public class Workout {
 
     @Override
     public String toString() {
-        return "Workout{" +
+        return "Workout{" + "\n" +
                 "workoutId=" + workoutId + "\n" +
                 ", workoutTypeName='" + workoutTypeName + '\'' + "\n" +
                 ", workoutCoaches='" + workoutCoaches + '\'' + "\n" +
