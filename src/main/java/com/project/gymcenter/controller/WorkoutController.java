@@ -5,6 +5,7 @@ import com.project.gymcenter.model.Workout;
 import com.project.gymcenter.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,10 +20,19 @@ public class WorkoutController {
     @Autowired
     private WorkoutService workoutService;
 
+
     @RequestMapping(value="/workouts")
-    public String workouts() {
+    public String workouts(Model model) {
+
+        List<Workout> workoutList = workoutService.findAll();
+
+        System.out.println(workoutList);
+
+        model.addAttribute("workouts", workoutList);
+
         return "workouts";
     }
+
 
     @GetMapping(value="/log")
     @ResponseBody

@@ -29,7 +29,9 @@ public class LoginController {
 
         if(registeredUserService.findOne(userName, password) != null) {
 
-            return "workouts";
+
+            return "redirect:/workouts";
+            //return "workouts";
 
         } else {
 
