@@ -21,6 +21,12 @@ public class RegisteredUserImpl implements RegisteredUserService {
     }
 
     @Override
+    public RegisteredUser findOne(String userName, String password) {
+
+        return registeredUserDAO.findOne(userName, password);
+    }
+
+    @Override
     public int add(RegisteredUser registeredUser) {
         return 0;
     }

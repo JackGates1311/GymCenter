@@ -4,6 +4,7 @@ import com.project.gymcenter.dao.RegisteredUserDAO;
 import com.project.gymcenter.model.RegisteredUser;
 import com.project.gymcenter.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -59,6 +60,22 @@ public class RegisteredUserDAOImpl implements RegisteredUserDAO {
         String sqlQuery = "SELECT * FROM registeredUser";
 
         return jdbcTemplate.query(sqlQuery, new RegisteredUserRowMapper());
+    }
+
+    @Override
+    public RegisteredUser findOne(String userName, String password) {
+
+        try {
+
+            String sqlQuery = "SELECT * FROM registeredUser WHERE userName = ? AND userPassword = ?";
+
+            return jdbcTemplate.queryForObject(sqlQuery, new RegisteredUserRowMapper(), userName, password);
+
+        } catch (EmptyResultDataAccessException ex) {
+
+            return null;
+        }
+
     }
 
     @Override

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MagicBoost Gym - Login</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+
+<div class="center">
+
+    <h2>MagicBoost Gym Login</h2>
+
+    <p class="centerError" th:if="${invalidCredentials}"> Username or Password is not correct! </p>
+
+    <form th:action="@{/}" th:object="${loginForm}" method="post">
+
+        <br>
+        <label for="userName">User name:</label>
+        <br><br>
+        <input type="text" name="userName" id="userName" placeholder="User name">
+        <br><br>
+        <label for="password">Password:</label>
+        <br><br>
+        <input type="password" name="password" id="password" placeholder="Password">
+        <br><br>
+        <input class="button" type="submit" value="Login">
+        <br><br>
+
+    </form>
+
+
+</div>
+
+</body>
+</html>
