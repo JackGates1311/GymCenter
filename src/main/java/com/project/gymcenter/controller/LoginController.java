@@ -1,6 +1,8 @@
 package com.project.gymcenter.controller;
 
 import com.project.gymcenter.form.LoginForm;
+import com.project.gymcenter.model.RegisteredUser;
+import com.project.gymcenter.model.UserRole;
 import com.project.gymcenter.service.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,11 +29,14 @@ public class LoginController {
         String userName = loginForm.getUserName();
         String password = loginForm.getPassword();
 
-        if(registeredUserService.findOne(userName, password) != null) {
+        RegisteredUser registeredUser = registeredUserService.findOne(userName, password);
 
+        if(registeredUser != null) {
 
-            return "redirect:/workouts";
-            //return "workouts";
+            if(registeredUser.getUserRole().equals(UserRole.Administrator))
+                return "redirect:/workouts";
+            else
+                return "login"; // NOT IMPLEMENTED YET FOR CUSTOMER
 
         } else {
 

@@ -36,9 +36,13 @@ public class WorkoutDAOImpl implements WorkoutDAO {
             int workoutLength = rs.getInt(index++);
             Double workoutAverageRate = rs.getDouble(index++);
             Boolean isDeleted = rs.getBoolean(index++);
+            String workoutName = rs.getString(index++);
+            String workoutTypeDetailedDescription = rs.getString(index++);
+            String workoutImage = rs.getString(index++);
 
             Workout workout = new Workout (workoutId, workoutTypeName, workoutCoaches, workoutDescription, workoutPrice,
-                    workoutOrganizatonType, workoutLevel, workoutLength, workoutAverageRate, isDeleted);
+                    workoutOrganizatonType, workoutLevel, workoutLength, workoutAverageRate, isDeleted, workoutName,
+                    workoutTypeDetailedDescription, workoutImage);
 
             return workout;
         }
@@ -52,7 +56,12 @@ public class WorkoutDAOImpl implements WorkoutDAO {
     @Override
     public List<Workout> findAll() {
 
-        String sqlQuery = "SELECT * FROM workout";
+        String sqlQuery = "SELECT workout.workoutId, workout.workoutTypeName, workout.workoutCoaches, " +
+                "workout.workoutDescription, workout.workoutPrice,\n" +
+                "workout.workoutOrganizationType, workout.workoutLevel, workout.workoutLength, " +
+                "workout.workoutAverageRate, workout.isDeleted, workout.workoutName, \n" +
+                "workoutType.workoutTypeDetailedDescription, workoutType.workoutImage FROM workout " +
+                "LEFT OUTER JOIN workoutType ON workoutType.workoutTypeName = workout.workoutTypeName;";
 
         return jdbcTemplate.query(sqlQuery, new WorkoutRowMapper());
     }

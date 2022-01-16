@@ -3,32 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <title>Workouts</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+
 <body>
-    List of workouts
-<table border="1">
 
-    <thead>
+    <div class="centerTable">
 
-        <tr>
-            <th> workoutTypeName </th>
-            <th> workoutDescription </th>
-        </tr>
+        <h2> List of workouts </h2>
 
-    </thead>
+        <div>
 
-    <tbody>
+            <form th:action="@{/}" th:object="${loginForm}" method="post">
 
-        <tr th:each="tempWorkouts:${workouts}">
+                <br><br>
 
-            <td th:text="${tempWorkouts.workoutTypeName}"/>
-            <td th:text="${tempWorkouts.workoutDescription}"/>
+                <label class="workoutSearch" for="workoutNameSearch"> Workout Name: </label>
+                <label class="workoutSearch" for="workoutNameSearch"> Workout Instructor: </label>
+                <label class="workoutSearch" for="workoutPriceMinSearch"> Workout Price: </label>
+                <label class="workoutSearch" for="workoutNameSearch"> Workout Type: </label>
+                <label class="workoutSearch" for="workoutNameSearch"> Workout Org. Type: </label>
+                <label class="workoutSearch" for="workoutNameSearch"> Sort by: </label>
 
-        </tr>
+                <br><br>
 
-    </tbody>
+                <input class="workoutSearch" type="search" name="workoutNameSearch" id="workoutNameSearch" placeholder="Workout name">
 
-</table>
+                <input class="workoutSearch" type="search" name="workoutInstructorsSearch" id="workoutInstructorsSearch" placeholder="Workout instructor">
+
+                <input class="workoutSearchSplitted" type="search" name="workoutPriceMinSearch" id="workoutPriceMinSearch"
+                       placeholder="Min"/>
+
+                <input class="workoutSearchSplitted" type="search" name="workoutPriceMaxSearch" id="workoutPriceMaxSearch"
+                       placeholder="Max"/>
+
+                <select class="workoutSearch" name="workoutTypeNameSearch" id="workoutTypeNameSearch">
+
+                    <option value="" selected> </option>
+                    <option th:each="tempWorkouts:${workoutTypes}"
+                            th:text="${tempWorkouts.workoutTypeName}"
+                            th:value="${tempWorkouts.workoutTypeName}">
+                </select>
+
+                <select class="workoutSearch" name="workoutOrganizationType" id="workoutOrganizationType">
+
+                    <option value="" selected> </option>
+                    <option value="Individual">Individual</option>
+                    <option value="Group">Group</option>
+
+                </select>
+
+                <select class="workoutSort" name="workoutSort" id="workoutSort">
+
+                    <option value="" selected> </option>
+                    <option value="Workout Name Ascending">Workout Name Ascending</option>
+                    <option value="Workout Name Descending">Workout Name Descending</option>
+                    <option value="Workout Instructor Ascending">Workout Instructor Ascending</option>
+                    <option value="Workout Instructor Descending">Workout Instructor Descending</option>
+                    <option value="Workout Price Ascending">Workout Price Ascending</option>
+                    <option value="Workout Price Descending">Workout Price Descending</option>
+                    <option value="Workout Type Ascending">Workout Type Ascending</option>
+                    <option value="Workout Type Descending">Workout Type Descending</option>
+                    <option value="Workout Org. Type Ascending">Workout Org. Type Ascending</option>
+                    <option value="Workout Org. Type Descending">Workout Org. Type Descending</option>
+                    <option value="Workout Average Ascending">Workout Average Ascending</option>
+                    <option value="Workout Average Descending">Workout Average Descending</option>
+
+
+                </select>
+
+                <input class="workoutSearchSplitted" type="submit" value="Find & Sort">
+
+                <br><br>
+
+            </form>
+
+        </div>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th> Workout Image </th>
+                    <th> Workout Name</th>
+                    <th> Workout Type</th>
+                    <th> Workout Level</th>
+                    <th> Workout Coaches</th>
+                    <th> Workout Price</th>
+                    <th> Workout Organization Type</th>
+                    <th> Workout Average Rate</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr th:each="tempWorkouts:${workouts}">
+
+                    <td><img th:src="@{${tempWorkouts.workoutImage}}"
+                             width="64" height="64"/> </td>
+                    <td> <a th:href="${tempWorkouts.workoutId}" th:text="${tempWorkouts.workoutName}"/> </td>
+                    <td th:text="${tempWorkouts.workoutTypeName}"/>
+                    <td th:text="${tempWorkouts.workoutLevel}"/>
+                    <td th:text="${tempWorkouts.workoutCoaches}"/>
+                    <td th:text="${tempWorkouts.workoutPrice}"/>
+                    <td th:text="${tempWorkouts.workoutOrganizationType}"/>
+                    <td th:text="${tempWorkouts.workoutAverageRate}"/>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+       <!-- <script>
+
+            $("#workoutSearch").on("keyup", function(){
+
+                var value = $(this).val();
+
+                $("table tr").each(function(records){
+
+                    if(records != 0) {
+
+                        var currentRow=$(this).closest("tr");
+                        var id = currentRow.find("td:eq(3)").text();
+
+                        alert(currentRow.find("td:eq(1)").text());
+
+                        if(id.indexOf(value) != 0) {
+
+                            $(this).hide();
+
+                        } else {
+
+                            $(this).show();
+                        }
+                    }
+
+                })
+
+            });
+
+        </script> !-->
+
+    </div>
 
 </body>
+
 </html>

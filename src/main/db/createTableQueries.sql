@@ -12,7 +12,8 @@ CREATE TABLE workout (
     workoutLevel ENUM('Amateur', 'Medium', 'Advanced'),
     workoutLength INT NOT NULL,
     workoutAverageRate DOUBLE,
-    isDeleted BOOLEAN
+    isDeleted BOOLEAN,
+    workoutName NVARCHAR(255) NOT NULL
     
 );
 

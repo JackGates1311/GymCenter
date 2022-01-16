@@ -7,11 +7,15 @@ public class Workout {
     private String workoutCoaches;
     private String workoutDescription;
     private Double workoutPrice;
-    private WorkoutOrganizatonType workoutOrganizatonType;
+    private WorkoutOrganizatonType workoutOrganizationType;
     private WorkoutLevel workoutLevel;
     private int workoutLength;
     private Double workoutAverageRate;
     private Boolean isDeleted;
+    private String workoutName;
+    private String workoutTypeDetailedDescription;
+    private String workoutImage;
+
 
     public Workout() {
 
@@ -20,16 +24,20 @@ public class Workout {
         this.workoutCoaches = null;
         this.workoutDescription = null;
         this.workoutPrice = null;
-        this.workoutOrganizatonType = null;
+        this.workoutOrganizationType = null;
         this.workoutLength = 0;
         this.workoutAverageRate = null;
         this.isDeleted = null;
+        this.workoutName = null;
+        this.workoutTypeDetailedDescription = null;
+        this.workoutImage = null;
 
     }
 
     public Workout(Long workoutId, String workoutTypeName, String workoutCoaches, String workoutDescription,
-                   Double workoutPrice, WorkoutOrganizatonType workoutOrganizatonType, WorkoutLevel workoutLevel,
-                   int workoutLength, Double workoutAverageRate, Boolean isDeleted) {
+                   Double workoutPrice, WorkoutOrganizatonType workoutOrganizationType, WorkoutLevel workoutLevel,
+                   int workoutLength, Double workoutAverageRate, Boolean isDeleted, String workoutName,
+                   String workoutTypeDetailedDescription, String workoutImage) {
 
         super();
 
@@ -38,11 +46,14 @@ public class Workout {
         this.workoutCoaches = workoutCoaches;
         this.workoutDescription = workoutDescription;
         this.workoutPrice = workoutPrice;
-        this.workoutOrganizatonType = workoutOrganizatonType;
+        this.workoutOrganizationType = workoutOrganizationType;
         this.workoutLevel = workoutLevel;
         this.workoutLength = workoutLength;
         this.workoutAverageRate = workoutAverageRate;
         this.isDeleted = isDeleted;
+        this.workoutName = workoutName;
+        this.workoutTypeDetailedDescription = workoutTypeDetailedDescription;
+        this.workoutImage = workoutImage;
     }
 
     public Long getWorkoutId() {
@@ -85,12 +96,12 @@ public class Workout {
         this.workoutPrice = workoutPrice;
     }
 
-    public WorkoutOrganizatonType getWorkoutOrganizatonType() {
-        return workoutOrganizatonType;
+    public WorkoutOrganizatonType getWorkoutOrganizationType() {
+        return workoutOrganizationType;
     }
 
-    public void setWorkoutOrganizatonType(WorkoutOrganizatonType workoutOrganizatonType) {
-        this.workoutOrganizatonType = workoutOrganizatonType;
+    public void setWorkoutOrganizationType(WorkoutOrganizatonType workoutOrganizationType) {
+        this.workoutOrganizationType = workoutOrganizationType;
     }
 
     public WorkoutLevel getWorkoutLevel() {
@@ -125,6 +136,30 @@ public class Workout {
         isDeleted = deleted;
     }
 
+    public String getWorkoutName() {
+        return workoutName;
+    }
+
+    public void setWorkoutName(String workoutName) {
+        this.workoutName = workoutName;
+    }
+
+    public String getWorkoutTypeDetailedDescription() {
+        return workoutTypeDetailedDescription;
+    }
+
+    public void setWorkoutTypeDetailedDescription(String workoutTypeDetailedDescription) {
+        this.workoutTypeDetailedDescription = workoutTypeDetailedDescription;
+    }
+
+    public String getWorkoutImage() {
+        return workoutImage;
+    }
+
+    public void setWorkoutImage(String workoutImage) {
+        this.workoutImage = workoutImage;
+    }
+
     @Override
     public String toString() {
         return "Workout{" + "\n" +
@@ -133,11 +168,14 @@ public class Workout {
                 ", workoutCoaches='" + workoutCoaches + '\'' + "\n" +
                 ", workoutDescription='" + workoutDescription + '\'' + "\n" +
                 ", workoutPrice=" + workoutPrice + "\n" +
-                ", workoutOrganizatonType=" + workoutOrganizatonType + "\n" +
+                ", workoutOrganizatonType=" + workoutOrganizationType + "\n" +
                 ", workoutLevel=" + workoutLevel + "\n" +
                 ", workoutLength=" + workoutLength + "\n" +
                 ", workoutAverageRate=" + workoutAverageRate + "\n" +
                 ", isDeleted=" + isDeleted + "\n" +
+                ", workoutName=" + workoutName + "\n" +
+                ", workoutTypeDetailedDescription=" + workoutTypeDetailedDescription + "\n" +
+                ", workoutImage=" + workoutImage + "\n" +
                 '}';
     }
 
