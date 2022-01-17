@@ -26,9 +26,8 @@ public class WorkoutTypeDAOImpl implements WorkoutTypeDAO {
 
             String workoutTypeName = rs.getString(index++);
             String workoutTypeDetailedDescription = rs.getString(index++);
-            String workoutImage = rs.getString(index++);
 
-            WorkoutType workoutType = new WorkoutType(workoutTypeName, workoutTypeDetailedDescription, workoutImage);
+            WorkoutType workoutType = new WorkoutType(workoutTypeName, workoutTypeDetailedDescription);
 
             return workoutType;
         }

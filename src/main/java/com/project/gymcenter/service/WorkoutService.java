@@ -14,4 +14,8 @@ public interface WorkoutService {
 
     public int delete(Workout workout);
 
+    public List<Workout> find(String workoutName, String workoutworkoutCoaches, Double workoutPriceMin,
+                              Double workoutPriceMax, String workoutTypeName, String workoutOrganizationType,
+                              String workoutLevel, String workoutSortBy);
+
 }

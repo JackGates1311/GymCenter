@@ -5,12 +5,14 @@ import com.project.gymcenter.model.Workout;
 import com.project.gymcenter.model.WorkoutLevel;
 import com.project.gymcenter.model.WorkoutOrganizatonType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -37,12 +39,11 @@ public class WorkoutDAOImpl implements WorkoutDAO {
             Double workoutAverageRate = rs.getDouble(index++);
             Boolean isDeleted = rs.getBoolean(index++);
             String workoutName = rs.getString(index++);
-            String workoutTypeDetailedDescription = rs.getString(index++);
             String workoutImage = rs.getString(index++);
 
             Workout workout = new Workout (workoutId, workoutTypeName, workoutCoaches, workoutDescription, workoutPrice,
                     workoutOrganizatonType, workoutLevel, workoutLength, workoutAverageRate, isDeleted, workoutName,
-                    workoutTypeDetailedDescription, workoutImage);
+                    workoutImage);
 
             return workout;
         }
@@ -56,12 +57,7 @@ public class WorkoutDAOImpl implements WorkoutDAO {
     @Override
     public List<Workout> findAll() {
 
-        String sqlQuery = "SELECT workout.workoutId, workout.workoutTypeName, workout.workoutCoaches, " +
-                "workout.workoutDescription, workout.workoutPrice,\n" +
-                "workout.workoutOrganizationType, workout.workoutLevel, workout.workoutLength, " +
-                "workout.workoutAverageRate, workout.isDeleted, workout.workoutName, \n" +
-                "workoutType.workoutTypeDetailedDescription, workoutType.workoutImage FROM workout " +
-                "LEFT OUTER JOIN workoutType ON workoutType.workoutTypeName = workout.workoutTypeName;";
+        String sqlQuery = "SELECT * FROM workout";
 
         return jdbcTemplate.query(sqlQuery, new WorkoutRowMapper());
     }
@@ -80,5 +76,33 @@ public class WorkoutDAOImpl implements WorkoutDAO {
     @Override
     public int delete(Workout workout) {
         return 0;
+    }
+
+    @Override
+    public List<Workout> find(String workoutName, String workoutCoaches, Double workoutPriceMin,
+                              Double workoutPriceMax, String workoutTypeName, String workoutOrganizationType,
+                              String workoutLevel, String workoutSortBy) {
+
+        ArrayList<Object> args = new ArrayList<Object>();
+
+        try {
+
+            String sqlQuery = "SELECT * FROM workout\n" +
+                    "WHERE workoutName LIKE '%" + workoutName + "%' AND workoutCoaches LIKE '%"
+                    + workoutCoaches + "%' AND " + "(workoutPrice BETWEEN " + workoutPriceMin + " AND " +
+                    workoutPriceMax + ") AND workoutTypeName LIKE '%" + workoutTypeName + "%' AND\n" +
+                    "workoutOrganizationType LIKE '%" + workoutOrganizationType + "%' AND " +
+                    "workoutLevel LIKE '%" + workoutLevel + "%'\n " + workoutSortBy + ";";
+
+
+            List<Workout> workoutsFound = jdbcTemplate.query(sqlQuery, new WorkoutRowMapper());
+
+            return workoutsFound;
+
+        } catch (EmptyResultDataAccessException ex) {
+
+            return null;
+        }
+
     }
 }

@@ -106,7 +106,7 @@ select {
     float: left;
     margin-left: 15px;
     left: 0%;
-    width: 185px;
+    width: 145px;
     height: 30px;
 
 }
@@ -116,7 +116,7 @@ select {
     float: left;
     margin-left: 15px;
     left: 0%;
-    width: 85px;
+    width: 65px;
     height: 30px;
 
 }
@@ -127,6 +127,26 @@ select {
     margin-left: 15px;
     left: 0%;
     width: 220px;
+    height: 30px;
+
+}
+
+#workoutSearchButton {
+
+    float: left;
+    margin-left: 15px;
+    left: 0%;
+    width: 80px;
+    height: 30px;
+
+}
+
+.clearSearchButton {
+
+    float: left;
+    margin-left: 15px;
+    left: 0%;
+    width: 40px;
     height: 30px;
 
 }

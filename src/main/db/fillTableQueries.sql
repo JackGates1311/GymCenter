@@ -26,36 +26,36 @@ INSERT INTO loyaltyCard(userId, discount, points) VALUES
     (7, 10, 5);
 
 INSERT INTO workout(workoutId, workoutTypeName, workoutCoaches, workoutDescription, workoutPrice, workoutOrganizationType, 
-	workoutLevel, workoutLength, workoutAverageRate, isDeleted, workoutName) VALUES
-        (1, 'Yoga', 'jovana123', 'Yoga helps to relax better', 1200, 'Individual', 'Amateur', 120, NULL, false, 'Workout 1'),
-		(2, 'Yoga', 'branko123/milan123', 'Yoga helps to relax better', 800, 'Group', 'Medium', 150, 8, false, 'Workout 2'),
-        (3, 'Fitness', 'branko123', 'Fitness improves your health and mood', 1400, 'Individual', 'Advanced', 240, 9, false, 'Workout 3'),
-        (4, 'Fitness', 'jovana123/milan123', 'Fitness improves your health and mood', 1000, 'Group', 'Amateur', 120, NULL, false, 'Workout 4'),
-        (5, 'Cardio', 'jovana123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1500, 'Individual', 'Advanced', 240, NULL, false, 'Workout 5'),
-        (6, 'Cardio', 'jovana123/branko123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1100, 'Group', 'Amateur', 240, 9, false, 'Workout 6'),
-        (7, 'Yoga', 'branko123', 'Yoga helps to relax better', 1300, 'Individual', 'Medium', 150, 10, true, 'Workout 7'),
-        (8, 'Cardio', 'jovana123/branko123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1200, 'Group', 'Amateur', 120, NULL, true, 'Workout 8');
+	workoutLevel, workoutLength, workoutAverageRate, isDeleted, workoutName, workoutImage) VALUES
+        (1, 'Yoga', 'jovana123', 'Yoga helps to relax better', 1200, 'Individual', 'Amateur', 120, NULL, false, 'Workout 1', 'images/yoga.png'),
+		(2, 'Yoga', 'branko123/milan123', 'Yoga helps to relax better', 800, 'Group', 'Medium', 150, 8, false, 'Workout 2', 'images/yoga.png'),
+        (3, 'Fitness', 'branko123', 'Fitness improves your health and mood', 1400, 'Individual', 'Advanced', 240, 9, false, 'Workout 3', 'images/fitness.png'),
+        (4, 'Fitness', 'jovana123/milan123', 'Fitness improves your health and mood', 1000, 'Group', 'Amateur', 120, NULL, false, 'Workout 4', 'images/fitness.png'),
+        (5, 'Cardio', 'jovana123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1500, 'Individual', 'Advanced', 240, NULL, false, 'Workout 5', 'images/cardio.png'),
+        (6, 'Cardio', 'jovana123/branko123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1100, 'Group', 'Amateur', 240, 9, false, 'Workout 6', 'images/cardio.png'),
+        (7, 'Yoga', 'branko123', 'Yoga helps to relax better', 1300, 'Individual', 'Medium', 150, 10, true, 'Workout 7', 'images/yoga.png'),
+        (8, 'Cardio', 'jovana123/branko123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1200, 'Group', 'Amateur', 120, NULL, true, 'Workout 8', 'images/cardio.png');
         
-INSERT INTO workoutType(workoutTypeName, workoutTypeDetailedDescription, workoutImage) VALUES
+INSERT INTO workoutType(workoutTypeName, workoutTypeDetailedDescription) VALUES
 	('Yoga', 'Yoga is the science of body, mind and spirit. The physical part of Yoga consists of Asanas - exercises and postures that develop the body and Pranayama - breathing exercises. 
     Mental development in Yoga is achieved through breathing exercises, concentration exercises and meditation. The physical benefits you can expect from exercise are, among others, 
     improved circulation, increased elasticity of all muscles, greater strength and resistance to disease. Yoga pays special attention to the spinal column, whose increased elasticity not 
     only results in good health, but also successfully combats the many difficulties that people in the 21st century suffer from. Asanas stretch, massage and stimulate not only muscles, 
-    but also internal organs and glandular system.', 'images/yoga.png'),
+    but also internal organs and glandular system.'),
     ('Fitness', 'Fitness improves your health and mood. Fitness includes several training programs and the biggest advantage of which is adaptability to the individual needs of each 
-    individual. The fitness club is equipped with the most modern equipment from the leading manufacturers', 'IMAGEPATH'),
+    individual. The fitness club is equipped with the most modern equipment from the leading manufacturers'),
     ('Cardio', 'Cardio training is the most effective way to remove fat deposits, achieve and maintain fitness. Cardio exercises are necessary for any effective training program because they 
     stimulate fat burning, but they are also good for the overall health of the body. Also, if you have not exercised for a long time, and you do not have the strength for other workouts, 
-    you can always adjust the cardio workout to your abilities.', 'images/cardio.png'),
+    you can always adjust the cardio workout to your abilities.'),
     ('Pilates', 'Pilates largely avoids high impact, high power output, and heavy muscular and skeletal loading. Builds strength without extra effort, creating a slender body with tight 
     thighs and a flat stomach. He teaches the body good posture and simple, graceful movements. Pilates largely avoids high impact, high power output, and heavy muscular and skeletal 
     loading. It can even help relieve back pain. Professional dancers have been using the benefits of Pilates for decades. Top athletes use it for strength, flexibility and injury 
     prevention. Hollywood stars and supermodels use it to maintain a good look. Miracle? Not really ... Developed from, above all, rehabilitation techniques, Pilates is a safe, subtle 
-    system of exercises that uses mats or appropriate equipment to help you look and feel your best. Regardless of your age or fitness, Pilates will suit you.', 'images/pilates.png'),
+    system of exercises that uses mats or appropriate equipment to help you look and feel your best. Regardless of your age or fitness, Pilates will suit you.'),
     ('Step', 'Step aerobics is a choreographic training with a lot of steps and movements, which also gives a form of dance, but the platform for "climbing" is used all the time. The 
     platform can be adjusted to several different heights, which allows practitioners to work with different training. The training consists of several types of steps that can be combined 
     with the work of the hands and with an additional small load of two-handed weights, so in addition to endurance and calorie burning, we also work on muscle tone. There is great 
-    interest in this type of aerobics, which bodybuilders use as cardio training.', 'image/step.png');
+    interest in this type of aerobics, which bodybuilders use as cardio training.');
 
 INSERT INTO auditorium(auditoriumId, capacity, isDeleted) VALUES 
 	('100', 5, false),

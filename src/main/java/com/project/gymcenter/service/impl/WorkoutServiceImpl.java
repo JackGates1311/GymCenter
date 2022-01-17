@@ -33,4 +33,11 @@ public class WorkoutServiceImpl implements WorkoutService {
     public int delete(Workout workout) {
         return 0;
     }
+
+    @Override
+    public List<Workout> find(String workoutName, String workoutCoaches, Double workoutPriceMin, Double workoutPriceMax, String workoutTypeName, String workoutOrganizationType, String workoutLevel, String workoutSortBy) {
+        return workoutDAO.find(workoutName,
+                workoutCoaches, workoutPriceMin, workoutPriceMax, workoutTypeName, workoutOrganizationType,
+                workoutLevel, workoutSortBy);
+    }
 }

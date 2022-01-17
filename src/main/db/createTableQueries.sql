@@ -1,6 +1,19 @@
 CREATE DATABASE gymCenter;
 USE gymCenter;
 
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS workout;
+DROP TABLE IF EXISTS workoutType;
+DROP TABLE IF EXISTS auditorium;
+DROP TABLE IF EXISTS period;
+DROP TABLE IF EXISTS periodReserved;
+DROP TABLE IF EXISTS registeredUser;
+DROP TABLE IF EXISTS loyaltyCard;
+DROP TABLE IF EXISTS workoutComment;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
 CREATE TABLE workout (
 
 	workoutId LONG NOT NULL,
@@ -13,16 +26,16 @@ CREATE TABLE workout (
     workoutLength INT NOT NULL,
     workoutAverageRate DOUBLE,
     isDeleted BOOLEAN,
-    workoutName NVARCHAR(255) NOT NULL
+    workoutName NVARCHAR(255) NOT NULL,
+    workoutImage LONGTEXT NOT NULL
     
 );
 
 CREATE TABLE workoutType(
 
     workoutTypeName NVARCHAR(100) NOT NULL,
-    workoutTypeDetailedDescription LONGTEXT NOT NULL,
-    workoutImage LONGTEXT NOT NULL
-    
+    workoutTypeDetailedDescription LONGTEXT NOT NULL
+
 );
 
 CREATE TABLE auditorium (

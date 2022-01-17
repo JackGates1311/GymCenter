@@ -5,6 +5,7 @@
     <title>Workouts</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -15,30 +16,32 @@
 
         <div>
 
-            <form th:action="@{/}" th:object="${loginForm}" method="post">
+            <form th:action="@{/workoutsSearchResult}" th:object="${workoutSearchForm}" method="post">
 
                 <br><br>
 
-                <label class="workoutSearch" for="workoutNameSearch"> Workout Name: </label>
-                <label class="workoutSearch" for="workoutNameSearch"> Workout Instructor: </label>
-                <label class="workoutSearch" for="workoutPriceMinSearch"> Workout Price: </label>
-                <label class="workoutSearch" for="workoutNameSearch"> Workout Type: </label>
-                <label class="workoutSearch" for="workoutNameSearch"> Workout Org. Type: </label>
-                <label class="workoutSearch" for="workoutNameSearch"> Sort by: </label>
+                <label class="workoutSearch" for="workoutName"> Workout Name: </label>
+                <label class="workoutSearch" for="workoutCoach"> Workout Coach: </label>
+                <label class="workoutSearch" for="workoutPriceMin"> Workout Price: </label>
+                <label class="workoutSearch" for="workoutTypeName"> Workout Type: </label>
+                <label class="workoutSearch" for="workoutOrganizationType"> Workout Org. Type: </label>
+                <label class="workoutSearch" for="workoutLevel"> Workout Level: </label>
+                <label class="workoutSearch" for="workoutSortBy"> Sort by: </label>
 
                 <br><br>
 
-                <input class="workoutSearch" type="search" name="workoutNameSearch" id="workoutNameSearch" placeholder="Workout name">
+                <input class="workoutSearch" type="search" name="workoutName" id="workoutName" placeholder="Workout Name">
 
-                <input class="workoutSearch" type="search" name="workoutInstructorsSearch" id="workoutInstructorsSearch" placeholder="Workout instructor">
+                <input class="workoutSearch" type="search" name="workoutCoach" id="workoutCoach"
+                       placeholder="Workout Coach">
 
-                <input class="workoutSearchSplitted" type="search" name="workoutPriceMinSearch" id="workoutPriceMinSearch"
+                <input class="workoutSearchSplitted" type="search" name="workoutPriceMin" id="workoutPriceMin"
                        placeholder="Min"/>
 
-                <input class="workoutSearchSplitted" type="search" name="workoutPriceMaxSearch" id="workoutPriceMaxSearch"
+                <input class="workoutSearchSplitted" type="search" name="workoutPriceMax" id="workoutPriceMax"
                        placeholder="Max"/>
 
-                <select class="workoutSearch" name="workoutTypeNameSearch" id="workoutTypeNameSearch">
+                <select class="workoutSearch" name="workoutTypeName" id="workoutTypeName">
 
                     <option value="" selected> </option>
                     <option th:each="tempWorkouts:${workoutTypes}"
@@ -54,26 +57,37 @@
 
                 </select>
 
-                <select class="workoutSort" name="workoutSort" id="workoutSort">
+                <select class="workoutSearch" name="workoutLevel" id="workoutLevel">
 
                     <option value="" selected> </option>
-                    <option value="Workout Name Ascending">Workout Name Ascending</option>
-                    <option value="Workout Name Descending">Workout Name Descending</option>
-                    <option value="Workout Instructor Ascending">Workout Instructor Ascending</option>
-                    <option value="Workout Instructor Descending">Workout Instructor Descending</option>
-                    <option value="Workout Price Ascending">Workout Price Ascending</option>
-                    <option value="Workout Price Descending">Workout Price Descending</option>
-                    <option value="Workout Type Ascending">Workout Type Ascending</option>
-                    <option value="Workout Type Descending">Workout Type Descending</option>
-                    <option value="Workout Org. Type Ascending">Workout Org. Type Ascending</option>
-                    <option value="Workout Org. Type Descending">Workout Org. Type Descending</option>
-                    <option value="Workout Average Ascending">Workout Average Ascending</option>
-                    <option value="Workout Average Descending">Workout Average Descending</option>
-
+                    <option value="Amateur">Amateur</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Advanced">Advanced</option>
 
                 </select>
 
-                <input class="workoutSearchSplitted" type="submit" value="Find & Sort">
+                <select class="workoutSort" name="workoutSortBy" id="workoutSortBy">
+
+                    <option value="" selected> </option>
+                    <option value="ORDER BY workoutName ASC">Workout Name Ascending</option>
+                    <option value="ORDER BY workoutName DESC">Workout Name Descending</option>
+                    <option value="ORDER BY workoutCoaches ASC">Workout Coach Ascending</option>
+                    <option value="ORDER BY workoutCoaches DESC">Workout Coach Descending</option>
+                    <option value="ORDER BY workoutPrice ASC">Workout Price Ascending</option>
+                    <option value="ORDER BY workoutPrice DESC">Workout Price Descending</option>
+                    <option value="ORDER BY workoutTypeName ASC">Workout Type Ascending</option>
+                    <option value="ORDER BY workoutTypeName DESC">Workout Type Descending</option>
+                    <option value="ORDER BY workoutOrganizationType ASC">Workout Org. Type Ascending</option>
+                    <option value="ORDER BY workoutOrganizationType DESC">Workout Org. Type Descending</option>
+                    <option value="ORDER BY workoutLevel ASC">Workout Level Ascending</option>
+                    <option value="ORDER BY workoutLevel DESC">Workout Level Descending</option>
+                    <option value="ORDER BY workoutAverageRate ASC">Workout Average Ascending</option>
+                    <option value="ORDER BY workoutAverageRate DESC">Workout Average Descending</option>
+
+                </select>
+
+                <input id="workoutSearchButton" type="submit" value="Find & Sort">
+                <input class="clearSearchButton" type="submit" formaction="/workouts" value="Clear">
 
                 <br><br>
 
@@ -118,36 +132,7 @@
 
         </table>
 
-       <!-- <script>
-
-            $("#workoutSearch").on("keyup", function(){
-
-                var value = $(this).val();
-
-                $("table tr").each(function(records){
-
-                    if(records != 0) {
-
-                        var currentRow=$(this).closest("tr");
-                        var id = currentRow.find("td:eq(3)").text();
-
-                        alert(currentRow.find("td:eq(1)").text());
-
-                        if(id.indexOf(value) != 0) {
-
-                            $(this).hide();
-
-                        } else {
-
-                            $(this).show();
-                        }
-                    }
-
-                })
-
-            });
-
-        </script> !-->
+        <script src="js/workouts.js" type="text/javascript"></script>
 
     </div>
 

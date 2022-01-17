@@ -13,7 +13,6 @@ public class Workout {
     private Double workoutAverageRate;
     private Boolean isDeleted;
     private String workoutName;
-    private String workoutTypeDetailedDescription;
     private String workoutImage;
 
 
@@ -29,7 +28,6 @@ public class Workout {
         this.workoutAverageRate = null;
         this.isDeleted = null;
         this.workoutName = null;
-        this.workoutTypeDetailedDescription = null;
         this.workoutImage = null;
 
     }
@@ -37,7 +35,7 @@ public class Workout {
     public Workout(Long workoutId, String workoutTypeName, String workoutCoaches, String workoutDescription,
                    Double workoutPrice, WorkoutOrganizatonType workoutOrganizationType, WorkoutLevel workoutLevel,
                    int workoutLength, Double workoutAverageRate, Boolean isDeleted, String workoutName,
-                   String workoutTypeDetailedDescription, String workoutImage) {
+                   String workoutImage) {
 
         super();
 
@@ -52,7 +50,6 @@ public class Workout {
         this.workoutAverageRate = workoutAverageRate;
         this.isDeleted = isDeleted;
         this.workoutName = workoutName;
-        this.workoutTypeDetailedDescription = workoutTypeDetailedDescription;
         this.workoutImage = workoutImage;
     }
 
@@ -144,14 +141,6 @@ public class Workout {
         this.workoutName = workoutName;
     }
 
-    public String getWorkoutTypeDetailedDescription() {
-        return workoutTypeDetailedDescription;
-    }
-
-    public void setWorkoutTypeDetailedDescription(String workoutTypeDetailedDescription) {
-        this.workoutTypeDetailedDescription = workoutTypeDetailedDescription;
-    }
-
     public String getWorkoutImage() {
         return workoutImage;
     }
@@ -174,7 +163,6 @@ public class Workout {
                 ", workoutAverageRate=" + workoutAverageRate + "\n" +
                 ", isDeleted=" + isDeleted + "\n" +
                 ", workoutName=" + workoutName + "\n" +
-                ", workoutTypeDetailedDescription=" + workoutTypeDetailedDescription + "\n" +
                 ", workoutImage=" + workoutImage + "\n" +
                 '}';
     }
