@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface WorkoutService {
 
+    public Workout findById(Long workoutId);
+
     List<Workout> findAll();
 
     public int add(Workout workout);

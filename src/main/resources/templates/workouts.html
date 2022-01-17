@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Workouts</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
@@ -86,10 +87,12 @@
 
                 </select>
 
-                <input id="workoutSearchButton" type="submit" value="Find & Sort">
-                <input class="clearSearchButton" type="submit" formaction="/workouts" value="Clear">
-
                 <br><br>
+
+                <input class="btn btn-light btn-sm" id="workoutSearchButton" type="submit" value="Find & Sort">
+                <input class="btn btn-light btn-sm" id="clearSearchButton" type="submit" formaction="/workouts" value="Clear">
+
+                <br>
 
             </form>
 
@@ -118,7 +121,11 @@
 
                     <td><img th:src="@{${tempWorkouts.workoutImage}}"
                              width="64" height="64"/> </td>
-                    <td> <a th:href="${tempWorkouts.workoutId}" th:text="${tempWorkouts.workoutName}"/> </td>
+                    <td>
+                        <a th:href="@{'/workoutDetails?id=' + ${tempWorkouts.workoutId}}"
+                           th:text="${tempWorkouts.workoutName}"/>
+                    </td>
+
                     <td th:text="${tempWorkouts.workoutTypeName}"/>
                     <td th:text="${tempWorkouts.workoutLevel}"/>
                     <td th:text="${tempWorkouts.workoutCoaches}"/>

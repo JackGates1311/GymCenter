@@ -24,7 +24,6 @@ public class WorkoutController {
     @Autowired
     private WorkoutTypeService workoutTypeService;
 
-
     @RequestMapping(value="/workouts")
     public String workouts(Model model) {
 

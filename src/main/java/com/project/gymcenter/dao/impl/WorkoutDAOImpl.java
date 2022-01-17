@@ -50,8 +50,15 @@ public class WorkoutDAOImpl implements WorkoutDAO {
     }
 
     @Override
-    public Workout findOne(Long workoutId) {
-        return null;
+    public Workout findById(Long workoutId) {
+
+        String sqlQuery = "SELECT * FROM workout WHERE workoutId = " + workoutId + ";";
+
+        WorkoutRowMapper workoutRowMapper = new WorkoutRowMapper();
+
+        List<Workout> workout = jdbcTemplate.query(sqlQuery, new WorkoutRowMapper());
+
+        return workout.get(0);
     }
 
     @Override

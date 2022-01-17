@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface WorkoutDAO {
 
-    public Workout findOne(Long workoutId);
+    public Workout findById(Long workoutId);
 
     public List<Workout> findAll();
 

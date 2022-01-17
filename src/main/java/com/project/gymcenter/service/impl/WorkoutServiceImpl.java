@@ -15,6 +15,11 @@ public class WorkoutServiceImpl implements WorkoutService {
     private WorkoutDAO workoutDAO;
 
     @Override
+    public Workout findById(Long workoutId) {
+        return workoutDAO.findById(workoutId);
+    }
+
+    @Override
     public List<Workout> findAll() {
         return workoutDAO.findAll();
     }
