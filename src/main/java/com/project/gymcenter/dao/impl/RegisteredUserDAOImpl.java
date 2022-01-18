@@ -9,9 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -35,7 +35,7 @@ public class RegisteredUserDAOImpl implements RegisteredUserDAO {
             String userEmail = rs.getString(index++);
             String userFirstName = rs.getString(index++);
             String userLastName = rs.getString(index++);
-            Date userDateBirth = rs.getDate(index++);
+            LocalDate userDateBirth = rs.getObject(index++, LocalDate.class);
             String userAddress = rs.getString(index++);
             String userPhoneNumber = rs.getString(index++);
 
@@ -79,8 +79,17 @@ public class RegisteredUserDAOImpl implements RegisteredUserDAO {
     }
 
     @Override
-    public int add(RegisteredUser registeredUser) {
-        return 0;
+    public void add(RegisteredUser registeredUser) {
+
+        String sqlQuery = "INSERT INTO registeredUser (userId, userName, userPassword, userEmail, userFirstName, " +
+                "userLastName, userDateBirth, userAddress, userPhoneNumber, userDateTimeRegistration, userRole, " +
+                "isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+        jdbcTemplate.update(sqlQuery,generateUserId(), registeredUser.getUserName(),
+                registeredUser.getUserPassword(), registeredUser.getUserEmail(), registeredUser.getUserFirstName(),
+                registeredUser.getUserLastName(), registeredUser.getUserDateBirth(), registeredUser.getUserAddress(),
+                registeredUser.getUserPhoneNumber(), registeredUser.getUserDateTimeRegistration(), "Customer", 0);
+
     }
 
     @Override
@@ -92,4 +101,18 @@ public class RegisteredUserDAOImpl implements RegisteredUserDAO {
     public int delete(RegisteredUser registeredUser) {
         return 0;
     }
+
+    @Override
+    public int generateUserId() {
+
+        String sqlQuery = "SELECT * FROM registereduser WHERE userId = " +
+                "(SELECT MAX(registereduser.userId) FROM registeredUser)";
+
+        List<RegisteredUser> registeredUser = jdbcTemplate.query(sqlQuery, new RegisteredUserRowMapper());
+
+        int generatedUserId = Math.toIntExact(registeredUser.get(0).getUserId() + 1);
+
+        return generatedUserId;
+    }
+
 }

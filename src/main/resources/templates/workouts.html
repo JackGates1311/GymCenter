@@ -31,18 +31,18 @@
 
                 <br><br>
 
-                <input class="workoutSearch" type="search" name="workoutName" id="workoutName" placeholder="Workout Name">
+                <input class="form-control" type="search" name="workoutName" id="workoutName" placeholder="Workout Name">
 
-                <input class="workoutSearch" type="search" name="workoutCoach" id="workoutCoach"
+                <input class="form-control" type="search" name="workoutCoach" id="workoutCoach"
                        placeholder="Workout Coach">
 
-                <input class="workoutSearchSplitted" type="search" name="workoutPriceMin" id="workoutPriceMin"
+                <input class="form-control" type="search" name="workoutPriceMin" id="workoutPriceMin"
                        placeholder="Min"/>
 
-                <input class="workoutSearchSplitted" type="search" name="workoutPriceMax" id="workoutPriceMax"
+                <input class="form-control" type="search" name="workoutPriceMax" id="workoutPriceMax"
                        placeholder="Max"/>
 
-                <select class="workoutSearch" name="workoutTypeName" id="workoutTypeName">
+                <select class="form-control form-control-sm" name="workoutTypeName" id="workoutTypeName">
 
                     <option value="" selected> </option>
                     <option th:each="tempWorkouts:${workoutTypes}"
@@ -50,7 +50,7 @@
                             th:value="${tempWorkouts.workoutTypeName}">
                 </select>
 
-                <select class="workoutSearch" name="workoutOrganizationType" id="workoutOrganizationType">
+                <select class="form-control form-control-sm" name="workoutOrganizationType" id="workoutOrganizationType">
 
                     <option value="" selected> </option>
                     <option value="Individual">Individual</option>
@@ -58,7 +58,7 @@
 
                 </select>
 
-                <select class="workoutSearch" name="workoutLevel" id="workoutLevel">
+                <select class="form-control form-control-sm" name="workoutLevel" id="workoutLevel">
 
                     <option value="" selected> </option>
                     <option value="Amateur">Amateur</option>
@@ -67,7 +67,7 @@
 
                 </select>
 
-                <select class="workoutSort" name="workoutSortBy" id="workoutSortBy">
+                <select class="form-control form-control-sm" name="workoutSortBy" id="workoutSortBy">
 
                     <option value="" selected> </option>
                     <option value="ORDER BY workoutName ASC">Workout Name Ascending</option>
@@ -98,19 +98,21 @@
 
         </div>
 
-        <table>
+        <br>
 
-            <thead>
+        <table class="table table-bordered">
+
+            <thead align="center" valign="center">
 
                 <tr>
-                    <th> Workout Image </th>
-                    <th> Workout Name</th>
-                    <th> Workout Type</th>
-                    <th> Workout Level</th>
-                    <th> Workout Coaches</th>
-                    <th> Workout Price</th>
-                    <th> Workout Organization Type</th>
-                    <th> Workout Average Rate</th>
+                    <th scope="col"> Workout Image </th>
+                    <th scope="col"> Workout Name</th>
+                    <th scope="col"> Workout Type</th>
+                    <th scope="col"> Workout Level</th>
+                    <th scope="col"> Workout Coaches</th>
+                    <th scope="col"> Workout Price</th>
+                    <th scope="col"> Workout Organization Type</th>
+                    <th scope="col"> Workout Average Rate</th>
                 </tr>
 
             </thead>

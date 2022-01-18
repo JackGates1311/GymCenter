@@ -1,7 +1,7 @@
 package com.project.gymcenter.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class RegisteredUser {
 
@@ -11,7 +11,7 @@ public class RegisteredUser {
     private String userEmail;
     private String userFirstName;
     private String userLastName;
-    private Date userDateBirth;
+    private LocalDate userDateBirth;
     private String userAddress;
     private String userPhoneNumber;
     private LocalDateTime userDateTimeRegistration;
@@ -35,7 +35,7 @@ public class RegisteredUser {
     }
 
     public RegisteredUser(Long userId, String userName, String userPassword, String userEmail, String userFirstName,
-                          String userLastName, Date userDateBirth, String userAddress, String userPhoneNumber,
+                          String userLastName, LocalDate userDateBirth, String userAddress, String userPhoneNumber,
                           LocalDateTime userDateTimeRegistration, UserRole userRole, Boolean isRemoved) {
 
         this.userId = userId;
@@ -50,6 +50,22 @@ public class RegisteredUser {
         this.userDateTimeRegistration = userDateTimeRegistration;
         this.userRole = userRole;
         this.isRemoved = isRemoved;
+    }
+
+    public RegisteredUser(String userName, String userPassword, String userEmail, String userFirstName,
+                          String userLastName, LocalDate userDateBirth, String userAddress, String userPhoneNumber,
+                          LocalDateTime userDateTimeRegistration) {
+
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
+        this.userDateBirth = userDateBirth;
+        this.userAddress = userAddress;
+        this.userPhoneNumber = userPhoneNumber;
+        this.userDateTimeRegistration = userDateTimeRegistration;
+
     }
 
     public Long getUserId() {
@@ -100,11 +116,11 @@ public class RegisteredUser {
         this.userLastName = userLastName;
     }
 
-    public Date getUserDateBirth() {
+    public LocalDate getUserDateBirth() {
         return userDateBirth;
     }
 
-    public void setUserDateBirth(Date userDateBirth) {
+    public void setUserDateBirth(LocalDate userDateBirth) {
         this.userDateBirth = userDateBirth;
     }
 

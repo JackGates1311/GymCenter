@@ -9,32 +9,34 @@
 
 <body>
 
-<div class="center">
+    <div class="center">
 
-    <h2>MagicBoost Gym Login</h2>
+        <h2>MagicBoost Gym Login</h2>
 
-    <p class="centerError" th:if="${invalidCredentials}"> Username or Password is not correct! </p>
+        <p class="centerError" th:if="${invalidCredentials}"> Username or Password is not correct! </p>
 
-    <form th:action="@{/}" th:object="${loginForm}" method="post">
+        <form th:action="@{/}" th:object="${loginForm}" method="post">
+
+            <br>
+            <label for="userName">User Name:</label>
+            <br>
+            <input class="form-control" type="text" name="userName" id="userName" placeholder="User Name">
+            <br>
+            <label for="password">Password:</label>
+            <br>
+            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+            <br>
+            <input class="btn btn-light btn-sm" type="submit" value="Login">
+            <br>
+
+        </form>
 
         <br>
-        <label for="userName">User name:</label>
-        <br><br>
-        <input type="text" name="userName" id="userName" placeholder="User name">
-        <br><br>
-        <label for="password">Password:</label>
-        <br><br>
-        <input type="password" name="password" id="password" placeholder="Password">
-        <br><br>
-        <input class="btn btn-light btn-sm" type="submit" value="Login">
-        <br><br>
-        <input class="btn btn-light btn-sm" type="submit" value="Register">
-        <br><br>
-
-    </form>
+        <a class="btn btn-light btn-sm w-100"  href="/register"> Register </a>
 
 
-</div>
+    </div>
 
 </body>
+
 </html>

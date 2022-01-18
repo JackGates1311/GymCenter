@@ -10,10 +10,12 @@ public interface RegisteredUserDAO {
 
     public RegisteredUser findOne(String userName, String password);
 
-    public int add(RegisteredUser registeredUser);
+    public void add(RegisteredUser registeredUser);
 
     public int update(RegisteredUser registeredUser);
 
     public int delete(RegisteredUser registeredUser);
+
+    public int generateUserId();
 
 }

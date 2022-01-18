@@ -10,7 +10,7 @@ public interface RegisteredUserService {
 
     public RegisteredUser findOne(String userName, String password);
 
-    public int add(RegisteredUser registeredUser);
+    public void add(RegisteredUser registeredUser);
 
     public int update(RegisteredUser registeredUser);
 

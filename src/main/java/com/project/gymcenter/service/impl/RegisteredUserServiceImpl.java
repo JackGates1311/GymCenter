@@ -27,8 +27,9 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     }
 
     @Override
-    public int add(RegisteredUser registeredUser) {
-        return 0;
+    public void add(RegisteredUser registeredUser) {
+
+        registeredUserDAO.add(registeredUser);
     }
 
     @Override
