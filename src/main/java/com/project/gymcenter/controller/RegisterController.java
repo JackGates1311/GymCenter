@@ -44,11 +44,24 @@ public class RegisterController {
         RegisteredUser registeredUser = new RegisteredUser(userName, userPassword, userEmail, userFirstName,
                 userLastName, userDateBirth, userAddress, userPhoneNumber, userDateTimeRegistration);
 
-        registeredUserService.add(registeredUser);
+        try {
+
+            registeredUserService.add(registeredUser);
+
+        } catch (Exception e) {
+
+
+            model.addAttribute("registrationFailed", true);
+
+            return "register";
+        }
 
         System.out.println("Success");
 
+        model.addAttribute("registrationSuccessfull", true);
+
         return "login";
+
 
     }
 }

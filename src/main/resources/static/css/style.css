@@ -21,6 +21,15 @@
     color: red;
 }
 
+.centerSuccess {
+
+    width: 80%;
+    overflow: hidden;
+    margin: auto;
+    padding: 5%;
+    color: green;
+}
+
 .centerCreateEntry {
     width: 30%;
     overflow: hidden;

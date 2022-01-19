@@ -106,7 +106,7 @@ public class RegisteredUserDAOImpl implements RegisteredUserDAO {
     public int generateUserId() {
 
         String sqlQuery = "SELECT * FROM registereduser WHERE userId = " +
-                "(SELECT MAX(registereduser.userId) FROM registeredUser)";
+                "(SELECT MAX(registereduser.userId * 1) FROM registeredUser)";
 
         List<RegisteredUser> registeredUser = jdbcTemplate.query(sqlQuery, new RegisteredUserRowMapper());
 

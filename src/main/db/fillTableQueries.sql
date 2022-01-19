@@ -8,6 +8,9 @@ DELETE FROM registeredUser;
 DELETE FROM loyaltyCard;
 DELETE FROM workoutComment;
 
+ALTER TABLE registeredUser
+ADD UNIQUE INDEX(userName);
+
 SET SQL_SAFE_UPDATES = 1;
 
 INSERT INTO registeredUser(userId, userName, userPassword, userEmail, userFirstName, userLastName, userDateBirth, userAddress, userPhoneNumber, 
