@@ -19,4 +19,10 @@ public class WorkoutTypeServiceImpl implements WorkoutTypeService {
 
         return workoutTypeDAO.findAll();
     }
+
+    @Override
+    public WorkoutType findByWorkoutTypeName(String workoutTypeName) {
+
+        return workoutTypeDAO.findByWorkoutTypeName(workoutTypeName);
+    }
 }

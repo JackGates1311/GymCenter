@@ -40,4 +40,14 @@ public class WorkoutTypeDAOImpl implements WorkoutTypeDAO {
 
         return jdbcTemplate.query(sqlQuery, new WorkoutTypeRowMapper());
     }
+
+    @Override
+    public WorkoutType findByWorkoutTypeName(String workoutTypeName) {
+
+        String sqlQuery = "SELECT * FROM workoutType WHERE workoutTypeName ='" + workoutTypeName + "';";
+
+        List<WorkoutType> workoutType = jdbcTemplate.query(sqlQuery, new WorkoutTypeRowMapper());
+
+        return workoutType.get(0);
+    }
 }

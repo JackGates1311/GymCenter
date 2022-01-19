@@ -52,13 +52,23 @@
 
                 <br><br><br>
 
-                <h5 th:text="@{'Workout Type: ' + ${workout.workoutTypeName}}"/>
+                <h5> Workout types: </h5>
 
-                <br>
+
+                <div class="btn-group" role="group" th:each="tempWorkoutIncludedTypes:${workoutIncludedTypes}">
+
+                    <a class="btn btn-light w-25" th:href="@{'/workoutTypeDetails?type=' +
+                    ${tempWorkoutIncludedTypes.workoutTypeName}}"
+                       th:text="@{${tempWorkoutIncludedTypes.workoutTypeName}}"></a>
+
+                </div>
+
+                <br><br>
 
                 <h6 th:text="${workout.workoutDescription}"/>
 
                 <br>
+
 
                 <a align="center" class="btn btn-light" width="150">Edit</a>
                 <a href="/workouts" align="center" class="btn btn-light" width="150">Back to all workouts</a>

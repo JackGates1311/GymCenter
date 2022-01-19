@@ -1,6 +1,7 @@
 SET SQL_SAFE_UPDATES = 0;
 
 DELETE FROM workout;
+DELETE FROM workoutIncludedTypes;
 DELETE FROM workoutType;
 DELETE FROM auditorium;
 DELETE FROM period;
@@ -13,7 +14,7 @@ ADD UNIQUE INDEX(userName);
 
 SET SQL_SAFE_UPDATES = 1;
 
-INSERT INTO registeredUser(userId, userName, userPassword, userEmail, userFirstName, userLastName, userDateBirth, userAddress, userPhoneNumber, 
+INSERT INTO registeredUser(userId, userName, userPassword, userEmail, userFirstName, userLastName, userDateBirth, userAddress, userPhoneNumber,
 	userDateTimeRegistration, userRole, isDeleted) VALUES
 		(1, 'petar123', 'petar123', 'petarpetrovic@web.com', 'Petar', 'Petrovic', '1978-01-17', 'Bulevar Kneza Lazara 76, Beograd', '+381602222222', '2022-01-12 16:04:44', 'Administrator', false),
         (2, 'marina123', 'marina123', 'marinamarinkovic@web.com', 'Marina', 'Marinkovic', '1996-12-01', 'Svetog Save 3, Zvornik', '+38765300786', '2022-01-13 16:11:24', 'Administrator', false),
@@ -28,17 +29,22 @@ INSERT INTO loyaltyCard(userId, discount, points) VALUES
 	(4, 5, 10),
     (7, 10, 5);
 
-INSERT INTO workout(workoutId, workoutTypeName, workoutCoaches, workoutDescription, workoutPrice, workoutOrganizationType, 
+INSERT INTO workout(workoutId, workoutTypeName, workoutCoaches, workoutDescription, workoutPrice, workoutOrganizationType,
 	workoutLevel, workoutLength, workoutAverageRate, isDeleted, workoutName, workoutImage) VALUES
-        (1, 'Yoga', 'jovana123', 'Yoga helps to relax better', 1200, 'Individual', 'Amateur', 120, NULL, false, 'Workout 1', 'images/yoga.png'),
+        (1, 'Yoga, Step', 'jovana123', 'Yoga helps to relax better', 1200, 'Individual', 'Amateur', 120, NULL, false, 'Workout 1', 'images/yoga.png'),
 		(2, 'Yoga', 'branko123/milan123', 'Yoga helps to relax better', 800, 'Group', 'Medium', 150, 8, false, 'Workout 2', 'images/yoga.png'),
         (3, 'Fitness', 'branko123', 'Fitness improves your health and mood', 1400, 'Individual', 'Advanced', 240, 9, false, 'Workout 3', 'images/fitness.png'),
-        (4, 'Fitness', 'jovana123/milan123', 'Fitness improves your health and mood', 1000, 'Group', 'Amateur', 120, NULL, false, 'Workout 4', 'images/fitness.png'),
+        (4, 'Fitness, Cardio', 'jovana123/milan123', 'Fitness improves your health and mood', 1000, 'Group', 'Amateur', 120, NULL, false, 'Workout 4', 'images/fitness.png'),
         (5, 'Cardio', 'jovana123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1500, 'Individual', 'Advanced', 240, NULL, false, 'Workout 5', 'images/cardio.png'),
         (6, 'Cardio', 'jovana123/branko123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1100, 'Group', 'Amateur', 240, 9, false, 'Workout 6', 'images/cardio.png'),
         (7, 'Yoga', 'branko123', 'Yoga helps to relax better', 1300, 'Individual', 'Medium', 150, 10, true, 'Workout 7', 'images/yoga.png'),
         (8, 'Cardio', 'jovana123/branko123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1200, 'Group', 'Amateur', 120, NULL, true, 'Workout 8', 'images/cardio.png');
-        
+
+INSERT INTO workoutIncludedTypes(workoutId, workoutTypeName) VALUES
+    (1, 'Yoga'), (1, 'Step'), (2, 'Yoga'), (3, 'Fitness'), (4, 'Fitness'), (4, 'Cardio'), (5, 'Cardio'), (6, 'Cardio'),
+    (7, 'Yoga'), (8, 'Cardio');
+
+
 INSERT INTO workoutType(workoutTypeName, workoutTypeDetailedDescription) VALUES
 	('Yoga', 'Yoga is the science of body, mind and spirit. The physical part of Yoga consists of Asanas - exercises and postures that develop the body and Pranayama - breathing exercises. 
     Mental development in Yoga is achieved through breathing exercises, concentration exercises and meditation. The physical benefits you can expect from exercise are, among others, 

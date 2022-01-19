@@ -50,7 +50,6 @@ public class RegisterController {
 
         } catch (Exception e) {
 
-
             model.addAttribute("registrationFailed", true);
 
             return "register";
@@ -61,7 +60,6 @@ public class RegisterController {
         model.addAttribute("registrationSuccessfull", true);
 
         return "login";
-
 
     }
 }

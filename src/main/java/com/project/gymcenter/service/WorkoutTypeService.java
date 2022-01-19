@@ -8,4 +8,6 @@ public interface WorkoutTypeService {
 
     public List<WorkoutType> findAll();
 
+    public WorkoutType findByWorkoutTypeName(String workoutTypeName);
+
 }

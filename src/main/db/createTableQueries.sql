@@ -4,6 +4,7 @@ USE gymCenter;
 SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS workout;
+DROP TABLE IF EXISTS workoutIncludedTypes;
 DROP TABLE IF EXISTS workoutType;
 DROP TABLE IF EXISTS auditorium;
 DROP TABLE IF EXISTS period;
@@ -17,7 +18,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE workout (
 
 	workoutId LONG NOT NULL,
-	workoutTypeName NVARCHAR(25) NOT NULL,
+	workoutTypeName NVARCHAR(255) NOT NULL,
     workoutCoaches LONGTEXT NOT NULL, /* Store data here AS {Pera Peric, Mika Mikic....} */
     workoutDescription LONGTEXT NOT NULL,
     workoutPrice DOUBLE NOT NULL,
@@ -29,6 +30,13 @@ CREATE TABLE workout (
     workoutName NVARCHAR(255) NOT NULL,
     workoutImage LONGTEXT NOT NULL
     
+);
+
+CREATE TABLE workoutIncludedTypes (
+
+    workoutId LONG NOT NULL,
+    workoutTypeName NVARCHAR(255) NOT NULL
+
 );
 
 CREATE TABLE workoutType(
