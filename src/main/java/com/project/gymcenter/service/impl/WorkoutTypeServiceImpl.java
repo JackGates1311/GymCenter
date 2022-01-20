@@ -25,4 +25,10 @@ public class WorkoutTypeServiceImpl implements WorkoutTypeService {
 
         return workoutTypeDAO.findByWorkoutTypeName(workoutTypeName);
     }
+
+    @Override
+    public void add(Long workoutId, String workoutTypeName) {
+
+        workoutTypeDAO.add(workoutId, workoutTypeName);
+    }
 }

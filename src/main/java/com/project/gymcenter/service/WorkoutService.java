@@ -1,6 +1,7 @@
 package com.project.gymcenter.service;
 
 import com.project.gymcenter.model.Workout;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface WorkoutService {
 
     List<Workout> findAll();
 
-    public int add(Workout workout);
+    public Long add(Workout workout);
 
     public int update(Workout workout);
 
@@ -20,4 +21,5 @@ public interface WorkoutService {
                               Double workoutPriceMax, String workoutTypeName, String workoutOrganizationType,
                               String workoutLevel, String workoutSortBy);
 
+    public String saveImage(MultipartFile imageFile) throws Exception;
 }

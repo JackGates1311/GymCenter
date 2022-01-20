@@ -9,7 +9,11 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -70,9 +74,20 @@ public class WorkoutDAOImpl implements WorkoutDAO {
     }
 
     @Override
-    public int add(Workout workout) {
+    public Long add(Workout workout) {
 
-        return 0;
+        int workoutId = generateWorkoutId();
+
+        String sqlQuery = "INSERT INTO workout (workoutId, workoutTypeName, workoutCoaches, workoutDescription, " +
+                "workoutPrice, workoutOrganizationType, workoutLevel, workoutLength, workoutAverageRate, " +
+                "isDeleted, workoutName, workoutImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+        jdbcTemplate.update(sqlQuery,workoutId, workout.getWorkoutTypeName(), workout.getWorkoutCoaches(),
+                workout.getWorkoutDescription(), workout.getWorkoutPrice(),
+                workout.getWorkoutOrganizationType().toString(), workout.getWorkoutLevel().toString(),
+                workout.getWorkoutLength(), 0, 0, workout.getWorkoutName(), workout.getWorkoutImage());
+
+        return Long.valueOf(workoutId);
     }
 
     @Override
@@ -111,5 +126,31 @@ public class WorkoutDAOImpl implements WorkoutDAO {
             return null;
         }
 
+    }
+
+    @Override
+    public String saveImage(MultipartFile imageFile) throws Exception {
+
+        byte[] photoBytes = imageFile.getBytes();
+
+        Path pathToSave = Paths.get("src/main/resources/static/images/" + imageFile.getOriginalFilename());
+
+        Files.write(pathToSave, photoBytes);
+
+        return "images/" + imageFile.getOriginalFilename();
+
+    }
+
+    @Override
+    public int generateWorkoutId() {
+
+        String sqlQuery = "SELECT * FROM workout WHERE workoutId = " +
+                "(SELECT MAX(workout.workoutId * 1) FROM workout)";
+
+        List<Workout> workouts = jdbcTemplate.query(sqlQuery, new WorkoutRowMapper());
+
+        int generatedWorkoutId = Math.toIntExact(workouts.get(0).getWorkoutId() + 1);
+
+        return generatedWorkoutId;
     }
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
     <title>Workouts</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -14,6 +15,8 @@
     <div class="centerTable">
 
         <h2> List of workouts </h2>
+
+        <p class="centerError" th:if="${workoutAddFailed}"> Error has been occured while adding workout to database! </p>
 
         <div>
 
@@ -89,8 +92,14 @@
 
                 <br><br>
 
-                <input class="btn btn-light btn-sm" id="workoutSearchButton" type="submit" value="Find & Sort">
-                <input class="btn btn-light btn-sm" id="clearSearchButton" type="submit" formaction="/workouts" value="Clear">
+                <div class="btn-group" role="group">
+
+                    <input class="btn btn-light btn-sm" id="workoutSearchButton" type="submit" value="Find & Sort">
+                    <input class="btn btn-light btn-sm" id="clearSearchButton" type="submit" formaction="/workouts" value="Clear">
+                    <input class="btn btn-light btn-sm" id="addNewWorkoutButton" type="submit" formaction="/addNewWorkout"
+                           value="Add new Workout">
+
+                </div>
 
                 <br>
 

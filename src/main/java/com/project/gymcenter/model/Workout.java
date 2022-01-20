@@ -15,7 +15,6 @@ public class Workout {
     private String workoutName;
     private String workoutImage;
 
-
     public Workout() {
 
         this.workoutId = null;
@@ -51,6 +50,23 @@ public class Workout {
         this.isDeleted = isDeleted;
         this.workoutName = workoutName;
         this.workoutImage = workoutImage;
+    }
+
+    public Workout(String workoutTypeName, String newWorkoutCoaches, String newWorkoutDescription,
+                   Double newWorkoutPrice, WorkoutOrganizatonType newWorkoutOrganizationType,
+                   WorkoutLevel newWorkoutLevel, int newWorkoutLength, String newWorkoutName,
+                   String newWorkoutImage) {
+
+        this.workoutTypeName = workoutTypeName;
+        this.workoutCoaches = newWorkoutCoaches;
+        this.workoutDescription = newWorkoutDescription;
+        this.workoutPrice = newWorkoutPrice;
+        this.workoutOrganizationType = newWorkoutOrganizationType;
+        this.workoutLevel = newWorkoutLevel;
+        this.workoutLength = newWorkoutLength;
+        this.workoutName = newWorkoutName;
+        this.workoutImage = newWorkoutImage;
+
     }
 
     public Long getWorkoutId() {

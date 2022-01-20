@@ -28,6 +28,8 @@ public class RegisterController {
     @RequestMapping(value="/sendRegistrationData", method = RequestMethod.POST)
     public String sendRegistrationData(@ModelAttribute(name="registerForm") RegisterForm registerForm, Model model) {
 
+        /*OPTIMIZE THIS PEACE OF CODE */
+
         String userName = registerForm.getUserName();
         String userPassword = registerForm.getUserPassword();
         String userEmail = registerForm.getUserEmail();

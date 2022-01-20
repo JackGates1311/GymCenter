@@ -5,6 +5,7 @@ import com.project.gymcenter.model.Workout;
 import com.project.gymcenter.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,8 +26,9 @@ public class WorkoutServiceImpl implements WorkoutService {
     }
 
     @Override
-    public int add(Workout workout) {
-        return 0;
+    public Long add(Workout workout) {
+
+        return workoutDAO.add(workout);
     }
 
     @Override
@@ -45,4 +47,11 @@ public class WorkoutServiceImpl implements WorkoutService {
                 workoutCoaches, workoutPriceMin, workoutPriceMax, workoutTypeName, workoutOrganizationType,
                 workoutLevel, workoutSortBy);
     }
+
+    @Override
+    public String saveImage(MultipartFile imageFile) throws Exception {
+
+        return workoutDAO.saveImage(imageFile);
+    }
+
 }
