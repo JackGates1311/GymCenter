@@ -51,12 +51,5 @@ public class WorkoutTypeDAOImpl implements WorkoutTypeDAO {
         return workoutType.get(0);
     }
 
-    @Override
-    public void add(Long workoutId, String workoutTypeName) {
 
-        String sqlQuery = "INSERT INTO workoutIncludedTypes (workoutId, workoutTypeName) VALUES (?, ?);";
-
-        jdbcTemplate.update(sqlQuery,workoutId, workoutTypeName);
-
-    }
 }

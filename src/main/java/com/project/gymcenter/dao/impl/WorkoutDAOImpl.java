@@ -91,8 +91,17 @@ public class WorkoutDAOImpl implements WorkoutDAO {
     }
 
     @Override
-    public int update(Workout workout) {
-        return 0;
+    public void update(Workout workout, Long workoutId) {
+
+        String sqlQuery = "UPDATE workout SET workoutTypeName = ?, workoutCoaches = ?, workoutDescription = ?, " +
+                "workoutPrice = ?, workoutOrganizationType = ?, workoutLevel = ?, workoutLength = ?, workoutName = ?," +
+                "workoutImage = ? WHERE workoutId = ?";
+
+        jdbcTemplate.update(sqlQuery, workout.getWorkoutTypeName(), workout.getWorkoutCoaches(),
+                workout.getWorkoutDescription(), workout.getWorkoutPrice(),
+                workout.getWorkoutOrganizationType().toString(), workout.getWorkoutLevel().toString(),
+                workout.getWorkoutLength(), workout.getWorkoutName(), workout.getWorkoutImage(), workoutId);
+
     }
 
     @Override

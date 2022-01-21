@@ -10,6 +10,4 @@ public interface WorkoutTypeDAO {
 
     public WorkoutType findByWorkoutTypeName(String workoutTypeName);
 
-    public void add(Long workoutId, String workoutTypeName);
-
 }

@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-public class AddNewWorkoutForm {
+public class AddEditWorkoutForm {
 
     private String newWorkoutName;
     private List<String> newWorkoutIncludedTypes;
@@ -19,15 +19,15 @@ public class AddNewWorkoutForm {
     private String newWorkoutDescription;
 
 
-    public AddNewWorkoutForm() {
+    public AddEditWorkoutForm() {
 
         super();
     }
 
-    public AddNewWorkoutForm(String newWorkoutName, List<String> newWorkoutIncludedTypes, String newWorkoutCoaches,
-                             Double newWorkoutPrice, WorkoutOrganizatonType newWorkoutOrganizationType,
-                             int newWorkoutLength, WorkoutLevel newWorkoutLevel, MultipartFile newWorkoutImage,
-                             String newWorkoutDescription) {
+    public AddEditWorkoutForm(String newWorkoutName, List<String> newWorkoutIncludedTypes, String newWorkoutCoaches,
+                              Double newWorkoutPrice, WorkoutOrganizatonType newWorkoutOrganizationType,
+                              int newWorkoutLength, WorkoutLevel newWorkoutLevel, MultipartFile newWorkoutImage,
+                              String newWorkoutDescription) {
 
         this.newWorkoutName = newWorkoutName;
         this.newWorkoutIncludedTypes = newWorkoutIncludedTypes;

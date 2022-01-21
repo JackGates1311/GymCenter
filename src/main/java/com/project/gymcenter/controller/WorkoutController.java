@@ -1,13 +1,14 @@
 package com.project.gymcenter.controller;
 
 
-import com.project.gymcenter.form.AddNewWorkoutForm;
+import com.project.gymcenter.form.AddEditWorkoutForm;
 import com.project.gymcenter.form.WorkoutSearchForm;
 import com.project.gymcenter.model.Workout;
 import com.project.gymcenter.model.WorkoutLevel;
 import com.project.gymcenter.model.WorkoutOrganizatonType;
 import com.project.gymcenter.model.WorkoutType;
 import com.project.gymcenter.service.RegisteredUserService;
+import com.project.gymcenter.service.WorkoutIncludedTypesService;
 import com.project.gymcenter.service.WorkoutService;
 import com.project.gymcenter.service.WorkoutTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class WorkoutController {
 
     @Autowired
     private RegisteredUserService registeredUserService;
+
+    @Autowired
+    private WorkoutIncludedTypesService workoutIncludedTypesService;
 
     @RequestMapping(value="/workouts")
     public String workouts(Model model) {
@@ -89,29 +93,29 @@ public class WorkoutController {
 
         model.addAttribute("addNewWorkoutTypes", workoutTypes);
 
-
         return "addNewWorkout";
     }
 
-    @RequestMapping(value="/sendWorkoutData", method = RequestMethod.POST)
+    @RequestMapping(value="/sendAddWorkoutData", method = RequestMethod.POST)
 
-    public String sendWorkoutData(@ModelAttribute(name="addNewWorkoutForm") AddNewWorkoutForm addNewWorkoutForm, Model model) throws Exception {
+    public String sendAddWorkoutData(@ModelAttribute(name="addWorkoutForm") AddEditWorkoutForm addEditWorkoutForm,
+                                     Model model) throws Exception {
 
-        String newWorkoutName = addNewWorkoutForm.getNewWorkoutName();
-        List<String> newWorkoutIncludedTypes = addNewWorkoutForm.getNewWorkoutIncludedTypes();
-        String newWorkoutCoaches = addNewWorkoutForm.getNewWorkoutCoaches();
-        Double newWorkoutPrice = addNewWorkoutForm.getNewWorkoutPrice();
-        WorkoutOrganizatonType newWorkoutOrganizationType = addNewWorkoutForm.getNewWorkoutOrganizationType();
-        int newWorkoutLength = addNewWorkoutForm.getnewWorkoutLength();
-        WorkoutLevel newWorkoutLevel = addNewWorkoutForm.getNewWorkoutLevel();
+        String newWorkoutName = addEditWorkoutForm.getNewWorkoutName();
+        List<String> newWorkoutIncludedTypes = addEditWorkoutForm.getNewWorkoutIncludedTypes();
+        String newWorkoutCoaches = addEditWorkoutForm.getNewWorkoutCoaches();
+        Double newWorkoutPrice = addEditWorkoutForm.getNewWorkoutPrice();
+        WorkoutOrganizatonType newWorkoutOrganizationType = addEditWorkoutForm.getNewWorkoutOrganizationType();
+        int newWorkoutLength = addEditWorkoutForm.getnewWorkoutLength();
+        WorkoutLevel newWorkoutLevel = addEditWorkoutForm.getNewWorkoutLevel();
         String newWorkoutImage = null;
-        String newWorkoutDescription = addNewWorkoutForm.getNewWorkoutDescription();
+        String newWorkoutDescription = addEditWorkoutForm.getNewWorkoutDescription();
 
-        String workoutTypeName = parseWorkoutTypes(addNewWorkoutForm.getNewWorkoutIncludedTypes());
+        String workoutTypeName = workoutTypeService.parseWorkoutTypes(addEditWorkoutForm.getNewWorkoutIncludedTypes());
 
-        /*try {*/
+        try {
 
-            newWorkoutImage = workoutService.saveImage(addNewWorkoutForm.getNewWorkoutImage());
+            newWorkoutImage = workoutService.saveImage(addEditWorkoutForm.getNewWorkoutImage());
 
             System.out.println(newWorkoutImage);
 
@@ -123,33 +127,19 @@ public class WorkoutController {
             System.out.println(workoutId);
 
             for(int i = 0; i < newWorkoutIncludedTypes.size(); i++)
-                workoutTypeService.add(workoutId, newWorkoutIncludedTypes.get(i));
+                workoutIncludedTypesService.add(workoutId, newWorkoutIncludedTypes.get(i));
 
-        /*} catch (Exception e) {
+        } catch (Exception e) {
 
             model.addAttribute("workoutAddFailed", true);
 
             return "redirect:/workouts";
-        }*/
+        }
+
+        model.addAttribute("workoutAddSuccess", true);
 
         return "redirect:/workouts";
 
-    }
-
-    private String parseWorkoutTypes(List<String> newWorkoutIncludedTypes) {
-
-        String workoutTypes = "";
-
-        for(int i = 0; i < newWorkoutIncludedTypes.size(); i++) {
-
-            workoutTypes += newWorkoutIncludedTypes.get(i);
-
-            if(i != newWorkoutIncludedTypes.size() - 1)
-                workoutTypes += ", ";
-
-        }
-
-        return workoutTypes;
     }
 
 }

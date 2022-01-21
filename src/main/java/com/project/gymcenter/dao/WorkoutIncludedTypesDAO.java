@@ -8,4 +8,8 @@ public interface WorkoutIncludedTypesDAO {
 
     public List<WorkoutIncludedTypes> findById(Long workoutId);
 
+    public void add(Long workoutId, String workoutTypeName);
+
+    public void remove(Long workoutId);
+
 }

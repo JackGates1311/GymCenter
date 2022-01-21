@@ -10,6 +10,6 @@ public interface WorkoutTypeService {
 
     public WorkoutType findByWorkoutTypeName(String workoutTypeName);
 
-    public void add(Long workoutId, String workoutTypeName);
+    public String parseWorkoutTypes(List<String> newWorkoutIncludedTypes);
 
 }

@@ -70,7 +70,9 @@
                 <br>
 
 
-                <a align="center" class="btn btn-light" width="150">Edit</a>
+                <a th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}" align="center" class="btn btn-light"
+                   width="150">Edit</a>
+
                 <a href="/workouts" align="center" class="btn btn-light" width="150">Back to all workouts</a>
 
             </div>

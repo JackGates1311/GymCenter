@@ -13,7 +13,7 @@ public interface WorkoutService {
 
     public Long add(Workout workout);
 
-    public int update(Workout workout);
+    public void update(Workout workout, Long workoutId);
 
     public int delete(Workout workout);
 

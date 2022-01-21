@@ -21,7 +21,9 @@
 
         <h2 align="center">Add new Workout</h2>
 
-        <form th:action="@{/sendWorkoutData}" th:object="${addNewWorkoutForm}" enctype="multipart/form-data"
+
+
+        <form th:action="@{/sendAddWorkoutData}" th:object="${addWorkoutForm}" enctype="multipart/form-data"
               method="post">
 
             <div class="row">
@@ -132,14 +134,16 @@
                     <textarea class="form-control" id="newWorkoutDescription" name="newWorkoutDescription"
                               rows="4"></textarea>
 
-
                 </div>
 
-                <input class="btn btn-light btn-sm w-100" id="addNewWorkoutButton" type="submit" value="Add New Workout">
+                <input style="margin-right: 15px;" class="btn btn-light btn-sm w-100" id="addNewWorkoutButton"
+                       type="submit" value="Add New Workout">
 
             </div>
 
         </form>
+
+        <a style="margin-top: 15px;" class="btn btn-light btn-sm w-100" href="/workouts"> Back to all workouts </a>
 
         <script src="js/addNewWorkout.js" type="text/javascript"></script>
 

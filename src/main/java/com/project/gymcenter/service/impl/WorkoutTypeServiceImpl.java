@@ -27,8 +27,19 @@ public class WorkoutTypeServiceImpl implements WorkoutTypeService {
     }
 
     @Override
-    public void add(Long workoutId, String workoutTypeName) {
+    public String parseWorkoutTypes(List<String> newWorkoutIncludedTypes) {
 
-        workoutTypeDAO.add(workoutId, workoutTypeName);
+        String workoutTypes = "";
+
+        for(int i = 0; i < newWorkoutIncludedTypes.size(); i++) {
+
+            workoutTypes += newWorkoutIncludedTypes.get(i);
+
+            if(i != newWorkoutIncludedTypes.size() - 1)
+                workoutTypes += ", ";
+
+        }
+
+        return workoutTypes;
     }
 }

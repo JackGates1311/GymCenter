@@ -41,4 +41,22 @@ public class WorkoutIncludedTypesDAOImpl implements WorkoutIncludedTypesDAO {
         return jdbcTemplate.query(sqlQuery, new WorkoutIncludedTypesRowMapper());
 
     }
+
+    @Override
+    public void add(Long workoutId, String workoutTypeName) {
+
+        String sqlQuery = "INSERT INTO workoutIncludedTypes (workoutId, workoutTypeName) VALUES (?, ?);";
+
+        jdbcTemplate.update(sqlQuery,workoutId, workoutTypeName);
+
+    }
+
+    @Override
+    public void remove(Long workoutId) {
+
+        String sqlQuery = "DELETE FROM workoutIncludedTypes WHERE workoutId = ?";
+
+        jdbcTemplate.update(sqlQuery, workoutId);
+
+    }
 }

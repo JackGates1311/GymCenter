@@ -32,8 +32,9 @@ public class WorkoutServiceImpl implements WorkoutService {
     }
 
     @Override
-    public int update(Workout workout) {
-        return 0;
+    public void update(Workout workout, Long workoutId) {
+
+        workoutDAO.update(workout, workoutId);
     }
 
     @Override
