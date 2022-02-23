@@ -142,4 +142,14 @@ public class WorkoutController {
 
     }
 
+    ////// TEMPORARY CODE
+
+    @RequestMapping(value="/index")
+
+    public String index(){
+
+
+        return "index.html";
+    }
+
 }

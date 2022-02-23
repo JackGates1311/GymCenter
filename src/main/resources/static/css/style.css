@@ -192,3 +192,157 @@ p {
     margin-right: 15px;
 
 }
+
+.navbar .navbar-collapse {
+
+    text-align: center;
+}
+
+
+#workoutView {
+
+    margin-top: 45px;
+    width: 75%;
+    height: 100%;
+    overflow-x: scroll;
+
+}
+
+.card {
+
+    display: inline;
+    padding: .75rem;
+    margin-bottom: 2rem;
+    border: 0;
+    flex-basis: 350px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 250px;
+    height: 425px;
+}
+
+/*.card-block {
+
+    min-height: 275px;
+    min-width: 450px;
+}*/
+
+/*@media (min-width: 576px) {
+
+    .card {
+
+        width: 290px;
+    }
+
+
+}*/
+
+@media (min-width: 470px) {
+
+    .card {
+
+        width: 350px;
+        height: 545px;
+    }
+
+}
+
+@media (min-width: 540px) {
+
+    .card {
+
+        width: 400px;
+        height: 595px;
+    }
+
+}
+
+@media (min-width: 660px) {
+
+    .card {
+
+        width: 460px;
+        height: 655px;
+    }
+
+}
+
+@media (min-width: 764px) {
+
+    .card {
+
+        width: 280px;
+        height: 455px;
+    }
+
+}
+
+@media (min-width: 800px) {
+
+    .card {
+
+        width: 290px;
+        height: 465px;
+    }
+
+}
+
+@media (min-width: 992px) {
+
+    .card {
+
+        width: 210px;
+        height: 385px;
+    }
+
+}
+
+@media (min-width: 1200px) {
+
+    .card {
+
+        width: 220px;
+        height: 395px;
+    }
+
+}
+
+@media (min-width: 1460px) {
+
+    .card {
+
+        width: 270px;
+        height: 445px;
+    }
+
+}
+
+@media (min-width: 1625px) {
+
+    .card {
+
+        width: 285px;
+        height: 460px;
+    }
+
+}
+
+@media (min-width: 1750px) {
+
+    .card {
+
+        width: 320px;
+        height: 495px;
+    }
+
+}
+
+@media (min-width: 2050px) {
+
+    .card {
+
+        width: 370px;
+        height: 565px;
+    }
+
+}

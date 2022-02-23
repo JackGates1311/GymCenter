@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>MagicBoost Gym</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="/index">MagicBoost Gym Center</a>
+
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+
+                <span class="navbar-toggler-icon"/>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+
+                <div class="navbar-nav ml-auto">
+
+                    <!-- For desktop version of website -->
+
+                    <!-- <a href="orderList.html" class="nav-item nav-link d-none d-lg-block">
+                        <span class="material-icons" data-toggle="tooltip" title="Korpa">local_grocery_store</span>
+                    </a>
+
+                    <a href="manageUsers.html" class="nav-item nav-link d-none d-lg-block">
+                        <span class="material-icons" data-toggle="tooltip" title="Upravljaj korisnicima">favorite</span>
+                    </a> -->
+
+                    <a href="#" class="nav-item nav-link d-none d-lg-block" data-toggle="modal" data-target="#userRegistration">
+                        <span class="material-icons" data-toggle="tooltip" title="Register">person_add_alt</span>
+                    </a>
+
+                    <a href="#" class="nav-item nav-link d-none d-lg-block" data-toggle="modal" data-target="#userLogin">
+                        <span class="material-icons" data-toggle="tooltip" title="Login">login</span>
+                    </a>
+
+
+                    <!-- For mobile version of website -->
+
+                    <!-- <a href="orderList.html"class="nav-item nav-link d-lg-none">Korpa</a>
+
+                    <a href="manageUsers.html" class="nav-item nav-link d-lg-none">
+                        Upravljaj korisnicima
+                    </a> -->
+
+                    <a href="#" class="nav-item nav-link d-lg-none" data-toggle="modal" data-target="#userRegistration">
+                        Register
+                    </a>
+
+                    <a href="#" class="nav-item nav-link d-lg-none" data-toggle="modal" data-target="#userLogin">
+                        Login
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </nav>
+
+    <div class="container-fluid" id="workoutView">
+
+        <div class="row flex-nowrap">
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+
+                <div class="card">
+                    <img src="https://picsum.photos/300/200">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+
+                <div class="card">
+                    <img src="https://picsum.photos/300/200">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card">
+                    <img src="https://picsum.photos/300/200">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card">
+                    <img src="https://picsum.photos/300/200">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card">
+                    <img src="https://picsum.photos/300/200">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+        <!-- <div class="card-group card-group-scroll" id="workoutView">
+
+            <div class="card">
+
+                <img class="card-img-top" src="/images/yoga.png" hegiht="350" width="350"/>
+
+                <div class="card-body">
+
+                    <h5 class="card-title">Yoga</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <img class="card-img-top" src="/images/yoga.png" hegiht="350" width="350"/>
+
+                <div class="card-body">
+
+                    <h5 class="card-title">Yoga</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <img class="card-img-top" src="/images/yoga.png" hegiht="350" width="350"/>
+
+                <div class="card-body">
+
+                    <h5 class="card-title">Yoga</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                </div>
+
+            </div>
+
+        </div> -->
+
+</body>
+
+</html>
