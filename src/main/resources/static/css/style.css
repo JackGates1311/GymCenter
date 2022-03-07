@@ -202,9 +202,10 @@ p {
 #workoutView {
 
     margin-top: 45px;
-    width: 75%;
+    width: 96%;
     height: 100%;
     overflow-x: scroll;
+    scroll-behavior: inherit;
 
 }
 
@@ -345,4 +346,53 @@ p {
         height: 565px;
     }
 
+}
+
+.col-1 {
+
+    display: grid;
+    justify-content: center;
+    align-content: center;
+
+    gap: 4px;
+    grid-auto-flow: column;
+
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    /*background-color: #000000;*/
+}
+
+::-webkit-scrollbar-track {
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+    background-color: #FFFF;
+}
+
+
+::-webkit-scrollbar-thumb {
+    /*background-size:8px 16px;
+    background: #64b6fd url('https://www.pngjoy.com/pngl/41/952512_hamburger-icon-menubuttom-hamburger-menu-icon-white-transparent.png') no-repeat center;
+    */
+
+    background-color: silver;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    /*border: 3px solid orange;   creates padding around scroll thumb */
+}
+
+#arrow-left, #arrow-right {
+
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+}
+
+#arrow-left:hover, #arrow-right:hover {
+
+    border-radius: 100%;
+    background: darkgray;
 }
