@@ -1,6 +1,6 @@
 package com.project.gymcenter.controller;
 
-import com.project.gymcenter.form.RegisterForm;
+import com.project.gymcenter.dao.form.RegisterForm;
 import com.project.gymcenter.model.RegisteredUser;
 import com.project.gymcenter.service.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,12 +1,19 @@
 let visibleCardElements = null;
+let scrollSpeed = null;
+let cardContainerSize = null;
+let cardWidth = null;
+let gapBetweenTwoCardElements = null;
+
+let current = 0;
 
 visibleCardElements = getVisibleCardsElementsValue();
+scrollSpeed = getScrollSpeedValue();
 
 function getVisibleCardsElementsValue() {
 
     if($(this).width() > 1199)
         visibleCardElements = 4;
-    else if ($(this).width() > 940)
+    else if ($(this).width() > 991)
         visibleCardElements = 3;
     else
         visibleCardElements = 2;
@@ -14,28 +21,24 @@ function getVisibleCardsElementsValue() {
     return visibleCardElements;
 }
 
-let gapBetweenTwoCardElements = ($("#workoutView").width() -
-    ($(".card").width() * visibleCardElements)) / (visibleCardElements - 1);
+function getScrollSpeedValue() {
 
-let scrollSpeed = $(".card").width() + gapBetweenTwoCardElements; //fix scrollspeed for 3 or less cards!
+    cardContainerSize = $("#workoutView").width();
 
+    cardWidth = $(".card").width();
 
-////
+    gapBetweenTwoCardElements = (cardContainerSize - (cardWidth * visibleCardElements)) / (visibleCardElements);
 
-alert($(".col-10").width());
-////
+    scrollSpeed = cardWidth + gapBetweenTwoCardElements;
 
-
-
-
-
-
+    return scrollSpeed;
+}
 
 $(window).resize(function() {
 
     visibleCardElements = getVisibleCardsElementsValue();
 
-    scrollSpeed = $(".card").width() + gapBetweenTwoCardElements;
+    scrollSpeed = getScrollSpeedValue();
 
 });
 
@@ -51,26 +54,18 @@ $("#arrow-left").click(function () {
 
 });
 
-
-
-
-
-// Code for horizontal Scroll for Workouts
-
-let current = 0;
-
-let ScrollX_pixelPer = 40;
-
 $("#workoutView").on("mousewheel", function(e) {
 
     e.preventDefault();
 
-    let delta = ScrollX_pixelPer * (parseInt(e.originalEvent.deltaY) / 33);
+    let delta = parseInt(e.originalEvent.deltaY);
 
-    current += delta;
+    if(delta > 0)
+        current += scrollSpeed;
+    else
+        current -= scrollSpeed;
 
     $(this).scrollLeft(current);
-
 });
 
 

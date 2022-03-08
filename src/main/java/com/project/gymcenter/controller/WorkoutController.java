@@ -1,8 +1,8 @@
 package com.project.gymcenter.controller;
 
 
-import com.project.gymcenter.form.AddEditWorkoutForm;
-import com.project.gymcenter.form.WorkoutSearchForm;
+import com.project.gymcenter.dao.form.AddEditWorkoutForm;
+import com.project.gymcenter.dao.form.WorkoutSearchForm;
 import com.project.gymcenter.model.Workout;
 import com.project.gymcenter.model.WorkoutLevel;
 import com.project.gymcenter.model.WorkoutOrganizatonType;

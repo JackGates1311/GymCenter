@@ -1,6 +1,6 @@
 package com.project.gymcenter.controller;
 
-import com.project.gymcenter.form.LoginForm;
+import com.project.gymcenter.dao.form.LoginForm;
 import com.project.gymcenter.model.RegisteredUser;
 import com.project.gymcenter.model.UserRole;
 import com.project.gymcenter.service.RegisteredUserService;

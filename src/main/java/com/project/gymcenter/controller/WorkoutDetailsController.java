@@ -1,6 +1,6 @@
 package com.project.gymcenter.controller;
 
-import com.project.gymcenter.form.AddEditWorkoutForm;
+import com.project.gymcenter.dao.form.AddEditWorkoutForm;
 import com.project.gymcenter.model.*;
 import com.project.gymcenter.service.WorkoutIncludedTypesService;
 import com.project.gymcenter.service.WorkoutService;

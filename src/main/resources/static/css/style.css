@@ -201,15 +201,22 @@ p {
 
 #workoutView {
 
-    margin-top: 45px;
     width: 96%;
-    height: 100%;
+    height: auto;
     overflow-x: scroll;
     scroll-behavior: inherit;
+
+    padding-bottom: 50px;
 
 }
 
 .card {
+
+    min-height: 450px;
+    height: 100%;
+
+}
+/*.card {
 
     display: inline;
     padding: .75rem;
@@ -220,7 +227,7 @@ p {
     flex-shrink: 0;
     width: 250px;
     height: 425px;
-}
+}*/
 
 /*.card-block {
 
@@ -238,7 +245,7 @@ p {
 
 }*/
 
-@media (min-width: 470px) {
+/*@media (min-width: 470px) {
 
     .card {
 
@@ -346,7 +353,7 @@ p {
         height: 565px;
     }
 
-}
+}*/
 
 .col-1 {
 
@@ -359,6 +366,15 @@ p {
 
 }
 
+.vertical-center {
+
+    min-height: 90%;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
 
 ::-webkit-scrollbar {
     width: 10px;
