@@ -1,7 +1,49 @@
+::-webkit-scrollbar {
+
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+
+    background-color: #FFFF;
+}
+
+
+::-webkit-scrollbar-thumb {
+
+    background-color: silver;
+    border-radius: 20px;
+}
+
 a {
 
     color: cornflowerblue;
 
+}
+
+h2 {
+
+    text-align: center;
+}
+
+input {
+
+    text-align: center;
+    width:100%;
+    height:30px;
+}
+
+p {
+
+    text-align: center;
+    font-size: 20px;
+}
+
+table th, table td {
+
+    text-align: center;
+    vertical-align: middle !important;
 }
 
 .material-icons {
@@ -15,111 +57,78 @@ a {
 }
 
 .center {
+
+    overflow: hidden;
+    margin: auto;
+    padding: 5%;
+}
+
+.w-30 {
+
+    width: 30%;
+}
+
+.w-40 {
+
     width: 40%;
-    overflow: hidden;
-    margin: auto;
-    padding: 5%;
 }
 
-.centerTable {
-    width: 90%;
-    overflow: hidden;
-    margin: auto;
-    padding: 5%;
-}
-
-.centerError {
+.w-80 {
 
     width: 80%;
-    overflow: hidden;
-    margin: auto;
-    padding: 5%;
+}
+
+.w-90 {
+
+    width: 90%;
+}
+
+.textAlignCenter {
+
+    text-align: center;
+
+}
+
+.red {
+
     color: red;
 }
 
-.centerSuccess {
+.green {
 
-    width: 80%;
-    overflow: hidden;
-    margin: auto;
-    padding: 5%;
     color: green;
 }
 
-.centerCreateEntry {
-    width: 30%;
-    overflow: hidden;
-    margin: auto;
-    padding: 5%;
-}
+.floatRight {
 
-h2 {
-    text-align: center;
-}
-
-.btn btn-light {
     float: right;
     right: -7px;
-    position: relative;
-    width:50%;
 }
 
-.buttonEntry {
+.btn-light {
 
-    text-align: center;
-    float: right;
-    right: 24%;
     position: relative;
-    width: 50%;
 
 }
 
-.buttonLeft {
+.table-bordered {
 
+    display: table;
     margin: 30px 0px 0px 0px;
-    height: 30px;
-    float: bottom;
-    position: relative;
-    width:100%;
 
 }
 
-input {
-    text-align: center;
-    width:100%;
-    height:30px;
-}
 
-.label {
-    font-size: 18px;
-    color: red;
-    padding: 10px 10px 10px 10px;
-}
 
-.table table-bordered {
 
-    margin: 30px 0px 0px 0px;
-    width: 100%;
-    text-align: center;
-    vertical-align: middle;
 
-}
 
-th, td {
-    border: 1px solid Gray;
-    padding: 5px;
-    text-align: center;
-    vertical-align: middle;
-    horiz-align: center;
-    vertical-align: center;
-}
 
-p {
+/* FROM HERE IT NEEDS OPTIMIZATION ... */
 
-    text-align: center;
-    font-size: 20px;
 
-}
+
+
 
 #workoutTypeName, #workoutOrganizationType, #workoutLevel, #workoutSortBy {
 
@@ -369,28 +378,6 @@ p {
 .smallBtn:hover {
 
     fill: cornflowerblue;
-}
-
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-    /*background-color: #000000;*/
-}
-
-::-webkit-scrollbar-track {
-    /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
-    background-color: #FFFF;
-}
-
-
-::-webkit-scrollbar-thumb {
-    /*background-size:8px 16px;
-    background: #64b6fd url('https://www.pngjoy.com/pngl/41/952512_hamburger-icon-menubuttom-hamburger-menu-icon-white-transparent.png') no-repeat center;
-    */
-
-    background-color: silver;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    /*border: 3px solid orange;   creates padding around scroll thumb */
 }
 
 #arrow-left, #arrow-right {

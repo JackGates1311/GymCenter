@@ -12,7 +12,7 @@
 
 <body>
 
-    <div class="centerTable">
+    <div class="center w-90">
 
         <h2> List of workouts </h2>
 
@@ -110,29 +110,31 @@
 
         <br>
 
-        <table class="table table-bordered">
+        <div class="table-responsive">
 
-            <thead align="center" valign="center">
+            <table class="table table-bordered w-100">
+
+                <thead class="thead-light">
 
                 <tr>
                     <th scope="col"> Workout Image </th>
                     <th scope="col"> Workout Name</th>
                     <th scope="col"> Workout Type</th>
                     <th scope="col"> Workout Level</th>
-                    <th scope="col"> Workout Coaches</th>
+                    <th scope="col">Workout Coaches</th>
                     <th scope="col"> Workout Price</th>
                     <th scope="col"> Workout Organization Type</th>
                     <th scope="col"> Workout Average Rate</th>
                 </tr>
 
-            </thead>
+                </thead>
 
-            <tbody>
+                <tbody>
 
                 <tr th:each="tempWorkouts:${workouts}">
 
-                    <td><img th:src="@{${tempWorkouts.workoutImage}}"
-                             width="64" height="64"/> </td>
+                    <td>
+                        <img th:src="@{${tempWorkouts.workoutImage}}" width="64" height="64"/> </td>
                     <td>
                         <a th:href="@{'/workoutDetails?id=' + ${tempWorkouts.workoutId}}"
                            th:text="${tempWorkouts.workoutName}"/>
@@ -147,9 +149,12 @@
 
                 </tr>
 
-            </tbody>
+                </tbody>
 
-        </table>
+            </table>
+
+        </div>
+
 
         <script src="js/workouts.js" type="text/javascript"></script>
 
