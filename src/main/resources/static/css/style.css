@@ -50,9 +50,16 @@ table th, table td {
    color: #00000080;
 }
 
-.material-icons:hover {
+.material-icons:hover, .inlineFlexNav:hover {
 
     color: cornflowerblue;
+
+}
+
+.inlineFlexNav:hover .material-icons {
+
+    color: cornflowerblue;
+
 }
 
 .center {
@@ -117,12 +124,11 @@ table th, table td {
 
 }
 
-.inlineFlex {
+.inlineFlex, .inlineFlexNav {
 
     display: inline-flex;
     gap: 10px;
 }
-
 
 
 
