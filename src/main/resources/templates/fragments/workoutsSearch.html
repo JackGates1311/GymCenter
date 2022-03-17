@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+    <body>
+
+    <div th:fragment="workoutsSearchModal" class="modal fade" id="btnSearch" tabindex="-1"
+         role="dialog">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-content">
+
+                <div class="modal-header text-center">
+
+                    <h4 class="modal-title w-100">Search for workouts</h4>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <form th:action="@{/workoutsSearchResult}" th:object="${workoutSearchForm}" method="post">
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6">
+
+                                <label for="workoutName">Workout name: </label>
+                                <input type="search" class="form-control" id="workoutName" name="workoutName"
+                                       placeholder="Workout name">
+                            </div>
+
+                            <div class="form-group col-md-6">
+
+                                <label for="workoutCoach">Workout coach: </label>
+                                <input type="search" class="form-control" id="workoutCoach" name="workoutCoach"
+                                       placeholder="Workout coach">
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6">
+
+                                <label for="workoutTypeName">Workout type:</label>
+
+                                <select class="form-control text-center" name="workoutTypeName" id="workoutTypeName">
+
+                                    <option value="" selected> </option>
+
+                                    <option th:each="tempWorkouts:${workoutTypes}"
+                                            th:text="${tempWorkouts.workoutTypeName}"
+                                            th:value="${tempWorkouts.workoutTypeName}">
+                                </select>
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+
+                                <label for="workoutCoach">Workout price: </label>
+
+                                <div class="inlineFlex">
+
+                                    <input type="search" class="form-control" id="workoutPriceMin" name="workoutPriceMin"
+                                           placeholder="Min">
+
+                                    <input type="search" class="form-control" id="workoutPriceMax" name="workoutPriceMax"
+                                           placeholder="Max">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6">
+
+                                <label for="workoutOrganizationType">Workout org. type: </label>
+
+                                <select class="form-control text-center" name="workoutOrganizationType"
+                                        id="workoutOrganizationType">
+
+                                    <option value="" selected> </option>
+                                    <option value="Individual">Individual</option>
+                                    <option value="Group">Group</option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+
+                                <label for="workoutLevel">Workout level: </label>
+
+                                <select class="form-control text-center" name="workoutLevel" id="workoutLevel">
+
+                                    <option value="" selected> </option>
+                                    <option value="Amateur">Amateur</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Advanced">Advanced</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-12">
+
+                                <label for="workoutSortBy">Sort by: </label>
+
+                                <select class="form-control text-center" name="workoutSortBy" id="workoutSortBy">
+
+                                    <option value="" selected> </option>
+                                    <option value="ORDER BY workoutName ASC">Workout Name Ascending</option>
+                                    <option value="ORDER BY workoutName DESC">Workout Name Descending</option>
+                                    <option value="ORDER BY workoutCoaches ASC">Workout Coach Ascending</option>
+                                    <option value="ORDER BY workoutCoaches DESC">Workout Coach Descending</option>
+                                    <option value="ORDER BY workoutPrice ASC">Workout Price Ascending</option>
+                                    <option value="ORDER BY workoutPrice DESC">Workout Price Descending</option>
+                                    <option value="ORDER BY workoutTypeName ASC">Workout Type Ascending</option>
+                                    <option value="ORDER BY workoutTypeName DESC">Workout Type Descending</option>
+                                    <option value="ORDER BY workoutOrganizationType ASC">Workout Org. Type Ascending</option>
+                                    <option value="ORDER BY workoutOrganizationType DESC">Workout Org. Type Descending</option>
+                                    <option value="ORDER BY workoutLevel ASC">Workout Level Ascending</option>
+                                    <option value="ORDER BY workoutLevel DESC">Workout Level Descending</option>
+                                    <option value="ORDER BY workoutAverageRate ASC">Workout Average Ascending</option>
+                                    <option value="ORDER BY workoutAverageRate DESC">Workout Average Descending</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6"></div>
+
+                            <div class="form-group col-md-6">
+
+                                <div class="inlineFlex w-100">
+
+                                    <input type="button" id="btnCancel" class="btn btn-light" data-dismiss="modal"
+                                           value="Cancel"/>
+
+                                    <input type="submit" id="btnWorkoutSearch" class="btn btn-light" value="Search"/>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <script src="js/workouts.js" type="text/javascript"></script>
+    </div>
+
+    </body>
+
+</html>

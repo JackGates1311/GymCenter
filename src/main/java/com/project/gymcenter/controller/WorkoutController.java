@@ -146,10 +146,18 @@ public class WorkoutController {
 
     @RequestMapping(value="/index")
 
-    public String index(){
+    public String index(Model model){
 
+        List<Workout> workoutList = workoutService.findAll();
 
-        return "index.html";
+        List<WorkoutType> workoutTypes = workoutTypeService.findAll();
+
+        System.out.println(workoutList);
+
+        model.addAttribute("workouts", workoutList);
+        model.addAttribute("workoutTypes", workoutTypes);
+
+        return "index";
     }
 
 }
