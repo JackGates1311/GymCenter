@@ -82,7 +82,7 @@ public class WorkoutController {
         model.addAttribute("workoutTypes", workoutTypes);
         model.addAttribute("refreshButton", true);
 
-        return "workouts";
+        return "index";
     }
 
     @RequestMapping(value="/addNewWorkout")

@@ -49,29 +49,6 @@ table th, table td {
     vertical-align: middle !important;
 }
 
-.material-icons {
-
-   color: #00000080;
-}
-
-.material-icons:hover, .inlineFlexNav:hover {
-
-    color: cornflowerblue;
-
-}
-
-.inlineFlexNav:hover .material-icons {
-
-    color: cornflowerblue;
-
-}
-
-.center {
-
-    overflow: hidden;
-    margin: auto;
-    padding: 5%;
-}
 
 .w-30 {
 
@@ -93,12 +70,6 @@ table th, table td {
     width: 90%;
 }
 
-.textAlignCenter {
-
-    text-align: center;
-
-}
-
 .red {
 
     color: red;
@@ -109,174 +80,14 @@ table th, table td {
     color: green;
 }
 
-.floatRight {
-
-    float: right;
-    right: -7px;
-}
-
-.btn-light {
-
-    position: relative;
-
-}
-
-.table-bordered {
-
-    display: table;
-    margin: 30px 0px 0px 0px;
-
-}
-
-.inlineFlex, .inlineFlexNav {
-
-    display: inline-flex;
-    gap: 10px;
-}
-
-/* FROM HERE IT NEEDS OPTIMIZATION ... */
-
-#monthOfBirth {
-
-    text-align: center;
-}
-
-.workoutSearch {
-
-    float: left;
-    margin-left: 15px;
-    left: 0%;
-    width: 145px;
-    height: 30px;
-}
-
-/*#workoutName, #workoutCoach, #workoutTypeName, #workoutOrganizationType, #workoutLevel {
-
-    float: left;
-    margin-left: 15px;
-    left: 0%;
-    width: 145px;
-    height: 30px;
-
-}*/
-
-/*#workoutPriceMin, #workoutPriceMax {
-
-    float: left;
-    margin-left: 15px;
-    left: 0%;
-    width: 65px;
-    height: 30px;
-
-}*/
-
-/*#workoutSortBy {
-
-    float: left;
-    margin-left: 15px;
-    left: 0%;
-    width: 220px;
-    height: 30px;
-
-}*/
-
-#workoutSearchButton, #clearSearchButton {
-
-    float: left;
-    margin-left: 15px;
-    left: 0%;
-    width: 100px;
-    height: 30px;
-
-}
-
-#addNewWorkoutButton {
-
-    float: left;
-    margin-left: 15px;
-    left: 0%;
-    width: 150px;
-    height: 30px;
-}
-
-.header {
-
-    width: 40%;
-    overflow: hidden;
-    margin: auto;
-    padding: 5%;
-}
-
-#registerButton {
-
-    margin-left: 15px;
-    margin-right: 15px;
-
-}
-
-.navbar .navbar-collapse {
-
-    text-align: center;
-}
-
-
-#workoutView {
-
-    width: 96%;
-    height: auto;
-    overflow-x: scroll;
-    scroll-behavior: inherit;
-
-    padding-bottom: 50px;
-
-}
-
-.card {
-
-    min-height: 450px;
-    height: 100%;
-}
-
-.cardImage {
-
-    display: flex;
-    justify-content: center;
-
-}
-
-.card-text {
-
-    font-size: 12pt;
-
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 15px;
-}
-
-.bold {
-
-    font-size: 14pt;
-    font-style: initial;
-}
-
 .blue {
 
     color: dodgerblue;
 }
 
-.rating {
+.material-icons {
 
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-    gap: 5px;
-
-}
-
-.star {
-
-    color: silver;
-
+   color: #00000080;
 }
 
 .silver {
@@ -284,9 +95,9 @@ table th, table td {
     color: silver;
 }
 
-.checked {
+.star {
 
-    color: cornflowerblue;
+    color: silver;
 }
 
 .heart {
@@ -307,13 +118,49 @@ table th, table td {
     cursor: pointer;
 }
 
-.img-responsive {
+.inlineFlexNav:hover .material-icons {
 
-    margin: 15px;
-    width: 45%;
-    height: 45%;
-    object-fit: fill;
+    color: cornflowerblue;
+}
 
+.material-icons:hover, .inlineFlexNav:hover {
+
+    color: cornflowerblue;
+}
+
+.smallBtn:hover {
+
+    fill: cornflowerblue;
+    cursor: pointer;
+}
+
+.bold {
+
+    font-size: 14pt;
+    font-style: initial;
+}
+
+
+.btn-light {
+
+    position: relative;
+}
+
+.card {
+
+    min-height: 450px;
+    height: 100%;
+}
+
+.cardButtons {
+
+    gap: 12px;
+    display: flex;
+}
+
+.card-text {
+
+    font-size: 12pt;
 }
 
 .col-1 {
@@ -326,20 +173,48 @@ table th, table td {
 
 }
 
-.vertical-center {
+.img-responsive {
 
-    min-height: 90%;
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+    margin: 15px;
+    width: 45%;
+    height: 45%;
+    object-fit: fill;
 }
 
-.cardButtons {
+.rating {
 
-    gap: 12px;
-    display: flex;
+    margin-bottom: 10px;
+    gap: 5px;
+}
+
+.table-bordered {
+
+    display: table;
+    margin: 30px 0 0 0;
+}
+
+.checked {
+
+    color: cornflowerblue;
+}
+
+.center {
+
+    overflow: hidden;
+    margin: auto;
+    padding: 5%;
+}
+
+.floatRight {
+
+    float: right;
+    right: -7px;
+}
+
+.inlineFlex, .inlineFlexNav {
+
+    display: inline-flex;
+    gap: 10px;
 }
 
 .alignLeft {
@@ -362,19 +237,36 @@ table th, table td {
     justify-content: end;
 }
 
+.flexCenter {
+
+    display: flex;
+    justify-content: center;
+}
+
+.marginsDefault {
+
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
 .smallBtn {
 
     margin-top: 7px;
     margin-bottom: 7px;
     width: 24px;
     height: 24px;
-
 }
 
-.smallBtn:hover {
+.textAlignCenter {
 
-    fill: cornflowerblue;
-    cursor: pointer;
+    text-align: center;
+}
+
+.vertical-center {
+
+    min-height: 90vh;
+    align-items: center;
 }
 
 #arrow-left, #arrow-right {
@@ -391,4 +283,13 @@ table th, table td {
     border-radius: 100%;
     background: darkgray;
     cursor: pointer;
+}
+
+#workoutViewGuest {
+
+    width: 96%;
+    height: auto;
+    overflow-x: scroll;
+    scroll-behavior: inherit;
+    padding-bottom: 50px;
 }

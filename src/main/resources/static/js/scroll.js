@@ -23,7 +23,7 @@ function getVisibleCardsElementsValue() {
 
 function getScrollSpeedValue() {
 
-    cardContainerSize = $("#workoutView").width();
+    cardContainerSize = $("#workoutViewGuest").width();
 
     cardWidth = $(".card").width();
 
@@ -44,17 +44,17 @@ $(window).resize(function() {
 
 $("#arrow-right").click(function () {
 
-    document.getElementById('workoutView').scrollLeft += scrollSpeed;
+    document.getElementById('workoutViewGuest').scrollLeft += scrollSpeed;
 
 });
 
 $("#arrow-left").click(function () {
 
-    document.getElementById('workoutView').scrollLeft -= scrollSpeed;
+    document.getElementById('workoutViewGuest').scrollLeft -= scrollSpeed;
 
 });
 
-$("#workoutView").on("mousewheel", function(e) {
+$("#workoutViewGuest").on("mousewheel", function(e) {
 
     e.preventDefault();
 
