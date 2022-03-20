@@ -19,7 +19,11 @@
 a {
 
     color: cornflowerblue;
+}
 
+a:hover, a:visited, a:focus {
+
+    text-decoration: none !important;
 }
 
 h2 {
@@ -130,25 +134,7 @@ table th, table td {
     gap: 10px;
 }
 
-
-
-
-
 /* FROM HERE IT NEEDS OPTIMIZATION ... */
-
-
-
-
-
-/*#workoutTypeName, #workoutOrganizationType, #workoutLevel, #workoutSortBy {
-
-    text-align: center;
-    float: right;
-    right: 24%;
-    position: relative;
-    width: 50%;
-
-}*/
 
 #monthOfBirth {
 
@@ -249,7 +235,6 @@ table th, table td {
 
     min-height: 450px;
     height: 100%;
-
 }
 
 .cardImage {
@@ -261,7 +246,7 @@ table th, table td {
 
 .card-text {
 
-    font-size: 14pt;
+    font-size: 12pt;
 
     margin-left: 15px;
     margin-right: 15px;
@@ -319,13 +304,14 @@ table th, table td {
 .heart:hover {
 
     border-image: radial-gradient(cornflowerblue 69%,#0000 70%) 84.5% fill/100%;
+    cursor: pointer;
 }
 
 .img-responsive {
 
     margin: 15px;
-    width: 50%;
-    height: 50%;
+    width: 45%;
+    height: 45%;
     object-fit: fill;
 
 }
@@ -388,6 +374,7 @@ table th, table td {
 .smallBtn:hover {
 
     fill: cornflowerblue;
+    cursor: pointer;
 }
 
 #arrow-left, #arrow-right {
@@ -403,4 +390,5 @@ table th, table td {
 
     border-radius: 100%;
     background: darkgray;
+    cursor: pointer;
 }

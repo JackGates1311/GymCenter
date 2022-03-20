@@ -157,6 +157,14 @@ public class WorkoutController {
         model.addAttribute("workouts", workoutList);
         model.addAttribute("workoutTypes", workoutTypes);
 
+
+        /////////
+
+
+
+        /////////////////
+
+
         return "index";
     }
 
