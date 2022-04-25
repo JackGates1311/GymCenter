@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController {
@@ -17,26 +18,43 @@ public class LoginController {
     @Autowired
     RegisteredUserService registeredUserService;
 
-    @RequestMapping("/")
+    @RequestMapping("/login")
     public String login() {
 
         return "login";
     }
 
     @RequestMapping(value="/", method=RequestMethod.POST)
-    public String login(@ModelAttribute(name="loginForm") LoginForm loginForm, Model model) {
+    public String login(@ModelAttribute(name="loginForm") LoginForm loginForm, Model model,
+                        HttpServletRequest request) {
 
-        String userName = loginForm.getUserName();
-        String password = loginForm.getPassword();
-
-        RegisteredUser registeredUser = registeredUserService.findOne(userName, password);
+        RegisteredUser registeredUser = registeredUserService.findOne(loginForm.getUserName(), loginForm.getPassword());
 
         if(registeredUser != null) {
 
-            if(registeredUser.getUserRole().equals(UserRole.Administrator))
+            if(registeredUser.getUserRole().equals(UserRole.Administrator)) {
+
+                /*
+
+                //request.getSession().getAttribute("currentUserRole")
+
+                //request.getSession().setAttribute("currentUserRole", registeredUser.getUserRole());
+
+                //request.getSession().invalidate();
+
+               */
+
+                request.getSession().setAttribute("currentUserRole", registeredUser.getUserRole());
+
                 return "redirect:/workouts";
-            else
+            }
+
+            else {
+
+                request.getSession().setAttribute("currentUserRole", registeredUser.getUserRole());
+
                 return "login"; // NOT IMPLEMENTED YET FOR CUSTOMER
+            }
 
         } else {
 
@@ -44,5 +62,13 @@ public class LoginController {
 
             return "login";
         }
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+
+        request.getSession().invalidate();
+
+        return "redirect:/";
     }
 }

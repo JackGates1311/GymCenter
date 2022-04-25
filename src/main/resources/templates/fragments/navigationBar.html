@@ -4,19 +4,95 @@
 
     <body>
 
-        <nav th:fragment="navBar" class="navbar navbar-expand-lg navbar-light bg-light textAlignCenter">
+        <nav th:fragment="navBarGuest" class="navbar navbar-expand-lg navbar-light bg-light textAlignCenter">
 
             <div class="container-fluid">
 
                 <a class="navbar-brand" href="/">MagicBoost Gym Center</a>
 
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapseGuest">
 
                     <span class="navbar-toggler-icon"></span>
 
                 </button>
 
-                <div class="collapse navbar-collapse textAlignCenter" id="navbarCollapse">
+                <div class="collapse navbar-collapse textAlignCenter" id="navbarCollapseGuest">
+
+                    <div class="navbar-nav ml-auto">
+
+                        <!-- For desktop version of website -->
+
+                        <a href="#" class="nav-item nav-link d-none d-lg-block" data-toggle="modal" data-target="#btnSearch">
+                            <span class="material-icons" data-toggle="tooltip" title="Search">search</span>
+                        </a>
+
+                        <a href="#" class="nav-item nav-link d-none d-lg-block" data-toggle="modal"
+                           data-target="#btnUserRegistration">
+
+                            <span class="material-icons" data-toggle="tooltip" title="Register">person_add_alt</span>
+
+                        </a>
+
+                        <a href="/login" class="nav-item nav-link d-none d-lg-block">
+                            <span class="material-icons" data-toggle="tooltip" title="Login">login</span>
+                        </a>
+
+                        <!-- For mobile version of website -->
+
+                        <a href="#" class="nav-item nav-link d-lg-none" data-toggle="modal" data-target="#btnSearch">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">search</span>
+                                Search for workouts
+
+                            </div>
+
+                        </a>
+
+                        <a href="#" class="nav-item nav-link d-lg-none" data-toggle="modal" data-target="#btnUserRegistration">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">person_add_alt</span>
+                                Register
+
+                            </div>
+
+                        </a>
+
+                        <a href="/login" class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">login</span>
+                                Login
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <nav th:fragment="navBarAdministrator" class="navbar navbar-expand-lg navbar-light bg-light textAlignCenter">
+
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="/workouts">List of workouts</a>
+
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapseAdministrator">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <div class="collapse navbar-collapse textAlignCenter" id="navbarCollapseAdministrator">
 
                     <div class="navbar-nav ml-auto">
 
@@ -30,6 +106,10 @@
                             <span class="material-icons" data-toggle="tooltip" title="Events">event</span>
                         </a>
 
+                        <a href="/addNewWorkout" class="nav-item nav-link d-none d-lg-block">
+                            <span class="material-icons" data-toggle="tooltip" title="Add new workout">fitness_center</span>
+                        </a>
+
                         <a href="#" class="nav-item nav-link d-none d-lg-block" data-toggle="modal" data-target="#btnWishList">
                             <span class="material-icons" data-toggle="tooltip" title="Favorites">favorite_border</span>
                         </a>
@@ -41,8 +121,8 @@
 
                         </a>
 
-                        <a href="#" class="nav-item nav-link d-none d-lg-block" data-toggle="modal" data-target="#btnUserLogin">
-                            <span class="material-icons" data-toggle="tooltip" title="Login">login</span>
+                        <a href="/logout" class="nav-item nav-link d-none d-lg-block">
+                            <span class="material-icons" data-toggle="tooltip" title="Logout">logout</span>
                         </a>
 
                         <!-- For mobile version of website -->
@@ -69,12 +149,23 @@
 
                         </a>
 
+                        <a href="/addNewWorkout" class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">fitness_center</span>
+                                Add new workout
+
+                            </div>
+
+                        </a>
+
                         <a href="#" class="nav-item nav-link d-lg-none" data-toggle="modal" data-target="#btnWishList">
 
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">favorite_border</span>
-                                Wishlist
+                                Favorites
 
                             </div>
 
@@ -91,16 +182,17 @@
 
                         </a>
 
-                        <a href="#" class="nav-item nav-link d-lg-none" data-toggle="modal" data-target="#btnUserLogin">
+                        <a href="/logout" class="nav-item nav-link d-lg-none">
 
                             <div class="inlineFlexNav">
 
-                                <span class="material-icons">login</span>
-                                Login
+                                <span class="material-icons">logout</span>
+                                Logout
 
                             </div>
 
                         </a>
+
 
                     </div>
 

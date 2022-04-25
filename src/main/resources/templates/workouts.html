@@ -2,113 +2,21 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
 
-    <meta charset="UTF-8">
-    <title>Workouts</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>List of workouts</title>
+
+    <div th:insert="/fragments/header :: header"></div>
 
 </head>
 
 <body>
 
-    <div class="center w-90">
+    <div th:insert="/fragments/navigationBar :: navBarAdministrator"></div>
+    <div th:insert="/fragments/workoutsSearch :: workoutsSearchModal"></div>
 
-        <h2> List of workouts </h2>
+    <div class="center paddingSmall w-90">
 
         <p class="centerError" th:if="${workoutAddFailed}"> Error has been occured while adding workout to database! </p>
         <p class="centerSuccess" th:if="${workoutAddSuccess}"> Workout has been successfully added! </p>
-
-        <div>
-
-            <form th:action="@{/workoutsSearchResult}" th:object="${workoutSearchForm}" method="post">
-
-                <br><br>
-
-                <label class="workoutSearch" for="workoutName"> Workout Name: </label>
-                <label class="workoutSearch" for="workoutCoach"> Workout Coach: </label>
-                <label class="workoutSearch" for="workoutPriceMin"> Workout Price: </label>
-                <label class="workoutSearch" for="workoutTypeName"> Workout Type: </label>
-                <label class="workoutSearch" for="workoutOrganizationType"> Workout Org. Type: </label>
-                <label class="workoutSearch" for="workoutLevel"> Workout Level: </label>
-                <label class="workoutSearch" for="workoutSortBy"> Sort by: </label>
-
-                <br><br>
-
-                <input class="form-control" type="search" name="workoutName" id="workoutName" placeholder="Workout Name">
-
-                <input class="form-control" type="search" name="workoutCoach" id="workoutCoach"
-                       placeholder="Workout Coach">
-
-                <input class="form-control" type="search" name="workoutPriceMin" id="workoutPriceMin"
-                       placeholder="Min"/>
-
-                <input class="form-control" type="search" name="workoutPriceMax" id="workoutPriceMax"
-                       placeholder="Max"/>
-
-                <select class="form-control form-control-sm" name="workoutTypeName" id="workoutTypeName">
-
-                    <option value="" selected> </option>
-                    <option th:each="tempWorkouts:${workoutTypes}"
-                            th:text="${tempWorkouts.workoutTypeName}"
-                            th:value="${tempWorkouts.workoutTypeName}">
-                </select>
-
-                <select class="form-control form-control-sm" name="workoutOrganizationType" id="workoutOrganizationType">
-
-                    <option value="" selected> </option>
-                    <option value="Individual">Individual</option>
-                    <option value="Group">Group</option>
-
-                </select>
-
-                <select class="form-control form-control-sm" name="workoutLevel" id="workoutLevel">
-
-                    <option value="" selected> </option>
-                    <option value="Amateur">Amateur</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Advanced">Advanced</option>
-
-                </select>
-
-                <select class="form-control form-control-sm" name="workoutSortBy" id="workoutSortBy">
-
-                    <option value="" selected> </option>
-                    <option value="ORDER BY workoutName ASC">Workout Name Ascending</option>
-                    <option value="ORDER BY workoutName DESC">Workout Name Descending</option>
-                    <option value="ORDER BY workoutCoaches ASC">Workout Coach Ascending</option>
-                    <option value="ORDER BY workoutCoaches DESC">Workout Coach Descending</option>
-                    <option value="ORDER BY workoutPrice ASC">Workout Price Ascending</option>
-                    <option value="ORDER BY workoutPrice DESC">Workout Price Descending</option>
-                    <option value="ORDER BY workoutTypeName ASC">Workout Type Ascending</option>
-                    <option value="ORDER BY workoutTypeName DESC">Workout Type Descending</option>
-                    <option value="ORDER BY workoutOrganizationType ASC">Workout Org. Type Ascending</option>
-                    <option value="ORDER BY workoutOrganizationType DESC">Workout Org. Type Descending</option>
-                    <option value="ORDER BY workoutLevel ASC">Workout Level Ascending</option>
-                    <option value="ORDER BY workoutLevel DESC">Workout Level Descending</option>
-                    <option value="ORDER BY workoutAverageRate ASC">Workout Average Ascending</option>
-                    <option value="ORDER BY workoutAverageRate DESC">Workout Average Descending</option>
-
-                </select>
-
-                <br><br>
-
-                <div class="btn-group" role="group">
-
-                    <input class="btn btn-light btn-sm" id="workoutSearchButton" type="submit" value="Find & Sort">
-                    <input class="btn btn-light btn-sm" id="clearSearchButton" type="submit" formaction="/workouts" value="Clear">
-                    <input class="btn btn-light btn-sm" id="addNewWorkoutButton" type="submit" formaction="/addNewWorkout"
-                           value="Add new Workout">
-
-                </div>
-
-                <br>
-
-            </form>
-
-        </div>
-
-        <br>
 
         <div class="table-responsive">
 
@@ -155,6 +63,7 @@
 
         </div>
 
+        <a th:if="${searchPerformed}" class="btn btn-light w-100" href="/workouts">Show all workouts</a>
 
         <script src="js/workouts.js" type="text/javascript"></script>
 

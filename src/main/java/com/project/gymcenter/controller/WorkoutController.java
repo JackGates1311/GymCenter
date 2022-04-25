@@ -3,6 +3,7 @@ package com.project.gymcenter.controller;
 
 import com.project.gymcenter.dao.form.AddEditWorkoutForm;
 import com.project.gymcenter.dao.form.WorkoutSearchForm;
+import com.project.gymcenter.model.UserRole;
 import com.project.gymcenter.model.Workout;
 import com.project.gymcenter.model.WorkoutType;
 import com.project.gymcenter.service.WorkoutIncludedTypesService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -34,23 +36,30 @@ public class WorkoutController {
     private List<WorkoutType> workoutTypes;
 
     @RequestMapping(value="/workouts")
-    public String workouts(Model model) {
+    public String workouts(Model model, HttpServletRequest request) {
 
-        workoutList = workoutService.findAll();
+        if(request.getSession().getAttribute("currentUserRole") == null) {
 
-        workoutTypes = workoutTypeService.findAll();
+            return "login";
 
-        System.out.println(workoutList);
+        } else {
 
-        model.addAttribute("workouts", workoutList);
-        model.addAttribute("workoutTypes", workoutTypes);
+            workoutList = workoutService.findAll();
 
-        return "workouts";
+            workoutTypes = workoutTypeService.findAll();
+
+            System.out.println(workoutList);
+
+            model.addAttribute("workouts", workoutList);
+            model.addAttribute("workoutTypes", workoutTypes);
+
+            return "workouts";
+        }
     }
 
     @RequestMapping(value="/workoutsSearchResult", method= RequestMethod.POST)
     public String workoutsSearch(@ModelAttribute(name="workoutSearchForm") WorkoutSearchForm workoutSearchForm,
-                                 Model model) {
+                                 Model model, HttpServletRequest request) {
 
         if(workoutSearchForm.getWorkoutPriceMin() == null)
             workoutSearchForm.setWorkoutPriceMin(0.0);
@@ -70,9 +79,12 @@ public class WorkoutController {
 
         model.addAttribute("workouts", workoutsFound);
         model.addAttribute("workoutTypes", workoutTypes);
-        model.addAttribute("refreshButton", true);
+        model.addAttribute("searchPerformed", true);
 
-        return "index";
+        if(request.getSession().getAttribute("currentUserRole") == null)
+            return "index";
+        else
+            return "workouts";
     }
 
     @RequestMapping(value="/addNewWorkout")
@@ -118,9 +130,9 @@ public class WorkoutController {
         return "redirect:/workouts";
     }
 
-    @RequestMapping(value="/index")
+    @RequestMapping(value="/")
 
-    public String index(Model model){
+    public String index(Model model, HttpServletRequest request){
 
         workoutList = workoutService.findAll();
 
@@ -130,8 +142,12 @@ public class WorkoutController {
 
         model.addAttribute("workouts", workoutList);
         model.addAttribute("workoutTypes", workoutTypes);
+        model.addAttribute("isLoggedIn", false);
 
-        return "index";
+        if(request.getSession().getAttribute("currentUserRole") == null)
+            return "index";
+        else
+            return "redirect:/workouts";
     }
 
 }

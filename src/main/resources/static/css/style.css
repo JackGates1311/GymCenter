@@ -202,7 +202,17 @@ table th, table td {
 
     overflow: hidden;
     margin: auto;
+
+}
+
+.paddingNormal {
+
     padding: 5%;
+}
+
+.paddingSmall {
+
+    padding: 1%;
 }
 
 .floatRight {
