@@ -1,4 +1,4 @@
-package com.project.gymcenter.form;
+package com.project.gymcenter.dao.form;
 
 public class LoginForm {
 

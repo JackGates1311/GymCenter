@@ -1,6 +1,5 @@
 package com.project.gymcenter.controller;
 
-import com.project.gymcenter.model.WorkoutType;
 import com.project.gymcenter.service.WorkoutTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +16,7 @@ public class WorkoutTypeDetailsController {
     @RequestMapping(value="/workoutTypeDetails")
     public String workoutTypeDetails(@RequestParam String type, Model model) {
 
-        WorkoutType workoutType = workoutTypeService.findByWorkoutTypeName(type);
-
-        model.addAttribute("workoutTypeDetails", workoutType);
+        model.addAttribute("workoutTypeDetails", workoutTypeService.findByWorkoutTypeName(type));
 
         return "workoutTypeDetails";
     }

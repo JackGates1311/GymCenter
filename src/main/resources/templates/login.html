@@ -9,12 +9,12 @@
 
 <body>
 
-    <div class="center">
+    <div class="center paddingNormal w-40">
 
         <h2>MagicBoost Gym Login</h2>
 
-        <p class="centerError" th:if="${invalidCredentials}"> Username or Password is not correct! </p>
-        <p class="centerSuccess" th:if="${registrationSuccessfull}"> You have successfully registered your account! </p>
+        <p class="center w-80 red" th:if="${invalidCredentials}"> Username or Password is not correct! </p>
+        <p class="center w-80 green" th:if="${registrationSuccessful}"> You have successfully registered your account! </p>
 
         <form th:action="@{/}" th:object="${loginForm}" method="post">
 

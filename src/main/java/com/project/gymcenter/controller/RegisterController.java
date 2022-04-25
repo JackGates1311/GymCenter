@@ -1,6 +1,6 @@
 package com.project.gymcenter.controller;
 
-import com.project.gymcenter.form.RegisterForm;
+import com.project.gymcenter.dao.form.RegisterForm;
 import com.project.gymcenter.model.RegisteredUser;
 import com.project.gymcenter.service.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,23 +28,15 @@ public class RegisterController {
     @RequestMapping(value="/sendRegistrationData", method = RequestMethod.POST)
     public String sendRegistrationData(@ModelAttribute(name="registerForm") RegisterForm registerForm, Model model) {
 
-        /*OPTIMIZE THIS PEACE OF CODE */
+        LocalDate userDateBirth = LocalDate.of(registerForm.getYearOfUserDateBirth(),
+                registerForm.getMonthOfUserDateBirth(), registerForm.getDayOfUserDateBirth());
 
-        String userName = registerForm.getUserName();
-        String userPassword = registerForm.getUserPassword();
-        String userEmail = registerForm.getUserEmail();
-        String userFirstName = registerForm.getUserFirstName();
-        String userLastName = registerForm.getUserLastName();
-        int dayOfUserDateBirth = registerForm.getDayOfUserDateBirth();
-        int monthOfUserDateBirth = registerForm.getMonthOfUserDateBirth();
-        int yearOfUserDateBirth = registerForm.getYearOfUserDateBirth();
-        String userAddress = registerForm.getUserAddress();
-        String userPhoneNumber = registerForm.getUserPhoneNumber();
-        LocalDate userDateBirth = LocalDate.of(yearOfUserDateBirth, monthOfUserDateBirth, dayOfUserDateBirth);
         LocalDateTime userDateTimeRegistration = LocalDateTime.now();
 
-        RegisteredUser registeredUser = new RegisteredUser(userName, userPassword, userEmail, userFirstName,
-                userLastName, userDateBirth, userAddress, userPhoneNumber, userDateTimeRegistration);
+        RegisteredUser registeredUser = new RegisteredUser(registerForm.getUserName(), registerForm.getUserPassword(),
+                registerForm.getUserEmail(), registerForm.getUserFirstName(), registerForm.getUserLastName(),
+                userDateBirth, registerForm.getUserAddress(), registerForm.getUserPhoneNumber(),
+                userDateTimeRegistration);
 
         try {
 
@@ -57,11 +49,8 @@ public class RegisterController {
             return "register";
         }
 
-        System.out.println("Success");
-
-        model.addAttribute("registrationSuccessfull", true);
+        model.addAttribute("registrationSuccessful", true);
 
         return "login";
-
     }
 }

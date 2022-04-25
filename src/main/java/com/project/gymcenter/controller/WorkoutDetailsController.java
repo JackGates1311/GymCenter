@@ -1,6 +1,6 @@
 package com.project.gymcenter.controller;
 
-import com.project.gymcenter.form.AddEditWorkoutForm;
+import com.project.gymcenter.dao.form.AddEditWorkoutForm;
 import com.project.gymcenter.model.*;
 import com.project.gymcenter.service.WorkoutIncludedTypesService;
 import com.project.gymcenter.service.WorkoutService;
@@ -30,17 +30,12 @@ public class WorkoutDetailsController {
     @RequestMapping(value="/workoutDetails")
     public String workoutDetails(@RequestParam Long id, Model model) {
 
-
-        System.out.println(id);
-
         Workout workout = workoutService.findById(id);
 
         System.out.println(workout);
 
-        List<WorkoutIncludedTypes> workoutIncludedTypes = workoutIncludedTypesService.findById(id);
-
         model.addAttribute("workout", workout);
-        model.addAttribute("workoutIncludedTypes", workoutIncludedTypes);
+        model.addAttribute("workoutIncludedTypes", workoutIncludedTypesService.findById(id));
 
         return "workoutDetails";
     }
@@ -76,34 +71,27 @@ public class WorkoutDetailsController {
     @RequestMapping(value="/sendEditWorkoutData", method = RequestMethod.POST)
 
     public String sendEditWorkoutData(@RequestParam Long id,
-                                      @ModelAttribute(name="editWorkoutForm") AddEditWorkoutForm addEditWorkoutForm,
-                                      Model model) throws Exception {
+                                      @ModelAttribute(name = "editWorkoutForm") AddEditWorkoutForm addEditWorkoutForm) {
 
-        String newWorkoutName = addEditWorkoutForm.getNewWorkoutName();
-        List<String> newWorkoutIncludedTypes = addEditWorkoutForm.getNewWorkoutIncludedTypes();
-        String newWorkoutCoaches = addEditWorkoutForm.getNewWorkoutCoaches();
-        Double newWorkoutPrice = addEditWorkoutForm.getNewWorkoutPrice();
-        WorkoutOrganizatonType newWorkoutOrganizationType = addEditWorkoutForm.getNewWorkoutOrganizationType();
-        int newWorkoutLength = addEditWorkoutForm.getnewWorkoutLength();
-        WorkoutLevel newWorkoutLevel = addEditWorkoutForm.getNewWorkoutLevel();
-        String newWorkoutImage = null;
-        String newWorkoutDescription = addEditWorkoutForm.getNewWorkoutDescription();
-
-        String workoutTypeName = workoutTypeService.parseWorkoutTypes(addEditWorkoutForm.getNewWorkoutIncludedTypes());
+        String newWorkoutImagePath;
 
         try {
 
-            newWorkoutImage = workoutService.saveImage(addEditWorkoutForm.getNewWorkoutImage());
+            newWorkoutImagePath = workoutService.saveImage(addEditWorkoutForm.getNewWorkoutImage());
 
         } catch (Exception e) {
 
             System.out.println("File not selected! Program will not perform changes to image...");
 
-            newWorkoutImage = workoutService.findById(id).getWorkoutImage();
+            newWorkoutImagePath = workoutService.findById(id).getWorkoutImage();
         }
 
-        Workout workout = new Workout(workoutTypeName, newWorkoutCoaches, newWorkoutDescription, newWorkoutPrice,
-                    newWorkoutOrganizationType, newWorkoutLevel, newWorkoutLength, newWorkoutName, newWorkoutImage);
+        Workout workout = new Workout(
+                workoutTypeService.parseWorkoutTypes(addEditWorkoutForm.getNewWorkoutIncludedTypes()),
+                addEditWorkoutForm.getNewWorkoutCoaches(), addEditWorkoutForm.getNewWorkoutDescription(),
+                addEditWorkoutForm.getNewWorkoutPrice(), addEditWorkoutForm.getNewWorkoutOrganizationType(),
+                addEditWorkoutForm.getNewWorkoutLevel(), addEditWorkoutForm.getnewWorkoutLength(),
+                addEditWorkoutForm.getNewWorkoutName(), newWorkoutImagePath);
 
         workoutService.update(workout, id);
 
@@ -111,8 +99,8 @@ public class WorkoutDetailsController {
 
         workoutIncludedTypesService.remove(id);
 
-        for(int i = 0; i < newWorkoutIncludedTypes.size(); i++)
-            workoutIncludedTypesService.add(id, newWorkoutIncludedTypes.get(i));
+        for (String newWorkoutIncludedType : addEditWorkoutForm.getNewWorkoutIncludedTypes())
+            workoutIncludedTypesService.add(id, newWorkoutIncludedType);
 
         return "redirect:/workoutDetails?id=" + id.toString();
     }

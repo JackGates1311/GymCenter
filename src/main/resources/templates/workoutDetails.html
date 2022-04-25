@@ -15,7 +15,7 @@
 
     <div class="container-fluid w-75">
         
-        <div class="header">
+        <div class="center w-40">
 
             <h2 class="text-center">Workout Details </h2>
 
@@ -57,7 +57,7 @@
 
                 <div class="btn-group" role="group" th:each="tempWorkoutIncludedTypes:${workoutIncludedTypes}">
 
-                    <a class="btn btn-light w-25" th:href="@{'/workoutTypeDetails?type=' +
+                    <a class="btn btn-light floatRight w-25" th:href="@{'/workoutTypeDetails?type=' +
                     ${tempWorkoutIncludedTypes.workoutTypeName}}"
                        th:text="@{${tempWorkoutIncludedTypes.workoutTypeName}}"></a>
 
@@ -73,7 +73,7 @@
                 <a th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}" align="center" class="btn btn-light"
                    width="150">Edit</a>
 
-                <a href="/workouts" align="center" class="btn btn-light" width="150">Back to all workouts</a>
+                <a href="/workouts" align="center" class="btn btn-light w-50" width="150">Back to all workouts</a>
 
             </div>
 
