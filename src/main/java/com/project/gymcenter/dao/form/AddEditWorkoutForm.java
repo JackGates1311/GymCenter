@@ -15,8 +15,8 @@ public class AddEditWorkoutForm {
     private WorkoutOrganizatonType newWorkoutOrganizationType;
     private int newWorkoutLength;
     private WorkoutLevel newWorkoutLevel;
-    private MultipartFile newWorkoutImage;
     private String newWorkoutDescription;
+    private String newWorkoutImageUrl;
 
 
     public AddEditWorkoutForm() {
@@ -26,7 +26,7 @@ public class AddEditWorkoutForm {
 
     public AddEditWorkoutForm(String newWorkoutName, List<String> newWorkoutIncludedTypes, String newWorkoutCoaches,
                               Double newWorkoutPrice, WorkoutOrganizatonType newWorkoutOrganizationType,
-                              int newWorkoutLength, WorkoutLevel newWorkoutLevel, MultipartFile newWorkoutImage,
+                              int newWorkoutLength, WorkoutLevel newWorkoutLevel, String newWorkoutImageUrl,
                               String newWorkoutDescription) {
 
         this.newWorkoutName = newWorkoutName;
@@ -36,7 +36,7 @@ public class AddEditWorkoutForm {
         this.newWorkoutOrganizationType = newWorkoutOrganizationType;
         this.newWorkoutLength = newWorkoutLength;
         this.newWorkoutLevel = newWorkoutLevel;
-        this.newWorkoutImage = newWorkoutImage;
+        this.newWorkoutImageUrl = newWorkoutImageUrl;
         this.newWorkoutDescription = newWorkoutDescription;
 
     }
@@ -81,11 +81,11 @@ public class AddEditWorkoutForm {
         this.newWorkoutOrganizationType = newWorkoutOrganizationType;
     }
 
-    public int getnewWorkoutLength() {
+    public int getNewWorkoutLength() {
         return newWorkoutLength;
     }
 
-    public void setnewWorkoutLength(int newWorkoutLength) {
+    public void setNewWorkoutLength(int newWorkoutLength) {
         this.newWorkoutLength = newWorkoutLength;
     }
 
@@ -97,12 +97,12 @@ public class AddEditWorkoutForm {
         this.newWorkoutLevel = newWorkoutLevel;
     }
 
-    public MultipartFile getNewWorkoutImage() {
-        return newWorkoutImage;
+    public String getNewWorkoutImageUrl() {
+        return newWorkoutImageUrl;
     }
 
-    public void setNewWorkoutImage(MultipartFile newWorkoutImage) {
-        this.newWorkoutImage = newWorkoutImage;
+    public void setNewWorkoutImageUrl(String newWorkoutImageUrl) {
+        this.newWorkoutImageUrl = newWorkoutImageUrl;
     }
 
     public String getNewWorkoutDescription() {
@@ -123,7 +123,7 @@ public class AddEditWorkoutForm {
                 ", newWorkoutOrganizatonType=" + newWorkoutOrganizationType +
                 ", newWorkoutLength=" + newWorkoutLength +
                 ", newWorkoutLevel=" + newWorkoutLevel +
-                ", newWorkoutImage='" + newWorkoutImage + '\'' +
+                ", newWorkoutImageUrl='" + newWorkoutImageUrl + '\'' +
                 ", newWorkoutDescription='" + newWorkoutDescription + '\'' +
                 '}';
     }

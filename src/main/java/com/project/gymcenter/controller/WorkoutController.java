@@ -3,7 +3,6 @@ package com.project.gymcenter.controller;
 
 import com.project.gymcenter.dao.form.AddEditWorkoutForm;
 import com.project.gymcenter.dao.form.WorkoutSearchForm;
-import com.project.gymcenter.model.UserRole;
 import com.project.gymcenter.model.Workout;
 import com.project.gymcenter.model.WorkoutType;
 import com.project.gymcenter.service.WorkoutIncludedTypesService;
@@ -53,6 +52,8 @@ public class WorkoutController {
             model.addAttribute("workouts", workoutList);
             model.addAttribute("workoutTypes", workoutTypes);
 
+            setNavBarAdministrator("List of workouts", true, model);
+
             return "workouts";
         }
     }
@@ -81,21 +82,42 @@ public class WorkoutController {
         model.addAttribute("workoutTypes", workoutTypes);
         model.addAttribute("searchPerformed", true);
 
-        if(request.getSession().getAttribute("currentUserRole") == null)
+        if(request.getSession().getAttribute("currentUserRole") == null) {
+
+            setNavBarGuest("MagicBoost Gym Center", model);
+
             return "index";
-        else
+        }
+
+        else {
+
+            setNavBarAdministrator("List of workouts", true, model);
+
             return "workouts";
+        }
+
+
     }
 
     @RequestMapping(value="/addNewWorkout")
-    public String addNewWorkout(Model model) {
+    public String addNewWorkout(Model model, HttpServletRequest request) {
 
         workoutTypes = workoutTypeService.findAll();
         workoutList = workoutService.findAll();
 
         model.addAttribute("addNewWorkoutTypes", workoutTypes);
 
-        return "addNewWorkout";
+        if(request.getSession().getAttribute("currentUserRole") == null) {
+
+            return "login";
+        } else {
+
+            setNavBarAdministrator("Add new workout", false, model);
+
+            return "addNewWorkout";
+        }
+
+
     }
 
     @RequestMapping(value="/sendAddWorkoutData", method = RequestMethod.POST)
@@ -109,9 +131,10 @@ public class WorkoutController {
                     workoutTypeService.parseWorkoutTypes(addEditWorkoutForm.getNewWorkoutIncludedTypes()),
                     addEditWorkoutForm.getNewWorkoutCoaches(), addEditWorkoutForm.getNewWorkoutDescription(),
                     addEditWorkoutForm.getNewWorkoutPrice(), addEditWorkoutForm.getNewWorkoutOrganizationType(),
-                    addEditWorkoutForm.getNewWorkoutLevel(), addEditWorkoutForm.getnewWorkoutLength(),
-                    addEditWorkoutForm.getNewWorkoutName(),
-                    workoutService.saveImage(addEditWorkoutForm.getNewWorkoutImage()));
+                    addEditWorkoutForm.getNewWorkoutLevel(), addEditWorkoutForm.getNewWorkoutLength(),
+                    addEditWorkoutForm.getNewWorkoutName(), addEditWorkoutForm.getNewWorkoutImageUrl());
+
+            //workoutService.saveImage(addEditWorkoutForm.getNewWorkoutImage()) -- old method for posting images
 
             Long workoutId = workoutService.add(workout);
 
@@ -144,10 +167,46 @@ public class WorkoutController {
         model.addAttribute("workoutTypes", workoutTypes);
         model.addAttribute("isLoggedIn", false);
 
+        setNavBarGuest("MagicBoost Gym Center", model);
+
         if(request.getSession().getAttribute("currentUserRole") == null)
             return "index";
         else
             return "redirect:/workouts";
+    }
+
+    private void setNavBarAdministrator(String navBarTitle, Boolean showSearchIconNavBar, Model model) {
+
+        model.addAttribute("navBarTitle", navBarTitle);
+        model.addAttribute("navBarTitlePath", "/workouts");
+
+        model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
+
+        model.addAttribute("showWorkoutsIconNavBar", true);
+        model.addAttribute("showAddNewWorkoutIconNavBar", true);
+        model.addAttribute("showFavoritesIconNavBar", true);
+        model.addAttribute("showManageUserIconNavBar", true);
+        model.addAttribute("showLogoutIconNavBar", true);
+
+        model.addAttribute("showUserRegisterIconNavBar", false);
+        model.addAttribute("showLoginIconNavBar", false);
+    }
+
+    private void setNavBarGuest(String navBarTitle, Model model) {
+
+        model.addAttribute("navBarTitle", navBarTitle);
+        model.addAttribute("navBarTitlePath", "/");
+
+        model.addAttribute("showSearchIconNavBar", true);
+
+        model.addAttribute("showWorkoutsIconNavBar", false);
+        model.addAttribute("showAddNewWorkoutIconNavBar", false);
+        model.addAttribute("showFavoritesIconNavBar", false);
+        model.addAttribute("showManageUserIconNavBar", false);
+        model.addAttribute("showLogoutIconNavBar", false);
+
+        model.addAttribute("showUserRegisterIconNavBar", true);
+        model.addAttribute("showLoginIconNavBar", true);
     }
 
 }

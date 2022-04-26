@@ -77,7 +77,7 @@ public class WorkoutDetailsController {
 
         try {
 
-            newWorkoutImagePath = workoutService.saveImage(addEditWorkoutForm.getNewWorkoutImage());
+            //newWorkoutImagePath = workoutService.saveImage(addEditWorkoutForm.getNewWorkoutImage());
 
         } catch (Exception e) {
 
@@ -90,8 +90,8 @@ public class WorkoutDetailsController {
                 workoutTypeService.parseWorkoutTypes(addEditWorkoutForm.getNewWorkoutIncludedTypes()),
                 addEditWorkoutForm.getNewWorkoutCoaches(), addEditWorkoutForm.getNewWorkoutDescription(),
                 addEditWorkoutForm.getNewWorkoutPrice(), addEditWorkoutForm.getNewWorkoutOrganizationType(),
-                addEditWorkoutForm.getNewWorkoutLevel(), addEditWorkoutForm.getnewWorkoutLength(),
-                addEditWorkoutForm.getNewWorkoutName(), newWorkoutImagePath);
+                addEditWorkoutForm.getNewWorkoutLevel(), addEditWorkoutForm.getNewWorkoutLength(),
+                addEditWorkoutForm.getNewWorkoutName(), "");
 
         workoutService.update(workout, id);
 
