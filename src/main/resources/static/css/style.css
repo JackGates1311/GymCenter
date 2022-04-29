@@ -31,10 +31,26 @@ h2 {
     text-align: center;
 }
 
+h5 {
+
+    padding-top: 10px;
+}
+
+h6 {
+
+    padding-top: 10px;
+    text-align: center;
+}
+
 input {
 
     text-align: center;
     width:100%;
+}
+
+label{
+
+    margin-top: 5px;
 }
 
 p {
@@ -48,7 +64,6 @@ table th, table td {
     text-align: center;
     vertical-align: middle !important;
 }
-
 
 .w-30 {
 
@@ -140,6 +155,10 @@ table th, table td {
     font-style: initial;
 }
 
+.btn-group {
+
+    margin-right: 10px;
+}
 
 .btn-light {
 
@@ -171,6 +190,17 @@ table th, table td {
     gap: 4px;
     grid-auto-flow: column;
 
+}
+
+.custom-file-input, textarea {
+
+    margin-top: 5px;
+}
+
+.form-group.col-md-6 {
+
+    padding-bottom: -20px; !important;
+    margin: 0; !important;
 }
 
 .img-responsive {
@@ -242,7 +272,6 @@ table th, table td {
 
 .alignRight {
 
-    margin-right: 15px;
     align-items: end;
     justify-content: end;
 }
@@ -258,6 +287,26 @@ table th, table td {
     margin-left: 15px;
     margin-right: 15px;
     margin-bottom: 15px;
+}
+
+.marginTopDefault {
+
+    margin-top: 15px;
+}
+
+.marginRightDefault {
+
+    margin-right: 15px;
+}
+
+.marginTopSmallDefault {
+
+    margin-top: 5px;
+}
+
+.removeMarginFormControl {
+
+    margin-top: -75px;
 }
 
 .smallBtn {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -27,21 +28,37 @@ public class WorkoutDetailsController {
     @Autowired
     private WorkoutTypeService workoutTypeService;
 
+    NavBarController navBarController = new NavBarController();
+
     @RequestMapping(value="/workoutDetails")
-    public String workoutDetails(@RequestParam Long id, Model model) {
+    public String workoutDetails(@RequestParam Long id, Model model, HttpServletRequest request) {
 
-        Workout workout = workoutService.findById(id);
-
-        System.out.println(workout);
-
-        model.addAttribute("workout", workout);
+        model.addAttribute("workout", workoutService.findById(id));
         model.addAttribute("workoutIncludedTypes", workoutIncludedTypesService.findById(id));
+        model.addAttribute("workoutTypeDetails", workoutTypeService.findAll());
+
+        String navBarTitle = "Workout details";
+
+        if(request.getSession().getAttribute("currentUserRole") == null) {
+
+            navBarController.setNavBarGuest(navBarTitle, false, model);
+
+            model.addAttribute("showEditWorkoutButton", false);
+
+        } else {
+
+            navBarController.setNavBarAdministrator(navBarTitle, false, model);
+
+            model.addAttribute("showEditWorkoutButton", true);
+        }
 
         return "workoutDetails";
     }
 
     @RequestMapping (value="/editWorkoutDetails")
     public String editWorkoutDetails(@RequestParam Long id, Model model) {
+
+        navBarController.setNavBarAdministrator("Edit workout", false, model);
 
         Workout workoutForEdit = workoutService.findById(id);
 
@@ -73,25 +90,12 @@ public class WorkoutDetailsController {
     public String sendEditWorkoutData(@RequestParam Long id,
                                       @ModelAttribute(name = "editWorkoutForm") AddEditWorkoutForm addEditWorkoutForm) {
 
-        String newWorkoutImagePath;
-
-        try {
-
-            //newWorkoutImagePath = workoutService.saveImage(addEditWorkoutForm.getNewWorkoutImage());
-
-        } catch (Exception e) {
-
-            System.out.println("File not selected! Program will not perform changes to image...");
-
-            newWorkoutImagePath = workoutService.findById(id).getWorkoutImage();
-        }
-
         Workout workout = new Workout(
                 workoutTypeService.parseWorkoutTypes(addEditWorkoutForm.getNewWorkoutIncludedTypes()),
                 addEditWorkoutForm.getNewWorkoutCoaches(), addEditWorkoutForm.getNewWorkoutDescription(),
                 addEditWorkoutForm.getNewWorkoutPrice(), addEditWorkoutForm.getNewWorkoutOrganizationType(),
                 addEditWorkoutForm.getNewWorkoutLevel(), addEditWorkoutForm.getNewWorkoutLength(),
-                addEditWorkoutForm.getNewWorkoutName(), "");
+                addEditWorkoutForm.getNewWorkoutName(), addEditWorkoutForm.getNewWorkoutImageUrl());
 
         workoutService.update(workout, id);
 

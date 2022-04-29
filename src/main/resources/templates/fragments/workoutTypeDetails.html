@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+    <body>
+
+        <div th:fragment="workoutTypeDetailsModal" class="modal fade" role="dialog" tabindex="-1"
+             th:id="@{'btnWorkoutType' + ${tempWorkoutIncludedTypes.workoutTypeName} + 'Details'}">
+
+            <div class="modal-dialog modal-dialog-centered" role="document">
+
+                <div class="modal-content">
+
+                    <div class="modal-header text-center">
+
+                        <h4 class="modal-title w-100" th:text="@{'About ' + ${tempWorkoutIncludedTypes.workoutTypeName} +
+                        ' workouts'}"></h4>
+
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="form-row alignCenter">
+
+                            <div th:each="tempWorkoutTypeDetails:${workoutTypeDetails}">
+
+                                <p th:if="${tempWorkoutIncludedTypes.workoutTypeName} ==
+                                ${tempWorkoutTypeDetails.workoutTypeName}"
+                                   th:text="${tempWorkoutTypeDetails.workoutTypeDetailedDescription}"></p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                                <div class="inlineFlex w-100 alignRight">
+
+                                    <input id="btnOk" class="btn btn-light w-25" data-dismiss="modal" value="Close"/>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+
+</html>

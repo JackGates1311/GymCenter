@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://thymeleaf.org">
+
 <head>
 
     <title>Add new Workout</title>
@@ -19,17 +21,14 @@
 
             <div class="row">
 
-                <div class="col-lg-6 com-md-6 col-sm-6 col-xs-6 mb-6">
+                <div class="col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
 
-                    <br>
                     <label for="newWorkoutName">Workout Name:</label>
-                    <br>
+
                     <input class="form-control" type="text" name="newWorkoutName" id="newWorkoutName"
                            placeholder="Workout Name" required="true">
 
-                    <br>
                     <label for="newWorkoutIncludedTypes">Workout Types:</label>
-                    <br>
 
                     <select class="select w-100" id="newWorkoutIncludedTypes" name="newWorkoutIncludedTypes"
                             required="true" multiple>
@@ -40,16 +39,30 @@
 
                     </select>
 
-                    <br><br>
                     <label for="newWorkoutCoaches">Workout Coaches:</label>
-                    <br>
 
                     <input class="form-control" type="text" name="newWorkoutCoaches" id="newWorkoutCoaches"
                            placeholder="Workout Coaches" required="true">
 
-                    <br>
-                    <label>Workout Price and Organization Type:</label>
-                    <br>
+
+                    <label for="newWorkoutImage">Workout Image:</label>
+
+                    <div class="custom-file">
+
+                        <input type="file" class="custom-file-input" id="newWorkoutImage" name="newWorkoutImage"
+                               required="true">
+
+                        <label class="custom-file-label" id="newWorkoutImageLabel" for="newWorkoutImage">
+                            Click here to select image
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
+
+                    <label>Workout Price and Org. Type:</label>
 
                     <div class="form-row">
 
@@ -75,13 +88,7 @@
 
                     </div>
 
-                </div>
-
-                <div class="col-lg-6 com-md-6 col-sm-6 col-xs-6 mb-6">
-
-                    <br>
                     <label>Workout Length and Level:</label>
-                    <br>
 
                     <div class="form-row">
 
@@ -107,40 +114,40 @@
 
                     </div>
 
-                    <label style="margin-top: 7px;" for="newWorkoutImage">Workout Image:</label>
-
-                    <div class="custom-file">
-
-                        <input type="file" class="custom-file-input" id="newWorkoutImage" name="newWorkoutImage"
-                               required="true">
-
-                        <label class="custom-file-label" id="newWorkoutImageLabel" for="newWorkoutImage">
-                            Click here to select Image
-                        </label>
-
-                    </div>
-
-                    <br><br>
-
                     <label for="newWorkoutDescription">Workout Description:</label>
 
                     <textarea class="form-control" id="newWorkoutDescription" name="newWorkoutDescription"
-                              rows="4"></textarea>
+                              rows="5"></textarea>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+
+                            <input class="btn btn-light btn-sm marginTopDefault w-100" id="cancelAddNewEditWorkoutButton"
+                                   type="button" value="Cancel"/>
+
+                        </div>
+
+                        <div class="form-group col-md-6">
+
+                            <input class="btn btn-light btn-sm marginTopDefault w-100" id="addNewWorkoutButton"
+                                   type="submit" value="Add New Workout">
+
+                        </div>
+
+                    </div>
+
 
                 </div>
 
-                <input type="text" name="newWorkoutImageUrl" id="newWorkoutImageUrl" value="textURL" hidden>
-
-                <input style="margin-right: 15px;" class="btn btn-light btn-sm w-100" id="addNewWorkoutButton"
-                       type="submit" value="Add New Workout">
+                <input type="text" name="newWorkoutImageUrl" id="newWorkoutImageUrl" value="" required="true"
+                       hidden>
 
             </div>
 
         </form>
 
-        <a style="margin-top: 15px;" class="btn btn-light btn-sm w-100" href="/workouts"> Back to all workouts </a>
-
-        <script src="js/addNewWorkout.js" type="text/javascript"></script>
+        <script src="js/addNewEditWorkout.js" type="text/javascript"></script>
 
     </div>
 

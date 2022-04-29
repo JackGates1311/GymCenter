@@ -1,10 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
+
     <title>MagicBoost Gym - Login</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+    <div th:insert="/fragments/header :: header"></div>
+
 </head>
 
 <body>
@@ -16,24 +19,25 @@
         <p class="center w-80 red" th:if="${invalidCredentials}"> Username or Password is not correct! </p>
         <p class="center w-80 green" th:if="${registrationSuccessful}"> You have successfully registered your account! </p>
 
-        <form th:action="@{/}" th:object="${loginForm}" method="post">
+        <div class="paddingNormal">
 
-            <br>
-            <label for="userName">User Name:</label>
-            <br>
-            <input class="form-control" type="text" name="userName" id="userName" placeholder="User Name">
-            <br>
-            <label for="password">Password:</label>
-            <br>
-            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
-            <br>
-            <input class="btn btn-light btn-sm" type="submit" value="Login">
-            <br>
+            <form th:action="@{/}" th:object="${loginForm}" method="post">
 
-        </form>
+                <label for="userName">User Name:</label>
 
-        <br>
-        <a class="btn btn-light btn-sm w-100"  href="/register"> Register </a>
+                <input class="form-control" type="text" name="userName" id="userName" placeholder="User Name">
+
+                <label for="password">Password:</label>
+
+                <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+
+                <input class="btn btn-light btn-sm marginTopDefault" type="submit" value="Login">
+
+            </form>
+
+            <a class="btn btn-light btn-sm marginTopDefault w-100"  href="/register"> Register </a>
+
+        </div>
 
 
     </div>

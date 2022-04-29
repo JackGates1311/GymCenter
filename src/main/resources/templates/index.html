@@ -13,7 +13,7 @@
 
     <div th:insert="/fragments/navigationBar :: navBar"></div>
 
-    <div th:insert="/fragments/workoutsSearch :: workoutsSearchModal"></div>
+    <div th:insert="/fragments/workoutSearch :: workoutSearchModal"></div>
 
     <div class="container-fluid">
 
@@ -41,7 +41,7 @@
 
                                 <div class="thumbnail">
 
-                                    <a href="">
+                                    <a th:href="@{'/workoutDetails?id=' + ${tempWorkouts.workoutId}}">
 
                                         <div class="cardImage flexCenter">
 
@@ -135,8 +135,10 @@
 
                                     <a class="heart" data-toggle="tooltip" title="Add workout to wishlist"></a>
 
-                                    <a> <div th:insert="/fragments/svg/images :: info" data-toggle="tooltip"
-                                             title="Workout details"></div> </a>
+                                    <a th:href="@{'/workoutDetails?id=' + ${tempWorkouts.workoutId}}">
+                                        <div th:insert="/fragments/svg/images :: info" data-toggle="tooltip"
+                                             title="Workout details"></div>
+                                    </a>
 
                                 </div>
 

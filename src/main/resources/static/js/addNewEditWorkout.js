@@ -11,13 +11,10 @@ $("#newWorkoutPrice").on("keyup", function(){
     if(numbersOnly.test(value) === false) {
 
         $(this).val(value.slice(0,-1));
-
     }
 });
 
 $("#newWorkoutLength").on("keyup", function(){
-
-    // alert("OKAY")
 
     let value = $(this).val();
 
@@ -93,4 +90,10 @@ $("#newWorkoutImage").on("change", function () {
 
         });
     }
+});
+
+$("#cancelAddNewEditWorkoutButton").on("click", function() {
+
+    window.history.back();
+
 });

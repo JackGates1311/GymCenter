@@ -34,6 +34,8 @@ public class WorkoutController {
     private List<Workout> workoutList;
     private List<WorkoutType> workoutTypes;
 
+    NavBarController navBarController = new NavBarController();
+
     @RequestMapping(value="/workouts")
     public String workouts(Model model, HttpServletRequest request) {
 
@@ -52,7 +54,7 @@ public class WorkoutController {
             model.addAttribute("workouts", workoutList);
             model.addAttribute("workoutTypes", workoutTypes);
 
-            setNavBarAdministrator("List of workouts", true, model);
+            navBarController.setNavBarAdministrator("List of workouts", true, model);
 
             return "workouts";
         }
@@ -84,14 +86,14 @@ public class WorkoutController {
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
-            setNavBarGuest("MagicBoost Gym Center", model);
+            navBarController.setNavBarGuest("MagicBoost Gym Center", true, model);
 
             return "index";
         }
 
         else {
 
-            setNavBarAdministrator("List of workouts", true, model);
+            navBarController.setNavBarAdministrator("List of workouts", true, model);
 
             return "workouts";
         }
@@ -112,7 +114,7 @@ public class WorkoutController {
             return "login";
         } else {
 
-            setNavBarAdministrator("Add new workout", false, model);
+            navBarController.setNavBarAdministrator("Add new workout", false, model);
 
             return "addNewWorkout";
         }
@@ -167,46 +169,11 @@ public class WorkoutController {
         model.addAttribute("workoutTypes", workoutTypes);
         model.addAttribute("isLoggedIn", false);
 
-        setNavBarGuest("MagicBoost Gym Center", model);
+        navBarController.setNavBarGuest("MagicBoost Gym Center", true, model);
 
         if(request.getSession().getAttribute("currentUserRole") == null)
             return "index";
         else
             return "redirect:/workouts";
     }
-
-    private void setNavBarAdministrator(String navBarTitle, Boolean showSearchIconNavBar, Model model) {
-
-        model.addAttribute("navBarTitle", navBarTitle);
-        model.addAttribute("navBarTitlePath", "/workouts");
-
-        model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
-
-        model.addAttribute("showWorkoutsIconNavBar", true);
-        model.addAttribute("showAddNewWorkoutIconNavBar", true);
-        model.addAttribute("showFavoritesIconNavBar", true);
-        model.addAttribute("showManageUserIconNavBar", true);
-        model.addAttribute("showLogoutIconNavBar", true);
-
-        model.addAttribute("showUserRegisterIconNavBar", false);
-        model.addAttribute("showLoginIconNavBar", false);
-    }
-
-    private void setNavBarGuest(String navBarTitle, Model model) {
-
-        model.addAttribute("navBarTitle", navBarTitle);
-        model.addAttribute("navBarTitlePath", "/");
-
-        model.addAttribute("showSearchIconNavBar", true);
-
-        model.addAttribute("showWorkoutsIconNavBar", false);
-        model.addAttribute("showAddNewWorkoutIconNavBar", false);
-        model.addAttribute("showFavoritesIconNavBar", false);
-        model.addAttribute("showManageUserIconNavBar", false);
-        model.addAttribute("showLogoutIconNavBar", false);
-
-        model.addAttribute("showUserRegisterIconNavBar", true);
-        model.addAttribute("showLoginIconNavBar", true);
-    }
-
 }
