@@ -138,19 +138,6 @@ public class WorkoutDAOImpl implements WorkoutDAO {
     }
 
     @Override
-    public String saveImage(MultipartFile imageFile) throws Exception {
-
-        byte[] photoBytes = imageFile.getBytes();
-
-        Path pathToSave = Paths.get("src/main/resources/static/images/" + imageFile.getOriginalFilename());
-
-        Files.write(pathToSave, photoBytes);
-
-        return "images/" + imageFile.getOriginalFilename();
-
-    }
-
-    @Override
     public int generateWorkoutId() {
 
         String sqlQuery = "SELECT * FROM workout WHERE workoutId = " +

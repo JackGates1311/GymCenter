@@ -16,8 +16,8 @@
 
         <h2>MagicBoost Gym Login</h2>
 
-        <p class="center w-80 red" th:if="${invalidCredentials}"> Username or Password is not correct! </p>
-        <p class="center w-80 green" th:if="${registrationSuccessful}"> You have successfully registered your account! </p>
+        <p class="center marginTopSmallDefault w-80 red" th:if="${invalidCredentials}"> Username or Password is not correct </p>
+        <p class="center w-80 green" th:if="${registrationSuccessful}"> You have successfully registered your account </p>
 
         <div class="paddingNormal">
 
@@ -35,10 +35,15 @@
 
             </form>
 
-            <a class="btn btn-light btn-sm marginTopDefault w-100"  href="/register"> Register </a>
+            <a th:if="${showRegisterButton}" class="btn btn-light btn-sm marginTopDefault w-100"  href="/register"> Register </a>
+
+            <a th:if="${showCancelButton}" class="btn btn-light btn-sm marginTopDefault w-100"
+               href="javascript:history.back()">Cancel</a>
+
+            <a th:if="${continueAsGuestButton}" class="btn btn-light btn-sm marginTopDefault w-100"
+               href="/">Continue as Guest</a>
 
         </div>
-
 
     </div>
 

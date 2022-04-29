@@ -1,10 +1,8 @@
 $("#dayOfUserDateBirth").on("keyup", function(){
 
-    // alert("OKAY")
+    let value = $(this).val();
 
-    var value = $(this).val();
-
-    var numbersOnly = new RegExp('^[0-9]*$')
+    let numbersOnly = new RegExp('^[0-9]*$');
 
     if(numbersOnly.test(value) === false) {
 
@@ -12,15 +10,13 @@ $("#dayOfUserDateBirth").on("keyup", function(){
 
     }
 
-})
+});
 
 $("#yearOfUserDateBirth").on("keyup", function(){
 
-    // alert("OKAY")
+    let value = $(this).val();
 
-    var value = $(this).val();
-
-    var numbersOnly = new RegExp('^[0-9]*$')
+    let numbersOnly = new RegExp('^[0-9]*$');
 
     if(numbersOnly.test(value) === false) {
 
@@ -28,4 +24,11 @@ $("#yearOfUserDateBirth").on("keyup", function(){
 
     }
 
-})
+});
+
+
+$("#cancelRegisterButton").on("click", function() {
+
+    window.history.back();
+
+});

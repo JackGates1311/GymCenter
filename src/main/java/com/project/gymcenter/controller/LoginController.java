@@ -19,7 +19,10 @@ public class LoginController {
     RegisteredUserService registeredUserService;
 
     @RequestMapping("/login")
-    public String login() {
+    public String login(Model model) {
+
+        model.addAttribute("showRegisterButton", true);
+        model.addAttribute("showCancelButton", true);
 
         return "login";
     }

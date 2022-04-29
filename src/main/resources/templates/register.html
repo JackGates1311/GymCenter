@@ -1,125 +1,137 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://thymeleaf.org">
 
 <head>
 
-    <meta charset="UTF-8">
     <title>Register to gym center</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <div th:insert="/fragments/header :: header"></div>
 
 </head>
 
 <body>
 
-    <div class="container-fluid w-50">
+    <div class="container-fluid paddingNormal w-50">
 
-        <br><br>
+        <h2>Register to MagicBoost Gym</h2>
 
-        <h2 align="center">Register to MagicBoost Gym</h2>
+        <div class="paddingNormal">
 
-        <form th:action="@{/sendRegistrationData}" th:object="${registerForm}" method="post">
+            <form th:action="@{/sendRegistrationData}" th:object="${registerForm}" method="post">
 
-            <div class="row">
+                <div class="row">
 
-                <div class="col-lg-6 com-md-6 col-sm-6 col-xs-6 mb-6">
+                    <div class="col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
 
-                    <br>
-                    <label for="userFirstName">First Name:</label>
-                    <br>
-                    <input class="form-control" type="text" name="userFirstName" id="userFirstName"
-                           placeholder="First Name" required="true">
-                    <br>
-                    <label for="userLastName">Last Name:</label>
-                    <br>
-                    <input class="form-control" type="text" name="userLastName" id="userLastName"
-                           placeholder="Last Name" required="true">
-                    <br>
-                    <label for="userEmail">Email:</label>
-                    <br>
-                    <input class="form-control" type="email" name="userEmail" id="userEmail" placeholder="Email"
-                           required="true">
-                    <br>
-                    <label>Date of Birth:</label>
-                    <br>
+                        <label for="userFirstName">First Name:</label>
 
-                    <div class="form-row">
+                        <input class="form-control" type="text" name="userFirstName" id="userFirstName"
+                               placeholder="First Name" required="true">
 
-                        <div class="form-group col-md-4">
-                            <input type="text" class="form-control" id="dayOfUserDateBirth" maxlength="2" minlength="1"
-                                   name="dayOfUserDateBirth" placeholder="Day">
+                        <label for="userLastName">Last Name:</label>
+
+                        <input class="form-control" type="text" name="userLastName" id="userLastName"
+                               placeholder="Last Name" required="true">
+
+                        <label for="userEmail">Email:</label>
+
+                        <input class="form-control" type="email" name="userEmail" id="userEmail" placeholder="Email"
+                               required="true">
+
+                        <label>Date of Birth:</label>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-4">
+                                <input type="text" class="form-control" id="dayOfUserDateBirth" maxlength="2" minlength="1"
+                                       name="dayOfUserDateBirth" placeholder="Day">
+                            </div>
+
+                            <div class="form-group col-md-4">
+
+                                <select class="form-control" id="monthOfUserDateBirth" name="monthOfUserDateBirth"
+                                        required="true">
+
+                                    <option value="" hidden>Month</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group col-md-4">
+
+                                <input type="text" class="form-control" id="yearOfUserDateBirth" name="yearOfUserDateBirth"
+                                       placeholder="Year" maxlength="4" minlength="4">
+                            </div>
+
                         </div>
 
-                        <div class="form-group col-md-4">
+                    </div>
 
-                            <select class="form-control" id="monthOfUserDateBirth" name="monthOfUserDateBirth"
-                                    required="true">
+                    <div class="col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
 
-                                <option value="" hidden>Month</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                            </select>
+                        <label for="userName">User Name:</label>
 
-                        </div>
+                        <input class="form-control" type="text" name="userName" id="userName" placeholder="User Name"
+                               required="true">
 
-                        <div class="form-group col-md-4">
+                        <label for="userPassword">Password:</label>
 
-                            <input type="text" class="form-control" id="yearOfUserDateBirth" name="yearOfUserDateBirth"
-                                   placeholder="Year" maxlength="4" minlength="4">
+                        <input class="form-control" type="password" name="userPassword" id="userPassword"
+                               placeholder="Password" required="true">
+
+                        <label for="userPhoneNumber">Phone Number:</label>
+
+                        <input class="form-control" type="text" name="userPhoneNumber" id="userPhoneNumber"
+                               placeholder="Phone Number" required="true" minlength="8" maxlength="15">
+
+                        <label for="userAddress">Address:</label>
+
+                        <input class="form-control" type="text" name="userAddress" id="userAddress"
+                               placeholder="Address" required="true">
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6">
+
+                                <input class="btn btn-light btn-sm marginTopDefault w-100" id="cancelRegisterButton"
+                                       type="button" value="Cancel"/>
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+
+                                <input class="btn btn-light btn-sm marginTopDefault w-100" id="registerButton" type="submit"
+                                       value="Register Now">
+
+                            </div>
+
                         </div>
 
                     </div>
 
                 </div>
 
-                <div class="col-lg-6 com-md-6 col-sm-6 col-xs-6 mb-6">
+            </form>
 
-                    <br>
-                    <label for="userName">User Name:</label>
-                    <br>
-                    <input class="form-control" type="text" name="userName" id="userName" placeholder="User Name"
-                           required="true">
-                    <br>
-                    <label for="userPassword">Password:</label>
-                    <br>
-                    <input class="form-control" type="password" name="userPassword" id="userPassword"
-                           placeholder="Password" required="true">
-                    <br>
-                    <label for="userPhoneNumber">Phone Number:</label>
-                    <br>
-                    <input class="form-control" type="text" name="userPhoneNumber" id="userPhoneNumber"
-                           placeholder="Phone Number" required="true" minlength="8" maxlength="15">
-                    <br>
-                    <label for="userAddress">Address:</label>
-                    <br>
-                    <input class="form-control" type="text" name="userAddress" id="userAddress"
-                           placeholder="Address" required="true">
-                    <br>
+            <script src="js/register.js" type="text/javascript"></script>
 
-                </div>
+            <p class="centerError paddingNormal red" th:if="${registrationFailed}">
+                Registration failed because of database error </p>
 
-                <input class="btn btn-light btn-sm w-100 marginsDefault" id="registerButton" type="submit"
-                       value="Register Now">
-
-            </div>
-
-        </form>
-
-        <script src="js/register.js" type="text/javascript"></script>
-
-        <p class="centerError" th:if="${registrationFailed}"> Registration failed because of database error! </p>
+        </div>
 
     </div>
 

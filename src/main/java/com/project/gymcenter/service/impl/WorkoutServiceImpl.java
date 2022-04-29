@@ -48,11 +48,4 @@ public class WorkoutServiceImpl implements WorkoutService {
                 workoutCoaches, workoutPriceMin, workoutPriceMax, workoutTypeName, workoutOrganizationType,
                 workoutLevel, workoutSortBy);
     }
-
-    @Override
-    public String saveImage(MultipartFile imageFile) throws Exception {
-
-        return workoutDAO.saveImage(imageFile);
-    }
-
 }

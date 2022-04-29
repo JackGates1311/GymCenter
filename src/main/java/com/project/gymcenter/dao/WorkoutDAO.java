@@ -21,7 +21,5 @@ public interface WorkoutDAO {
                               Double workoutPriceMax, String workoutTypeName, String workoutOrganizationType,
                               String workoutLevel, String workoutSortBy);
 
-    public String saveImage(MultipartFile imageFile) throws Exception;
-
     public int generateWorkoutId();
 }

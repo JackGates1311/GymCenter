@@ -50,7 +50,9 @@ public class RegisterController {
         }
 
         model.addAttribute("registrationSuccessful", true);
+        model.addAttribute("continueAsGuestButton", true);
 
         return "login";
+
     }
 }
