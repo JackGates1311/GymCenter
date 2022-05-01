@@ -1,6 +1,6 @@
 package com.project.gymcenter.dao.form;
 
-public class RegisterForm {
+public class AddEditAccountForm {
 
     private String userName;
     private String userPassword;
@@ -13,7 +13,7 @@ public class RegisterForm {
     private String userAddress;
     private String userPhoneNumber;
 
-    public RegisterForm() {
+    public AddEditAccountForm() {
 
         super();
     }

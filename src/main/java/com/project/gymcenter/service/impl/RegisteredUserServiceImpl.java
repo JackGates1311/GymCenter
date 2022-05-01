@@ -27,14 +27,27 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     }
 
     @Override
+    public RegisteredUser findById(int userId) {
+
+        return registeredUserDAO.findById(userId);
+    }
+
+    @Override
     public void add(RegisteredUser registeredUser) {
 
         registeredUserDAO.add(registeredUser);
     }
 
     @Override
-    public int update(RegisteredUser registeredUser) {
-        return 0;
+    public void update(RegisteredUser registeredUser, int userId) {
+
+        registeredUserDAO.update(registeredUser, userId);
+    }
+
+    @Override
+    public void changePassword(String newPassword, int userId) {
+
+        registeredUserDAO.changePassword(newPassword, userId);
     }
 
     @Override

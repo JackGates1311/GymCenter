@@ -12,10 +12,13 @@ public interface RegisteredUserDAO {
 
     public void add(RegisteredUser registeredUser);
 
-    public int update(RegisteredUser registeredUser);
+    public void update(RegisteredUser registeredUser, int userId);
 
     public int delete(RegisteredUser registeredUser);
 
     public int generateUserId();
 
+    public RegisteredUser findById(int userId);
+
+    public void changePassword(String newPassword, int userId);
 }

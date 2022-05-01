@@ -28,7 +28,8 @@
 
                         <!--/*@thymesVar id="showSearchIconNavBar" type=""*/-->
 
-                        <a th:if="${showSearchIconNavBar}" href="#" class="nav-item nav-link d-none d-lg-block" data-toggle="modal" data-target="#btnSearch">
+                        <a th:if="${showSearchIconNavBar}" href="#" class="nav-item nav-link d-none d-lg-block"
+                           data-toggle="modal" data-target="#btnSearch">
                             <span class="material-icons" data-toggle="tooltip" title="Search">search</span>
                         </a>
 
@@ -59,10 +60,10 @@
 
                         <!--/*@thymesVar id="showManageUserIconNavBar" type=""*/-->
 
-                        <a th:if="${showManageUserIconNavBar}" href="#" class="nav-item nav-link d-none d-lg-block"
-                           data-toggle="modal" data-target="#btnUserRegistration">
+                        <a th:if="${showManageUserIconNavBar}" href="/accountInfo"
+                           class="nav-item nav-link d-none d-lg-block">
 
-                            <span class="material-icons" data-toggle="tooltip" title="User settings">
+                            <span class="material-icons" data-toggle="tooltip" title="My account">
                                 account_circle</span>
 
                         </a>
@@ -104,7 +105,8 @@
 
                         </a>
 
-                        <a th:if="${showWorkoutsIconNavBar}" href="#" class="nav-item nav-link d-lg-none" data-toggle="modal" data-target="#btnEvents">
+                        <a th:if="${showWorkoutsIconNavBar}" href="#" class="nav-item nav-link d-lg-none"
+                           data-toggle="modal" data-target="#btnEvents">
 
                             <div class="inlineFlexNav">
 
@@ -137,12 +139,13 @@
 
                         </a>
 
-                        <a th:if="${showManageUserIconNavBar}" href="#" class="nav-item nav-link d-lg-none" data-toggle="modal" data-target="#btnUserRegistration">
+                        <a th:if="${showManageUserIconNavBar}" href="/accountInfo"
+                           class="nav-item nav-link d-lg-none">
 
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">account_circle</span>
-                                User settings
+                                My account
 
                             </div>
 

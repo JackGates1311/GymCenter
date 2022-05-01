@@ -18,34 +18,36 @@
 
         <div class="paddingNormal">
 
-            <form th:action="@{/sendRegistrationData}" th:object="${registerForm}" method="post">
+            <form th:action="@{/sendRegistrationData}" th:object="${addEditAccountForm}" method="post">
 
                 <div class="row">
 
                     <div class="col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
 
-                        <label for="userFirstName">First Name:</label>
+                        <label for="userFirstName">First name:</label>
 
                         <input class="form-control" type="text" name="userFirstName" id="userFirstName"
-                               placeholder="First Name" required="true">
+                               placeholder="First name" required="true">
 
-                        <label for="userLastName">Last Name:</label>
+                        <label for="userLastName">Last name:</label>
 
                         <input class="form-control" type="text" name="userLastName" id="userLastName"
-                               placeholder="Last Name" required="true">
+                               placeholder="Last name" required="true">
 
                         <label for="userEmail">Email:</label>
 
                         <input class="form-control" type="email" name="userEmail" id="userEmail" placeholder="Email"
                                required="true">
 
-                        <label>Date of Birth:</label>
+                        <label>Date of birth:</label>
 
                         <div class="form-row">
 
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control" id="dayOfUserDateBirth" maxlength="2" minlength="1"
-                                       name="dayOfUserDateBirth" placeholder="Day">
+
+                                <input type="text" class="form-control"
+                                       id="dayOfUserDateBirth" maxlength="2" minlength="1"
+                                       name="dayOfUserDateBirth" placeholder="Day" required="true">
                             </div>
 
                             <div class="form-group col-md-4">
@@ -73,7 +75,7 @@
                             <div class="form-group col-md-4">
 
                                 <input type="text" class="form-control" id="yearOfUserDateBirth" name="yearOfUserDateBirth"
-                                       placeholder="Year" maxlength="4" minlength="4">
+                                       placeholder="Year" maxlength="4" minlength="4" required="true">
                             </div>
 
                         </div>
@@ -82,9 +84,9 @@
 
                     <div class="col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
 
-                        <label for="userName">User Name:</label>
+                        <label for="userName">Username:</label>
 
-                        <input class="form-control" type="text" name="userName" id="userName" placeholder="User Name"
+                        <input class="form-control" type="text" name="userName" id="userName" placeholder="Username"
                                required="true">
 
                         <label for="userPassword">Password:</label>
@@ -92,10 +94,10 @@
                         <input class="form-control" type="password" name="userPassword" id="userPassword"
                                placeholder="Password" required="true">
 
-                        <label for="userPhoneNumber">Phone Number:</label>
+                        <label for="userPhoneNumber">Phone number:</label>
 
                         <input class="form-control" type="text" name="userPhoneNumber" id="userPhoneNumber"
-                               placeholder="Phone Number" required="true" minlength="8" maxlength="15">
+                               placeholder="Phone number" minlength="8" maxlength="15" required="true">
 
                         <label for="userAddress">Address:</label>
 
@@ -106,7 +108,7 @@
 
                             <div class="form-group col-md-6">
 
-                                <input class="btn btn-light btn-sm marginTopDefault w-100" id="cancelRegisterButton"
+                                <input class="btn btn-light btn-sm marginTopDefault w-100" id="cancelAddEditAccount"
                                        type="button" value="Cancel"/>
 
                             </div>
@@ -126,7 +128,7 @@
 
             </form>
 
-            <script src="js/register.js" type="text/javascript"></script>
+            <script src="js/addEditAccount.js" type="text/javascript"></script>
 
             <p class="centerError paddingNormal red" th:if="${registrationFailed}">
                 Registration failed because of database error </p>

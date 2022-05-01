@@ -10,9 +10,13 @@ public interface RegisteredUserService {
 
     public RegisteredUser findOne(String userName, String password);
 
+    public RegisteredUser findById (int userId);
+
     public void add(RegisteredUser registeredUser);
 
-    public int update(RegisteredUser registeredUser);
+    public void update(RegisteredUser registeredUser, int userId);
+
+    public void changePassword(String newPassword, int userId);
 
     public int delete(RegisteredUser registeredUser);
 

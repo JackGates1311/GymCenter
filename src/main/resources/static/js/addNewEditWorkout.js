@@ -44,7 +44,8 @@ $("#newWorkoutImage").on("change", function () {
 
         $("#newWorkoutImageLabel").text("Uploading image ...");
 
-        // Set metadata (fixes localhost error 429)
+        /* Set metadata (fixes localhost error 429)
+            https://stackoverflow.com/questions/6817595/remove-http-referer */
 
         let meta = document.createElement('meta');
         meta.name = "referrer";

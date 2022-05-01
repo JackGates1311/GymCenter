@@ -61,7 +61,7 @@ public class WorkoutController {
     }
 
     @RequestMapping(value="/workoutsSearchResult", method= RequestMethod.POST)
-    public String workoutsSearch(@ModelAttribute(name="workoutSearchForm") WorkoutSearchForm workoutSearchForm,
+    public String workoutsSearchResult(@ModelAttribute(name="workoutSearchForm") WorkoutSearchForm workoutSearchForm,
                                  Model model, HttpServletRequest request) {
 
         if(workoutSearchForm.getWorkoutPriceMin() == null)
@@ -124,7 +124,7 @@ public class WorkoutController {
 
     @RequestMapping(value="/sendAddWorkoutData", method = RequestMethod.POST)
 
-    public String sendAddWorkoutData(@ModelAttribute(name="addWorkoutForm") AddEditWorkoutForm addEditWorkoutForm,
+    public String sendAddWorkoutData(@ModelAttribute(name="addEditWorkoutForm") AddEditWorkoutForm addEditWorkoutForm,
                                      Model model) {
 
         try {
@@ -135,8 +135,6 @@ public class WorkoutController {
                     addEditWorkoutForm.getNewWorkoutPrice(), addEditWorkoutForm.getNewWorkoutOrganizationType(),
                     addEditWorkoutForm.getNewWorkoutLevel(), addEditWorkoutForm.getNewWorkoutLength(),
                     addEditWorkoutForm.getNewWorkoutName(), addEditWorkoutForm.getNewWorkoutImageUrl());
-
-            //workoutService.saveImage(addEditWorkoutForm.getNewWorkoutImage()) -- old method for posting images
 
             Long workoutId = workoutService.add(workout);
 

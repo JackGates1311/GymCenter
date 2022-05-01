@@ -93,8 +93,16 @@ public class RegisteredUserDAOImpl implements RegisteredUserDAO {
     }
 
     @Override
-    public int update(RegisteredUser registeredUser) {
-        return 0;
+    public void update(RegisteredUser registeredUser, int userId) {
+
+        String sqlQuery = "UPDATE registeredUser SET userName = ?, userEmail = ?, " +
+                "userFirstName = ?, userLastName = ?, userDateBirth = ?, userAddress = ?, userPhoneNumber = ? " +
+                "WHERE userId = ?;";
+
+        jdbcTemplate.update(sqlQuery, registeredUser.getUserName(), registeredUser.getUserEmail(),
+                registeredUser.getUserFirstName(), registeredUser.getUserLastName(), registeredUser.getUserDateBirth(),
+                registeredUser.getUserAddress(), registeredUser.getUserPhoneNumber(), userId);
+
     }
 
     @Override
@@ -113,6 +121,25 @@ public class RegisteredUserDAOImpl implements RegisteredUserDAO {
         int generatedUserId = Math.toIntExact(registeredUser.get(0).getUserId() + 1);
 
         return generatedUserId;
+    }
+
+    @Override
+    public RegisteredUser findById(int userId) {
+
+        String sqlQuery = "SELECT * FROM registeredUser WHERE userId = '" + userId + "';";
+
+        List<RegisteredUser> registeredUser = jdbcTemplate.query(sqlQuery, new RegisteredUserRowMapper());
+
+        return registeredUser.get(0);
+    }
+
+    @Override
+    public void changePassword(String newPassword, int userId) {
+
+        String sqlQuery = "UPDATE registeredUser SET userPassword = ? WHERE userId = ?";
+
+        jdbcTemplate.update(sqlQuery, newPassword, userId);
+
     }
 
 }

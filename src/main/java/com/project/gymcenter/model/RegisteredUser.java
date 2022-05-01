@@ -68,6 +68,19 @@ public class RegisteredUser {
 
     }
 
+    public RegisteredUser(String userName, String userEmail, String userFirstName, String userLastName,
+                          LocalDate userDateBirth, String userAddress, String userPhoneNumber) {
+
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
+        this.userDateBirth = userDateBirth;
+        this.userAddress = userAddress;
+        this.userPhoneNumber = userPhoneNumber;
+
+    }
+
     public Long getUserId() {
         return userId;
     }
