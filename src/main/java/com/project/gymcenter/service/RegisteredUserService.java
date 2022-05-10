@@ -18,6 +18,8 @@ public interface RegisteredUserService {
 
     public void update(RegisteredUser registeredUser, int userId);
 
+    public void updateAccountStatus(RegisteredUser registeredUser, int userId);
+
     public void changePassword(String newPassword, int userId);
 
     public int delete(RegisteredUser registeredUser);

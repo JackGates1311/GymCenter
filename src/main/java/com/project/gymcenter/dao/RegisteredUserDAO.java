@@ -23,4 +23,6 @@ public interface RegisteredUserDAO {
     public void changePassword(String newPassword, int userId);
 
     public List<RegisteredUser> find(String userName, String userRole, String userSortBy);
+
+    public void updateAccountStatus(RegisteredUser registeredUser, int userId);
 }

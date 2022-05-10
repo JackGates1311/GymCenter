@@ -1,5 +1,7 @@
 package com.project.gymcenter.dao.form;
 
+import com.project.gymcenter.model.UserRole;
+
 public class AddEditAccountForm {
 
     private String userName;
@@ -12,6 +14,8 @@ public class AddEditAccountForm {
     private int yearOfUserDateBirth;
     private String userAddress;
     private String userPhoneNumber;
+    private UserRole userRole;
+    private String userAccountStatus;
 
     public AddEditAccountForm() {
 
@@ -98,4 +102,19 @@ public class AddEditAccountForm {
         this.userPhoneNumber = userPhoneNumber;
     }
 
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    public String getUserAccountStatus() {
+        return userAccountStatus;
+    }
+
+    public void setUserAccountStatus(String userAccountStatus) {
+        this.userAccountStatus = userAccountStatus;
+    }
 }

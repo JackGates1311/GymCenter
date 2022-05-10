@@ -16,7 +16,7 @@ public class RegisteredUser {
     private String userPhoneNumber;
     private LocalDateTime userDateTimeRegistration;
     private UserRole userRole;
-    private Boolean isRemoved;
+    private Boolean isDeleted;
 
     public RegisteredUser() {
 
@@ -31,12 +31,12 @@ public class RegisteredUser {
         this.userPhoneNumber = null;
         this.userDateTimeRegistration = null;
         this.userRole = null;
-        this.isRemoved = null;
+        this.isDeleted = null;
     }
 
     public RegisteredUser(Long userId, String userName, String userPassword, String userEmail, String userFirstName,
                           String userLastName, LocalDate userDateBirth, String userAddress, String userPhoneNumber,
-                          LocalDateTime userDateTimeRegistration, UserRole userRole, Boolean isRemoved) {
+                          LocalDateTime userDateTimeRegistration, UserRole userRole, Boolean isDeleted) {
 
         this.userId = userId;
         this.userName = userName;
@@ -49,7 +49,7 @@ public class RegisteredUser {
         this.userPhoneNumber = userPhoneNumber;
         this.userDateTimeRegistration = userDateTimeRegistration;
         this.userRole = userRole;
-        this.isRemoved = isRemoved;
+        this.isDeleted= isDeleted;
     }
 
     public RegisteredUser(String userName, String userPassword, String userEmail, String userFirstName,
@@ -79,6 +79,12 @@ public class RegisteredUser {
         this.userAddress = userAddress;
         this.userPhoneNumber = userPhoneNumber;
 
+    }
+
+    public RegisteredUser(UserRole userRole, Boolean isDeleted) {
+
+        this.userRole = userRole;
+        this.isDeleted = isDeleted;
     }
 
     public Long getUserId() {
@@ -169,12 +175,12 @@ public class RegisteredUser {
         this.userRole = userRole;
     }
 
-    public Boolean getRemoved() {
-        return isRemoved;
+    public Boolean getDeleted() {
+        return isDeleted;
     }
 
-    public void setRemoved(Boolean removed) {
-        isRemoved = removed;
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 
     @Override
@@ -191,7 +197,7 @@ public class RegisteredUser {
                 ", userPhoneNumber='" + userPhoneNumber + '\'' + "\n" +
                 ", userDateTimeRegistration=" + userDateTimeRegistration + "\n" +
                 ", userRole=" + userRole + "\n" +
-                ", isRemoved=" + isRemoved + "\n" +
+                ", isDelted=" + isDeleted + "\n" +
                 '}';
     }
 }

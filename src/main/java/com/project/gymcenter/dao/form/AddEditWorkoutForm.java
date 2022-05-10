@@ -1,5 +1,6 @@
 package com.project.gymcenter.dao.form;
 
+import com.project.gymcenter.model.UserRole;
 import com.project.gymcenter.model.WorkoutLevel;
 import com.project.gymcenter.model.WorkoutOrganizatonType;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +18,6 @@ public class AddEditWorkoutForm {
     private WorkoutLevel newWorkoutLevel;
     private String newWorkoutDescription;
     private String newWorkoutImageUrl;
-
 
     public AddEditWorkoutForm() {
 
@@ -115,16 +115,16 @@ public class AddEditWorkoutForm {
 
     @Override
     public String toString() {
-        return "AddNewWorkoutForm{" +
+        return "AddEditWorkoutForm{" +
                 "newWorkoutName='" + newWorkoutName + '\'' +
                 ", newWorkoutIncludedTypes=" + newWorkoutIncludedTypes +
-                ", workoutCoaches='" + newWorkoutCoaches + '\'' +
+                ", newWorkoutCoaches='" + newWorkoutCoaches + '\'' +
                 ", newWorkoutPrice=" + newWorkoutPrice +
-                ", newWorkoutOrganizatonType=" + newWorkoutOrganizationType +
+                ", newWorkoutOrganizationType=" + newWorkoutOrganizationType +
                 ", newWorkoutLength=" + newWorkoutLength +
                 ", newWorkoutLevel=" + newWorkoutLevel +
-                ", newWorkoutImageUrl='" + newWorkoutImageUrl + '\'' +
                 ", newWorkoutDescription='" + newWorkoutDescription + '\'' +
+                ", newWorkoutImageUrl='" + newWorkoutImageUrl + '\'' +
                 '}';
     }
 }

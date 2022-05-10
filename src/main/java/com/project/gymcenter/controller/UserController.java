@@ -308,11 +308,64 @@ public class UserController {
     }
 
     @RequestMapping(value="/saveUserDetails", method = RequestMethod.POST)
-    public String saveUserDetails() {
+    public String saveUserDetails(@RequestParam int id, @ModelAttribute(name="addEditAccountForm")
+            AddEditAccountForm addEditAccountForm, HttpServletRequest request, Model model) {
 
         //TODO Implement method for saving userRole and AccountStatus fields, then start implementing workout period
 
-        return "userDetails";
+        if(request.getSession().getAttribute("currentUserRole") == null) {
+
+            return "login";
+
+        } else {
+
+
+            try{
+
+                Boolean isRemoved;
+
+                if(addEditAccountForm.getUserAccountStatus().equals("Active"))
+                    isRemoved = false;
+                else
+                    isRemoved = true;
+
+
+                RegisteredUser registeredUser = new RegisteredUser(addEditAccountForm.getUserRole(), isRemoved);
+
+                registeredUserService.updateAccountStatus(registeredUser, id);
+
+                navBarController.setNavBarAdministrator("User details", "/userDetails?id=" + id,
+                        false, model);
+
+                FillFormWithUserData(model, id);
+
+                FillFormWithUserDataReadOnly(true, model, id);
+
+                model.addAttribute("saveAccountChangesSuccess", true);
+
+                return "userDetails";
+
+
+            } catch (Exception e) {
+
+                model.addAttribute("saveAccountChangesFailed", true);
+
+
+                navBarController.setNavBarAdministrator("User details", "/userDetails?id=" + id,
+                        false, model);
+
+                FillFormWithUserData(model, id);
+
+                FillFormWithUserDataReadOnly(true, model, id);
+
+                e.printStackTrace();
+
+                return "userDetails";
+            }
+
+        }
+
+
     }
 
 
@@ -344,7 +397,7 @@ public class UserController {
         model.addAttribute("loggedInUserDayOfBirth",
                 splitUserDateBirth(currentLoggedInUserData.getUserDateBirth())[2]);
 
-        model.addAttribute("loggedInUserIsRemoved", currentLoggedInUserData.getRemoved());
+        model.addAttribute("loggedInUserIsRemoved", currentLoggedInUserData.getDeleted());
 
 
         System.out.println(currentLoggedInUserData);

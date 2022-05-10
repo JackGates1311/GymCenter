@@ -51,6 +51,12 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     }
 
     @Override
+    public void updateAccountStatus(RegisteredUser registeredUser, int userId) {
+
+        registeredUserDAO.updateAccountStatus(registeredUser, userId);
+    }
+
+    @Override
     public void changePassword(String newPassword, int userId) {
 
         registeredUserDAO.changePassword(newPassword, userId);

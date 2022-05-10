@@ -162,4 +162,14 @@ public class RegisteredUserDAOImpl implements RegisteredUserDAO {
 
     }
 
+    @Override
+    public void updateAccountStatus(RegisteredUser registeredUser, int userId) {
+
+        String sqlQuery = "UPDATE registeredUser SET userRole = ?, isDeleted = ? " +
+                "WHERE userId = ?;";
+
+        jdbcTemplate.update(sqlQuery, registeredUser.getUserRole().toString(), registeredUser.getDeleted(), userId);
+
+    }
+
 }
