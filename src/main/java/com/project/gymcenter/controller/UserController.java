@@ -302,14 +302,22 @@ public class UserController {
 
         else {
 
-            navBarController.setNavBarAdministrator("User details", "/userDetails?id=" + id,
-                    false, model);
+            if(Integer.parseInt(request.getSession().getAttribute("loggedInUserId").toString()) == id) {
 
-            FillFormWithUserData(model, id);
+                return "redirect:/accountInfo";
 
-            FillFormWithUserDataReadOnly(true, model, id);
+            } else {
 
-            return "userDetails";
+                navBarController.setNavBarAdministrator("User details", "/userDetails?id=" + id,
+                        false, model);
+
+                FillFormWithUserData(model, id);
+
+                FillFormWithUserDataReadOnly(true, model, id);
+
+                return "userDetails";
+            }
+
         }
 
     }
@@ -434,6 +442,7 @@ public class UserController {
 
             model.addAttribute("userPasswordButtonVisible", false);
             model.addAttribute("cancelAddEditAccountVisible", false);
+            model.addAttribute("cancelUserDetailsAccountVisible", true);
             model.addAttribute("saveChangesButtonVisible", false);
 
             model.addAttribute("userRoleVisible", true);
@@ -447,6 +456,7 @@ public class UserController {
 
             model.addAttribute("userPasswordVisible", true);
             model.addAttribute("cancelAddEditAccountVisible", true);
+            model.addAttribute("cancelUserDetailsAccountVisible", false);
             model.addAttribute("saveChangesButtonVisible", true);
 
             model.addAttribute("userRoleVisible", false);

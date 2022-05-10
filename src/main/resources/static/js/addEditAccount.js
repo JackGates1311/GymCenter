@@ -45,6 +45,12 @@ $("#cancelAddEditAccount").on("click", function() {
 
 });
 
+$("#cancelUserDetailsAccount").on("click", function () {
+
+    $(location).attr('href', '/manageUsers');
+
+})
+
 $("#btnSetNewPassword").on("click", function(e) {
 
         let userNewPassword = $("#userNewPassword").val();
