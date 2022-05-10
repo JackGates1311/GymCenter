@@ -197,7 +197,7 @@ public class RegisteredUser {
                 ", userPhoneNumber='" + userPhoneNumber + '\'' + "\n" +
                 ", userDateTimeRegistration=" + userDateTimeRegistration + "\n" +
                 ", userRole=" + userRole + "\n" +
-                ", isDelted=" + isDeleted + "\n" +
+                ", isDeleted=" + isDeleted + "\n" +
                 '}';
     }
 }

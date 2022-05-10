@@ -99,6 +99,13 @@ public class UserController {
                 request.getSession().setAttribute("loggedInUserId", registeredUser.getUserId());
 
                 return "redirect:/workouts";
+
+            } else if (registeredUser.getUserRole().equals(UserRole.Customer)) {
+
+                System.out.println("Logged in customer");
+
+                return "login";
+
             }
 
             else {
@@ -311,52 +318,54 @@ public class UserController {
     public String saveUserDetails(@RequestParam int id, @ModelAttribute(name="addEditAccountForm")
             AddEditAccountForm addEditAccountForm, HttpServletRequest request, Model model) {
 
-        //TODO Implement method for saving userRole and AccountStatus fields, then start implementing workout period
-
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
             return "login";
 
         } else {
 
-
             try{
 
                 Boolean isRemoved;
 
-                if(addEditAccountForm.getUserAccountStatus().equals("Active"))
-                    isRemoved = false;
-                else
-                    isRemoved = true;
+                try {
 
+                    if(addEditAccountForm.getUserAccountStatus().equals("Active"))
+                        isRemoved = false;
+                    else
+                        isRemoved = true;
 
-                RegisteredUser registeredUser = new RegisteredUser(addEditAccountForm.getUserRole(), isRemoved);
+                } catch (Exception e) {
 
-                registeredUserService.updateAccountStatus(registeredUser, id);
+                    isRemoved = registeredUserService.findById(id).getDeleted();
 
-                navBarController.setNavBarAdministrator("User details", "/userDetails?id=" + id,
-                        false, model);
+                }
 
-                FillFormWithUserData(model, id);
+                if(addEditAccountForm.getUserRole().equals(UserRole.Administrator) && isRemoved) {
 
-                FillFormWithUserDataReadOnly(true, model, id);
+                    model.addAttribute("changeUserRoleAccountFailed", true); // ADD ERROR
 
-                model.addAttribute("saveAccountChangesSuccess", true);
+                    getUserDetails(id, model);
+
+                } else {
+
+                    RegisteredUser registeredUser = new RegisteredUser(addEditAccountForm.getUserRole(), isRemoved);
+
+                    registeredUserService.updateAccountStatus(registeredUser, id);
+
+                    getUserDetails(id, model);
+
+                    model.addAttribute("saveAccountChangesSuccess", true);
+
+                }
 
                 return "userDetails";
-
 
             } catch (Exception e) {
 
                 model.addAttribute("saveAccountChangesFailed", true);
 
-
-                navBarController.setNavBarAdministrator("User details", "/userDetails?id=" + id,
-                        false, model);
-
-                FillFormWithUserData(model, id);
-
-                FillFormWithUserDataReadOnly(true, model, id);
+                getUserDetails(id, model);
 
                 e.printStackTrace();
 
@@ -365,6 +374,17 @@ public class UserController {
 
         }
 
+
+    }
+
+    private void getUserDetails(int id, Model model) {
+
+        navBarController.setNavBarAdministrator("User details", "/userDetails?id=" + id,
+                false, model);
+
+        FillFormWithUserData(model, id);
+
+        FillFormWithUserDataReadOnly(true, model, id);
 
     }
 
@@ -382,25 +402,26 @@ public class UserController {
         return userDateBirth.toString().split("-");
     }
 
-    private void FillFormWithUserData(Model model, int currentLoggedInUserId) {
+    private void FillFormWithUserData(Model model, int userId) {
 
-        RegisteredUser currentLoggedInUserData = registeredUserService.findById(currentLoggedInUserId);
+        RegisteredUser userData = registeredUserService.findById(userId);
 
-        model.addAttribute("loggedInUser", currentLoggedInUserData);
+        model.addAttribute("loggedInUser", userData);
 
         model.addAttribute("loggedInUserYearOfBirth",
-                splitUserDateBirth(currentLoggedInUserData.getUserDateBirth())[0]);
+                splitUserDateBirth(userData.getUserDateBirth())[0]);
 
         model.addAttribute("loggedInUserMonthOfBirth",
-                splitUserDateBirth(currentLoggedInUserData.getUserDateBirth())[1]);
+                splitUserDateBirth(userData.getUserDateBirth())[1]);
 
         model.addAttribute("loggedInUserDayOfBirth",
-                splitUserDateBirth(currentLoggedInUserData.getUserDateBirth())[2]);
+                splitUserDateBirth(userData.getUserDateBirth())[2]);
 
-        model.addAttribute("loggedInUserIsRemoved", currentLoggedInUserData.getDeleted());
+        model.addAttribute("loggedInUserIsRemoved", userData.getDeleted());
 
+        setUserAccountStatusReadOnly(model, userData);
 
-        System.out.println(currentLoggedInUserData);
+        System.out.println(userData);
     }
 
     private void FillFormWithUserDataReadOnly(boolean readOnly, Model model, int id) {
@@ -433,5 +454,15 @@ public class UserController {
 
         }
 
+    }
+
+    private void setUserAccountStatusReadOnly(Model model, RegisteredUser userData) {
+
+        if(userData.getUserRole().equals(UserRole.Administrator))
+
+            model.addAttribute("userAccountStatusReadOnly", true);
+
+        else
+            model.addAttribute("userAccountStatusReadOnly", false);
     }
 }

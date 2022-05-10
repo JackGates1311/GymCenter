@@ -68,9 +68,9 @@ public class RegisteredUserDAOImpl implements RegisteredUserDAO {
 
         try {
 
-            String sqlQuery = "SELECT * FROM registeredUser WHERE userName = ? AND userPassword = ?";
+            String sqlQuery = "SELECT * FROM registeredUser WHERE userName = ? AND userPassword = ? AND isDeleted = ?";
 
-            return jdbcTemplate.queryForObject(sqlQuery, new RegisteredUserRowMapper(), userName, password);
+            return jdbcTemplate.queryForObject(sqlQuery, new RegisteredUserRowMapper(), userName, password, false);
 
         } catch (EmptyResultDataAccessException ex) {
 

@@ -55,7 +55,7 @@
                         <div class="form-group col-md-4">
 
                             <select class="form-control" id="monthOfUserDateBirth" name="monthOfUserDateBirth"
-                                    required="true" th:readonly="${inputReadOnly}">
+                                    required="true" th:disabled="${inputReadOnly}">
 
                                 <option value="" hidden>Month</option>
                                 <option value="1" th:selected="${loggedInUserMonthOfBirth} eq 1">1</option>
@@ -139,7 +139,7 @@
                             <label for="userAccountStatus" th:if="${userRoleVisible}">Account status:</label>
 
                             <select class="form-control" id="userAccountStatus" name="userAccountStatus" required="true"
-                                    th:if="${userRoleVisible}">
+                                    th:if="${userRoleVisible}" th:disabled="${userAccountStatusReadOnly}">
 
                                 <option value="" hidden>Status</option>
 
@@ -199,6 +199,9 @@
 
         <p class="centerError paddingNormal red" th:if="${passwordChangeFailed}">
             Password is not successfully changed </p>
+
+        <p class="centerError paddingNormal red" th:if="${changeUserRoleAccountFailed}">
+            Administrator can't be blocked in system </p>
 
     </div>
 
