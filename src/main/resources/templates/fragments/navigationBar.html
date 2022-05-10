@@ -26,6 +26,17 @@
 
                         <!-- For desktop version of website -->
 
+
+                        <!--/*@thymesVar id="showAllWorkoutsIconNavBar" type=""*/-->
+
+                        <a th:if="${showAllWorkoutsIconNavBar}" href="/workouts"
+                           class="nav-item nav-link d-none d-lg-block">
+
+                            <span class="material-icons" data-toggle="tooltip" title="All workouts">
+                                home</span>
+
+                        </a>
+
                         <!--/*@thymesVar id="showSearchIconNavBar" type=""*/-->
 
                         <a th:if="${showSearchIconNavBar}" href="#" class="nav-item nav-link d-none d-lg-block"
@@ -55,6 +66,15 @@
                            data-toggle="modal" data-target="#btnWishList">
 
                             <span class="material-icons" data-toggle="tooltip" title="Favorites">favorite_border</span>
+
+                        </a>
+
+                        <!--/*@thymesVar id="showManageUsersIconNavBar" type=""*/-->
+
+                        <a th:if="${showManageUsersIconNavBar}" href="/manageUsers"
+                           class="nav-item nav-link d-none d-lg-block">
+
+                            <span class="material-icons">group</span>
 
                         </a>
 
@@ -93,6 +113,19 @@
                         </a>
 
                         <!-- For mobile version of website -->
+
+
+                        <a th:if="${showAllWorkoutsIconNavBar}" href="/workouts"
+                           class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">home</span>
+                                All workouts
+
+                            </div>
+
+                        </a>
 
                         <a th:if="${showSearchIconNavBar}" href="#" class="nav-item nav-link d-lg-none" data-toggle="modal" data-target="#btnSearch">
 
@@ -134,6 +167,18 @@
 
                                 <span class="material-icons">favorite_border</span>
                                 Favorites
+
+                            </div>
+
+                        </a>
+
+                        <a th:if="${showManageUsersIconNavBar}" href="/manageUsers"
+                           class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">group</span>
+                                Manage users
 
                             </div>
 

@@ -17,7 +17,7 @@
 
     <div class="container-fluid paddingNormal w-50">
 
-        <form th:action="@{/saveAccountInfo}" th:object="${addEditAccountForm}" method="post">
+        <form th:action="${formAction}" th:object="${addEditAccountForm}" method="post">
 
             <div class="row">
 
@@ -26,17 +26,19 @@
                     <label for="userFirstName">First name:</label>
 
                     <input class="form-control" type="text" name="userFirstName" id="userFirstName"
-                           placeholder="First name" required="true" th:value="${loggedInUser.userFirstName}">
+                           placeholder="First name" required="true" th:value="${loggedInUser.userFirstName}"
+                           th:readonly="${inputReadOnly}">
 
                     <label for="userLastName">Last name:</label>
 
                     <input class="form-control" type="text" name="userLastName" id="userLastName"
-                           placeholder="Last name" required="true" th:value="${loggedInUser.userLastName}">
+                           placeholder="Last name" required="true" th:value="${loggedInUser.userLastName}"
+                           th:readonly="${inputReadOnly}">
 
                     <label for="userEmail">Email:</label>
 
                     <input class="form-control" type="email" name="userEmail" id="userEmail" placeholder="Email"
-                           required="true" th:value="${loggedInUser.userEmail}">
+                           required="true" th:value="${loggedInUser.userEmail}" th:readonly="${inputReadOnly}">
 
                     <label>Date of birth:</label>
 
@@ -46,14 +48,14 @@
 
                             <input type="text" class="form-control" id="dayOfUserDateBirth" maxlength="2" minlength="1"
                                    name="dayOfUserDateBirth" placeholder="Day" required="true"
-                                   th:value="${loggedInUserDayOfBirth}">
+                                   th:value="${loggedInUserDayOfBirth}" th:readonly="${inputReadOnly}">
 
                         </div>
 
                         <div class="form-group col-md-4">
 
                             <select class="form-control" id="monthOfUserDateBirth" name="monthOfUserDateBirth"
-                                    required="true">
+                                    required="true" th:readonly="${inputReadOnly}">
 
                                 <option value="" hidden>Month</option>
                                 <option value="1" th:selected="${loggedInUserMonthOfBirth} eq 1">1</option>
@@ -77,7 +79,7 @@
 
                             <input type="text" class="form-control" id="yearOfUserDateBirth" name="yearOfUserDateBirth"
                                    placeholder="Year" maxlength="4" minlength="4" required="true"
-                                   th:value="${loggedInUserYearOfBirth}">
+                                   th:value="${loggedInUserYearOfBirth}" th:readonly="${inputReadOnly}">
                         </div>
 
                     </div>
@@ -89,25 +91,72 @@
                     <label for="userName">Username:</label>
 
                     <input class="form-control" type="text" name="userName" id="userName" placeholder="Username"
-                           required="true" th:value="${loggedInUser.userName}">
+                           required="true" th:value="${loggedInUser.userName}" th:readonly="${inputReadOnly}">
 
                     <label for="userPhoneNumber">Phone number:</label>
 
                     <input class="form-control" type="text" name="userPhoneNumber" id="userPhoneNumber"
                            placeholder="Phone number" minlength="8" maxlength="15" required="true"
-                           th:value="${loggedInUser.userPhoneNumber}">
+                           th:value="${loggedInUser.userPhoneNumber}" th:readonly="${inputReadOnly}">
 
                     <label for="userAddress">Address:</label>
 
                     <input class="form-control" type="text" name="userAddress" id="userAddress"
-                           placeholder="Address" required="true" th:value="${loggedInUser.userAddress}">
+                           placeholder="Address" required="true" th:value="${loggedInUser.userAddress}"
+                           th:readonly="${inputReadOnly}">
 
-
-                    <label for="userPasswordButton">Password:</label>
+                    <label for="userPasswordButton" th:if="${userPasswordVisible}">Password:</label>
 
                     <input class="btn btn-light w-100" type="button" name="userPasswordButton" data-toggle="modal"
                            data-target="#btnChangePassword" id="userPasswordButton" placeholder="Password" required="true"
-                           value="Change Password">
+                           value="Change Password" th:if="${userPasswordVisible}">
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+
+                            <label for="userRole" th:if="${userRoleVisible}">User role:</label>
+
+                            <select class="form-control" id="userRole" name="userRole" required="true"
+                                    th:if="${userRoleVisible}">
+
+                                <option value="" hidden>Role</option>
+
+                                <option value="Administrator" th:selected="${#strings.toString(loggedInUser.userRole)} eq 'Administrator'">
+                                    Administrator
+                                </option>
+
+                                <option value="Customer" th:selected="${#strings.toString(loggedInUser.userRole)} eq 'Customer'">
+                                    Customer
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group col-md-6">
+
+                            <label for="accountStatus" th:if="${userRoleVisible}">Account status:</label>
+
+                            <select class="form-control" id="accountStatus" name="accountStatus" required="true"
+                                    th:if="${userRoleVisible}">
+
+                                <option value="" hidden>Status</option>
+
+                                <option value="Active" th:selected="${loggedInUserIsRemoved} == false">
+                                    Active
+                                </option>
+
+                                <option value="Blocked" th:selected="${loggedInUserIsRemoved} == true">
+                                    Blocked
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
 
                     <input class="form-control" type="password" name="userPassword" id="userPassword"
                            placeholder="Password" required="true" th:value="${loggedInUser.userPassword}" hidden>
@@ -117,7 +166,7 @@
                         <div class="form-group col-md-6">
 
                             <input class="btn btn-light btn-sm marginTopDefault w-100" id="cancelAddEditAccount"
-                                   type="button" value="Back to all workouts"/>
+                                   type="button" value="Back to all workouts" th:if="${cancelAddEditAccountVisible}"/>
 
                         </div>
 

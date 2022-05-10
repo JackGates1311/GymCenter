@@ -3,6 +3,7 @@ package com.project.gymcenter.dao.impl;
 import com.project.gymcenter.dao.RegisteredUserDAO;
 import com.project.gymcenter.model.RegisteredUser;
 import com.project.gymcenter.model.UserRole;
+import com.project.gymcenter.model.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -139,6 +140,25 @@ public class RegisteredUserDAOImpl implements RegisteredUserDAO {
         String sqlQuery = "UPDATE registeredUser SET userPassword = ? WHERE userId = ?";
 
         jdbcTemplate.update(sqlQuery, newPassword, userId);
+
+    }
+
+    @Override
+    public List<RegisteredUser> find(String userName, String userRole, String userSortBy) {
+
+        try {
+
+            String sqlQuery = "SELECT * FROM registeredUser WHERE userName LIKE '%" + userName + "%' AND userRole " +
+                    "LIKE '%" + userRole + "%' \n" + userSortBy;
+
+            List<RegisteredUser> usersFound = jdbcTemplate.query(sqlQuery, new RegisteredUserDAOImpl.RegisteredUserRowMapper());
+
+            return usersFound;
+
+        } catch (EmptyResultDataAccessException ex) {
+
+            return null;
+        }
 
     }
 

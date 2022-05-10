@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<body>
+
+<div th:fragment="userSearchModal" class="modal fade" id="btnSearch" tabindex="-1"
+     role="dialog">
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header text-center">
+
+                <h4 class="modal-title w-100">Search for users</h4>
+
+            </div>
+
+            <div class="modal-body">
+
+                <form th:action="@{/usersSearchResult}" th:object="${userSearchForm}" method="post">
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+
+                            <label for="userName">Username: </label>
+                            <input type="search" class="form-control" id="userName" name="userName"
+                                   placeholder="Username">
+                        </div>
+
+                        <div class="form-group col-md-6">
+
+                            <label for="userRole">User role: </label>
+
+                            <select class="form-control text-center" name="userRole" id="userRole">
+
+                                <option value="" selected> </option>
+                                <option value="Administrator">Administrator</option>
+                                <option value="Customer">Customer</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-12">
+
+                            <label for="userSortBy">Sort by: </label>
+
+                            <select class="form-control text-center" name="userSortBy" id="userSortBy">
+
+                                <option value="" selected> </option>
+                                <option value="ORDER BY userName ASC">Username Ascending</option>
+                                <option value="ORDER BY userName DESC">Username Descending</option>
+                                <option value="ORDER BY userRole ASC">User Role Ascending</option>
+                                <option value="ORDER BY userRole DESC">User Role Descending</option>
+                                <option value="ORDER BY userDateTimeRegistration ASC">User Date Registration Ascending</option>
+                                <option value="ORDER BY userDateTimeRegistration DESC">User Date Registration Descending</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6"></div>
+
+                        <div class="form-group col-md-6">
+
+                            <div class="inlineFlex w-100">
+
+                                <input type="button" id="btnCancel" class="btn btn-light" data-dismiss="modal"
+                                       value="Cancel"/>
+
+                                <input type="submit" id="btnWorkoutSearch" class="btn btn-light" value="Search"/>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <script src="js/workoutPriceValidation.js" type="text/javascript"></script>
+</div>
+
+</body>
+
+</html>

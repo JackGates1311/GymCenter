@@ -54,7 +54,7 @@ public class WorkoutController {
             model.addAttribute("workouts", workoutList);
             model.addAttribute("workoutTypes", workoutTypes);
 
-            navBarController.setNavBarAdministrator("List of workouts", true, model);
+            navBarController.setNavBarAdministrator("List of workouts", "/workouts", true, model);
 
             return "workouts";
         }
@@ -86,14 +86,14 @@ public class WorkoutController {
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
-            navBarController.setNavBarGuest("MagicBoost Gym Center", true, model);
+            navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
 
             return "index";
         }
 
         else {
 
-            navBarController.setNavBarAdministrator("List of workouts", true, model);
+            navBarController.setNavBarAdministrator("List of workouts", "/workouts", true, model);
 
             return "workouts";
         }
@@ -114,7 +114,7 @@ public class WorkoutController {
             return "login";
         } else {
 
-            navBarController.setNavBarAdministrator("Add new workout", false, model);
+            navBarController.setNavBarAdministrator("Add new workout", "/addNewWorkout", false, model);
 
             return "addNewWorkout";
         }
@@ -167,7 +167,7 @@ public class WorkoutController {
         model.addAttribute("workoutTypes", workoutTypes);
         model.addAttribute("isLoggedIn", false);
 
-        navBarController.setNavBarGuest("MagicBoost Gym Center", true, model);
+        navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
 
         if(request.getSession().getAttribute("currentUserRole") == null)
             return "index";

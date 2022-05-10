@@ -1,19 +1,16 @@
 package com.project.gymcenter.controller;
 
-import com.project.gymcenter.dao.form.ChangePasswordForm;
-import com.project.gymcenter.dao.form.LoginForm;
-import com.project.gymcenter.dao.form.AddEditAccountForm;
-import com.project.gymcenter.dao.form.WorkoutSearchForm;
+import com.project.gymcenter.dao.form.*;
 import com.project.gymcenter.model.RegisteredUser;
 import com.project.gymcenter.model.UserRole;
 import com.project.gymcenter.service.RegisteredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.datetime.joda.LocalDateParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
@@ -132,9 +129,13 @@ public class UserController {
             int currentLoggedInUserId = Integer.parseInt(
                     request.getSession().getAttribute("loggedInUserId").toString());
 
-            FillFormWithLoggedInUserData(model, currentLoggedInUserId);
+            navBarController.setNavBarAdministrator("My account details", "/accountInfo", false, model);
 
-            return "editUserDetails";
+            FillFormWithUserData(model, currentLoggedInUserId);
+
+            FillFormWithUserDataReadOnly(false, model, currentLoggedInUserId);
+
+            return "userDetails";
         }
 
     }
@@ -163,21 +164,30 @@ public class UserController {
 
                 registeredUserService.update(registeredUser, userId);
 
-                FillFormWithLoggedInUserData(model, userId);
+                navBarController.setNavBarAdministrator("My account details", "/accountInfo", false, model);
+
+                FillFormWithUserData(model, userId);
+
+                FillFormWithUserDataReadOnly(false, model, userId);
 
                 model.addAttribute("saveAccountChangesSuccess", true);
 
-                return "editUserDetails";
+                return "userDetails";
 
             } catch (Exception e) {
 
                 model.addAttribute("saveAccountChangesFailed", true);
 
-                FillFormWithLoggedInUserData(model, userId);
+
+                navBarController.setNavBarAdministrator("My account details", "/accountInfo", false, model);
+
+                FillFormWithUserData(model, userId);
+
+                FillFormWithUserDataReadOnly(false, model, userId);
 
                 e.printStackTrace();
 
-                return "editUserDetails";
+                return "userDetails";
             }
 
         }
@@ -199,24 +209,112 @@ public class UserController {
 
                 registeredUserService.changePassword(changePasswordForm.getUserNewPassword(), userId);
 
-                FillFormWithLoggedInUserData(model, userId);
+
+                navBarController.setNavBarAdministrator("My account details", "/accountInfo", false, model);
+
+                FillFormWithUserData(model, userId);
+
+                FillFormWithUserDataReadOnly(false, model, userId);
 
                 model.addAttribute("passwordChangeSuccess", true);
 
-                return "editUserDetails";
+                return "userDetails";
 
             } catch (Exception e) {
 
-                FillFormWithLoggedInUserData(model, userId);
+
+                navBarController.setNavBarAdministrator("My account details", "/accountInfo", false, model);
+
+                FillFormWithUserData(model, userId);
+
+                FillFormWithUserDataReadOnly(false, model, userId);
 
                 model.addAttribute("passwordChangeFailed", true);
 
-                return "editUserDetails";
+                return "userDetails";
             }
 
         }
 
     }
+
+    @RequestMapping("/manageUsers")
+    public String manageUsers(HttpServletRequest request, Model model) {
+
+        if(request.getSession().getAttribute("currentUserRole") == null) {
+
+            return "login";
+
+        } else {
+
+            navBarController.setNavBarAdministrator("Manage users", "/manageUsers",
+                    true, model);
+
+            List<RegisteredUser> registeredUsers = registeredUserService.findAll();
+
+            model.addAttribute("registeredUsers", registeredUsers);
+
+            return "manageUsers";
+        }
+
+    }
+
+    @RequestMapping(value="/usersSearchResult", method=RequestMethod.POST)
+    public String usersSearchResult(@ModelAttribute(name="userSearchForm") UserSearchForm userSearchForm, Model model,
+                                    HttpServletRequest request) {
+
+        List<RegisteredUser> usersFound = registeredUserService.find(userSearchForm.getUserName(),
+                userSearchForm.getUserRole(), userSearchForm.getUserSortBy());
+
+        model.addAttribute("registeredUsers", usersFound);
+
+        if(request.getSession().getAttribute("currentUserRole") == null) {
+
+            navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
+
+            return "index";
+        }
+
+        else {
+
+            navBarController.setNavBarAdministrator("Manage users", "/manageUsers", true, model);
+
+            return "manageUsers";
+        }
+    }
+
+    @RequestMapping("/userDetails")
+    public String userDetails(@RequestParam int id, Model model, HttpServletRequest request) {
+
+        if(request.getSession().getAttribute("currentUserRole") == null) {
+
+            navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
+
+            return "index";
+        }
+
+        else {
+
+            navBarController.setNavBarAdministrator("User details", "/userDetails?id=" + id,
+                    false, model);
+
+            FillFormWithUserData(model, id);
+
+            FillFormWithUserDataReadOnly(true, model, id);
+
+            return "userDetails";
+        }
+
+    }
+
+    @RequestMapping(value="/saveUserDetails", method = RequestMethod.POST)
+    public String saveUserDetails() {
+
+        //TODO Implement method for saving userRole and AccountStatus fields, then start implementing workout period
+
+        return "userDetails";
+    }
+
 
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request) {
@@ -231,9 +329,7 @@ public class UserController {
         return userDateBirth.toString().split("-");
     }
 
-    private void FillFormWithLoggedInUserData(Model model, int currentLoggedInUserId) {
-
-        navBarController.setNavBarAdministrator("My account details", false, model);
+    private void FillFormWithUserData(Model model, int currentLoggedInUserId) {
 
         RegisteredUser currentLoggedInUserData = registeredUserService.findById(currentLoggedInUserId);
 
@@ -247,5 +343,42 @@ public class UserController {
 
         model.addAttribute("loggedInUserDayOfBirth",
                 splitUserDateBirth(currentLoggedInUserData.getUserDateBirth())[2]);
+
+        model.addAttribute("loggedInUserIsRemoved", currentLoggedInUserData.getRemoved());
+
+
+        System.out.println(currentLoggedInUserData);
+    }
+
+    private void FillFormWithUserDataReadOnly(boolean readOnly, Model model, int id) {
+
+        if(readOnly) {
+
+            model.addAttribute("formAction", "/saveUserDetails?id=" + id);
+
+            model.addAttribute("inputReadOnly", true);
+
+            model.addAttribute("userPasswordButtonVisible", false);
+            model.addAttribute("cancelAddEditAccountVisible", false);
+            model.addAttribute("saveChangesButtonVisible", false);
+
+            model.addAttribute("userRoleVisible", true);
+            model.addAttribute("accountStatusVisible", true);
+
+        } else {
+
+            model.addAttribute("formAction", "/saveAccountInfo");
+
+            model.addAttribute("inputReadOnly", false);
+
+            model.addAttribute("userPasswordVisible", true);
+            model.addAttribute("cancelAddEditAccountVisible", true);
+            model.addAttribute("saveChangesButtonVisible", true);
+
+            model.addAttribute("userRoleVisible", false);
+            model.addAttribute("accountStatusVisible", false);
+
+        }
+
     }
 }

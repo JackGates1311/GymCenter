@@ -8,6 +8,8 @@ public interface RegisteredUserService {
 
     public List<RegisteredUser> findAll();
 
+    public List<RegisteredUser> find(String userName, String userRole, String userSortBy);
+
     public RegisteredUser findOne(String userName, String password);
 
     public RegisteredUser findById (int userId);

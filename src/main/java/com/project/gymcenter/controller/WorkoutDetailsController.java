@@ -41,13 +41,14 @@ public class WorkoutDetailsController {
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
-            navBarController.setNavBarGuest(navBarTitle, false, model);
+            navBarController.setNavBarGuest(navBarTitle, "/workoutDetails?id=" + id, false, model);
 
             model.addAttribute("showEditWorkoutButton", false);
 
         } else {
 
-            navBarController.setNavBarAdministrator(navBarTitle, false, model);
+            navBarController.setNavBarAdministrator(navBarTitle, "/workoutDetails?id=" + id,
+                    false, model);
 
             model.addAttribute("showEditWorkoutButton", true);
         }
@@ -58,7 +59,8 @@ public class WorkoutDetailsController {
     @RequestMapping (value="/editWorkoutDetails")
     public String editWorkoutDetails(@RequestParam Long id, Model model) {
 
-        navBarController.setNavBarAdministrator("Edit workout", false, model);
+        navBarController.setNavBarAdministrator("Edit workout", "/editWorkoutDetails?id=" + id,
+                false, model);
 
         Workout workoutForEdit = workoutService.findById(id);
 

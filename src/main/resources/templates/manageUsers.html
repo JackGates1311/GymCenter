@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+
+    <title>Manage users</title>
+
+    <div th:insert="/fragments/header :: header"></div>
+
+</head>
+<body>
+
+    <div th:insert="/fragments/navigationBar :: navBar"></div>
+    <div th:insert="/fragments/userSearch :: userSearchModal"></div>
+
+    <div class="center paddingSmall w-90">
+
+        <div class="table-responsive scrollable">
+
+            <table class="table table-bordered w-100">
+
+                <thead class="thead-light">
+
+                    <tr>
+
+                        <th scope="col"> Username </th>
+                        <th scope="col"> Date of Registration</th>
+                        <th scope="col"> User Role</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="tempRegisteredUsers:${registeredUsers}">
+
+                        <td>
+
+                            <a th:href="@{'/userDetails?id=' + ${tempRegisteredUsers.userId}}"
+                               th:text="${tempRegisteredUsers.userName}"></a>
+
+                        </td>
+
+                        <td th:text="${#temporals.format(tempRegisteredUsers.userDateTimeRegistration, 'dd.MM.yyyy.')}"></td>
+
+                        <td th:text="${tempRegisteredUsers.userRole}"></td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
