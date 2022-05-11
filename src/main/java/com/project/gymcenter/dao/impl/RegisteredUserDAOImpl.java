@@ -44,11 +44,11 @@ public class RegisteredUserDAOImpl implements RegisteredUserDAO {
             LocalDateTime userDateTimeRegistration = LocalDateTime.parse(rs.getString(index++), formatter);
 
             UserRole userRole = UserRole.valueOf(rs.getString(index++));
-            Boolean isRemoved = rs.getBoolean(index++);
+            Boolean isDeleted = rs.getBoolean(index++);
 
             RegisteredUser registeredUser = new RegisteredUser(userId, userName, userPassword, userEmail,
                     userFirstName, userLastName, userDateBirth, userAddress, userPhoneNumber, userDateTimeRegistration,
-                    userRole, isRemoved);
+                    userRole, isDeleted);
 
             return registeredUser;
         }

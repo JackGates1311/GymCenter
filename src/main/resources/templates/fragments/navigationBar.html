@@ -50,6 +50,14 @@
                             <span class="material-icons" data-toggle="tooltip" title="Events">event</span>
                         </a>
 
+                        <!--/*@thymesVar id="showAuditoriumsIconNavBar" type=""*/-->
+
+                        <a th:if="${showAuditoriumsIconNavBar}" href="/auditoriums"
+                           class="nav-item nav-link d-none d-lg-block">
+
+                            <span class="material-icons" data-toggle="tooltip" title="Auditoriums">apartment</span>
+                        </a>
+
                         <!--/*@thymesVar id="showAddNewWorkoutIconNavBar" type=""*/-->
 
                         <a th:if="${showAddNewWorkoutIconNavBar}" href="/addNewWorkout"
@@ -145,6 +153,17 @@
 
                                 <span class="material-icons">event</span>
                                 Reserved workouts
+
+                            </div>
+
+                        </a>
+
+                        <a th:if="${showAuditoriumsIconNavBar}" href="/auditoriums" class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">apartment</span>
+                                Auditoriums
 
                             </div>
 

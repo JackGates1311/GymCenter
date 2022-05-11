@@ -13,6 +13,7 @@ public class NavBarController {
 
         model.addAttribute("showAllWorkoutsIconNavBar", true);
         model.addAttribute("showWorkoutsIconNavBar", true);
+        model.addAttribute("showAuditoriumsIconNavBar", true);
         model.addAttribute("showAddNewWorkoutIconNavBar", true);
         model.addAttribute("showFavoritesIconNavBar", true);
         model.addAttribute("showManageUsersIconNavBar", true);
@@ -32,6 +33,7 @@ public class NavBarController {
 
         model.addAttribute("showAllWorkoutsIconNavBar", false);
         model.addAttribute("showWorkoutsIconNavBar", false);
+        model.addAttribute("showAuditoriumsIconNavBar", false);
         model.addAttribute("showAddNewWorkoutIconNavBar", false);
         model.addAttribute("showFavoritesIconNavBar", false);
         model.addAttribute("showManageUsersIconNavBar", false);

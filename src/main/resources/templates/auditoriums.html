@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+
+    <title>Auditoriums</title>
+
+    <div th:insert="/fragments/header :: header"></div>
+
+</head>
+<body>
+
+<div th:insert="/fragments/navigationBar :: navBar"></div>
+
+<div class="center paddingSmall w-90">
+
+    <div class="table-responsive scrollable">
+
+        <table class="table table-bordered w-100">
+
+            <thead class="thead-light">
+
+            <tr>
+
+                <th scope="col">Auditorium ID</th>
+                <th scope="col">Capacity</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="tempAuditoriumList:${auditoriumList}">
+
+                <td>
+
+                    <a th:text="${tempAuditoriumList.auditoriumId}"></a>
+
+                </td>
+
+                <td th:text="${tempAuditoriumList.capacity}"></td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>
