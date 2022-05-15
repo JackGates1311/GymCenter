@@ -14,5 +14,5 @@ public interface AuditoriumService {
 
     public int remove(String id);
 
-    public void add(Auditorium auditorium);
+    public Boolean add(Auditorium auditorium);
 }

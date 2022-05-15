@@ -135,19 +135,24 @@ public class AuditoriumController {
             Auditorium auditorium = new Auditorium(addEditAuditoriumForm.getAuditoriumId(),
                     addEditAuditoriumForm.getAuditoriumCapacity());
 
-            try {
+            if(auditoriumService.add(auditorium)) {
 
-                auditoriumService.add(auditorium);
+                return "redirect:/auditoriums";
 
 
-            } catch (Exception e) {
+            } else {
 
+                navBarController.setNavBarAdministrator("Auditoriums", "/auditoriums",
+                        true, model);
+
+                FillFormWithAuditoriumsData(model);
+
+                model.addAttribute("auditoriumAddFailed", true);
+
+                return "auditoriums";
 
             }
 
-
-
-            return "redirect:/auditoriums";
 
         }
 

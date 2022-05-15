@@ -20,6 +20,9 @@
     <p class="centerError paddingBottom red" th:if="${auditoriumRemoveFailed}">
         Selected auditorium is not possible to remove currently </p>
 
+    <p class="centerError paddingBottom red" th:if="${auditoriumAddFailed}">
+        Auditorium with entered Auditorium ID already exists </p>
+
     <div class="inlineFlex w-100 paddingBottom">
 
         <div th:each="tempAuditoriumList:${auditoriumAddId}">

@@ -50,6 +50,14 @@
                             <span class="material-icons" data-toggle="tooltip" title="Events">event</span>
                         </a>
 
+                        <!--/*@thymesVar id="addPeriodIconNavBar" type=""*/-->
+
+                        <a th:if="${addPeriodIconNavBar}" href="#" class="nav-item nav-link d-none d-lg-block">
+
+                            <span class="material-icons" data-toggle="tooltip" title="Add new period for workout">
+                                more_time</span>
+                        </a>
+
                         <!--/*@thymesVar id="showAuditoriumsIconNavBar" type=""*/-->
 
                         <a th:if="${showAuditoriumsIconNavBar}" href="/auditoriums"
@@ -153,6 +161,17 @@
 
                                 <span class="material-icons">event</span>
                                 Reserved workouts
+
+                            </div>
+
+                        </a>
+
+                        <a th:if="${addPeriodIconNavBar}" href="#" class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">more_time</span>
+                                Add new period for workout
 
                             </div>
 

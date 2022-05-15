@@ -86,11 +86,21 @@ public class AuditoriumDAOImpl implements AuditoriumDAO {
     }
 
     @Override
-    public void add(Auditorium auditorium) {
+    public Boolean add(Auditorium auditorium) {
 
-        String sqlQuery = "INSERT INTO auditorium (auditoriumId, capacity, isDeleted) VALUES (?, ?, ?);";
+        try {
 
-        jdbcTemplate.update(sqlQuery, auditorium.getAuditoriumId(), auditorium.getCapacity(), 0);
+            String sqlQuery = "INSERT INTO auditorium (auditoriumId, capacity, isDeleted) VALUES (?, ?, ?);";
+
+            jdbcTemplate.update(sqlQuery, auditorium.getAuditoriumId(), auditorium.getCapacity(), 0);
+
+            return true;
+
+        } catch (Exception e) {
+
+            return false;
+
+        }
 
     }
 }

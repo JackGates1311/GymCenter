@@ -48,7 +48,7 @@ CREATE TABLE workoutType(
 
 CREATE TABLE auditorium (
 
-	auditoriumId NVARCHAR(255) NOT NULL,
+	auditoriumId NVARCHAR(255) PRIMARY KEY,
     capacity INT NOT NULL,
     isDeleted BOOLEAN
 

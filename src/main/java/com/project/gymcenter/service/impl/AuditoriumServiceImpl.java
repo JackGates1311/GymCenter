@@ -39,8 +39,8 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     }
 
     @Override
-    public void add(Auditorium auditorium) {
+    public Boolean add(Auditorium auditorium) {
 
-        auditoriumDAO.add(auditorium);
+        return auditoriumDAO.add(auditorium);
     }
 }
