@@ -39,8 +39,58 @@ public class AuditoriumDAOImpl implements AuditoriumDAO {
     @Override
     public List<Auditorium> findAll() {
 
-        String sqlQuery = "SELECT * FROM auditorium;";
+        String sqlQuery = "SELECT * FROM auditorium WHERE isDeleted = 0;";
 
         return jdbcTemplate.query(sqlQuery, new AuditoriumRowMapper());
+    }
+
+    @Override
+    public List<Auditorium> find(String auditoriumId, String auditoriumSortBy) {
+
+        try {
+
+            String sqlQuery = "SELECT * FROM auditorium WHERE auditoriumId LIKE '%" + auditoriumId + "%' \n" +
+                    auditoriumSortBy;
+
+            List<Auditorium> auditoriumsFound = jdbcTemplate.query(sqlQuery, new AuditoriumDAOImpl.AuditoriumRowMapper());
+
+            return auditoriumsFound;
+
+        } catch (Exception e) {
+
+            return null;
+
+        }
+
+    }
+
+    @Override
+    public void update(Auditorium auditorium) {
+
+        String sqlQuery = "UPDATE auditorium SET capacity = ? WHERE auditoriumId = ?" + ";";
+
+        jdbcTemplate.update(sqlQuery, auditorium.getCapacity(), auditorium.getAuditoriumId());
+
+    }
+
+    @Override
+    public int remove(String id) {
+
+        String sqlQuery= "UPDATE auditorium LEFT OUTER JOIN period ON auditorium.auditoriumId = period.auditoriumId " +
+                "SET auditorium.isDeleted = 1 WHERE auditorium.auditoriumId = ? " +
+                "AND (SELECT workoutDateTimeEnd FROM period WHERE auditoriumId = ? AND workoutDateTimeEnd > NOW()) " +
+                "IS NULL;";
+
+        return jdbcTemplate.update(sqlQuery, id, id);
+
+    }
+
+    @Override
+    public void add(Auditorium auditorium) {
+
+        String sqlQuery = "INSERT INTO auditorium (auditoriumId, capacity, isDeleted) VALUES (?, ?, ?);";
+
+        jdbcTemplate.update(sqlQuery, auditorium.getAuditoriumId(), auditorium.getCapacity(), 0);
+
     }
 }

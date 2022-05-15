@@ -22,6 +22,13 @@ public class Auditorium {
 
     }
 
+    public Auditorium(String auditoriumId, Long capacity) {
+
+        this.auditoriumId = auditoriumId;
+        this.capacity = capacity;
+
+    }
+
     public String getAuditoriumId() {
         return auditoriumId;
     }

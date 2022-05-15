@@ -19,4 +19,28 @@ public class AuditoriumServiceImpl implements AuditoriumService {
 
         return auditoriumDAO.findAll();
     }
+
+    @Override
+    public List<Auditorium> find(String auditoriumId, String auditoriumSortBy) {
+
+        return auditoriumDAO.find(auditoriumId, auditoriumSortBy);
+    }
+
+    @Override
+    public void update(Auditorium auditorium) {
+
+        auditoriumDAO.update(auditorium);
+    }
+
+    @Override
+    public int remove(String id) {
+
+        return auditoriumDAO.remove(id);
+    }
+
+    @Override
+    public void add(Auditorium auditorium) {
+
+        auditoriumDAO.add(auditorium);
+    }
 }

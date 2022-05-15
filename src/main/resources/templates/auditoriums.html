@@ -10,8 +10,30 @@
 <body>
 
 <div th:insert="/fragments/navigationBar :: navBar"></div>
+<div th:insert="/fragments/auditoriumSearch :: auditoriumSearchModal"></div>
 
 <div class="center paddingSmall w-90">
+
+    <p class="centerError paddingBottom green" th:if="${auditoriumRemoveSuccess}">
+        Selected auditorium is successfully removed </p>
+
+    <p class="centerError paddingBottom red" th:if="${auditoriumRemoveFailed}">
+        Selected auditorium is not possible to remove currently </p>
+
+    <div class="inlineFlex w-100 paddingBottom">
+
+        <div th:each="tempAuditoriumList:${auditoriumAddId}">
+
+            <div th:insert="/fragments/auditoriumDetails :: auditoriumDetailsModal"></div>
+
+            <a class="btn btn-light" data-toggle="modal"
+               th:data-target="@{'#linkAuditoriumDetails' + ${tempAuditoriumList.auditoriumId}}">
+                Add new auditorium</a>
+
+        </div>
+
+
+    </div>
 
     <div class="table-responsive scrollable">
 
@@ -34,7 +56,13 @@
 
                 <td>
 
-                    <a th:text="${tempAuditoriumList.auditoriumId}"></a>
+                    <div th:insert="/fragments/auditoriumDetails :: auditoriumDetailsModal"></div>
+
+                    <!-- th:href="@{'/auditoriumDetails?id=' + ${tempAuditoriumList.auditoriumId}}" !-->
+
+                    <a class="link-primary" data-toggle="modal" th:data-target="@{'#linkAuditoriumDetails' + ${tempAuditoriumList.auditoriumId}}"
+
+                       th:text="${tempAuditoriumList.auditoriumId}"></a>
 
                 </td>
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<body>
+
+<div th:fragment="auditoriumSearchModal" class="modal fade" id="btnSearch" tabindex="-1"
+     role="dialog">
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header text-center">
+
+                <h4 class="modal-title w-100">Search for auditoriums</h4>
+
+            </div>
+
+            <div class="modal-body">
+
+                <form th:action="@{/auditoriumsSearchResult}" th:object="${auditoriumSearchForm}" method="post">
+
+                    <div class="form-row">
+
+                        <label for="auditoriumId">Auditorium ID: </label>
+
+                        <input type="search" class="form-control" id="auditoriumId" name="auditoriumId"
+                               placeholder="Auditorium ID">
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <label for="auditoriumSortBy">Sort by: </label>
+
+                        <select class="form-control text-center" name="auditoriumSortBy" id="auditoriumSortBy">
+
+                            <option value="" selected> </option>
+                            <option value="ORDER BY auditoriumId ASC">Auditorium ID Ascending</option>
+                            <option value="ORDER BY auditoriumId DESC">Auditorium ID Descending</option>
+                            <option value="ORDER BY capacity ASC">Capacity Ascending</option>
+                            <option value="ORDER BY capacity DESC">Capacity Descending</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-row">
+
+                            <div class="inlineFlex w-100 marginTopDefault alignRight">
+
+                                <input type="button" id="btnCancel" class="btn btn-light w-25" data-dismiss="modal"
+                                       value="Cancel"/>
+
+                                <input type="submit" id="btnWorkoutSearch" class="btn btn-light w-25" value="Search"/>
+
+                            </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

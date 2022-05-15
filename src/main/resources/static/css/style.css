@@ -24,6 +24,7 @@ a {
 a:hover, a:visited, a:focus {
 
     text-decoration: none !important;
+    cursor: pointer;
 }
 
 h2 {
@@ -305,6 +306,11 @@ table th, table td {
     margin-top: 5px;
 }
 
+.paddingBottom {
+
+    padding-bottom: 25px;
+}
+
 .removeMarginFormControl {
 
     margin-top: -75px;
@@ -327,6 +333,11 @@ table th, table td {
 .textAlignCenter {
 
     text-align: center;
+}
+
+.textAlignLeft {
+
+    text-align: start;
 }
 
 .vertical-center {
