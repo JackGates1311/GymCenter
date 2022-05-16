@@ -9,6 +9,7 @@ import com.project.gymcenter.service.WorkoutIncludedTypesService;
 import com.project.gymcenter.service.WorkoutService;
 import com.project.gymcenter.service.WorkoutTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,10 +32,12 @@ public class WorkoutController {
     @Autowired
     private WorkoutIncludedTypesService workoutIncludedTypesService;
 
+    @Autowired
+    NavBarController navBarController = new NavBarController();
+
     private List<Workout> workoutList;
     private List<WorkoutType> workoutTypes;
 
-    NavBarController navBarController = new NavBarController();
 
     @RequestMapping(value="/workouts")
     public String workouts(Model model, HttpServletRequest request) {

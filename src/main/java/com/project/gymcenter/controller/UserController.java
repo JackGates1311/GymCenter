@@ -24,6 +24,7 @@ public class UserController {
     @Autowired
     RegisteredUserService registeredUserService;
 
+    @Autowired
     NavBarController navBarController = new NavBarController();
 
     @RequestMapping("/login")

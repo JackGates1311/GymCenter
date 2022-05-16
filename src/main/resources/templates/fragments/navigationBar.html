@@ -52,7 +52,11 @@
 
                         <!--/*@thymesVar id="addPeriodIconNavBar" type=""*/-->
 
-                        <a th:if="${addPeriodIconNavBar}" href="#" class="nav-item nav-link d-none d-lg-block">
+                        <div th:if="${addPeriodIconNavBar}"
+                             th:insert="/fragments/addNewPeriod :: addNewPeriodModal"></div>
+
+                        <a th:if="${addPeriodIconNavBar}" href="#" class="nav-item nav-link d-none d-lg-block"
+                           data-toggle="modal" data-target="#btnAddNewPeriod">
 
                             <span class="material-icons" data-toggle="tooltip" title="Add new period for workout">
                                 more_time</span>
@@ -166,7 +170,8 @@
 
                         </a>
 
-                        <a th:if="${addPeriodIconNavBar}" href="#" class="nav-item nav-link d-lg-none">
+                        <a th:if="${addPeriodIconNavBar}" href="#" class="nav-item nav-link d-lg-none"
+                           data-toggle="modal" data-target="#btnAddNewPeriod">
 
                             <div class="inlineFlexNav">
 

@@ -9,7 +9,7 @@ public interface WorkoutService {
 
     public Workout findById(Long workoutId);
 
-    List<Workout> findAll();
+    public List<Workout> findAll();
 
     public Long add(Workout workout);
 

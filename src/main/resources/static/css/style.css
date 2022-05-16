@@ -311,6 +311,11 @@ table th, table td {
     padding-bottom: 25px;
 }
 
+.paddingExtra {
+
+    padding-top: 15%;
+}
+
 .removeMarginFormControl {
 
     margin-top: -75px;

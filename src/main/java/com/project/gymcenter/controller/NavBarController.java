@@ -1,8 +1,20 @@
 package com.project.gymcenter.controller;
 
+import com.project.gymcenter.model.Workout;
+import com.project.gymcenter.service.WorkoutService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.time.Period;
+import java.util.List;
+
+@Controller
 public class NavBarController {
+
+    @Autowired
+    private PeriodController periodController;
 
     protected void setNavBarAdministrator(String navBarTitle, String navBarLink, Boolean showSearchIconNavBar, Model model) {
 
@@ -14,6 +26,9 @@ public class NavBarController {
         model.addAttribute("showAllWorkoutsIconNavBar", true);
         model.addAttribute("showWorkoutsIconNavBar", true);
         model.addAttribute("addPeriodIconNavBar", true);
+
+        periodController.configureAddNewPeriodModal(model);
+
         model.addAttribute("showAuditoriumsIconNavBar", true);
         model.addAttribute("showAddNewWorkoutIconNavBar", true);
         model.addAttribute("showFavoritesIconNavBar", true);
@@ -45,4 +60,5 @@ public class NavBarController {
         model.addAttribute("showUserRegisterIconNavBar", true);
         model.addAttribute("showLoginIconNavBar", true);
     }
+
 }

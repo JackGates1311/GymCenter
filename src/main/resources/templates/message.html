@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+
+    <title th:text="${textTitle}"></title>
+
+    <div th:insert="/fragments/header :: header"></div>
+
+</head>
+
+<body>
+
+<div class="center w-50 paddingNormal">
+
+    <h2 th:text="${textHeader}"></h2>
+
+    <p class="center paddingNormal w-80 red" th:text="${textMessage}" th:if="${isError}"></p>
+
+    <p class="center paddingNormal w-80 green" th:text="${textMessage}" th:if="${isError eq false}"></p>
+
+    <div class="inlineFlex w-100 alignCenter">
+
+        <a class="btn btn-light btn-sm marginTopDefault w-50"  href="javascript:history.back()">OK</a>
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>

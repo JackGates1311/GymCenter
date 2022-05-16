@@ -21,6 +21,7 @@ public class AuditoriumController {
     @Autowired
     AuditoriumService auditoriumService;
 
+    @Autowired
     NavBarController navBarController = new NavBarController();
 
     @RequestMapping("/auditoriums")

@@ -28,6 +28,7 @@ public class WorkoutDetailsController {
     @Autowired
     private WorkoutTypeService workoutTypeService;
 
+    @Autowired
     NavBarController navBarController = new NavBarController();
 
     @RequestMapping(value="/workoutDetails")
