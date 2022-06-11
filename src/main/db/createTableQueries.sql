@@ -1,4 +1,4 @@
-CREATE DATABASE gymCenter;
+/* CREATE DATABASE gymCenter; */
 USE gymCenter;
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -56,6 +56,7 @@ CREATE TABLE auditorium (
 
 CREATE TABLE period (
 
+    periodId LONG NOT NULL,
 	auditoriumId NVARCHAR(255) NOT NULL,
     workoutId LONG NOT NULL,
     workoutDateTimeStart DATETIME NOT NULL,
@@ -65,7 +66,7 @@ CREATE TABLE period (
 
 CREATE TABLE periodReserved (
 
-	workoutId LONG NOT NULL,
+	periodId LONG NOT NULL,
     userId LONG NOT NULL
 
 );

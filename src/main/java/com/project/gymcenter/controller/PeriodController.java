@@ -44,8 +44,8 @@ public class PeriodController {
 
             LocalDateTime[] date = getPeriodDates(addNewPeriodForm);
 
-            Period period = new Period(addNewPeriodForm.getAuditoriumId(), addNewPeriodForm.getWorkoutId(),
-                    date[0], date[1]);
+            Period period = new Period(addNewPeriodForm.getPeriodId(), addNewPeriodForm.getAuditoriumId(),
+                    addNewPeriodForm.getWorkoutId(), date[0], date[1]);
             if(periodService.checkForPeriodAvailability(period)) {
 
                 periodService.add(period);

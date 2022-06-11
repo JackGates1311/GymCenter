@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 public class Period {
 
+    private Long periodId;
     private String auditoriumId;
     private Long workoutId;
     private LocalDateTime workoutDateTimeStart;
@@ -13,20 +14,30 @@ public class Period {
 
     public Period() {
 
+        this.periodId = null;
         this.auditoriumId = null;
         this.workoutId = null;
         this.workoutDateTimeStart = null;
         this.workoutDateTimeEnd = null;
     }
 
-    public Period(String auditoriumId, Long workoutId, LocalDateTime workoutDateTimeStart,
+    public Period(Long periodId, String auditoriumId, Long workoutId, LocalDateTime workoutDateTimeStart,
                   LocalDateTime workoutDateTimeEnd) {
 
+        this.periodId = periodId;
         this.auditoriumId = auditoriumId;
         this.workoutId = workoutId;
         this.workoutDateTimeStart = workoutDateTimeStart;
         this.workoutDateTimeEnd = workoutDateTimeEnd;
 
+    }
+
+    public Long getPeriodId() {
+        return periodId;
+    }
+
+    public void setPeriodId(Long periodId) {
+        this.periodId = periodId;
     }
 
     public String getAuditoriumId() {

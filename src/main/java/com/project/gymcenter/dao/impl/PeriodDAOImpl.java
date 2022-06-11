@@ -3,6 +3,7 @@ package com.project.gymcenter.dao.impl;
 import com.project.gymcenter.dao.PeriodDAO;
 import com.project.gymcenter.model.Auditorium;
 import com.project.gymcenter.model.Period;
+import com.project.gymcenter.model.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -26,12 +27,13 @@ public class PeriodDAOImpl implements PeriodDAO {
 
             int index = 1;
 
+            Long periodId = rs.getLong(index++);
             String auditoriumId = rs.getString(index++);
             Long workoutId = rs.getLong(index++);
             LocalDateTime workoutDateTimeStart = rs.getObject(index++, LocalDateTime.class);
             LocalDateTime workoutDateTimeEnd = rs.getObject(index++, LocalDateTime.class);
 
-            Period period = new Period(auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd);
+            Period period = new Period(periodId, auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd);
 
             return period;
         }
@@ -41,10 +43,10 @@ public class PeriodDAOImpl implements PeriodDAO {
     @Override
     public void add(Period period) {
 
-        String sqlQuery = "INSERT INTO period (auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd) " +
-                "VALUES (?, ?, ?, ?)";
+        String sqlQuery = "INSERT INTO period (periodId, auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd) " +
+                "VALUES (?, ?, ?, ?, ?)";
 
-        jdbcTemplate.update(sqlQuery, period.getAuditoriumId(), period.getWorkoutId(), period.getWorkoutDateTimeStart(),
+        jdbcTemplate.update(sqlQuery, generatePeriodId(), period.getAuditoriumId(), period.getWorkoutId(), period.getWorkoutDateTimeStart(),
                 period.getWorkoutDateTimeEnd());
 
     }
@@ -70,6 +72,30 @@ public class PeriodDAOImpl implements PeriodDAO {
             return false;
         }
 
+    }
+
+    @Override
+    public List<Period> findAvailablePeriodsByWorkoutId(Long id) {
+        
+        String sqlQuery = "SELECT * FROM period WHERE workoutId = " + id + " AND workoutDateTimeStart > NOW();";
+
+        List<Period> availablePeriods = jdbcTemplate.query(sqlQuery, new PeriodDAOImpl.PeriodRowMapper());
+
+        return availablePeriods;
+
+    }
+
+    @Override
+    public int generatePeriodId() {
+
+        String sqlQuery = "SELECT * FROM period WHERE periodId = " +
+                "(SELECT MAX(period.periodId * 1) FROM period)";
+
+        List<Period> period = jdbcTemplate.query(sqlQuery, new PeriodDAOImpl.PeriodRowMapper());
+
+        int generatedPeriodId = Math.toIntExact(period.get(0).getPeriodId() + 1);
+
+        return generatedPeriodId;
     }
 
 }

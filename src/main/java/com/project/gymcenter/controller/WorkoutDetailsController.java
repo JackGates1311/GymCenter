@@ -2,6 +2,7 @@ package com.project.gymcenter.controller;
 
 import com.project.gymcenter.dao.form.AddEditWorkoutForm;
 import com.project.gymcenter.model.*;
+import com.project.gymcenter.service.PeriodService;
 import com.project.gymcenter.service.WorkoutIncludedTypesService;
 import com.project.gymcenter.service.WorkoutService;
 import com.project.gymcenter.service.WorkoutTypeService;
@@ -18,6 +19,9 @@ import java.util.List;
 
 @Controller
 public class WorkoutDetailsController {
+
+    @Autowired
+    private PeriodService periodService;
 
     @Autowired
     private WorkoutService workoutService;
@@ -37,6 +41,7 @@ public class WorkoutDetailsController {
         model.addAttribute("workout", workoutService.findById(id));
         model.addAttribute("workoutIncludedTypes", workoutIncludedTypesService.findById(id));
         model.addAttribute("workoutTypeDetails", workoutTypeService.findAll());
+        model.addAttribute("workoutListPeriod", periodService.findAvailablePeriodsByWorkoutId(id));
 
         String navBarTitle = "Workout details";
 

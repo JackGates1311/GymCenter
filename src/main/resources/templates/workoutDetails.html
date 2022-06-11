@@ -18,29 +18,41 @@
 
         <div class="row">
 
-            <div class="col-lg-7 com-md-6 col-sm-12 col-xs-12 mb-12">
+            <div class="center col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
 
-                <h5 th:text="@{'Workout Name: ' + ${workout.workoutName}}"/>
+                <p th:text="@{'Workout Name: ' + ${workout.workoutName}}"/>
 
-                <h5 th:text="@{'Workout Coaches: ' + ${workout.workoutCoaches}}"/>
+                <p th:text="@{'Workout Coaches: ' + ${workout.workoutCoaches}}"/>
 
-                <h5 th:text="@{'Workout Price: ' + ${workout.workoutPrice} + ' RSD'}"/>
+                <p th:text="@{'Workout Price: ' + ${workout.workoutPrice} + ' RSD'}"/>
 
-                <h5 th:text="@{'Workout Org. Type: ' + ${workout.workoutOrganizationType} + ' workout'}"/>
+                <p th:text="@{'Workout Org. Type: ' + ${workout.workoutOrganizationType} + ' workout'}"/>
 
-                <h5 th:text="@{'Workout Level: ' + ${workout.workoutLevel}}"/>
+                <p th:text="@{'Workout Level: ' + ${workout.workoutLevel}}"/>
 
-                <h5 th:text="@{'Workout Length: ' + ${workout.workoutLength} + ' minutes'}"/>
+                <p th:text="@{'Workout Length: ' + ${workout.workoutLength} + ' minutes'}"/>
 
-                <h5 th:text="@{'Workout Average Rate: ' + ${workout.workoutAverageRate}}"/>
+                <p th:text="@{'Workout Average Rate: ' + ${workout.workoutAverageRate}}"/>
 
-                <h5> Workout Periods: </h5>
+                <div class="inlineFlex flexCenter">
 
-                <h5> Workout Hall: </h5>
+                    <div th:insert="/fragments/reserveWorkout :: reserveWorkoutModal"></div>
+
+                    <a th:if="${showEditWorkoutButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
+                           class="btn btn-light alignCenter" data-toggle="modal" data-target="#btnReserveWorkout">
+                        Reserve period</a>
+                    <a th:if="${showEditWorkoutButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
+                       class="btn btn-light alignCenter">Add to wishlist</a>
+
+
+                    <a th:if="${showEditWorkoutButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
+                           class="btn btn-light alignCenter">Comments</a>
+
+                </div>
 
             </div>
 
-            <div class="col-lg-4 com-md-4 col-sm-12 col-xs-12 mb-12">
+            <div class="col-lg-6 com-md-4 col-sm-12 col-xs-12 mb-12">
 
                 <div class="flexCenter">
 
@@ -68,13 +80,17 @@
 
                 </div>
 
-                <h6 th:text="${workout.workoutDescription}"/>
-
                 <div class="flexCenter">
+
+                    <h6 class="w-50" th:text="${workout.workoutDescription}"/>
+
+                </div>
+
+                <div class="inlineFlex flexCenter">
 
                     <a th:if="${showEditWorkoutButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
                        class="btn btn-light alignCenter">Edit workout</a>
-                    <a class="btn btn-light alignLeft" id="backToAllWorkoutsButton">
+                    <a class="btn btn-light alignCenter" id="backToAllWorkoutsButton">
                         All workouts
                     </a>
 

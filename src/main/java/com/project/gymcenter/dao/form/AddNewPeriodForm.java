@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 public class AddNewPeriodForm {
 
+    private Long periodId;
     private Long workoutId;
     private String auditoriumId;
     private String periodDateTimeStart;
@@ -14,6 +15,14 @@ public class AddNewPeriodForm {
 
         super();
 
+    }
+
+    public Long getPeriodId() {
+        return periodId;
+    }
+
+    public void setPeriodId(Long periodId) {
+        this.periodId = periodId;
     }
 
     public Long getWorkoutId() {

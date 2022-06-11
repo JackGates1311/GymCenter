@@ -6,6 +6,8 @@ import com.project.gymcenter.service.PeriodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PeriodServiceImpl implements PeriodService {
 
@@ -22,5 +24,11 @@ public class PeriodServiceImpl implements PeriodService {
     public Boolean checkForPeriodAvailability(Period period) {
 
         return periodDAO.checkForPeriodAvailability(period);
+    }
+
+    @Override
+    public List<Period> findAvailablePeriodsByWorkoutId(Long id) {
+        
+        return periodDAO.findAvailablePeriodsByWorkoutId(id);
     }
 }

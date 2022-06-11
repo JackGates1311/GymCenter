@@ -75,23 +75,23 @@ INSERT INTO auditorium(auditoriumId, capacity, isDeleted) VALUES
     ('105', 4, false),
     ('106', 3, false);
     
-INSERT INTO period(auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd) VALUES
-    ('100', '1', '2022-01-13 19:00:00', '2022-01-13 21:00:00'),
-    ('101', '2', '2022-01-13 14:00:00', '2022-01-13 16:30:00'),
-    ('102', '3', '2022-01-13 23:00:00', '2022-01-14 01:00:00'),
-    ('102', '4', '2022-01-15 17:30:00', '2022-01-15 19:30:00'),
-    ('103', '5', '2022-01-18 11:00:00', '2022-01-18 15:00:00'),
-    ('105', '6', '2022-01-19 07:30:00', '2022-01-19 11:30:00'),
-	('103', '7', '2022-01-23 18:30:00', '2022-01-23 21:00:00'),
-    ('105', '8', '2022-01-27 06:30:00', '2022-01-27 08:30:00');
+INSERT INTO period(periodId, auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd) VALUES
+    (1, '100', '1', '2022-01-13 19:00:00', '2022-01-13 21:00:00'),
+    (2, '101', '2', '2022-01-13 14:00:00', '2022-01-13 16:30:00'),
+    (3, '102', '3', '2022-01-13 23:00:00', '2022-01-14 01:00:00'),
+    (4, '102', '4', '2022-01-15 17:30:00', '2022-01-15 19:30:00'),
+    (5, '103', '5', '2022-01-18 11:00:00', '2022-01-18 15:00:00'),
+    (6, '105', '6', '2022-01-19 07:30:00', '2022-01-19 11:30:00'),
+	(7, '103', '7', '2022-01-23 18:30:00', '2022-01-23 21:00:00'),
+    (8, '105', '8', '2022-01-27 06:30:00', '2022-01-27 08:30:00');
     
-INSERT INTO periodReserved(workoutId, userId) VALUES
-	('1', '5'),
-    ('2', '4'),
-    ('2', '6'),
-    ('4', '7'),
-    ('4', '5'),
-    ('7', '4');
+INSERT INTO periodReserved(periodId, userId) VALUES
+	(1, 4),
+    (2, 4),
+    (2, 4),
+    (2, 5),
+    (3, 5),
+    (4, 4);
     
 INSERT INTO workoutComment(workoutId, commentAuthorId, commentContent, commentAverageRate, commentDateTimePosted, commentAuthorName, commentStatus) VALUES
     (2, 4, 'Sve kao sto sam i ocekivao', 9, '2022-01-15 19:38:23', 'bojana123', 'Approved'),
