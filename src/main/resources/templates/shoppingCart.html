@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+    <title>Reserved workouts</title>
+
+    <div th:insert="/fragments/header :: header"></div>
+
 </head>
 <body>
+
+    <div th:insert="/fragments/navigationBar :: navBar"></div>
+
+    <div class="center paddingSmall w-90">
+
+        <div class="table-responsive scrollable">
+
+            <table class="table table-bordered w-100">
+
+                <thead class="thead-light">
+
+                <tr>
+
+                    <th scope="col"> Workout Name </th>
+                    <th scope="col"> Workout Coaches</th>
+                    <th scope="col"> Workout Org. Type</th>
+                    <th scope="col"> Workout Period Start</th>
+                    <th scope="col"> Workout Price</th>
+                    <th scope="col"> Action </th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="tempShoppingCartItems:${shoppingCartItems}">
+
+                    <td th:text="${tempShoppingCartItems.workoutName}"></td>
+
+                    <td th:text="${tempShoppingCartItems.workoutCoaches}"></td>
+
+                    <td th:text="${tempShoppingCartItems.workoutOrganizationType}"></td>
+
+                    <td th:text="${#temporals.format(tempShoppingCartItems.workoutDateTimeStart, 'dd.MM.yyyy. HH:mm')}"></td>
+
+                    <td th:text="${tempShoppingCartItems.workoutPrice}"></td>
+
+                    <td>
+
+                        <a th:href="@{'/removeShoppingCartItem?id=' + ${tempShoppingCartItems.shoppingCartId}}">
+                            Remove
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
 </body>
 </html>

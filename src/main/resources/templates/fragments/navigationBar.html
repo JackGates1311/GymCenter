@@ -29,7 +29,9 @@
 
                         <!--/*@thymesVar id="showAllWorkoutsIconNavBar" type=""*/-->
 
-                        <a th:if="${showAllWorkoutsIconNavBar}" href="/workouts"
+                        <!--/*@thymesVar id="showAllWorkoutsIconNavBarLink" type=""*/-->
+
+                        <a th:if="${showAllWorkoutsIconNavBar}" th:href="${showAllWorkoutsIconNavBarLink}"
                            class="nav-item nav-link d-none d-lg-block">
 
                             <span class="material-icons" data-toggle="tooltip" title="All workouts">
@@ -98,6 +100,15 @@
 
                         </a>
 
+                        <!--/*@thymesVar id="showShoppingCartIconNavBar" type=""*/-->
+                        <a th:if="${showShoppingCartIconNavBar}" href="/shoppingCart"
+                           class="nav-item nav-link d-none d-lg-block">
+
+                            <span class="material-icons" data-toggle="tooltip" title="Show reserved workouts">
+                                shopping_cart</span>
+
+                        </a>
+
                         <!--/*@thymesVar id="showManageUserIconNavBar" type=""*/-->
 
                         <a th:if="${showManageUserIconNavBar}" href="/accountInfo"
@@ -134,8 +145,7 @@
 
                         <!-- For mobile version of website -->
 
-
-                        <a th:if="${showAllWorkoutsIconNavBar}" href="/workouts"
+                        <a th:if="${showAllWorkoutsIconNavBar}" th:href="${showAllWorkoutsIconNavBarLink}"
                            class="nav-item nav-link d-lg-none">
 
                             <div class="inlineFlexNav">
@@ -222,6 +232,18 @@
 
                                 <span class="material-icons">group</span>
                                 Manage users
+
+                            </div>
+
+                        </a>
+
+                        <a th:if="${showShoppingCartIconNavBar}" href="/shoppingCart"
+                           class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">shopping_cart</span>
+                                Show reserved workouts
 
                             </div>
 

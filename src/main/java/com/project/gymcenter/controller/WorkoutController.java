@@ -2,14 +2,14 @@ package com.project.gymcenter.controller;
 
 
 import com.project.gymcenter.dao.form.AddEditWorkoutForm;
+import com.project.gymcenter.dao.form.AddWorkoutToShoppingCartForm;
 import com.project.gymcenter.dao.form.WorkoutSearchForm;
+import com.project.gymcenter.model.ShoppingCart;
+import com.project.gymcenter.model.UserRole;
 import com.project.gymcenter.model.Workout;
 import com.project.gymcenter.model.WorkoutType;
-import com.project.gymcenter.service.WorkoutIncludedTypesService;
-import com.project.gymcenter.service.WorkoutService;
-import com.project.gymcenter.service.WorkoutTypeService;
+import com.project.gymcenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 
 public class WorkoutController {
+
 
     @Autowired
     private WorkoutService workoutService;
@@ -33,6 +35,9 @@ public class WorkoutController {
     private WorkoutIncludedTypesService workoutIncludedTypesService;
 
     @Autowired
+    private PeriodService periodService;
+
+    @Autowired
     NavBarController navBarController = new NavBarController();
 
     private List<Workout> workoutList;
@@ -42,7 +47,12 @@ public class WorkoutController {
     @RequestMapping(value="/workouts")
     public String workouts(Model model, HttpServletRequest request) {
 
-        if(request.getSession().getAttribute("currentUserRole") == null) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                        String.valueOf(UserRole.Customer))) {
+
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
             return "login";
 
@@ -92,6 +102,14 @@ public class WorkoutController {
             navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
 
             return "index";
+
+        } else if (Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                String.valueOf(UserRole.Customer))) {
+
+            navBarController.setNavBarCustomer("MagicBoost Gym Center", "/", true,
+                    model);
+
+            return "index";
         }
 
         else {
@@ -112,9 +130,15 @@ public class WorkoutController {
 
         model.addAttribute("addNewWorkoutTypes", workoutTypes);
 
-        if(request.getSession().getAttribute("currentUserRole") == null) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                        String.valueOf(UserRole.Customer))) {
+
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
             return "login";
+
         } else {
 
             navBarController.setNavBarAdministrator("Add new workout", "/addNewWorkout", false, model);
@@ -169,12 +193,32 @@ public class WorkoutController {
         model.addAttribute("workouts", workoutList);
         model.addAttribute("workoutTypes", workoutTypes);
         model.addAttribute("isLoggedIn", false);
+        model.addAttribute("workoutListPeriod", periodService.findAllAvailablePeriods());
 
-        navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
+        model.addAttribute("accessFromIndexPage", true);
 
-        if(request.getSession().getAttribute("currentUserRole") == null)
+        if(request.getSession().getAttribute("currentUserRole") == null) {
+
+            navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
+
             return "index";
-        else
+        }
+        else if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                String.valueOf(UserRole.Customer))) {
+
+            navBarController.setNavBarCustomer("MagicBoost Gym Center", "/", true,
+                    model);
+
+            model.addAttribute("showWorkoutReservationButton", true);
+            model.addAttribute("showAddWorkoutToWishListButton", true);
+
+            return "index";
+
+        } else {
+
             return "redirect:/workouts";
+        }
+
     }
+
 }

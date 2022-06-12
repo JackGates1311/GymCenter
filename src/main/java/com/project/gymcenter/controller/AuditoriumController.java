@@ -3,6 +3,7 @@ package com.project.gymcenter.controller;
 import com.project.gymcenter.dao.form.AddEditAuditoriumForm;
 import com.project.gymcenter.dao.form.AuditoriumSearchForm;
 import com.project.gymcenter.model.Auditorium;
+import com.project.gymcenter.model.UserRole;
 import com.project.gymcenter.service.AuditoriumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,12 @@ public class AuditoriumController {
     @RequestMapping("/auditoriums")
     public String auditoriums(HttpServletRequest request, Model model) {
 
-        if(request.getSession().getAttribute("currentUserRole") == null) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                        String.valueOf(UserRole.Customer))) {
+
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
             return "login";
 
@@ -51,11 +57,14 @@ public class AuditoriumController {
 
         model.addAttribute("auditoriumList", auditoriumsFound);
 
-        if(request.getSession().getAttribute("currentUserRole") == null) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                        String.valueOf(UserRole.Customer))) {
 
-            navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
-            return "index";
+            return "login";
 
         } else {
 
@@ -72,11 +81,14 @@ public class AuditoriumController {
     public String auditoriumDetails(@ModelAttribute(name="addEditAuditoriumForm") AddEditAuditoriumForm
                                             addEditAuditoriumForm, Model model, HttpServletRequest request) {
 
-        if(request.getSession().getAttribute("currentUserRole") == null) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                        String.valueOf(UserRole.Customer))) {
 
-            navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
-            return "index";
+            return "login";
 
         } else {
 
@@ -97,37 +109,53 @@ public class AuditoriumController {
     @RequestMapping("/removeAuditorium")
     public String removeAuditorium (@RequestParam String id, Model model, HttpServletRequest request) {
 
-        if(auditoriumService.remove(id) == 0) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                        String.valueOf(UserRole.Customer))) {
 
-            navBarController.setNavBarAdministrator("Auditoriums", "/auditoriums",
-                    false, model);
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
-            model.addAttribute("auditoriumRemoveFailed", true);
-
-            FillFormWithAuditoriumsData(model);
-
-            return "auditoriums";
+            return "login";
 
         } else {
 
-            navBarController.setNavBarAdministrator("Auditoriums", "/auditoriums",
-                    false, model);
+            if(auditoriumService.remove(id) == 0) {
 
-            model.addAttribute("auditoriumRemoveSuccess", true);
+                navBarController.setNavBarAdministrator("Auditoriums", "/auditoriums",
+                        false, model);
 
-            FillFormWithAuditoriumsData(model);
+                model.addAttribute("auditoriumRemoveFailed", true);
 
-            return "auditoriums";
+                FillFormWithAuditoriumsData(model);
 
+                return "auditoriums";
+
+            } else {
+
+                navBarController.setNavBarAdministrator("Auditoriums", "/auditoriums",
+                        false, model);
+
+                model.addAttribute("auditoriumRemoveSuccess", true);
+
+                FillFormWithAuditoriumsData(model);
+
+                return "auditoriums";
+
+            }
         }
-
     }
 
     @RequestMapping(value="/addNewAuditorium", method = RequestMethod.POST)
     public String addNewAuditorium(@ModelAttribute(name="addEditAuditoriumForm") AddEditAuditoriumForm
                                                addEditAuditoriumForm, Model model, HttpServletRequest request) {
 
-        if(request.getSession().getAttribute("currentUserRole") == null) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                        String.valueOf(UserRole.Customer))) {
+
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
             return "login";
 

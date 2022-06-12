@@ -166,7 +166,8 @@
                         <div class="form-group col-md-6">
 
                             <input class="btn btn-light btn-sm marginTopDefault w-100" id="cancelAddEditAccount"
-                                   type="button" value="Back to all workouts" th:if="${cancelAddEditAccountVisible}"/>
+                                   onclick="javascript: window.location=document.referrer;" type="button"
+                                   value="Back to all workouts" th:if="${cancelAddEditAccountVisible}"/>
 
                             <input class="btn btn-light btn-sm marginTopDefault w-100" id="cancelUserDetailsAccount"
                                    type="button" value="Back to all users" th:if="${cancelUserDetailsAccountVisible}"/>

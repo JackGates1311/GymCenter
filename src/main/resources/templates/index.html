@@ -130,10 +130,16 @@
 
                                 <div class="cardButtons alignCenter">
 
-                                    <a> <div th:insert="/fragments/svg/images :: reservation" data-toggle="tooltip"
-                                             title="Make a reservation for this workout"></div> </a>
+                                    <a th:if="${showWorkoutReservationButton}">
 
-                                    <a class="heart" data-toggle="tooltip" title="Add workout to wishlist"></a>
+                                        <div th:insert="/fragments/addWorkoutToShoppingCart :: addWorkoutToShoppingCartModal"></div>
+
+                                        <div th:insert="/fragments/svg/images :: reservation" data-toggle="modal"
+                                             th:data-target="@{'#btnAddWorkoutToShoppingCart' + ${tempWorkouts.workoutId}}"></div>
+                                    </a>
+
+                                    <a th:if="${showAddWorkoutToWishListButton}"
+                                       class="heart" data-toggle="tooltip" title="Add workout to wishlist"></a>
 
                                     <a th:href="@{'/workoutDetails?id=' + ${tempWorkouts.workoutId}}">
                                         <div th:insert="/fragments/svg/images :: info" data-toggle="tooltip"

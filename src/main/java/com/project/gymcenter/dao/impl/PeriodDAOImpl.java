@@ -77,12 +77,24 @@ public class PeriodDAOImpl implements PeriodDAO {
     @Override
     public List<Period> findAvailablePeriodsByWorkoutId(Long id) {
         
-        String sqlQuery = "SELECT * FROM period WHERE workoutId = " + id + " AND workoutDateTimeStart > NOW();";
+        String sqlQuery = "SELECT * FROM period WHERE workoutId = " + id + " AND workoutDateTimeStart > NOW()" +
+                "ORDER BY workoutDateTimeStart;";
 
         List<Period> availablePeriods = jdbcTemplate.query(sqlQuery, new PeriodDAOImpl.PeriodRowMapper());
 
         return availablePeriods;
 
+    }
+
+    @Override
+    public List<Period> findAllAvailablePeriods() {
+
+        String sqlQuery = "SELECT * FROM period WHERE workoutDateTimeStart > NOW()" +
+                "ORDER BY workoutDateTimeStart;";
+
+        List<Period> availablePeriods = jdbcTemplate.query(sqlQuery, new PeriodDAOImpl.PeriodRowMapper());
+
+        return availablePeriods;
     }
 
     @Override
@@ -97,5 +109,6 @@ public class PeriodDAOImpl implements PeriodDAO {
 
         return generatedPeriodId;
     }
+
 
 }

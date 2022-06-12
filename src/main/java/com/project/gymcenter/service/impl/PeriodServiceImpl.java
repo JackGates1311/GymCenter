@@ -31,4 +31,10 @@ public class PeriodServiceImpl implements PeriodService {
         
         return periodDAO.findAvailablePeriodsByWorkoutId(id);
     }
+
+    @Override
+    public List<Period> findAllAvailablePeriods() {
+
+        return periodDAO.findAllAvailablePeriods();
+    }
 }

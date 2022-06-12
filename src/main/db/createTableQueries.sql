@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS periodReserved;
 DROP TABLE IF EXISTS registeredUser;
 DROP TABLE IF EXISTS loyaltyCard;
 DROP TABLE IF EXISTS workoutComment;
+DROP TABLE IF EXISTS shoppingCart;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -106,4 +107,12 @@ CREATE TABLE workoutComment (
     commentAuthorName NVARCHAR(30) NOT NULL,
     commentStatus ENUM('OnWaiting', 'Approved', 'Declined')
     
+);
+
+CREATE TABLE shoppingCart (
+
+	shoppingCartId LONG NOT NULL,
+    periodId LONG NOT NULL,
+    userId LONG NOT NULL
+
 );

@@ -98,6 +98,10 @@ INSERT INTO workoutComment(workoutId, commentAuthorId, commentContent, commentAv
     (2, 6, 'Neke stvari mogu da se unaprede u vezi ovog termina', NULL, '2021-01-19 13:23:33', 'jovan123', 'OnWaiting'),
     (7, 4, 'Termin uopste nije bio u skladu sa mojim ocekivanjima', NULL, '2022-01-18 20:00:12', 'bojana123', 'Declined'),
     (5, 7, 'Usluga na nivou', NULL, '2022-01-20 00:00:12', 'dejan123', 'OnWaiting');
+    
+INSERT INTO shoppingCart(shoppingCartId, periodId, userId) VALUES 
+(1, 1, 6),
+(2, 1, 5);
 
     
     

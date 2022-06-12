@@ -13,4 +13,6 @@ public interface PeriodDAO {
     public List<Period> findAvailablePeriodsByWorkoutId(Long id);
 
     public int generatePeriodId();
+
+    public List<Period> findAllAvailablePeriods();
 }

@@ -24,6 +24,8 @@ public class NavBarController {
         model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
 
         model.addAttribute("showAllWorkoutsIconNavBar", true);
+        model.addAttribute("showAllWorkoutsIconNavBarLink", "/workouts");
+
         model.addAttribute("showWorkoutsIconNavBar", true);
         model.addAttribute("addPeriodIconNavBar", true);
 
@@ -31,8 +33,40 @@ public class NavBarController {
 
         model.addAttribute("showAuditoriumsIconNavBar", true);
         model.addAttribute("showAddNewWorkoutIconNavBar", true);
-        model.addAttribute("showFavoritesIconNavBar", true);
+        model.addAttribute("showFavoritesIconNavBar", false);
         model.addAttribute("showManageUsersIconNavBar", true);
+
+        model.addAttribute("showShoppingCartIconNavBar", false);
+
+        model.addAttribute("showManageUserIconNavBar", true);
+        model.addAttribute("showLogoutIconNavBar", true);
+
+        model.addAttribute("showUserRegisterIconNavBar", false);
+        model.addAttribute("showLoginIconNavBar", false);
+    }
+
+    protected void setNavBarCustomer(String navBarTitle, String navBarLink, Boolean showSearchIconNavBar, Model model) {
+
+        model.addAttribute("navBarTitle", navBarTitle);
+        model.addAttribute("navBarTitlePath", navBarLink);
+
+        model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
+
+        model.addAttribute("showAllWorkoutsIconNavBar", true);
+        model.addAttribute("showAllWorkoutsIconNavBarLink", "/");
+
+        model.addAttribute("showWorkoutsIconNavBar", false);
+        model.addAttribute("addPeriodIconNavBar", false);
+
+       // periodController.configureAddNewPeriodModal(model);
+
+        model.addAttribute("showAuditoriumsIconNavBar", false);
+        model.addAttribute("showAddNewWorkoutIconNavBar", false);
+        model.addAttribute("showFavoritesIconNavBar", true);
+        model.addAttribute("showManageUsersIconNavBar", false);
+
+        model.addAttribute("showShoppingCartIconNavBar", true);
+
         model.addAttribute("showManageUserIconNavBar", true);
         model.addAttribute("showLogoutIconNavBar", true);
 
@@ -48,12 +82,17 @@ public class NavBarController {
         model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
 
         model.addAttribute("showAllWorkoutsIconNavBar", false);
+        model.addAttribute("showAllWorkoutsIconNavBarLink", "/");
+
         model.addAttribute("showWorkoutsIconNavBar", false);
         model.addAttribute("addPeriodIconNavBar", false);
         model.addAttribute("showAuditoriumsIconNavBar", false);
         model.addAttribute("showAddNewWorkoutIconNavBar", false);
         model.addAttribute("showFavoritesIconNavBar", false);
         model.addAttribute("showManageUsersIconNavBar", false);
+
+        model.addAttribute("showShoppingCartIconNavBar", false);
+
         model.addAttribute("showManageUserIconNavBar", false);
         model.addAttribute("showLogoutIconNavBar", false);
 

@@ -2,6 +2,7 @@ package com.project.gymcenter.controller;
 
 import com.project.gymcenter.dao.form.AddNewPeriodForm;
 import com.project.gymcenter.model.Period;
+import com.project.gymcenter.model.UserRole;
 import com.project.gymcenter.service.AuditoriumService;
 import com.project.gymcenter.service.PeriodService;
 import com.project.gymcenter.service.WorkoutService;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class PeriodController {
@@ -36,7 +38,12 @@ public class PeriodController {
     public String addNewPeriod(@ModelAttribute(name="addNewPeriod") AddNewPeriodForm addNewPeriodForm, Model model,
                                HttpServletRequest request) {
 
-        if(request.getSession().getAttribute("currentUserRole") == null) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                        String.valueOf(UserRole.Customer))) {
+
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
             return "login";
 
@@ -46,18 +53,27 @@ public class PeriodController {
 
             Period period = new Period(addNewPeriodForm.getPeriodId(), addNewPeriodForm.getAuditoriumId(),
                     addNewPeriodForm.getWorkoutId(), date[0], date[1]);
+
             if(periodService.checkForPeriodAvailability(period)) {
 
-                periodService.add(period);
+                if(date[0].isBefore(LocalDateTime.now())) {
 
-                messageController.newMessageTemplate(model, "MagicBoost Gym - Message",
-                        "MagicBoost Gym message", "New period added successfully",false);
+                    messageController.newMessageTemplate(model, "MagicBoost Gym - Message",
+                            "MagicBoost Gym", "New period is not added successfully" +
+                                    ", because of invalid date and time",true);
+                } else {
+
+                    periodService.add(period);
+
+                    messageController.newMessageTemplate(model, "MagicBoost Gym - Message",
+                            "MagicBoost Gym message", "New period has been added successfully",false);
+                }
 
             } else {
 
                 messageController.newMessageTemplate(model, "MagicBoost Gym - Message",
-                        "MagicBoost Gym", "New period is not added successfully " +
-                                "because of time overlapping with another one",true);
+                        "MagicBoost Gym", "New period is not added successfully" +
+                                ", because of time overlapping with another one",true);
 
             }
 

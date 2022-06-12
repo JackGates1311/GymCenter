@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class WorkoutDetailsController {
@@ -43,6 +44,8 @@ public class WorkoutDetailsController {
         model.addAttribute("workoutTypeDetails", workoutTypeService.findAll());
         model.addAttribute("workoutListPeriod", periodService.findAvailablePeriodsByWorkoutId(id));
 
+        model.addAttribute("accessFromWorkoutDetailsPage", true);
+
         String navBarTitle = "Workout details";
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
@@ -50,6 +53,16 @@ public class WorkoutDetailsController {
             navBarController.setNavBarGuest(navBarTitle, "/workoutDetails?id=" + id, false, model);
 
             model.addAttribute("showEditWorkoutButton", false);
+
+        } else if (Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                String.valueOf(UserRole.Customer))) {
+
+            navBarController.setNavBarCustomer(navBarTitle, "/workoutDetails?id=" + id, false,
+                    model);
+
+            model.addAttribute("showReservePeriodButton", true);
+            model.addAttribute("showAddToWishListButton", true);
+            model.addAttribute("showCommentsButton", true);
 
         } else {
 

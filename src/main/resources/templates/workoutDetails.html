@@ -36,16 +36,16 @@
 
                 <div class="inlineFlex flexCenter">
 
-                    <div th:insert="/fragments/reserveWorkout :: reserveWorkoutModal"></div>
+                    <div th:insert="/fragments/addWorkoutToShoppingCart :: addWorkoutToShoppingCartModal"></div>
 
-                    <a th:if="${showEditWorkoutButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
-                           class="btn btn-light alignCenter" data-toggle="modal" data-target="#btnReserveWorkout">
-                        Reserve period</a>
-                    <a th:if="${showEditWorkoutButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
+                    <a th:if="${showReservePeriodButton}" class="btn btn-light alignCenter" data-toggle="modal"
+                       data-target="#btnAddWorkoutToShoppingCart"> Reserve period</a>
+
+                    <a th:if="${showAddToWishListButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
                        class="btn btn-light alignCenter">Add to wishlist</a>
 
 
-                    <a th:if="${showEditWorkoutButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
+                    <a th:if="${showCommentsButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
                            class="btn btn-light alignCenter">Comments</a>
 
                 </div>

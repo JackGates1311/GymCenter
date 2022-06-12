@@ -13,4 +13,6 @@ public interface PeriodService {
 
     public List<Period> findAvailablePeriodsByWorkoutId(Long id);
 
+    public List<Period> findAllAvailablePeriods();
+
 }

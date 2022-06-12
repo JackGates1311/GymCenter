@@ -39,12 +39,6 @@ $("#userPhoneNumber").on("keyup", function(){
     }
 });
 
-$("#cancelAddEditAccount").on("click", function() {
-
-    $(location).attr('href', '/workouts');
-
-});
-
 $("#cancelUserDetailsAccount").on("click", function () {
 
     $(location).attr('href', '/manageUsers');

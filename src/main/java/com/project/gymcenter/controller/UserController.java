@@ -105,7 +105,11 @@ public class UserController {
 
                 System.out.println("Logged in customer");
 
-                return "login";
+                request.getSession().setAttribute("currentUserRole", registeredUser.getUserRole());
+
+                request.getSession().setAttribute("loggedInUserId", registeredUser.getUserId());
+
+                return "redirect:/";
 
             }
 
@@ -113,12 +117,13 @@ public class UserController {
 
                 request.getSession().setAttribute("currentUserRole", registeredUser.getUserRole());
 
-                return "login"; // NOT IMPLEMENTED YET FOR CUSTOMER
+                return "login";
             }
 
         } else {
 
             model.addAttribute("invalidCredentials", true);
+            model.addAttribute("showRegisterButton", true);
 
             return "login";
         }
@@ -130,6 +135,8 @@ public class UserController {
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
+            model.addAttribute("showRegisterButton", true);
+
             return "login";
 
         } else {
@@ -137,11 +144,14 @@ public class UserController {
             int currentLoggedInUserId = Integer.parseInt(
                     request.getSession().getAttribute("loggedInUserId").toString());
 
-            navBarController.setNavBarAdministrator("My account details", "/accountInfo", false, model);
+            /* navBarController.setNavBarAdministrator("My account details", "/accountInfo",
+                    false, model);
 
             FillFormWithUserData(model, currentLoggedInUserId);
 
-            FillFormWithUserDataReadOnly(false, model, currentLoggedInUserId);
+            FillFormWithUserDataReadOnly(false, model, currentLoggedInUserId); */
+
+            getUserDetailsPageNavBar(request, model, currentLoggedInUserId);
 
             return "userDetails";
         }
@@ -153,6 +163,8 @@ public class UserController {
                                   HttpServletRequest request, Model model) {
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
+
+            model.addAttribute("showRegisterButton", true);
 
             return "login";
 
@@ -172,11 +184,7 @@ public class UserController {
 
                 registeredUserService.update(registeredUser, userId);
 
-                navBarController.setNavBarAdministrator("My account details", "/accountInfo", false, model);
-
-                FillFormWithUserData(model, userId);
-
-                FillFormWithUserDataReadOnly(false, model, userId);
+                getUserDetailsPageNavBar(request, model, userId);
 
                 model.addAttribute("saveAccountChangesSuccess", true);
 
@@ -186,14 +194,7 @@ public class UserController {
 
                 model.addAttribute("saveAccountChangesFailed", true);
 
-
-                navBarController.setNavBarAdministrator("My account details", "/accountInfo", false, model);
-
-                FillFormWithUserData(model, userId);
-
-                FillFormWithUserDataReadOnly(false, model, userId);
-
-                e.printStackTrace();
+                getUserDetailsPageNavBar(request, model, userId);
 
                 return "userDetails";
             }
@@ -207,6 +208,8 @@ public class UserController {
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
+            model.addAttribute("showRegisterButton", true);
+
             return "login";
 
         } else {
@@ -217,12 +220,7 @@ public class UserController {
 
                 registeredUserService.changePassword(changePasswordForm.getUserNewPassword(), userId);
 
-
-                navBarController.setNavBarAdministrator("My account details", "/accountInfo", false, model);
-
-                FillFormWithUserData(model, userId);
-
-                FillFormWithUserDataReadOnly(false, model, userId);
+                getUserDetailsPageNavBar(request, model, userId);
 
                 model.addAttribute("passwordChangeSuccess", true);
 
@@ -230,12 +228,9 @@ public class UserController {
 
             } catch (Exception e) {
 
-
                 navBarController.setNavBarAdministrator("My account details", "/accountInfo", false, model);
 
-                FillFormWithUserData(model, userId);
-
-                FillFormWithUserDataReadOnly(false, model, userId);
+                getUserDetailsPageNavBar(request, model, userId);
 
                 model.addAttribute("passwordChangeFailed", true);
 
@@ -249,7 +244,12 @@ public class UserController {
     @RequestMapping("/manageUsers")
     public String manageUsers(HttpServletRequest request, Model model) {
 
-        if(request.getSession().getAttribute("currentUserRole") == null) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                String.valueOf(UserRole.Customer))) {
+
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
             return "login";
 
@@ -276,16 +276,20 @@ public class UserController {
 
         model.addAttribute("registeredUsers", usersFound);
 
-        if(request.getSession().getAttribute("currentUserRole") == null) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                        String.valueOf(UserRole.Customer))) {
 
-            navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
-            return "index";
+            return "login";
         }
 
         else {
 
-            navBarController.setNavBarAdministrator("Manage users", "/manageUsers", true, model);
+            navBarController.setNavBarAdministrator("Manage users", "/manageUsers",
+                    true, model);
 
             return "manageUsers";
         }
@@ -294,11 +298,14 @@ public class UserController {
     @RequestMapping("/userDetails")
     public String userDetails(@RequestParam int id, Model model, HttpServletRequest request) {
 
-        if(request.getSession().getAttribute("currentUserRole") == null) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                        String.valueOf(UserRole.Customer))) {
 
-            navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
-            return "index";
+            return "login";
         }
 
         else {
@@ -327,7 +334,12 @@ public class UserController {
     public String saveUserDetails(@RequestParam int id, @ModelAttribute(name="addEditAccountForm")
             AddEditAccountForm addEditAccountForm, HttpServletRequest request, Model model) {
 
-        if(request.getSession().getAttribute("currentUserRole") == null) {
+        if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
+                Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                        String.valueOf(UserRole.Customer))) {
+
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
 
             return "login";
 
@@ -386,6 +398,14 @@ public class UserController {
 
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+
+        request.getSession().invalidate();
+
+        return "redirect:/";
+    }
+
     private void getUserDetails(int id, Model model) {
 
         navBarController.setNavBarAdministrator("User details", "/userDetails?id=" + id,
@@ -395,15 +415,6 @@ public class UserController {
 
         FillFormWithUserDataReadOnly(true, model, id);
 
-    }
-
-
-    @RequestMapping("/logout")
-    public String logout(HttpServletRequest request) {
-
-        request.getSession().invalidate();
-
-        return "redirect:/";
     }
 
     public String[] splitUserDateBirth(LocalDate userDateBirth) {
@@ -475,5 +486,25 @@ public class UserController {
 
         else
             model.addAttribute("userAccountStatusReadOnly", false);
+    }
+
+    private void getUserDetailsPageNavBar(HttpServletRequest request, Model model, int userId) {
+
+        if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                String.valueOf(UserRole.Customer))) {
+
+            navBarController.setNavBarCustomer("My account details",
+                    "/accountInfo", false, model);
+
+        } else {
+
+            navBarController.setNavBarAdministrator("My account details",
+                    "/accountInfo", false, model);
+
+        }
+
+        FillFormWithUserData(model, userId);
+
+        FillFormWithUserDataReadOnly(false, model, userId);
     }
 }
