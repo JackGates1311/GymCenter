@@ -27,14 +27,26 @@ public class PeriodServiceImpl implements PeriodService {
     }
 
     @Override
-    public List<Period> findAvailablePeriodsByWorkoutId(Long id) {
+    public List<Period> findAvailablePeriodsByWorkoutId(Long id, Long userId) {
         
-        return periodDAO.findAvailablePeriodsByWorkoutId(id);
+        return periodDAO.findAvailablePeriodsByWorkoutId(id, userId);
     }
 
     @Override
-    public List<Period> findAllAvailablePeriods() {
+    public List<Period> findAllAvailablePeriods(Long userId) {
 
-        return periodDAO.findAllAvailablePeriods();
+        return periodDAO.findAllAvailablePeriods(userId);
+    }
+
+    @Override
+    public Period findByPeriodId(Long periodId) {
+
+        return periodDAO.findByPeriodId(periodId);
+    }
+
+    @Override
+    public boolean checkForPeriodAvailability(Long periodId) {
+
+        return periodDAO.checkForPeriodAvailability(periodId);
     }
 }

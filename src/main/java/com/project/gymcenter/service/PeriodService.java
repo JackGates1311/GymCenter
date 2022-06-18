@@ -11,8 +11,11 @@ public interface PeriodService {
 
     public Boolean checkForPeriodAvailability(Period period);
 
-    public List<Period> findAvailablePeriodsByWorkoutId(Long id);
+    public List<Period> findAvailablePeriodsByWorkoutId(Long id, Long userId);
 
-    public List<Period> findAllAvailablePeriods();
+    public List<Period> findAllAvailablePeriods(Long userId);
 
+    public Period findByPeriodId(Long periodId);
+
+    public boolean checkForPeriodAvailability(Long periodId);
 }

@@ -193,7 +193,6 @@ public class WorkoutController {
         model.addAttribute("workouts", workoutList);
         model.addAttribute("workoutTypes", workoutTypes);
         model.addAttribute("isLoggedIn", false);
-        model.addAttribute("workoutListPeriod", periodService.findAllAvailablePeriods());
 
         model.addAttribute("accessFromIndexPage", true);
 
@@ -202,9 +201,13 @@ public class WorkoutController {
             navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
 
             return "index";
-        }
-        else if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+
+        } else if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Customer))) {
+
+            Long userId = Long.parseLong(String.valueOf(request.getSession().getAttribute("loggedInUserId")));
+
+            model.addAttribute("workoutListPeriod", periodService.findAllAvailablePeriods(userId));
 
             navBarController.setNavBarCustomer("MagicBoost Gym Center", "/", true,
                     model);

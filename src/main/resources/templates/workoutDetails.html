@@ -39,7 +39,7 @@
                     <div th:insert="/fragments/addWorkoutToShoppingCart :: addWorkoutToShoppingCartModal"></div>
 
                     <a th:if="${showReservePeriodButton}" class="btn btn-light alignCenter" data-toggle="modal"
-                       data-target="#btnAddWorkoutToShoppingCart"> Reserve period</a>
+                       data-target="#btnAddWorkoutToShoppingCart">Add to cart</a>
 
                     <a th:if="${showAddToWishListButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
                        class="btn btn-light alignCenter">Add to wishlist</a>

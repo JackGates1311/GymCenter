@@ -11,6 +11,18 @@
 
     <div th:insert="/fragments/navigationBar :: navBar"></div>
 
+    <p class="centerError marginTopDefault green" th:if="${workoutReservationSuccess}">
+        You have successfully reserved selected workout period </p>
+
+    <p class="centerError marginTopDefault red" th:if="${checkReservationAvailabilityFailed}">
+        Reservation is not possible because of full auditorium for selected workout period </p>
+
+    <p class="centerError marginTopDefault red" th:if="${checkForPeriodAvailability}">
+        Reservation is not possible for the selected workout period because it has been already started</p>
+
+    <p class="centerError marginTopDefault red" th:if="${checkReservationTimeOverlappingFailed}">
+        You have already reserved another workout period which takes place at the same time</p>
+
     <div class="center paddingSmall w-90">
 
         <div class="table-responsive scrollable">
@@ -26,7 +38,7 @@
                     <th scope="col"> Workout Org. Type</th>
                     <th scope="col"> Workout Period Start</th>
                     <th scope="col"> Workout Price</th>
-                    <th scope="col"> Action </th>
+                    <th scope="col"> Actions </th>
 
                 </tr>
 
@@ -48,9 +60,25 @@
 
                     <td>
 
-                        <a th:href="@{'/removeShoppingCartItem?id=' + ${tempShoppingCartItems.shoppingCartId}}">
-                            Remove
-                        </a>
+                        <div class="inlineFlex w-100">
+
+                            <div class="inlineFlex w-50 alignCenter">
+
+                                <a class="alignRight" th:href="@{'/reserveWorkout?id=' + ${tempShoppingCartItems.shoppingCartId}}">
+                                    Reserve
+                                </a>
+
+                            </div>
+
+                            <div class="inlineFlex w-50 alignCenter">
+
+                                <a th:href="@{'/removeShoppingCartItem?id=' + ${tempShoppingCartItems.shoppingCartId}}">
+                                    Remove
+                                </a>
+
+                            </div>
+
+                        </div>
 
                     </td>
 

@@ -14,4 +14,7 @@ public interface ShoppingCartService {
 
     public void deleteById(Long id);
 
+    public ShoppingCart findByShoppingCartId(Long id);
+
+    public ShoppingCart findPeriodByShoppingCartId(Long id);
 }

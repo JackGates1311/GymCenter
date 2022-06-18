@@ -37,4 +37,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         shoppingCartDAO.deleteById(id);
     }
+
+    @Override
+    public ShoppingCart findByShoppingCartId(Long id) {
+
+        return shoppingCartDAO.findByShoppingCartId(id);
+    }
+
+    @Override
+    public ShoppingCart findPeriodByShoppingCartId(Long id) {
+
+        return shoppingCartDAO.findPeriodByShoppingCartId(id);
+    }
 }

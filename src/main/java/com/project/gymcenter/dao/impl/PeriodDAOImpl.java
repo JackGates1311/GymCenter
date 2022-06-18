@@ -75,10 +75,14 @@ public class PeriodDAOImpl implements PeriodDAO {
     }
 
     @Override
-    public List<Period> findAvailablePeriodsByWorkoutId(Long id) {
-        
-        String sqlQuery = "SELECT * FROM period WHERE workoutId = " + id + " AND workoutDateTimeStart > NOW()" +
-                "ORDER BY workoutDateTimeStart;";
+    public List<Period> findAvailablePeriodsByWorkoutId(Long id, Long userId) {
+
+        String sqlQuery = "SELECT DISTINCT period.periodId, period.auditoriumId, period.workoutId," +
+                "period.workoutDateTimeStart, period.workoutDateTimeEnd, periodreserved.periodId " +
+                "FROM period LEFT OUTER JOIN periodreserved ON " +
+                "period.periodId = periodreserved.periodId WHERE workoutId = " + id + " AND " +
+                "workoutDateTimeStart > NOW()" + " AND (periodreserved.userId != " + userId + " OR " +
+                "periodreserved.userId IS NULL)";
 
         List<Period> availablePeriods = jdbcTemplate.query(sqlQuery, new PeriodDAOImpl.PeriodRowMapper());
 
@@ -87,14 +91,48 @@ public class PeriodDAOImpl implements PeriodDAO {
     }
 
     @Override
-    public List<Period> findAllAvailablePeriods() {
+    public List<Period> findAllAvailablePeriods(Long userId) {
 
-        String sqlQuery = "SELECT * FROM period WHERE workoutDateTimeStart > NOW()" +
-                "ORDER BY workoutDateTimeStart;";
+        /*String sqlQuery = "SELECT * FROM period WHERE workoutDateTimeStart > NOW()" +
+                "ORDER BY workoutDateTimeStart;";*/
+
+        String sqlQuery = "SELECT DISTINCT period.periodId, period.auditoriumId, period.workoutId, " +
+                "period.workoutDateTimeStart, period.workoutDateTimeEnd, periodreserved.periodId FROM period " +
+                "LEFT OUTER JOIN periodreserved ON " + "period.periodId = periodreserved.periodId WHERE " +
+                "workoutDateTimeStart > NOW()" + " AND (periodreserved.userId != " + userId + " OR " +
+                "periodreserved.userId IS NULL)";
 
         List<Period> availablePeriods = jdbcTemplate.query(sqlQuery, new PeriodDAOImpl.PeriodRowMapper());
 
         return availablePeriods;
+    }
+
+    @Override
+    public Period findByPeriodId(Long periodId) {
+
+        String sqlQuery = "SELECT * FROM period WHERE periodId = " + periodId + ";";
+
+        List<Period> periodFound = jdbcTemplate.query(sqlQuery, new PeriodRowMapper());
+
+        return periodFound.get(0);
+    }
+
+    @Override
+    public boolean checkForPeriodAvailability(Long periodId) {
+
+        String sqlQuery = "SELECT * FROM period WHERE periodId = " + periodId + " AND workoutDateTimeStart >= NOW();";
+
+        List<Period> periodFound = jdbcTemplate.query(sqlQuery, new PeriodRowMapper());
+
+        if(periodFound.isEmpty()) {
+
+            return false;
+
+        } else {
+
+            return true;
+        }
+
     }
 
     @Override

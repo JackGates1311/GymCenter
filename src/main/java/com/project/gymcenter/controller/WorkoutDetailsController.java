@@ -39,10 +39,22 @@ public class WorkoutDetailsController {
     @RequestMapping(value="/workoutDetails")
     public String workoutDetails(@RequestParam Long id, Model model, HttpServletRequest request) {
 
+        if(request.getSession().getAttribute("currentUserRole") != null) {
+
+
+            if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                    String.valueOf(UserRole.Customer))) {
+
+                Long userId = Long.parseLong(String.valueOf(request.getSession().getAttribute("loggedInUserId")));
+                model.addAttribute("workoutListPeriod", periodService.findAvailablePeriodsByWorkoutId(id, userId));
+
+            }
+        }
+
         model.addAttribute("workout", workoutService.findById(id));
         model.addAttribute("workoutIncludedTypes", workoutIncludedTypesService.findById(id));
         model.addAttribute("workoutTypeDetails", workoutTypeService.findAll());
-        model.addAttribute("workoutListPeriod", periodService.findAvailablePeriodsByWorkoutId(id));
+
 
         model.addAttribute("accessFromWorkoutDetailsPage", true);
 

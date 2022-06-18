@@ -71,7 +71,7 @@ public class ShoppingCartController {
 
             Long userId = Long.parseLong(String.valueOf(request.getSession().getAttribute("loggedInUserId")));
 
-            navBarController.setNavBarCustomer("Reserved workouts", "/shoppingCart",
+            navBarController.setNavBarCustomer("Workouts in shopping cart", "/shoppingCart",
                     false, model);
 
             model.addAttribute("shoppingCartItems", shoppingCartService.findAllByUserId(userId));
@@ -89,12 +89,23 @@ public class ShoppingCartController {
     }
 
     @RequestMapping(value = "/removeShoppingCartItem")
-    public String removeShoppingCartItem(@RequestParam Long id) {
+    public String removeShoppingCartItem(@RequestParam Long id, HttpServletRequest request, Model model) {
 
-        shoppingCartService.deleteById(id);
+        if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                String.valueOf(UserRole.Customer))) {
 
-        return "redirect:/shoppingCart";
+            shoppingCartService.deleteById(id);
+
+            return "redirect:/shoppingCart";
+
+        } else {
+
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
+
+            return "login";
+        }
+
     }
-
 
 }

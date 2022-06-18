@@ -124,6 +124,31 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
     }
 
     @Override
+    public ShoppingCart findByShoppingCartId(Long id) {
+
+        String sqlQuery = "SELECT * FROM shoppingcart WHERE shoppingCartId =" + id + ";";
+
+        List<ShoppingCart> shoppingCartItem = jdbcTemplate.query(sqlQuery, new ShoppingCartRowMapper());
+
+        return shoppingCartItem.get(0);
+    }
+
+    @Override
+    public ShoppingCart findPeriodByShoppingCartId(Long id) {
+
+        String sqlQuery = "SELECT shoppingCart.shoppingCartId, shoppingCart.periodId, shoppingCart.userId, \n" +
+                "period.auditoriumId, period.workoutId, period.workoutDateTimeStart, period.workoutDateTimeEnd,\n" +
+                "workout.workoutName, workout.workoutCoaches, workout.workoutPrice, workout.workoutOrganizationType " +
+                "FROM shoppingCart \n" + "LEFT OUTER JOIN period ON shoppingCart.periodId = period.periodId \n" +
+                "LEFT OUTER JOIN workout ON workout.workoutId = period.workoutId WHERE shoppingCart.shoppingCartId = " + id +
+                ";";
+
+        List<ShoppingCart> shoppingCartItemFound = jdbcTemplate.query(sqlQuery, new ShoppingCartFullRowMapper());
+
+        return shoppingCartItemFound.get(0);
+    }
+
+    @Override
     public int generateShoppingCartId() {
 
         String sqlQuery = "SELECT * FROM shoppingCart WHERE shoppingCartId = " +
@@ -131,7 +156,16 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 
         List<ShoppingCart> shoppingCartList = jdbcTemplate.query(sqlQuery, new ShoppingCartRowMapper());
 
-        int generatedShoppingCartId = Math.toIntExact(shoppingCartList.get(0).getShoppingCartId() + 1);
+        int generatedShoppingCartId;
+
+        try {
+
+            generatedShoppingCartId = Math.toIntExact(shoppingCartList.get(0).getShoppingCartId() + 1);
+
+        } catch (Exception e) {
+
+            generatedShoppingCartId = 1;
+        }
 
         return generatedShoppingCartId;
     }
