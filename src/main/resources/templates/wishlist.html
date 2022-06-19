@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+
+    <title>Workouts wishlist</title>
+
+    <div th:insert="/fragments/header :: header"></div>
+
+</head>
+
+<body>
+
+    <div th:insert="/fragments/navigationBar :: navBar"></div>
+
+    <div class="center paddingSmall w-50">
+
+        <div class="table-responsive scrollable">
+
+            <table class="table table-bordered w-100">
+
+                <thead class="thead-light">
+
+                <tr>
+
+                    <th scope="col"> Workout Name </th>
+                    <th scope="col"> Actions </th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="tempWishListItems:${wishListItems}">
+
+                    <td>
+
+                        <a th:href="@{'/workoutDetails?id=' + ${tempWishListItems.workoutId}}"
+                           th:text="${tempWishListItems.workoutName}"></a>
+
+                    </td>
+
+                    <td>
+
+                        <div class="inlineFlex alignCenter w-100">
+
+                            <a th:href="@{'/removeWishListItem?id=' + ${tempWishListItems.wishListId}}">
+                                    Remove
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

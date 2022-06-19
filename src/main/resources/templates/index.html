@@ -138,8 +138,9 @@
                                              th:data-target="@{'#btnAddWorkoutToShoppingCart' + ${tempWorkouts.workoutId}}"></div>
                                     </a>
 
-                                    <a th:if="${showAddWorkoutToWishListButton}"
-                                       class="heart" data-toggle="tooltip" title="Add workout to wishlist"></a>
+                                    <a th:if="${showAddWorkoutToWishListButton}" class="heart"
+                                       th:href="@{'/addWorkoutToWishlist?id=' + ${tempWorkouts.workoutId}}"
+                                       data-toggle="tooltip" title="Add workout to wishlist"></a>
 
                                     <a th:href="@{'/workoutDetails?id=' + ${tempWorkouts.workoutId}}">
                                         <div th:insert="/fragments/svg/images :: info" data-toggle="tooltip"

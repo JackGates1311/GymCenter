@@ -37,9 +37,20 @@ public class ReservationController {
 
             ShoppingCart shoppingCartItem = shoppingCartService.findPeriodByShoppingCartId(id);
 
-            boolean checkReservationAvailability = reservationService.checkReservationAvailability(id);
+            boolean checkReservationAvailability;
+
+            if(shoppingCartItem.getCapacityFull().equals(true)) {
+
+                checkReservationAvailability = false;
+
+            } else {
+
+                checkReservationAvailability = reservationService.checkReservationAvailability(id);
+            }
+
             boolean checkForPeriodAvailability = periodService.checkForPeriodAvailability(
                     shoppingCartItem.getPeriodId());
+
             boolean checkReservationTimeOverlapping = reservationService.checkReservationTimeOverlapping(
                     shoppingCartItem);
 
@@ -56,10 +67,11 @@ public class ReservationController {
 
             } else {
 
-
                 fillShoppingCart(model, shoppingCartItem);
 
                 if(!checkReservationAvailability) {
+
+                    periodService.setCapacityFullByPeriodId(shoppingCartItem.getPeriodId());
 
                     model.addAttribute("checkReservationAvailabilityFailed", true);
 
@@ -69,6 +81,8 @@ public class ReservationController {
                 if(!checkForPeriodAvailability) {
 
                     model.addAttribute("checkForPeriodAvailabilityFailed", true);
+
+                    shoppingCartService.deleteById(id);
 
                     return "shoppingCart";
                 }

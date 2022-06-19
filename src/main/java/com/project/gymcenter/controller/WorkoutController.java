@@ -99,12 +99,19 @@ public class WorkoutController {
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
+            workoutsFound.removeIf(workout ->
+                            periodService.findAvailablePeriodsByWorkoutId(workout.getWorkoutId(), null).isEmpty());
+
+
             navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
 
             return "index";
 
         } else if (Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Customer))) {
+
+            workoutsFound.removeIf(workout ->
+                    periodService.findAvailablePeriodsByWorkoutId(workout.getWorkoutId(), null).isEmpty());
 
             navBarController.setNavBarCustomer("MagicBoost Gym Center", "/", true,
                     model);
@@ -186,6 +193,9 @@ public class WorkoutController {
 
         workoutList = workoutService.findAll();
 
+        workoutList.removeIf(workout ->
+                periodService.findAvailablePeriodsByWorkoutId(workout.getWorkoutId(), null).isEmpty());
+
         workoutTypes = workoutTypeService.findAll();
 
         System.out.println(workoutList);
@@ -199,6 +209,8 @@ public class WorkoutController {
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
             navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
+
+            //model.addAttribute("workoutListPeriod", periodService.findAllAvailablePeriods(null));
 
             return "index";
 

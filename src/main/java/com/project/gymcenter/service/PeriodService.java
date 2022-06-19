@@ -18,4 +18,7 @@ public interface PeriodService {
     public Period findByPeriodId(Long periodId);
 
     public boolean checkForPeriodAvailability(Long periodId);
+
+    public void setCapacityFullByPeriodId(Long periodId);
+
 }

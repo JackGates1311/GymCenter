@@ -61,7 +61,8 @@ CREATE TABLE period (
 	auditoriumId NVARCHAR(255) NOT NULL,
     workoutId LONG NOT NULL,
     workoutDateTimeStart DATETIME NOT NULL,
-    workoutDateTimeEnd DATETIME NOT NULL
+    workoutDateTimeEnd DATETIME NOT NULL,
+    isCapacityFull BOOLEAN
 
 );
 
@@ -113,6 +114,14 @@ CREATE TABLE shoppingCart (
 
 	shoppingCartId LONG NOT NULL,
     periodId LONG NOT NULL,
+    userId LONG NOT NULL
+
+);
+
+CREATE TABLE wishList (
+
+    wishListId LONG NOT NULL,
+    workoutId LONG NOT NULL,
     userId LONG NOT NULL
 
 );

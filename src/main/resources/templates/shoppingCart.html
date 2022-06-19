@@ -17,7 +17,7 @@
     <p class="centerError marginTopDefault red" th:if="${checkReservationAvailabilityFailed}">
         Reservation is not possible because of full auditorium for selected workout period </p>
 
-    <p class="centerError marginTopDefault red" th:if="${checkForPeriodAvailability}">
+    <p class="centerError marginTopDefault red" th:if="${checkForPeriodAvailabilityFailed}">
         Reservation is not possible for the selected workout period because it has been already started</p>
 
     <p class="centerError marginTopDefault red" th:if="${checkReservationTimeOverlappingFailed}">

@@ -39,8 +39,7 @@ public class ShoppingCartController {
 
                 messageController.newMessageTemplate(model, "MagicBoost Gym - Message",
                         "MagicBoost Gym message", "Workout has been already added to your " +
-                                "shopping cart",
-                        true);
+                                "shopping cart", true);
 
             } else {
 

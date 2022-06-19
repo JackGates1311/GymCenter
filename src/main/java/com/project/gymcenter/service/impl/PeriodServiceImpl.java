@@ -49,4 +49,10 @@ public class PeriodServiceImpl implements PeriodService {
 
         return periodDAO.checkForPeriodAvailability(periodId);
     }
+
+    @Override
+    public void setCapacityFullByPeriodId(Long periodId) {
+
+        periodDAO.setCapacityFullByPeriodId(periodId);
+    }
 }
