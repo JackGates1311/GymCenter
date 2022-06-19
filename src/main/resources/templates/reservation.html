@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
+
 <head>
 
-    <title>Workout periods in shopping cart</title>
+    <title>Reserved workouts</title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -10,18 +11,6 @@
 <body>
 
     <div th:insert="/fragments/navigationBar :: navBar"></div>
-
-    <p class="centerError marginTopDefault green" th:if="${workoutReservationSuccess}">
-        You have successfully reserved selected workout period </p>
-
-    <p class="centerError marginTopDefault red" th:if="${checkReservationAvailabilityFailed}">
-        Reservation is not possible because of full auditorium for selected workout period </p>
-
-    <p class="centerError marginTopDefault red" th:if="${checkForPeriodAvailabilityFailed}">
-        Reservation is not possible for the selected workout period because it has been already started</p>
-
-    <p class="centerError marginTopDefault red" th:if="${checkReservationTimeOverlappingFailed}">
-        You have already reserved another workout period which takes place at the same time</p>
 
     <div class="center paddingSmall w-90">
 
@@ -37,6 +26,7 @@
                     <th scope="col"> Workout Coaches</th>
                     <th scope="col"> Workout Org. Type</th>
                     <th scope="col"> Workout Period Start</th>
+                    <th scope="col"> Workout Time Reservation</th>
                     <th scope="col"> Workout Price</th>
                     <th scope="col"> Actions </th>
 

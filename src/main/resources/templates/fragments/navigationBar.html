@@ -46,9 +46,10 @@
                             <span class="material-icons" data-toggle="tooltip" title="Search">search</span>
                         </a>
 
-                        <!--/*@thymesVar id="showWorkoutsIconNavBar" type=""*/-->
+                        <!--/*@thymesVar id="showWorkoutReservationsIconNavBar" type=""*/-->
 
-                        <a th:if="${showWorkoutsIconNavBar}" href="#" class="nav-item nav-link d-none d-lg-block" data-toggle="modal" data-target="#btnEvents">
+                        <a th:if="${showWorkoutReservationsIconNavBar}" href="/reservations"
+                           class="nav-item nav-link d-none d-lg-block">
                             <span class="material-icons" data-toggle="tooltip" title="Events">event</span>
                         </a>
 
@@ -168,8 +169,8 @@
 
                         </a>
 
-                        <a th:if="${showWorkoutsIconNavBar}" href="#" class="nav-item nav-link d-lg-none"
-                           data-toggle="modal" data-target="#btnEvents">
+                        <a th:if="${showWorkoutReservationsIconNavBar}" href="/reservations"
+                           class="nav-item nav-link d-lg-none">
 
                             <div class="inlineFlexNav">
 

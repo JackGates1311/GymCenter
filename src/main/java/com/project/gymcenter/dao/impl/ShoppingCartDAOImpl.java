@@ -52,7 +52,6 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
             Long workoutId = rs.getLong(index++);
             LocalDateTime workoutDateTimeStart = rs.getObject(index++, LocalDateTime.class);
             LocalDateTime workoutDateTimeEnd = rs.getObject(index++, LocalDateTime.class);
-            Boolean isCapacityFull = rs.getBoolean(index++);
 
             String workoutName = rs.getString(index++);
             String workoutCoaches = rs.getString(index++);
@@ -60,7 +59,7 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
             WorkoutOrganizatonType workoutOrganizatonType = WorkoutOrganizatonType.valueOf(rs.getString(index++));
 
             ShoppingCart shoppingCart = new ShoppingCart(shoppingCartId, periodId, userId, auditoriumId, workoutId,
-                    workoutDateTimeStart, workoutDateTimeEnd, isCapacityFull, workoutName, workoutCoaches, workoutPrice,
+                    workoutDateTimeStart, workoutDateTimeEnd, workoutName, workoutCoaches, workoutPrice,
                     workoutOrganizatonType);
 
             return shoppingCart;
@@ -107,7 +106,7 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 
         String sqlQuery = "SELECT shoppingCart.shoppingCartId, shoppingCart.periodId, shoppingCart.userId, \n" +
                 "period.auditoriumId, period.workoutId, period.workoutDateTimeStart, period.workoutDateTimeEnd,\n" +
-                "period.isCapacityFull, workout.workoutName, workout.workoutCoaches, workout.workoutPrice, " +
+                "workout.workoutName, workout.workoutCoaches, workout.workoutPrice, " +
                 "workout.workoutOrganizationType " + "FROM shoppingCart \n" + "LEFT OUTER JOIN period ON " +
                 "shoppingCart.periodId = period.periodId \n" + "LEFT OUTER JOIN workout ON " +
                 "workout.workoutId = period.workoutId WHERE shoppingCart.userId = " + id +
@@ -141,7 +140,7 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 
         String sqlQuery = "SELECT shoppingCart.shoppingCartId, shoppingCart.periodId, shoppingCart.userId, \n" +
                 "period.auditoriumId, period.workoutId, period.workoutDateTimeStart, period.workoutDateTimeEnd,\n" +
-                "period.isCapacityFull, workout.workoutName, workout.workoutCoaches, workout.workoutPrice, workout.workoutOrganizationType " +
+                "workout.workoutName, workout.workoutCoaches, workout.workoutPrice, workout.workoutOrganizationType " +
                 "FROM shoppingCart \n" + "LEFT OUTER JOIN period ON shoppingCart.periodId = period.periodId \n" +
                 "LEFT OUTER JOIN workout ON workout.workoutId = period.workoutId WHERE shoppingCart.shoppingCartId = " + id +
                 ";";

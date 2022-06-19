@@ -11,7 +11,6 @@ public class Period {
     private Long workoutId;
     private LocalDateTime workoutDateTimeStart;
     private LocalDateTime workoutDateTimeEnd;
-    private Boolean isCapacityFull;
 
     public Period() {
 
@@ -20,18 +19,16 @@ public class Period {
         this.workoutId = null;
         this.workoutDateTimeStart = null;
         this.workoutDateTimeEnd = null;
-        this.isCapacityFull = null;
     }
 
     public Period(Long periodId, String auditoriumId, Long workoutId, LocalDateTime workoutDateTimeStart,
-                  LocalDateTime workoutDateTimeEnd, Boolean isCapacityFull) {
+                  LocalDateTime workoutDateTimeEnd) {
 
         this.periodId = periodId;
         this.auditoriumId = auditoriumId;
         this.workoutId = workoutId;
         this.workoutDateTimeStart = workoutDateTimeStart;
         this.workoutDateTimeEnd = workoutDateTimeEnd;
-        this.isCapacityFull = isCapacityFull;
 
     }
 
@@ -75,14 +72,6 @@ public class Period {
         this.workoutDateTimeEnd = workoutDateTimeEnd;
     }
 
-    public Boolean getCapacityFull() {
-        return isCapacityFull;
-    }
-
-    public void setCapacityFull(Boolean capacityFull) {
-        isCapacityFull = capacityFull;
-    }
-
     @Override
     public String toString() {
         return "Period{" +
@@ -91,7 +80,6 @@ public class Period {
                 ", workoutId=" + workoutId +
                 ", workoutDateTimeStart=" + workoutDateTimeStart +
                 ", workoutDateTimeEnd=" + workoutDateTimeEnd +
-                ", isCapacityFull=" + isCapacityFull +
                 '}';
     }
 

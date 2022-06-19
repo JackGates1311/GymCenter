@@ -75,23 +75,23 @@ INSERT INTO auditorium(auditoriumId, capacity, isDeleted) VALUES
     ('105', 4, false),
     ('106', 3, false);
     
-INSERT INTO period(periodId, auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd, isCapacityFull) VALUES
-    (1, '100', '1', '2022-01-13 19:00:00', '2022-01-13 21:00:00', 0),
-    (2, '101', '2', '2022-01-13 14:00:00', '2022-01-13 16:30:00', 0),
-    (3, '102', '3', '2022-01-13 23:00:00', '2022-01-14 01:00:00', 0),
-    (4, '102', '4', '2022-01-15 17:30:00', '2022-01-15 19:30:00', 0),
-    (5, '103', '5', '2022-01-18 11:00:00', '2022-01-18 15:00:00', 0),
-    (6, '105', '6', '2022-01-19 07:30:00', '2022-01-19 11:30:00', 0),
-	(7, '103', '7', '2022-01-23 18:30:00', '2022-01-23 21:00:00', 0),
-    (8, '105', '8', '2022-01-27 06:30:00', '2022-01-27 08:30:00', 0);
+INSERT INTO period(periodId, auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd) VALUES
+    (1, '100', '1', '2022-01-13 19:00:00', '2022-01-13 21:00:00'),
+    (2, '101', '2', '2022-01-13 14:00:00', '2022-01-13 16:30:00'),
+    (3, '102', '3', '2022-01-13 23:00:00', '2022-01-14 01:00:00'),
+    (4, '102', '4', '2022-01-15 17:30:00', '2022-01-15 19:30:00'),
+    (5, '103', '5', '2022-01-18 11:00:00', '2022-01-18 15:00:00'),
+    (6, '105', '6', '2022-01-19 07:30:00', '2022-01-19 11:30:00'),
+	(7, '103', '7', '2022-01-23 18:30:00', '2022-01-23 21:00:00'),
+    (8, '105', '8', '2022-01-27 06:30:00', '2022-01-27 08:30:00');
     
-INSERT INTO periodReserved(periodId, userId) VALUES
-	(1, 4),
-    (2, 4),
-    (2, 4),
-    (2, 5),
-    (3, 5),
-    (4, 4);
+INSERT INTO periodReserved(periodReservationId, periodId, userId, periodDateTimeReservation) VALUES
+	(1, 1, 4, '2022-01-13 21:00:00'),
+    (2, 2, 4, '2022-02-14 22:00:00'),
+    (3, 2, 4, '2022-03-14 23:40:00'),
+    (4, 2, 5, '2022-04-18 11:00:00'),
+    (5, 3, 5, '2022-05-17 14:00:00'),
+    (6, 4, 4, '2022-06-18 16:00:00');
     
 INSERT INTO workoutComment(workoutId, commentAuthorId, commentContent, commentAverageRate, commentDateTimePosted, commentAuthorName, commentStatus) VALUES
     (2, 4, 'Sve kao sto sam i ocekivao', 9, '2022-01-15 19:38:23', 'bojana123', 'Approved'),

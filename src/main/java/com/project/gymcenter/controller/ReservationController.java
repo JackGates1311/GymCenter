@@ -37,16 +37,7 @@ public class ReservationController {
 
             ShoppingCart shoppingCartItem = shoppingCartService.findPeriodByShoppingCartId(id);
 
-            boolean checkReservationAvailability;
-
-            if(shoppingCartItem.getCapacityFull().equals(true)) {
-
-                checkReservationAvailability = false;
-
-            } else {
-
-                checkReservationAvailability = reservationService.checkReservationAvailability(id);
-            }
+            boolean checkReservationAvailability = reservationService.checkReservationAvailability(id);
 
             boolean checkForPeriodAvailability = periodService.checkForPeriodAvailability(
                     shoppingCartItem.getPeriodId());
@@ -70,8 +61,6 @@ public class ReservationController {
                 fillShoppingCart(model, shoppingCartItem);
 
                 if(!checkReservationAvailability) {
-
-                    periodService.setCapacityFullByPeriodId(shoppingCartItem.getPeriodId());
 
                     model.addAttribute("checkReservationAvailabilityFailed", true);
 
@@ -97,6 +86,32 @@ public class ReservationController {
             }
 
             return "shoppingCart";
+
+        } else {
+
+            model.addAttribute("showCancelButton", true);
+            model.addAttribute("permissionDenied", true);
+
+            return "login";
+        }
+
+    }
+
+    @RequestMapping(value = "/reservations")
+    public String getReservations(HttpServletRequest request, Model model) {
+
+        if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                String.valueOf(UserRole.Customer))) {
+
+            // if customer
+
+            return "";
+        } else if (Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
+                String.valueOf(UserRole.Administrator))) {
+
+            //if admin
+
+            return "";
 
         } else {
 

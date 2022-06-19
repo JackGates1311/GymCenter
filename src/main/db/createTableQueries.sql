@@ -61,15 +61,16 @@ CREATE TABLE period (
 	auditoriumId NVARCHAR(255) NOT NULL,
     workoutId LONG NOT NULL,
     workoutDateTimeStart DATETIME NOT NULL,
-    workoutDateTimeEnd DATETIME NOT NULL,
-    isCapacityFull BOOLEAN
+    workoutDateTimeEnd DATETIME NOT NULL
 
 );
 
 CREATE TABLE periodReserved (
 
+    periodReservationId LONG NOT NULL,
 	periodId LONG NOT NULL,
-    userId LONG NOT NULL
+    userId LONG NOT NULL,
+    periodDateTimeReservation DATETIME NOT NULL
 
 );
 

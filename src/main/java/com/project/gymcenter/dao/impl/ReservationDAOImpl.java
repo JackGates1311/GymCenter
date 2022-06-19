@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -41,10 +42,13 @@ public class ReservationDAOImpl implements ReservationDAO {
 
             int index = 1;
 
+            Long periodReservationId = rs.getLong(index++);
             Long periodId = rs.getLong(index++);
             Long userId = rs.getLong(index++);
+            LocalDateTime periodDateTimeReservation = rs.getObject(index++, LocalDateTime.class);
 
-            PeriodReserved periodReserved = new PeriodReserved(periodId, userId);
+            PeriodReserved periodReserved = new PeriodReserved(periodReservationId, periodId, userId,
+                    periodDateTimeReservation);
 
             return periodReserved;
         }
@@ -71,9 +75,11 @@ public class ReservationDAOImpl implements ReservationDAO {
     @Override
     public void reserveWorkout(ShoppingCart shoppingCartItem) {
 
-        String sqlQuery = "INSERT INTO periodreserved (periodId, userId) VALUES (?, ?);";
+        String sqlQuery = "INSERT INTO periodreserved (periodReservationId, periodId, userId, " +
+                "periodDateTimeReservation) VALUES (?, ?, ?, ?);";
 
-        jdbcTemplate.update(sqlQuery, shoppingCartItem.getPeriodId(), shoppingCartItem.getUserId());
+        jdbcTemplate.update(sqlQuery, generatePeriodReservationId(), shoppingCartItem.getPeriodId(),
+                shoppingCartItem.getUserId(), LocalDateTime.now());
     }
 
     @Override
@@ -99,4 +105,26 @@ public class ReservationDAOImpl implements ReservationDAO {
             return false;
         }
     }
+
+    private int generatePeriodReservationId() {
+
+        String sqlQuery = "SELECT * FROM periodreserved WHERE periodReservationId = " +
+                "(SELECT MAX(periodreserved.periodReservationId * 1) FROM periodreserved)";
+
+        List<PeriodReserved> periodReservedList = jdbcTemplate.query(sqlQuery, new ReservationRowMapper());
+
+        int generatedPeriodReservationId;
+
+        try {
+
+            generatedPeriodReservationId = Math.toIntExact(periodReservedList.get(0).getPeriodReservationId() + 1);
+
+        } catch (Exception e) {
+
+            generatedPeriodReservationId = 1;
+        }
+
+        return generatedPeriodReservationId;
+    }
+
 }

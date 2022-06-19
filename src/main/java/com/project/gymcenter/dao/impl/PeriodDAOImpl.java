@@ -32,10 +32,8 @@ public class PeriodDAOImpl implements PeriodDAO {
             Long workoutId = rs.getLong(index++);
             LocalDateTime workoutDateTimeStart = rs.getObject(index++, LocalDateTime.class);
             LocalDateTime workoutDateTimeEnd = rs.getObject(index++, LocalDateTime.class);
-            Boolean isCapacityFull = rs.getBoolean(index++);
 
-            Period period = new Period(periodId, auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd,
-                    isCapacityFull);
+            Period period = new Period(periodId, auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd);
 
             return period;
         }
@@ -45,11 +43,11 @@ public class PeriodDAOImpl implements PeriodDAO {
     @Override
     public void add(Period period) {
 
-        String sqlQuery = "INSERT INTO period (periodId, auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd, isCapacityFull) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String sqlQuery = "INSERT INTO period (periodId, auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd) " +
+                "VALUES (?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sqlQuery, generatePeriodId(), period.getAuditoriumId(), period.getWorkoutId(), period.getWorkoutDateTimeStart(),
-                period.getWorkoutDateTimeEnd(), period.getCapacityFull());
+                period.getWorkoutDateTimeEnd());
 
     }
 
@@ -88,8 +86,8 @@ public class PeriodDAOImpl implements PeriodDAO {
                 "period.workoutDateTimeStart, period.workoutDateTimeEnd, periodreserved.periodId " +
                 "FROM period LEFT OUTER JOIN periodreserved ON " +
                 "period.periodId = periodreserved.periodId WHERE workoutId = " + id + " AND " +
-                "workoutDateTimeStart > NOW()" + " AND period.isCapacityFull = false AND " +
-                "(periodreserved.userId != " + userId + " OR " + "periodreserved.userId IS NULL)";
+                "workoutDateTimeStart > NOW()" + " AND " + "(periodreserved.userId != " + userId + " OR " +
+                "periodreserved.userId IS NULL)";
 
         List<Period> availablePeriods = jdbcTemplate.query(sqlQuery, new PeriodDAOImpl.PeriodRowMapper());
 
@@ -106,7 +104,7 @@ public class PeriodDAOImpl implements PeriodDAO {
         String sqlQuery = "SELECT DISTINCT period.periodId, period.auditoriumId, period.workoutId, " +
                 "period.workoutDateTimeStart, period.workoutDateTimeEnd, periodreserved.periodId FROM period " +
                 "LEFT OUTER JOIN periodreserved ON " + "period.periodId = periodreserved.periodId WHERE " +
-                "workoutDateTimeStart > NOW()" + " AND period.isCapacityFull = false AND (periodreserved.userId != " + userId + " OR " +
+                "workoutDateTimeStart > NOW()" + " AND (periodreserved.userId != " + userId + " OR " +
                 "periodreserved.userId IS NULL)";
 
         List<Period> availablePeriods = jdbcTemplate.query(sqlQuery, new PeriodDAOImpl.PeriodRowMapper());
@@ -143,15 +141,9 @@ public class PeriodDAOImpl implements PeriodDAO {
     }
 
     @Override
-    public void setCapacityFullByPeriodId(Long periodId) {
-
-        String sqlQuery = "UPDATE period SET isCapacityFull = 1 WHERE periodId = ?;";
-
-        jdbcTemplate.update(sqlQuery, periodId);
-    }
-
-    @Override
     public int generatePeriodId() {
+
+        //TODO add try/catch if table is empty!
 
         String sqlQuery = "SELECT * FROM period WHERE periodId = " +
                 "(SELECT MAX(period.periodId * 1) FROM period)";

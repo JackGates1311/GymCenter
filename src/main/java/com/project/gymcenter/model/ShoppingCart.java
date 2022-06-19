@@ -12,7 +12,6 @@ public class ShoppingCart {
     private Long workoutId;
     private LocalDateTime workoutDateTimeStart;
     private LocalDateTime workoutDateTimeEnd;
-    private Boolean isCapacityFull;
 
     private String workoutName;
     private String workoutCoaches;
@@ -29,7 +28,6 @@ public class ShoppingCart {
         this.workoutId = null;
         this.workoutDateTimeStart = null;
         this.workoutDateTimeEnd = null;
-        this.isCapacityFull = null;
         this.workoutName = null;
         this.workoutCoaches = null;
         this.workoutPrice = null;
@@ -50,7 +48,7 @@ public class ShoppingCart {
     }
 
     public ShoppingCart(Long shoppingCartId, Long periodId, Long userId, Long auditoriumId, Long workoutId,
-                        LocalDateTime workoutDateTimeStart, LocalDateTime workoutDateTimeEnd, Boolean isCapacityFull,
+                        LocalDateTime workoutDateTimeStart, LocalDateTime workoutDateTimeEnd,
                         String workoutName, String workoutCoaches, Double workoutPrice,
                         WorkoutOrganizatonType workoutOrganizationType) {
 
@@ -61,7 +59,6 @@ public class ShoppingCart {
         this.workoutId = workoutId;
         this.workoutDateTimeStart = workoutDateTimeStart;
         this.workoutDateTimeEnd = workoutDateTimeEnd;
-        this.isCapacityFull = isCapacityFull;
         this.workoutName = workoutName;
         this.workoutCoaches = workoutCoaches;
         this.workoutPrice = workoutPrice;
@@ -122,14 +119,6 @@ public class ShoppingCart {
 
     public void setWorkoutDateTimeEnd(LocalDateTime workoutDateTimeEnd) {
         this.workoutDateTimeEnd = workoutDateTimeEnd;
-    }
-
-    public Boolean getCapacityFull() {
-        return isCapacityFull;
-    }
-
-    public void setCapacityFull(Boolean capacityFull) {
-        isCapacityFull = capacityFull;
     }
 
     public String getWorkoutName() {
