@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<body>
+
+<div th:fragment="reservationSearchModal" class="modal fade" id="btnSearch" tabindex="-1"
+     role="dialog">
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header text-center">
+
+                <h4 class="modal-title w-100">Search for reservations</h4>
+
+            </div>
+
+            <div class="modal-body">
+
+                <form th:action="@{/reservationsSearchResult}" th:object="${reservationSearchForm}" method="post">
+
+                    <div th:if="${isAdministrator}" class="form-row">
+
+                        <label for="customerFilter">Customer: </label>
+
+                        <select class="form-control text-center" name="customerFilter" id="customerFilter">
+
+                            <option value="" selected>All customers</option>
+                            <option th:each="tempRegisteredUsers:${registeredUsers}"
+                                    th:text="${tempRegisteredUsers.userName}"
+                                    th:if="${#strings.toString(tempRegisteredUsers.userRole) == 'Customer'}"
+                                    th:value="${tempRegisteredUsers.userId}"></option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <label for="reservationSortBy">Sort by: </label>
+
+                        <select class="form-control text-center" name="reservationSortBy" id="reservationSortBy">
+
+                            <option th:if="${isAdministrator}" value="ORDER BY registereduser.userName ASC">
+                                Customer Ascending</option>
+                            <option th:if="${isAdministrator}" value="ORDER BY registereduser.userName DESC">
+                                Customer Descending</option>
+                            <option value="ORDER BY workout.workoutName ASC">Workout Name Ascending</option>
+                            <option value="ORDER BY workout.workoutName DESC">Workout Name Descending</option>
+                            <option value="ORDER BY workout.workoutCoaches ASC">Workout Coaches Ascending</option>
+                            <option value="ORDER BY workout.workoutCoaches DESC">Workout Coaches Descending</option>
+                            <option value="ORDER BY workout.workoutOrganizationType ASC">
+                                Workout Organization Type Ascending</option>
+                            <option value="ORDER BY workout.workoutOrganizationType DESC">
+                                Workout Organization Type Descending</option>
+                            <option value="ORDER BY period.workoutDateTimeStart ASC">
+                                Workout Period Start Ascending</option>
+                            <option value="ORDER BY period.workoutDateTimeStart DESC">
+                                Workout Period Start Descending</option>
+                            <option value="ORDER BY periodreserved.periodDateTimeReservation ASC">
+                                Workout Time Reservation Ascending</option>
+                            <option value="ORDER BY periodreserved.periodDateTimeReservation DESC" selected>
+                                Workout Time Reservation Descending</option>
+                            <option value="ORDER BY workout.workoutPrice ASC">Workout Price Ascending</option>
+                            <option value="ORDER BY workout.workoutPrice DESC">Workout Price Descending</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="inlineFlex w-100 marginTopDefault alignRight">
+
+                            <input type="button" id="btnCancel" class="btn btn-light w-25" data-dismiss="modal"
+                                   value="Cancel"/>
+
+                            <input type="submit" id="btnWorkoutSearch" class="btn btn-light w-25" value="Search"/>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -6,6 +6,7 @@ import com.project.gymcenter.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -46,6 +47,18 @@ public class WorkoutServiceImpl implements WorkoutService {
         return workoutDAO.find(workoutName,
                 workoutCoaches, workoutPriceMin, workoutPriceMax, workoutTypeName, workoutOrganizationType,
                 workoutLevel, workoutSortBy);
+    }
+
+    @Override
+    public List<Workout> count() {
+
+        return workoutDAO.count();
+    }
+
+    @Override
+    public List<Workout> countBetweenDates(String summaryDateStart, String summaryDateEnd) {
+
+        return workoutDAO.countBetweenDates(summaryDateStart, summaryDateEnd);
     }
 
 }

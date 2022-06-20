@@ -1,9 +1,7 @@
 package com.project.gymcenter.dao.form;
 
-import com.project.gymcenter.model.UserRole;
 import com.project.gymcenter.model.WorkoutLevel;
-import com.project.gymcenter.model.WorkoutOrganizatonType;
-import org.springframework.web.multipart.MultipartFile;
+import com.project.gymcenter.model.WorkoutOrganizationType;
 
 import java.util.List;
 
@@ -13,7 +11,7 @@ public class AddEditWorkoutForm {
     private List<String> newWorkoutIncludedTypes;
     private String newWorkoutCoaches;
     private Double newWorkoutPrice;
-    private WorkoutOrganizatonType newWorkoutOrganizationType;
+    private WorkoutOrganizationType newWorkoutOrganizationType;
     private int newWorkoutLength;
     private WorkoutLevel newWorkoutLevel;
     private String newWorkoutDescription;
@@ -25,7 +23,7 @@ public class AddEditWorkoutForm {
     }
 
     public AddEditWorkoutForm(String newWorkoutName, List<String> newWorkoutIncludedTypes, String newWorkoutCoaches,
-                              Double newWorkoutPrice, WorkoutOrganizatonType newWorkoutOrganizationType,
+                              Double newWorkoutPrice, WorkoutOrganizationType newWorkoutOrganizationType,
                               int newWorkoutLength, WorkoutLevel newWorkoutLevel, String newWorkoutImageUrl,
                               String newWorkoutDescription) {
 
@@ -73,11 +71,11 @@ public class AddEditWorkoutForm {
         this.newWorkoutPrice = newWorkoutPrice;
     }
 
-    public WorkoutOrganizatonType getNewWorkoutOrganizationType() {
+    public WorkoutOrganizationType getNewWorkoutOrganizationType() {
         return newWorkoutOrganizationType;
     }
 
-    public void setNewWorkoutOrganizationType(WorkoutOrganizatonType newWorkoutOrganizationType) {
+    public void setNewWorkoutOrganizationType(WorkoutOrganizationType newWorkoutOrganizationType) {
         this.newWorkoutOrganizationType = newWorkoutOrganizationType;
     }
 

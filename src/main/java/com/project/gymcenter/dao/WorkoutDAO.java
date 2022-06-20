@@ -2,6 +2,7 @@ package com.project.gymcenter.dao;
 
 import com.project.gymcenter.model.Workout;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface WorkoutDAO {
@@ -21,4 +22,8 @@ public interface WorkoutDAO {
                               String workoutLevel, String workoutSortBy);
 
     public int generateWorkoutId();
+
+    public List<Workout> count();
+
+    public List<Workout> countBetweenDates(String summaryDateStart, String summaryDateEnd);
 }

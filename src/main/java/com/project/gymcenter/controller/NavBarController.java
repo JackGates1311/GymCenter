@@ -23,6 +23,7 @@ public class NavBarController {
 
         model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
 
+        model.addAttribute("showWorkoutSummaryIconNavBar", true);
         model.addAttribute("showAllWorkoutsIconNavBar", true);
         model.addAttribute("showAllWorkoutsIconNavBarLink", "/workouts");
 
@@ -30,7 +31,11 @@ public class NavBarController {
 
         model.addAttribute("addPeriodIconNavBar", true);
 
-        periodController.configureAddNewPeriodModal(model);
+        try {
+
+            periodController.configureAddNewPeriodModal(model);
+
+        } catch (Exception ignored) {}
 
         model.addAttribute("showAuditoriumsIconNavBar", true);
         model.addAttribute("showAddNewWorkoutIconNavBar", true);
@@ -53,6 +58,7 @@ public class NavBarController {
 
         model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
 
+        model.addAttribute("showWorkoutSummaryIconNavBar", false);
         model.addAttribute("showAllWorkoutsIconNavBar", true);
         model.addAttribute("showAllWorkoutsIconNavBarLink", "/");
 
@@ -83,6 +89,7 @@ public class NavBarController {
 
         model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
 
+        model.addAttribute("showWorkoutSummaryIconNavBar", false);
         model.addAttribute("showAllWorkoutsIconNavBar", false);
         model.addAttribute("showAllWorkoutsIconNavBarLink", "/");
 

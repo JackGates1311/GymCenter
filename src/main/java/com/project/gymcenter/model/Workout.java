@@ -7,13 +7,16 @@ public class Workout {
     private String workoutCoaches;
     private String workoutDescription;
     private Double workoutPrice;
-    private WorkoutOrganizatonType workoutOrganizationType;
+    private WorkoutOrganizationType workoutOrganizationType;
     private WorkoutLevel workoutLevel;
     private int workoutLength;
     private Double workoutAverageRate;
     private Boolean isDeleted;
     private String workoutName;
     private String workoutImage;
+
+    private Long reservationCount;
+    private Double salary;
 
     public Workout() {
 
@@ -29,10 +32,13 @@ public class Workout {
         this.workoutName = null;
         this.workoutImage = null;
 
+        this.reservationCount = null;
+        this.salary = null;
+
     }
 
     public Workout(Long workoutId, String workoutTypeName, String workoutCoaches, String workoutDescription,
-                   Double workoutPrice, WorkoutOrganizatonType workoutOrganizationType, WorkoutLevel workoutLevel,
+                   Double workoutPrice, WorkoutOrganizationType workoutOrganizationType, WorkoutLevel workoutLevel,
                    int workoutLength, Double workoutAverageRate, Boolean isDeleted, String workoutName,
                    String workoutImage) {
 
@@ -53,7 +59,7 @@ public class Workout {
     }
 
     public Workout(String workoutTypeName, String newWorkoutCoaches, String newWorkoutDescription,
-                   Double newWorkoutPrice, WorkoutOrganizatonType newWorkoutOrganizationType,
+                   Double newWorkoutPrice, WorkoutOrganizationType newWorkoutOrganizationType,
                    WorkoutLevel newWorkoutLevel, int newWorkoutLength, String newWorkoutName,
                    String newWorkoutImage) {
 
@@ -67,6 +73,21 @@ public class Workout {
         this.workoutName = newWorkoutName;
         this.workoutImage = newWorkoutImage;
 
+    }
+
+    public Workout(Long workoutId, String workoutName, String workoutCoaches, Long reservationCount, Double salary) {
+
+        this.workoutId = workoutId;
+        this.workoutName = workoutName;
+        this.workoutCoaches = workoutCoaches;
+        this.reservationCount = reservationCount;
+        this.salary = salary;
+    }
+
+    public Workout(Long workoutId, Long reservationCount) {
+
+        this.workoutId = workoutId;
+        this.reservationCount = reservationCount;
     }
 
     public Long getWorkoutId() {
@@ -109,11 +130,11 @@ public class Workout {
         this.workoutPrice = workoutPrice;
     }
 
-    public WorkoutOrganizatonType getWorkoutOrganizationType() {
+    public WorkoutOrganizationType getWorkoutOrganizationType() {
         return workoutOrganizationType;
     }
 
-    public void setWorkoutOrganizationType(WorkoutOrganizatonType workoutOrganizationType) {
+    public void setWorkoutOrganizationType(WorkoutOrganizationType workoutOrganizationType) {
         this.workoutOrganizationType = workoutOrganizationType;
     }
 
@@ -165,21 +186,39 @@ public class Workout {
         this.workoutImage = workoutImage;
     }
 
+    public Long getReservationCount() {
+        return reservationCount;
+    }
+
+    public void setReservationCount(Long reservationCount) {
+        this.reservationCount = reservationCount;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
     @Override
     public String toString() {
-        return "Workout{" + "\n" +
-                "workoutId=" + workoutId + "\n" +
-                ", workoutTypeName='" + workoutTypeName + '\'' + "\n" +
-                ", workoutCoaches='" + workoutCoaches + '\'' + "\n" +
-                ", workoutDescription='" + workoutDescription + '\'' + "\n" +
-                ", workoutPrice=" + workoutPrice + "\n" +
-                ", workoutOrganizatonType=" + workoutOrganizationType + "\n" +
-                ", workoutLevel=" + workoutLevel + "\n" +
-                ", workoutLength=" + workoutLength + "\n" +
-                ", workoutAverageRate=" + workoutAverageRate + "\n" +
-                ", isDeleted=" + isDeleted + "\n" +
-                ", workoutName=" + workoutName + "\n" +
-                ", workoutImage=" + workoutImage + "\n" +
+        return "Workout{" +
+                "workoutId=" + workoutId +
+                ", workoutTypeName='" + workoutTypeName + '\'' +
+                ", workoutCoaches='" + workoutCoaches + '\'' +
+                ", workoutDescription='" + workoutDescription + '\'' +
+                ", workoutPrice=" + workoutPrice +
+                ", workoutOrganizationType=" + workoutOrganizationType +
+                ", workoutLevel=" + workoutLevel +
+                ", workoutLength=" + workoutLength +
+                ", workoutAverageRate=" + workoutAverageRate +
+                ", isDeleted=" + isDeleted +
+                ", workoutName='" + workoutName + '\'' +
+                ", workoutImage='" + workoutImage + '\'' +
+                ", reservationCount=" + reservationCount +
+                ", salary=" + salary +
                 '}';
     }
 

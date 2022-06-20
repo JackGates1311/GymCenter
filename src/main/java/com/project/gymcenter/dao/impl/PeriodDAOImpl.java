@@ -87,7 +87,7 @@ public class PeriodDAOImpl implements PeriodDAO {
                 "FROM period LEFT OUTER JOIN periodreserved ON " +
                 "period.periodId = periodreserved.periodId WHERE workoutId = " + id + " AND " +
                 "workoutDateTimeStart > NOW()" + " AND " + "(periodreserved.userId != " + userId + " OR " +
-                "periodreserved.userId IS NULL)";
+                "periodreserved.userId IS NULL) ORDER BY period.workoutDateTimeStart";
 
         List<Period> availablePeriods = jdbcTemplate.query(sqlQuery, new PeriodDAOImpl.PeriodRowMapper());
 
@@ -105,7 +105,7 @@ public class PeriodDAOImpl implements PeriodDAO {
                 "period.workoutDateTimeStart, period.workoutDateTimeEnd, periodreserved.periodId FROM period " +
                 "LEFT OUTER JOIN periodreserved ON " + "period.periodId = periodreserved.periodId WHERE " +
                 "workoutDateTimeStart > NOW()" + " AND (periodreserved.userId != " + userId + " OR " +
-                "periodreserved.userId IS NULL)";
+                "periodreserved.userId IS NULL) ORDER BY period.workoutDateTimeStart";
 
         List<Period> availablePeriods = jdbcTemplate.query(sqlQuery, new PeriodDAOImpl.PeriodRowMapper());
 

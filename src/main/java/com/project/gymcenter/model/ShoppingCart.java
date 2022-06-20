@@ -16,7 +16,7 @@ public class ShoppingCart {
     private String workoutName;
     private String workoutCoaches;
     private Double workoutPrice;
-    private WorkoutOrganizatonType workoutOrganizationType;
+    private WorkoutOrganizationType workoutOrganizationType;
 
     public ShoppingCart() {
 
@@ -50,7 +50,7 @@ public class ShoppingCart {
     public ShoppingCart(Long shoppingCartId, Long periodId, Long userId, Long auditoriumId, Long workoutId,
                         LocalDateTime workoutDateTimeStart, LocalDateTime workoutDateTimeEnd,
                         String workoutName, String workoutCoaches, Double workoutPrice,
-                        WorkoutOrganizatonType workoutOrganizationType) {
+                        WorkoutOrganizationType workoutOrganizationType) {
 
         this.shoppingCartId = shoppingCartId;
         this.periodId = periodId;
@@ -145,11 +145,11 @@ public class ShoppingCart {
         this.workoutPrice = workoutPrice;
     }
 
-    public WorkoutOrganizatonType getWorkoutOrganizationType() {
+    public WorkoutOrganizationType getWorkoutOrganizationType() {
         return workoutOrganizationType;
     }
 
-    public void setWorkoutOrganizationType(WorkoutOrganizatonType workoutOrganizationType) {
+    public void setWorkoutOrganizationType(WorkoutOrganizationType workoutOrganizationType) {
         this.workoutOrganizationType = workoutOrganizationType;
     }
 

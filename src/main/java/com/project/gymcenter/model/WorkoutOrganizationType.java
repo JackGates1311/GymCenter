@@ -1,6 +1,6 @@
 package com.project.gymcenter.model;
 
-public enum WorkoutOrganizatonType {
+public enum WorkoutOrganizationType {
 
     Group,
     Individual

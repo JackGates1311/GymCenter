@@ -1,9 +1,7 @@
 package com.project.gymcenter.dao.impl;
 
 import com.project.gymcenter.dao.ReservationDAO;
-import com.project.gymcenter.model.Auditorium;
-import com.project.gymcenter.model.PeriodReserved;
-import com.project.gymcenter.model.ShoppingCart;
+import com.project.gymcenter.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -54,6 +52,50 @@ public class ReservationDAOImpl implements ReservationDAO {
         }
     }
 
+    private class ReservationRowFullMapper implements RowMapper<PeriodReserved> {
+
+        @Override
+        public PeriodReserved mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+            int index = 1;
+
+            Long periodReservationId = rs.getLong(index++);
+            Long periodId = rs.getLong(index++);
+            Long userId = rs.getLong(index++);
+            LocalDateTime periodDateTimeReservation = rs.getObject(index++, LocalDateTime.class);
+
+            //TODO refactor code here
+
+            Long auditoriumId = rs.getLong(index++);
+
+            Long workoutId = rs.getLong(index++);
+            LocalDateTime workoutDateTimeStart = rs.getObject(index++, LocalDateTime.class);
+            LocalDateTime workoutDateTimeEnd = rs.getObject(index++, LocalDateTime.class);
+            String workoutName = rs.getString(index++);
+            String workoutCoaches = rs.getString(index++);
+            Double workoutPrice = rs.getDouble(index++);
+            WorkoutOrganizationType workoutOrganizationType = WorkoutOrganizationType.valueOf(rs.getString(index++));
+
+            String userName;
+            UserRole userRole;
+
+            try {
+
+                userName = rs.getString(index++);
+                userRole = UserRole.valueOf(rs.getString(index++));
+
+            } catch (Exception e) {
+
+                userName = null;
+                userRole = null;
+            }
+
+            return new PeriodReserved(periodReservationId, periodId, userId,
+                    periodDateTimeReservation, auditoriumId, workoutId, workoutDateTimeStart, workoutDateTimeEnd,
+                    workoutName, workoutCoaches, workoutPrice, workoutOrganizationType, userName, userRole);
+        }
+    }
+
     @Override
     public boolean checkReservationAvailability(Long shoppingCartId) {
 
@@ -85,7 +127,8 @@ public class ReservationDAOImpl implements ReservationDAO {
     @Override
     public boolean checkReservationTimeOverlapping(ShoppingCart shoppingCart) {
 
-        String sqlQuery = "SELECT periodreserved.periodId, periodreserved.userId FROM periodreserved INNER JOIN " +
+        String sqlQuery = "SELECT periodreserved.periodReservationId, periodreserved.periodId, periodreserved.userId, " +
+                "periodreserved.periodDateTimeReservation FROM periodreserved INNER JOIN " +
                 "period ON period.periodId = periodreserved.periodId WHERE periodreserved.userId = " +
                 shoppingCart.getUserId() +
                 " AND (period.workoutDateTimeStart BETWEEN '" + shoppingCart.getWorkoutDateTimeStart() + "' AND '" +
@@ -104,6 +147,60 @@ public class ReservationDAOImpl implements ReservationDAO {
 
             return false;
         }
+    }
+
+    @Override
+    public List<PeriodReserved> findAllByUserId(Long id) {
+
+        String sqlQuery = "SELECT periodreserved.periodReservationId, periodreserved.periodId, periodreserved.userId, " +
+                "periodreserved.periodDateTimeReservation, \n" + "period.auditoriumId, period.workoutId, " +
+                "period.workoutDateTimeStart, period.WorkoutDateTimeEnd, \n" + "workout.workoutName, " +
+                "workout.workoutCoaches, workout.workoutPrice, workout.workoutOrganizationType\n" +
+                "FROM periodreserved INNER JOIN period ON periodreserved.periodid = period.periodId " +
+                "INNER JOIN workout ON workout.workoutId = period.workoutId\n" +
+                "WHERE periodreserved.userId = " + id + " ORDER BY periodreserved.periodDateTimeReservation DESC;";
+
+        return jdbcTemplate.query(sqlQuery, new ReservationRowFullMapper());
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+        String sqlQuery = "DELETE FROM periodreserved WHERE periodReservationId = ?;";
+
+        jdbcTemplate.update(sqlQuery, id);
+    }
+
+    @Override
+    public List<PeriodReserved> findAll() {
+
+        String sqlQuery = "SELECT periodreserved.periodReservationId, periodreserved.periodId, periodreserved.userId, " +
+                "periodreserved.periodDateTimeReservation, \n" + "period.auditoriumId, period.workoutId, " +
+                "period.workoutDateTimeStart, period.WorkoutDateTimeEnd, \n" + "workout.workoutName, " +
+                "workout.workoutCoaches, workout.workoutPrice, workout.workoutOrganizationType, " +
+                "registereduser.userName, registereduser.userRole\n" + "FROM periodreserved " +
+                "INNER JOIN period ON periodreserved.periodid = period.periodId " +
+                "INNER JOIN workout ON workout.workoutId = period.workoutId\n " +
+                "INNER JOIN registereduser ON periodreserved.userId = registereduser.userId" +
+                " ORDER BY periodreserved.periodDateTimeReservation DESC;";
+
+        return jdbcTemplate.query(sqlQuery, new ReservationRowFullMapper());
+    }
+
+    @Override
+    public List<PeriodReserved> find(String customerFilter, String reservationSortBy) {
+
+        String sqlQuery = "SELECT periodreserved.periodReservationId, periodreserved.periodId, periodreserved.userId, " +
+                "periodreserved.periodDateTimeReservation, \n" + "period.auditoriumId, period.workoutId, " +
+                "period.workoutDateTimeStart, period.WorkoutDateTimeEnd, \n" + "workout.workoutName, " +
+                "workout.workoutCoaches, workout.workoutPrice, workout.workoutOrganizationType, registereduser.userName, " +
+                "registereduser.userRole\n" + "FROM periodreserved " +
+                "INNER JOIN period ON periodreserved.periodid = period.periodId " +
+                "INNER JOIN workout ON workout.workoutId = period.workoutId\n " +
+                "INNER JOIN registereduser ON periodreserved.userId = registereduser.userId " +
+                "WHERE registereduser.userId LIKE '%" + customerFilter + "%' " + reservationSortBy;
+
+        return jdbcTemplate.query(sqlQuery, new ReservationRowFullMapper());
     }
 
     private int generatePeriodReservationId() {

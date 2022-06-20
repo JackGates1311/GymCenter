@@ -1,9 +1,8 @@
 package com.project.gymcenter.dao.impl;
 
-import com.mysql.cj.result.Row;
 import com.project.gymcenter.dao.ShoppingCartDAO;
 import com.project.gymcenter.model.ShoppingCart;
-import com.project.gymcenter.model.WorkoutOrganizatonType;
+import com.project.gymcenter.model.WorkoutOrganizationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -56,11 +55,11 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
             String workoutName = rs.getString(index++);
             String workoutCoaches = rs.getString(index++);
             Double workoutPrice = rs.getDouble(index++);
-            WorkoutOrganizatonType workoutOrganizatonType = WorkoutOrganizatonType.valueOf(rs.getString(index++));
+            WorkoutOrganizationType workoutOrganizationType = WorkoutOrganizationType.valueOf(rs.getString(index++));
 
             ShoppingCart shoppingCart = new ShoppingCart(shoppingCartId, periodId, userId, auditoriumId, workoutId,
                     workoutDateTimeStart, workoutDateTimeEnd, workoutName, workoutCoaches, workoutPrice,
-                    workoutOrganizatonType);
+                    workoutOrganizationType);
 
             return shoppingCart;
         }

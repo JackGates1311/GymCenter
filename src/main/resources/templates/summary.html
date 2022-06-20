@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+
+    <title>Workouts summary</title>
+
+    <div th:insert="/fragments/header :: header"></div>
+
+</head>
+
+<body>
+
+    <div th:insert="/fragments/summarySearch :: summarySearchModal"></div>
+
+    <div th:insert="/fragments/navigationBar :: navBar"></div>
+
+    <div class="center paddingSmall w-90">
+
+        <div class="table-responsive scrollable">
+
+            <table class="table table-bordered w-100">
+
+                <thead class="thead-light">
+
+                <tr>
+
+                    <th scope="col"> Workout Name </th>
+                    <th scope="col"> Workout Coaches</th>
+                    <th scope="col"> Reservation Count</th>
+                    <th scope="col"> Workout Salary</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="tempWorkoutSummaryList:${workoutSummaryList}">
+
+                    <td th:text="${tempWorkoutSummaryList.workoutName}"></td>
+
+                    <td th:text="${tempWorkoutSummaryList.workoutCoaches}"></td>
+
+                    <td th:text="${tempWorkoutSummaryList.reservationCount}"></td>
+
+                    <td th:text="${tempWorkoutSummaryList.salary}"></td>
+
+                </tr>
+
+                <tr>
+
+                    <td colspan="2"></td>
+                    <td th:text="${reservationCountTotal}"></td>
+                    <td th:text="${salaryTotal}"></td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

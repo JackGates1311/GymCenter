@@ -26,7 +26,6 @@
 
                         <!-- For desktop version of website -->
 
-
                         <!--/*@thymesVar id="showAllWorkoutsIconNavBar" type=""*/-->
 
                         <!--/*@thymesVar id="showAllWorkoutsIconNavBarLink" type=""*/-->
@@ -44,6 +43,13 @@
                         <a th:if="${showSearchIconNavBar}" href="#" class="nav-item nav-link d-none d-lg-block"
                            data-toggle="modal" data-target="#btnSearch">
                             <span class="material-icons" data-toggle="tooltip" title="Search">search</span>
+                        </a>
+
+                        <!--/*@thymesVar id="showWorkoutSummaryIconNavBar" type=""*/-->
+
+                        <a th:if="${showWorkoutSummaryIconNavBar}" href="/summary"
+                           class="nav-item nav-link d-none d-lg-block">
+                            <span class="material-icons" data-toggle="tooltip" title="Summary">bar_chart</span>
                         </a>
 
                         <!--/*@thymesVar id="showWorkoutReservationsIconNavBar" type=""*/-->
@@ -158,12 +164,25 @@
 
                         </a>
 
-                        <a th:if="${showSearchIconNavBar}" href="#" class="nav-item nav-link d-lg-none" data-toggle="modal" data-target="#btnSearch">
+                        <a th:if="${showSearchIconNavBar}" href="#" class="nav-item nav-link d-lg-none"
+                           data-toggle="modal" data-target="#btnSearch">
 
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">search</span>
                                 Search for workouts
+
+                            </div>
+
+                        </a>
+
+                        <a th:if="${showWorkoutSummaryIconNavBar}" href="/summary"
+                           class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">bar_chart</span>
+                                Workout summary
 
                             </div>
 

@@ -10,6 +10,8 @@
 </head>
 <body>
 
+    <div th:insert="/fragments/reservationSearch :: reservationSearchModal"></div>
+
     <div th:insert="/fragments/navigationBar :: navBar"></div>
 
     <div class="center paddingSmall w-90">
@@ -22,13 +24,14 @@
 
                 <tr>
 
+                    <th th:if="${isAdministrator}" scope="col"> Customer </th>
                     <th scope="col"> Workout Name </th>
                     <th scope="col"> Workout Coaches</th>
                     <th scope="col"> Workout Org. Type</th>
                     <th scope="col"> Workout Period Start</th>
                     <th scope="col"> Workout Time Reservation</th>
                     <th scope="col"> Workout Price</th>
-                    <th scope="col"> Actions </th>
+                    <th th:if="${isAdministrator} == false" scope="col"> Actions </th>
 
                 </tr>
 
@@ -36,37 +39,32 @@
 
                 <tbody>
 
-                <tr th:each="tempShoppingCartItems:${shoppingCartItems}">
+                <tr th:each="tempWorkoutReservations:${workoutReservations}">
 
-                    <td th:text="${tempShoppingCartItems.workoutName}"></td>
+                    <td th:if="${isAdministrator}" th:text="${tempWorkoutReservations.userName}"></td>
 
-                    <td th:text="${tempShoppingCartItems.workoutCoaches}"></td>
+                    <td th:text="${tempWorkoutReservations.workoutName}"></td>
 
-                    <td th:text="${tempShoppingCartItems.workoutOrganizationType}"></td>
+                    <td th:text="${tempWorkoutReservations.workoutCoaches}"></td>
 
-                    <td th:text="${#temporals.format(tempShoppingCartItems.workoutDateTimeStart, 'dd.MM.yyyy. HH:mm')}"></td>
+                    <td th:text="${tempWorkoutReservations.workoutOrganizationType}"></td>
 
-                    <td th:text="${tempShoppingCartItems.workoutPrice}"></td>
+                    <td th:text="${#temporals.format(tempWorkoutReservations.workoutDateTimeStart,
+                        'dd.MM.yyyy. HH:mm')}"></td>
 
-                    <td>
+                    <td th:text="${#temporals.format(tempWorkoutReservations.periodDateTimeReservation, 'dd.MM.yyyy. HH:mm')}"></td>
 
-                        <div class="inlineFlex w-100">
+                    <td th:text="${tempWorkoutReservations.workoutPrice}"></td>
 
-                            <div class="inlineFlex w-50 alignCenter">
+                    <td th:if="${isAdministrator} == false">
 
-                                <a class="alignRight" th:href="@{'/reserveWorkout?id=' + ${tempShoppingCartItems.shoppingCartId}}">
-                                    Reserve
-                                </a>
+                        <div class="inlineFlex alignCenter w-100">
 
-                            </div>
-
-                            <div class="inlineFlex w-50 alignCenter">
-
-                                <a th:href="@{'/removeShoppingCartItem?id=' + ${tempShoppingCartItems.shoppingCartId}}">
-                                    Remove
-                                </a>
-
-                            </div>
+                            <a th:href="@{'/cancelReservation?id=' + ${tempWorkoutReservations.periodReservationId}}"
+                               th:if="${#temporals.format(tempWorkoutReservations.workoutDateTimeStart,
+                                'dd.MM.yyyy. HH:mm')} > ${#temporals.format(isCancelReservationExpired,
+                                'dd.MM.yyyy. HH:mm')}" >
+                                Cancel reservation </a>
 
                         </div>
 

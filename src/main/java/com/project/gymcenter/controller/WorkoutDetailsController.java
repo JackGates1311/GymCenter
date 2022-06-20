@@ -108,8 +108,8 @@ public class WorkoutDetailsController {
 
         model.addAttribute("selectedWorkoutIncludedTypes", selectedWorkoutIncludedTypes);
 
-        model.addAttribute("individualWorkout", WorkoutOrganizatonType.Individual);
-        model.addAttribute("groupWorkout", WorkoutOrganizatonType.Group);
+        model.addAttribute("individualWorkout", WorkoutOrganizationType.Individual);
+        model.addAttribute("groupWorkout", WorkoutOrganizationType.Group);
 
         model.addAttribute("amateurLevel", WorkoutLevel.Amateur);
         model.addAttribute("mediumLevel", WorkoutLevel.Medium);
