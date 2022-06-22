@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
 
-    <title>Workout periods in shopping cart</title>
+    <title th:text="#{title_shopping_cart_page}"></title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -11,17 +11,17 @@
 
     <div th:insert="/fragments/navigationBar :: navBar"></div>
 
-    <p class="centerError marginTopDefault green" th:if="${workoutReservationSuccess}">
-        You have successfully reserved selected workout period </p>
+    <p class="centerError marginTopDefault green" th:if="${workoutReservationSuccess}"
+        th:text="#{workoutReservationSuccess_shopping_cart_page}"></p>
 
-    <p class="centerError marginTopDefault red" th:if="${checkReservationAvailabilityFailed}">
-        Reservation is not possible because of full auditorium for selected workout period </p>
+    <p class="centerError marginTopDefault red" th:if="${checkReservationAvailabilityFailed}"
+        th:text="#{checkReservationAvailabilityFailed_shopping_cart_page}"></p>
 
-    <p class="centerError marginTopDefault red" th:if="${checkForPeriodAvailabilityFailed}">
-        Reservation is not possible for the selected workout period because it has been already started</p>
+    <p class="centerError marginTopDefault red" th:if="${checkForPeriodAvailabilityFailed}"
+        th:text="#{checkForPeriodAvailabilityFailed_shopping_cart_page}"></p>
 
-    <p class="centerError marginTopDefault red" th:if="${checkReservationTimeOverlappingFailed}">
-        You have already reserved another workout period which takes place at the same time</p>
+    <p class="centerError marginTopDefault red" th:if="${checkReservationTimeOverlappingFailed}"
+        th:text="#{checkReservationTimeOverlappingFailed_shopping_cart_page}"></p>
 
     <div class="center paddingSmall w-90">
 
@@ -33,12 +33,12 @@
 
                 <tr>
 
-                    <th scope="col"> Workout Name </th>
-                    <th scope="col"> Workout Coaches</th>
-                    <th scope="col"> Workout Org. Type</th>
-                    <th scope="col"> Workout Period Start</th>
-                    <th scope="col"> Workout Price</th>
-                    <th scope="col"> Actions </th>
+                    <th scope="col" th:text="#{colWorkoutName_shopping_cart_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutCoaches_shopping_cart_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutOrganizationType_shopping_cart_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutPeriodStart_shopping_cart_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutPrice_shopping_cart_page}"></th>
+                    <th scope="col" th:text="#{colActions_shopping_cart_page}"></th>
 
                 </tr>
 
@@ -64,17 +64,15 @@
 
                             <div class="inlineFlex w-50 alignCenter">
 
-                                <a class="alignRight" th:href="@{'/reserveWorkout?id=' + ${tempShoppingCartItems.shoppingCartId}}">
-                                    Reserve
-                                </a>
+                                <a class="alignRight" th:href="@{'/reserveWorkout?id=' + ${tempShoppingCartItems.shoppingCartId}}"
+                                    th:text="#{btnReserve_shopping_cart_page}"></a>
 
                             </div>
 
                             <div class="inlineFlex w-50 alignCenter">
 
-                                <a th:href="@{'/removeShoppingCartItem?id=' + ${tempShoppingCartItems.shoppingCartId}}">
-                                    Remove
-                                </a>
+                                <a th:href="@{'/removeShoppingCartItem?id=' + ${tempShoppingCartItems.shoppingCartId}}"
+                                    th:text="#{btnRemove_shopping_cart_page}"></a>
 
                             </div>
 

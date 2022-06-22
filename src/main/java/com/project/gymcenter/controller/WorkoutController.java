@@ -15,15 +15,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 @Controller
 
 public class WorkoutController {
 
+    @Autowired
+    private AuditoriumService auditoriumService;
 
     @Autowired
     private WorkoutService workoutService;
@@ -37,15 +42,20 @@ public class WorkoutController {
     @Autowired
     private PeriodService periodService;
 
-    @Autowired
     NavBarController navBarController = new NavBarController();
+
+    InternationalizationController internationalization = new InternationalizationController();
+
 
     private List<Workout> workoutList;
     private List<WorkoutType> workoutTypes;
 
 
     @RequestMapping(value="/workouts")
-    public String workouts(Model model, HttpServletRequest request) {
+    public String workouts(Model model, HttpServletRequest request, @RequestParam(required = false) String lang) {
+
+        String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                navBarController.getNavBarLanguagePath(lang);
 
         if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
                 Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
@@ -67,7 +77,9 @@ public class WorkoutController {
             model.addAttribute("workouts", workoutList);
             model.addAttribute("workoutTypes", workoutTypes);
 
-            navBarController.setNavBarAdministrator("List of workouts", "/workouts", true, model);
+            navBarController.setNavBarAdministrator("List of workouts", "/workouts",
+                    navBarLanguagePath, true, true, model, workoutService.findAll(),
+                    auditoriumService.findAll());
 
             return "workouts";
         }
@@ -75,7 +87,7 @@ public class WorkoutController {
 
     @RequestMapping(value="/workoutsSearchResult", method= RequestMethod.POST)
     public String workoutsSearchResult(@ModelAttribute(name="workoutSearchForm") WorkoutSearchForm workoutSearchForm,
-                                 Model model, HttpServletRequest request) {
+                                       Model model, HttpServletRequest request) {
 
         if(workoutSearchForm.getWorkoutPriceMin() == null)
             workoutSearchForm.setWorkoutPriceMin(0.0);
@@ -102,8 +114,8 @@ public class WorkoutController {
             workoutsFound.removeIf(workout ->
                             periodService.findAvailablePeriodsByWorkoutId(workout.getWorkoutId(), null).isEmpty());
 
-
-            navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
+            navBarController.setNavBarGuest("MagicBoost Gym Center", "/",
+                    "", true, false, model);
 
             return "index";
 
@@ -113,15 +125,16 @@ public class WorkoutController {
             workoutsFound.removeIf(workout ->
                     periodService.findAvailablePeriodsByWorkoutId(workout.getWorkoutId(), null).isEmpty());
 
-            navBarController.setNavBarCustomer("MagicBoost Gym Center", "/", true,
-                    model);
+            navBarController.setNavBarCustomer("MagicBoost Gym Center", "/",
+                    "", true, false, model);
 
             return "index";
         }
 
         else {
 
-            navBarController.setNavBarAdministrator("List of workouts", "/workouts", true, model);
+            navBarController.setNavBarAdministrator("List of workouts", "/workouts",
+                   "", true, false, model, workoutService.findAll(), auditoriumService.findAll());
 
             return "workouts";
         }
@@ -130,7 +143,10 @@ public class WorkoutController {
     }
 
     @RequestMapping(value="/addNewWorkout")
-    public String addNewWorkout(Model model, HttpServletRequest request) {
+    public String addNewWorkout(Model model, HttpServletRequest request, @RequestParam(required = false) String lang) {
+
+        String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                navBarController.getNavBarLanguagePath(lang);
 
         workoutTypes = workoutTypeService.findAll();
         workoutList = workoutService.findAll();
@@ -148,7 +164,8 @@ public class WorkoutController {
 
         } else {
 
-            navBarController.setNavBarAdministrator("Add new workout", "/addNewWorkout", false, model);
+            navBarController.setNavBarAdministrator("Add new workout", "/addNewWorkout",
+                    navBarLanguagePath, false, true, model, workoutService.findAll(), auditoriumService.findAll());
 
             return "addNewWorkout";
         }
@@ -188,8 +205,10 @@ public class WorkoutController {
     }
 
     @RequestMapping(value="/")
+    public String index(Model model, HttpServletRequest request, @RequestParam(required = false) String lang) {
 
-    public String index(Model model, HttpServletRequest request){
+        String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                navBarController.getNavBarLanguagePath(lang);
 
         workoutList = workoutService.findAll();
 
@@ -208,7 +227,8 @@ public class WorkoutController {
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
-            navBarController.setNavBarGuest("MagicBoost Gym Center", "/", true, model);
+            navBarController.setNavBarGuest(internationalization.getStringValue(lang, "navBarTitle_index_page"),
+                    "/", navBarLanguagePath, true, true, model);
 
             //model.addAttribute("workoutListPeriod", periodService.findAllAvailablePeriods(null));
 
@@ -221,8 +241,8 @@ public class WorkoutController {
 
             model.addAttribute("workoutListPeriod", periodService.findAllAvailablePeriods(userId));
 
-            navBarController.setNavBarCustomer("MagicBoost Gym Center", "/", true,
-                    model);
+            navBarController.setNavBarCustomer(internationalization.getStringValue(lang, "navBarTitle_index_page"),
+                    "/", navBarLanguagePath, true, true, model);
 
             model.addAttribute("showWorkoutReservationButton", true);
             model.addAttribute("showAddWorkoutToWishListButton", true);

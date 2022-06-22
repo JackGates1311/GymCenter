@@ -5,10 +5,7 @@ import com.project.gymcenter.model.Period;
 import com.project.gymcenter.model.PeriodReserved;
 import com.project.gymcenter.model.ShoppingCart;
 import com.project.gymcenter.model.UserRole;
-import com.project.gymcenter.service.PeriodService;
-import com.project.gymcenter.service.RegisteredUserService;
-import com.project.gymcenter.service.ReservationService;
-import com.project.gymcenter.service.ShoppingCartService;
+import com.project.gymcenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +23,12 @@ import java.util.Objects;
 public class ReservationController {
 
     @Autowired
+    AuditoriumService auditoriumService;
+
+    @Autowired
+    WorkoutService workoutService;
+
+    @Autowired
     ReservationService reservationService;
 
     @Autowired
@@ -40,7 +43,11 @@ public class ReservationController {
     NavBarController navBarController = new NavBarController();
 
     @RequestMapping(value = "/reserveWorkout")
-    public String reserveWorkout(@RequestParam Long id, HttpServletRequest request, Model model) {
+    public String reserveWorkout(@RequestParam Long id, HttpServletRequest request, Model model,
+                                 @RequestParam(required = false) String lang) {
+
+        String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                navBarController.getNavBarLanguagePath(lang);
 
         if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Customer))) {
@@ -63,12 +70,12 @@ public class ReservationController {
 
                 shoppingCartService.deleteById(id);
 
-                fillShoppingCart(model, shoppingCartItem);
+                fillShoppingCart(model, shoppingCartItem, navBarLanguagePath);
 
 
             } else {
 
-                fillShoppingCart(model, shoppingCartItem);
+                fillShoppingCart(model, shoppingCartItem, navBarLanguagePath);
 
                 if(!checkReservationAvailability) {
 
@@ -108,11 +115,14 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/reservations")
-    public String getReservations(HttpServletRequest request, Model model) {
+    public String getReservations(HttpServletRequest request, Model model, @RequestParam(required = false) String lang) {
 
         //TODO on this page, you can add search and filter methods and hiding already started workout periods...
 
         Long userId;
+
+        String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                navBarController.getNavBarLanguagePath(lang);
 
         if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Customer))) {
@@ -120,7 +130,7 @@ public class ReservationController {
             userId = Long.parseLong(String.valueOf(request.getSession().getAttribute("loggedInUserId")));
 
             navBarController.setNavBarCustomer("Reserved workout periods", "/reservations",
-                    true, model);
+                    navBarLanguagePath, true, true, model);
 
             model.addAttribute("isAdministrator", false);
 
@@ -134,7 +144,8 @@ public class ReservationController {
                 String.valueOf(UserRole.Administrator))) {
 
             navBarController.setNavBarAdministrator("Reserved all workout periods", "/reservations",
-                    true, model);
+                    navBarLanguagePath, true, true, model, workoutService.findAll(),
+                    auditoriumService.findAll());
 
             model.addAttribute("isAdministrator", true);
 
@@ -155,8 +166,8 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/reservationsSearchResult", method = RequestMethod.POST)
-    public String reservationsSearchResult(@ModelAttribute(name="reservationSearchForm") ReservationSearchForm
-                                                       reservationSearchForm, Model model, HttpServletRequest request) {
+    public String reservationsSearchResult(@ModelAttribute(name="reservationSearchForm") ReservationSearchForm reservationSearchForm, Model model, HttpServletRequest request, @RequestParam(required = false) String lang) {
+
         List<PeriodReserved> reservationList;
 
         model.addAttribute("registeredUsers", registeredUserService.findAll());
@@ -171,7 +182,7 @@ public class ReservationController {
             model.addAttribute("workoutReservations", reservationList);
 
             navBarController.setNavBarCustomer("Reserved all workout periods", "/reservations",
-                    true, model);
+                    "", true, false, model);
 
         } else if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Administrator))) {
@@ -184,7 +195,8 @@ public class ReservationController {
             model.addAttribute("isAdministrator", true);
 
             navBarController.setNavBarAdministrator("Reserved all workout periods", "/reservations",
-                    true, model);
+                    "", true, false, model, workoutService.findAll(),
+                    auditoriumService.findAll());
 
         } else {
 
@@ -222,10 +234,10 @@ public class ReservationController {
         }
     }
 
-    private void fillShoppingCart(Model model, ShoppingCart shoppingCartItem) {
+    private void fillShoppingCart(Model model, ShoppingCart shoppingCartItem, String path) {
 
-        navBarController.setNavBarCustomer("Workouts in shopping cart", "/shoppingCart",
-                false, model);
+        navBarController.setNavBarCustomer("Workouts in shopping cart", "/shoppingCart", path,
+                false, true, model);
 
         model.addAttribute("shoppingCartItems", shoppingCartService.findAllByUserId(
                 shoppingCartItem.getUserId()));

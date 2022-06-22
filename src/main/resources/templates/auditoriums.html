@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
 
-    <title>Auditoriums</title>
+    <title th:text="#{title_auditoriums_page}"></title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -14,14 +14,14 @@
 
 <div class="center paddingSmall w-90">
 
-    <p class="centerError paddingBottom green" th:if="${auditoriumRemoveSuccess}">
-        Selected auditorium is successfully removed </p>
+    <p class="centerError paddingBottom green" th:if="${auditoriumRemoveSuccess}"
+        th:text="#{auditoriumRemoveSuccess_auditoriums_page}"></p>
 
-    <p class="centerError paddingBottom red" th:if="${auditoriumRemoveFailed}">
-        Selected auditorium is not possible to remove currently </p>
+    <p class="centerError paddingBottom red" th:if="${auditoriumRemoveFailed}"
+        th:text="#{auditoriumRemoveFailed_auditoriums_page}"></p>
 
-    <p class="centerError paddingBottom red" th:if="${auditoriumAddFailed}">
-        Auditorium with entered Auditorium ID already exists </p>
+    <p class="centerError paddingBottom red" th:if="${auditoriumAddFailed}"
+        th:text="#{auditoriumAddFailed_auditoriums_page}"></p>
 
     <div class="inlineFlex w-100 paddingBottom">
 
@@ -30,8 +30,8 @@
             <div th:insert="/fragments/auditoriumDetails :: auditoriumDetailsModal"></div>
 
             <a class="btn btn-light" data-toggle="modal"
-               th:data-target="@{'#linkAuditoriumDetails' + ${tempAuditoriumList.auditoriumId}}">
-                Add new auditorium</a>
+               th:data-target="@{'#linkAuditoriumDetails' + ${tempAuditoriumList.auditoriumId}}"
+                th:text="#{btnAddNewAuditorium_auditoriums_page}"></a>
 
         </div>
 
@@ -46,8 +46,8 @@
 
             <tr>
 
-                <th scope="col">Auditorium ID</th>
-                <th scope="col">Capacity</th>
+                <th scope="col" th:text="#{colAuditoriumID_auditoriums_page}"></th>
+                <th scope="col" th:text="#{colCapacity_auditoriums_page}"></th>
 
             </tr>
 

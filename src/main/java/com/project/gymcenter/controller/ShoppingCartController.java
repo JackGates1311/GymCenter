@@ -63,15 +63,18 @@ public class ShoppingCartController {
     }
 
     @RequestMapping("/shoppingCart")
-    public String getShoppingCartItems(HttpServletRequest request, Model model) {
+    public String getShoppingCartItems(HttpServletRequest request, Model model, @RequestParam(required = false) String lang) {
+
+        String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                navBarController.getNavBarLanguagePath(lang);
 
         if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Customer))) {
 
             Long userId = Long.parseLong(String.valueOf(request.getSession().getAttribute("loggedInUserId")));
 
-            navBarController.setNavBarCustomer("Workouts in shopping cart", "/shoppingCart",
-                    false, model);
+            navBarController.setNavBarCustomer("Workouts in shopping cart", "/shoppingCart", navBarLanguagePath,
+                    false, true, model);
 
             model.addAttribute("shoppingCartItems", shoppingCartService.findAllByUserId(userId));
 

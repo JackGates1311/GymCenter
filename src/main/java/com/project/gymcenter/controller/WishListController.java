@@ -22,15 +22,19 @@ public class WishListController {
     WishListService wishListService;
 
     @RequestMapping(value = "/wishlist")
-    private String wishList(HttpServletRequest request, Model model) {
+    private String wishList(HttpServletRequest request, Model model,
+                            @RequestParam(required = false) String lang) {
 
         if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Customer))) {
 
             Long userId = Long.parseLong(String.valueOf(request.getSession().getAttribute("loggedInUserId")));
 
-            navBarController.setNavBarCustomer("Workouts wishlist", "/wishlist",
-                    false, model);
+            String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                    navBarController.getNavBarLanguagePath(lang);
+
+            navBarController.setNavBarCustomer("Workouts wishlist", "/wishlist", navBarLanguagePath,
+                    false, true, model);
 
             model.addAttribute("wishListItems", wishListService.getWishListByUserId(userId));
 

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
 
-    <title>List of workouts</title>
+    <title th:text="#{title_workouts_page}"></title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -15,8 +15,8 @@
 
     <div class="center paddingSmall w-90">
 
-        <p class="centerError" th:if="${workoutAddFailed}"> Error has been occured while adding workout to database! </p>
-        <p class="centerSuccess" th:if="${workoutAddSuccess}"> Workout has been successfully added! </p>
+        <p class="centerError" th:if="${workoutAddFailed}" th:text="#{workoutAddFailed_workouts_page}"></p>
+        <p class="centerSuccess" th:if="${workoutAddSuccess}" th:text="#{workoutAddSuccess_workouts_page}"></p>
 
         <div class="table-responsive scrollable">
 
@@ -25,14 +25,14 @@
                 <thead class="thead-light">
 
                 <tr>
-                    <th scope="col"> Workout Image </th>
-                    <th scope="col"> Workout Name</th>
-                    <th scope="col"> Workout Type</th>
-                    <th scope="col"> Workout Level</th>
-                    <th scope="col">Workout Coaches</th>
-                    <th scope="col"> Workout Price</th>
-                    <th scope="col"> Workout Organization Type</th>
-                    <th scope="col"> Workout Average Rate</th>
+                    <th scope="col" th:text="#{colWorkoutImage_workouts_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutName_workouts_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutType_workouts_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutLevel_workouts_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutCoaches_workouts_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutPrice_workouts_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutOrganizationType_workouts_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutAverageRate_workouts_page}"></th>
                 </tr>
 
                 </thead>
@@ -63,7 +63,8 @@
 
         </div>
 
-        <a th:if="${searchPerformed}" class="btn btn-light w-100" href="/workouts">Show all workouts</a>
+        <a th:if="${searchPerformed}" class="btn btn-light w-100" href="/workouts"
+           th:text="#{btnShowAllWorkouts_workouts_page}"></a>
 
         <script src="js/workouts.js" type="text/javascript"></script>
 

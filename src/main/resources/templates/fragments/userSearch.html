@@ -13,7 +13,7 @@
 
             <div class="modal-header text-center">
 
-                <h4 class="modal-title w-100">Search for users</h4>
+                <h4 class="modal-title w-100" th:text="#{modalTitle_user_search_page}"></h4>
 
             </div>
 
@@ -25,20 +25,22 @@
 
                         <div class="form-group col-md-6">
 
-                            <label for="userName">Username: </label>
+                            <label for="userName" th:text="#{userName_user_search_page}"></label>
                             <input type="search" class="form-control" id="userName" name="userName"
-                                   placeholder="Username">
+                                   th:placeholder="#{userNamePlaceholder_user_search_page}">
                         </div>
 
                         <div class="form-group col-md-6">
 
-                            <label for="userRole">User role: </label>
+                            <label for="userRole" th:text="#{userRole_user_search_page}"></label>
 
                             <select class="form-control text-center" name="userRole" id="userRole">
 
                                 <option value="" selected> </option>
-                                <option value="Administrator">Administrator</option>
-                                <option value="Customer">Customer</option>
+                                <option value="Administrator"
+                                        th:text="#{selectUserRoleAdministrator_user_search_page}"></option>
+                                <option value="Customer"
+                                        th:text="#{selectUserRoleCustomer_user_search_page}"></option>
 
                             </select>
 
@@ -50,17 +52,23 @@
 
                         <div class="form-group col-md-12">
 
-                            <label for="userSortBy">Sort by: </label>
+                            <label for="userSortBy" th:text="#{lblSortBy}"></label>
 
                             <select class="form-control text-center" name="userSortBy" id="userSortBy">
 
                                 <option value="" selected> </option>
-                                <option value="ORDER BY userName ASC">Username Ascending</option>
-                                <option value="ORDER BY userName DESC">Username Descending</option>
-                                <option value="ORDER BY userRole ASC">User Role Ascending</option>
-                                <option value="ORDER BY userRole DESC">User Role Descending</option>
-                                <option value="ORDER BY userDateTimeRegistration ASC">User Date Registration Ascending</option>
-                                <option value="ORDER BY userDateTimeRegistration DESC">User Date Registration Descending</option>
+                                <option value="ORDER BY userName ASC" th:text="#{orderByUserNameASC_user_search_page}">
+                                </option>
+                                <option value="ORDER BY userName DESC"
+                                        th:text="#{orderByUserNameDESC_user_search_page}"></option>
+                                <option value="ORDER BY userRole ASC" th:text="#{orderByUserRoleASC_user_search_page}">
+                                    </option>
+                                <option value="ORDER BY userRole DESC"
+                                        th:text="#{orderByUserRoleDESC_user_search_page}"></option>
+                                <option value="ORDER BY userDateTimeRegistration ASC"
+                                        th:text="#{orderByUserDateTimeRegistrationASC_user_search_page}"></option>
+                                <option value="ORDER BY userDateTimeRegistration DESC"
+                                        th:text="#{orderByUserDateTimeRegistrationDESC_user_search_page}"></option>
 
                             </select>
 
@@ -77,9 +85,10 @@
                             <div class="inlineFlex w-100">
 
                                 <input type="button" id="btnCancel" class="btn btn-light" data-dismiss="modal"
-                                       value="Cancel"/>
+                                       th:value="#{btnCancel}"/>
 
-                                <input type="submit" id="btnWorkoutSearch" class="btn btn-light" value="Search"/>
+                                <input type="submit" id="btnWorkoutSearch" class="btn btn-light"
+                                       th:value="#{btnSearch}"/>
 
                             </div>
 

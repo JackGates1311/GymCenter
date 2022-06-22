@@ -3,6 +3,7 @@ package com.project.gymcenter.controller;
 import com.project.gymcenter.dao.form.SummarySearchForm;
 import com.project.gymcenter.model.UserRole;
 import com.project.gymcenter.model.Workout;
+import com.project.gymcenter.service.AuditoriumService;
 import com.project.gymcenter.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -18,18 +20,28 @@ import java.util.*;
 public class SummaryController {
 
     @Autowired
+    AuditoriumController auditoriumController;
+
+    @Autowired
+    AuditoriumService auditoriumService;
+
+    @Autowired
     WorkoutService workoutService;
 
     NavBarController navBarController = new NavBarController();
 
     @RequestMapping(value = "/summary")
-    public String workoutsSummary(HttpServletRequest request, Model model) {
+    public String workoutsSummary(HttpServletRequest request, Model model, @RequestParam(required = false) String lang) {
+
+        String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                navBarController.getNavBarLanguagePath(lang);
 
         if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Administrator))) {
 
             navBarController.setNavBarAdministrator("Workouts summary",
-                "/summary", true, model);
+                "/summary", navBarLanguagePath, true, true, model, workoutService.findAll(),
+                    auditoriumService.findAll());
 
             getWorkouts(workoutService.count(), "workoutName ASC", model);
 
@@ -45,8 +57,7 @@ public class SummaryController {
     }
 
     @RequestMapping(value = "/summarySearchResult", method = RequestMethod.POST)
-    public String summarySearchResult(@ModelAttribute(name="summarySearchForm") SummarySearchForm summarySearchForm,
-                                      Model model, HttpServletRequest request) {
+    public String summarySearchResult(@ModelAttribute(name="summarySearchForm") SummarySearchForm summarySearchForm, Model model, HttpServletRequest request, @RequestParam(required = false) String lang) {
 
         if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Administrator))) {
@@ -62,8 +73,9 @@ public class SummaryController {
                         summarySearchForm.getSummaryDateEnd()), summarySearchForm.getSummarySortBy(), model);
             }
 
-            navBarController.setNavBarAdministrator("Workouts summary",
-                    "/summary", true, model);
+            navBarController.setNavBarAdministrator("Workouts summary", "/summary",
+                    "", true, false, model, workoutService.findAll(),
+                    auditoriumService.findAll());
 
             return "summary";
 

@@ -1,5 +1,6 @@
 package com.project.gymcenter.controller;
 
+import com.project.gymcenter.model.Auditorium;
 import com.project.gymcenter.model.Workout;
 import com.project.gymcenter.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +10,24 @@ import org.springframework.ui.Model;
 
 import java.time.Period;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.ResourceBundle;
+
+import static java.util.Locale.US;
 
 @Controller
 public class NavBarController {
 
-    @Autowired
-    private PeriodController periodController;
-
-    protected void setNavBarAdministrator(String navBarTitle, String navBarLink, Boolean showSearchIconNavBar, Model model) {
+    protected void setNavBarAdministrator(String navBarTitle, String navBarLink, String navBarLanguagePath,
+                                          Boolean showSearchIconNavBar, Boolean showTranslateIconNavBar, Model model,
+                                          List<Workout> workoutList, List<Auditorium> auditoriumList) {
 
         model.addAttribute("navBarTitle", navBarTitle);
         model.addAttribute("navBarTitlePath", navBarLink);
+
+        model.addAttribute("showTranslateIconNavBar", showTranslateIconNavBar);
+        model.addAttribute("translateNavBarPath", navBarLanguagePath);
 
         model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
 
@@ -31,11 +39,8 @@ public class NavBarController {
 
         model.addAttribute("addPeriodIconNavBar", true);
 
-        try {
-
-            periodController.configureAddNewPeriodModal(model);
-
-        } catch (Exception ignored) {}
+        model.addAttribute("workoutListForPeriod", workoutList);
+        model.addAttribute("auditoriumListForPeriod", auditoriumList);
 
         model.addAttribute("showAuditoriumsIconNavBar", true);
         model.addAttribute("showAddNewWorkoutIconNavBar", true);
@@ -51,10 +56,14 @@ public class NavBarController {
         model.addAttribute("showLoginIconNavBar", false);
     }
 
-    protected void setNavBarCustomer(String navBarTitle, String navBarLink, Boolean showSearchIconNavBar, Model model) {
+    protected void setNavBarCustomer(String navBarTitle, String navBarLink, String navBarLanguagePath,
+                                     Boolean showSearchIconNavBar, Boolean showTranslateIconNavBar, Model model) {
 
         model.addAttribute("navBarTitle", navBarTitle);
         model.addAttribute("navBarTitlePath", navBarLink);
+
+        model.addAttribute("showTranslateIconNavBar", showTranslateIconNavBar);
+        model.addAttribute("translateNavBarPath", navBarLanguagePath);
 
         model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
 
@@ -82,10 +91,14 @@ public class NavBarController {
         model.addAttribute("showLoginIconNavBar", false);
     }
 
-    protected void setNavBarGuest(String navBarTitle, String navBarLink, Boolean showSearchIconNavBar, Model model) {
+    protected void setNavBarGuest(String navBarTitle, String navBarLink, String navBarLanguagePath,
+                                  Boolean showSearchIconNavBar, Boolean showTranslateIconNavBar, Model model) {
 
         model.addAttribute("navBarTitle", navBarTitle);
         model.addAttribute("navBarTitlePath", navBarLink);
+
+        model.addAttribute("showTranslateIconNavBar", showTranslateIconNavBar);
+        model.addAttribute("translateNavBarPath", navBarLanguagePath);
 
         model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
 
@@ -110,4 +123,24 @@ public class NavBarController {
         model.addAttribute("showLoginIconNavBar", true);
     }
 
+
+    protected String getNavBarLanguagePath(String lang) {
+
+        String navBarLanguagePath;
+
+        if(Objects.equals(lang, "en")) {
+
+            navBarLanguagePath = "lang=sr";
+
+        } else if(Objects.equals(lang, "sr")) {
+
+            navBarLanguagePath = "lang=en";
+
+        } else {
+
+            navBarLanguagePath = "lang=sr";
+        }
+
+        return navBarLanguagePath;
+    }
 }

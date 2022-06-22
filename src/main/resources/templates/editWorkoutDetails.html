@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>Edit Workout</title>
+    <title th:text="#{title_edit_workout_details_page}"></title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -23,12 +23,12 @@
 
                 <div class="col-lg-6 com-md-6 col-sm-6 col-xs-6 mb-6">
 
-                    <label for="newWorkoutName">Workout Name:</label>
+                    <label for="newWorkoutName" th:text="#{newWorkoutName_edit_workout_details_page}"></label>
 
                     <input class="form-control" type="text" name="newWorkoutName" id="newWorkoutName"
-                           placeholder="Workout Name" required="true" th:value="${workoutForEdit.workoutName}">
+                        required="true" th:value="${workoutForEdit.workoutName}">
 
-                    <label for="newWorkoutIncludedTypes">Workout Types:</label>
+                    <label for="newWorkoutIncludedTypes" th:text="#{newWorkoutTypes_edit_workout_details_page}"></label>
 
                     <select class="select w-100" id="newWorkoutIncludedTypes" name="newWorkoutIncludedTypes"
                             required="true" multiple>
@@ -38,27 +38,29 @@
                             <option th:each="tempSelectedWorkoutIncludedTypes:${selectedWorkoutIncludedTypes}"
                                     th:text="${tempSelectedWorkoutIncludedTypes.workoutTypeName}"
                                     th:value="${tempSelectedWorkoutIncludedTypes.workoutTypeName}"
-                                    th:selected="${#lists.contains(tempSelectedWorkoutIncludedTypes.returnValue, 'true')}"
-                            />
+                                    th:selected="${#lists.contains(tempSelectedWorkoutIncludedTypes.returnValue, 'true')}">
+
+                            </option>
 
                         </div>
 
                     </select>
 
-                    <label for="newWorkoutCoaches">Workout Coaches:</label>
+                    <label for="newWorkoutCoaches" th:text="#{newWorkoutCoaches_edit_workout_details_page}"></label>
 
                     <input class="form-control" type="text" name="newWorkoutCoaches" id="newWorkoutCoaches"
-                           placeholder="Workout Coaches" required="true" th:value="${workoutForEdit.workoutCoaches}">
+                           required="true" th:value="${workoutForEdit.workoutCoaches}">
 
-
-                    <label style="margin-top: 7px;" for="newWorkoutImage">Workout Image:</label>
+                    <label style="margin-top: 7px;" for="newWorkoutImage" th:text="#{newWorkoutImage_edit_workout_details_page}">
+                    </label>
 
                     <div class="custom-file">
 
                         <input type="file" class="custom-file-input" id="newWorkoutImage" name="newWorkoutImage"
                                th:value="${workoutForEdit.workoutImage}">
 
-                        <label class="custom-file-label" id="newWorkoutImageLabel" for="newWorkoutImage">Click here to change image</label>
+                        <label class="custom-file-label" id="newWorkoutImageLabel" for="newWorkoutImage"
+                            th:text="#{newWorkoutImageLabel_edit_workout_details_page}"></label>
 
                     </div>
 
@@ -66,14 +68,14 @@
 
                 <div class="col-lg-6 com-md-6 col-sm-6 col-xs-6 mb-6">
 
-                    <label>Workout Price and Organization Type:</label>
+                    <label th:text="#{workoutPriceAndOrganizationType_edit_workout_details_page}"></label>
 
                     <div class="form-row">
 
                         <div class="form-group col-md-6">
 
                             <input type="text" class="form-control" id="newWorkoutPrice" minlength="1" maxlength="6"
-                                   name="newWorkoutPrice" placeholder="Price" th:value="${workoutForEdit.workoutPrice}">
+                                   name="newWorkoutPrice" th:value="${workoutForEdit.workoutPrice}">
 
                         </div>
 
@@ -84,11 +86,16 @@
 
                                 <option value="" hidden></option>
 
-                                <option th:value="Individual" th:text="Individual"
-                                        th:selected="${#lists.contains(workoutForEdit.workoutOrganizationType, individualWorkout)}"/>
+                                <option th:value="Individual"
+                                        th:text="#{selectWorkoutOrganizationTypeIndividual_edit_workout_details_page}"
+                                        th:selected="${#lists.contains(workoutForEdit.workoutOrganizationType, individualWorkout)}">
+                                </option>
 
-                                <option th:value="Group" th:text="Group"
-                                        th:selected="${#lists.contains(workoutForEdit.workoutOrganizationType, groupWorkout)}"/>
+                                <option th:value="Group"
+                                        th:text="#{selectWorkoutOrganizationTypeGroup_edit_workout_details_page}"
+                                        th:selected="${#lists.contains(workoutForEdit.workoutOrganizationType, groupWorkout)}">
+
+                                </option>
 
                             </select>
 
@@ -96,15 +103,14 @@
 
                     </div>
 
-                    <label>Workout Length and Level:</label>
+                    <label th:text="#{workoutLengthAndLevel_edit_workout_details_page}"></label>
 
                     <div class="form-row">
 
                         <div class="form-group col-md-6">
 
                             <input type="text" class="form-control" id="newWorkoutLength" minlength="1" maxlength="4"
-                                   name="newWorkoutLength" placeholder="Length (in minutes)"
-                                   th:value="${workoutForEdit.workoutLength}">
+                                   name="newWorkoutLength" th:value="${workoutForEdit.workoutLength}">
 
                         </div>
 
@@ -113,12 +119,19 @@
                             <select class="form-control" id="newWorkoutLevel" name="newWorkoutLevel" required="true">
 
                                 <option value="" hidden></option>
-                                <option th:value="Amateur" th:text="Amateur"
-                                        th:selected="${#lists.contains(workoutForEdit.workoutLevel, amateurLevel)}"/>
-                                <option th:value="Medium" th:text="Medium"
-                                        th:selected="${#lists.contains(workoutForEdit.workoutLevel, mediumLevel)}"/>
-                                <option th:value="Advanced" th:text="Advanced"
-                                        th:selected="${#lists.contains(workoutForEdit.workoutLevel, advancedLevel)}"/>
+                                <option th:value="Amateur"
+                                        th:text="#{selectWorkoutLevelAmateur_edit_workout_details_page}"
+                                        th:selected="${#lists.contains(workoutForEdit.workoutLevel, amateurLevel)}">
+                                </option>
+                                <option th:value="Medium"
+                                        th:text="#{selectWorkoutLevelMedium_edit_workout_details_page}"
+                                        th:selected="${#lists.contains(workoutForEdit.workoutLevel, mediumLevel)}">
+                                </option>
+                                <option th:value="Advanced"
+                                        th:text="#{selectWorkoutLevelAdvanced_edit_workout_details_page}"
+                                        th:selected="${#lists.contains(workoutForEdit.workoutLevel, advancedLevel)}">
+
+                                </option>
 
                             </select>
 
@@ -126,7 +139,8 @@
 
                     </div>
 
-                    <label for="newWorkoutDescription">Workout Description:</label>
+                    <label for="newWorkoutDescription" th:text="#{newWorkoutDescription_edit_workout_details_page}">
+                    </label>
 
                     <textarea class="form-control" id="newWorkoutDescription" name="newWorkoutDescription"
                               rows="5" th:text="${workoutForEdit.workoutDescription}"></textarea>
@@ -136,14 +150,14 @@
                         <div class="form-group col-md-6">
 
                             <input class="btn btn-light btn-sm marginTopDefault w-100" id="cancelAddNewEditWorkoutButton"
-                                   type="button" value="Cancel"/>
+                                   type="button" th:value="#{btnCancel}"/>
 
                         </div>
 
                         <div class="form-group col-md-6">
 
                             <input class="btn btn-light btn-sm marginTopDefault w-100" id="editNewWorkoutButton"
-                                   type="submit" value="Save Changes">
+                                   type="submit" th:value="#{btnSave}">
 
                         </div>
 

@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>MagicBoost Gym</title>
+    <title th:text="#{title_index_page}"></title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -130,7 +130,8 @@
 
                                 <div class="cardButtons alignCenter">
 
-                                    <a th:if="${showWorkoutReservationButton}">
+                                    <a th:if="${showWorkoutReservationButton}"
+                                       data-toggle="tooltip" th:title="#{btnAddWorkoutToShoppingCart_index_page}">
 
                                         <div th:insert="/fragments/addWorkoutToShoppingCart :: addWorkoutToShoppingCartModal"></div>
 
@@ -140,11 +141,11 @@
 
                                     <a th:if="${showAddWorkoutToWishListButton}" class="heart"
                                        th:href="@{'/addWorkoutToWishlist?id=' + ${tempWorkouts.workoutId}}"
-                                       data-toggle="tooltip" title="Add workout to wishlist"></a>
+                                       data-toggle="tooltip" th:title="#{btnAddWorkoutToWishlist_index_page}"></a>
 
                                     <a th:href="@{'/workoutDetails?id=' + ${tempWorkouts.workoutId}}">
                                         <div th:insert="/fragments/svg/images :: info" data-toggle="tooltip"
-                                             title="Workout details"></div>
+                                             th:title="#{btnWorkoutDetails_index_page}"></div>
                                     </a>
 
                                 </div>

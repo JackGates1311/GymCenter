@@ -13,7 +13,7 @@
 
                 <div class="modal-header text-center">
 
-                    <h4 class="modal-title w-100">Search for workouts</h4>
+                    <h4 class="modal-title w-100" th:text="#{modalTitle_workout_search_page}"></h4>
 
                 </div>
 
@@ -25,16 +25,16 @@
 
                             <div class="form-group col-md-6">
 
-                                <label for="workoutName">Workout name: </label>
+                                <label for="workoutName" th:text="#{workoutName_workout_search_page}"></label>
                                 <input type="search" class="form-control" id="workoutName" name="workoutName"
-                                       placeholder="Workout name">
+                                       th:placeholder="#{workoutNamePlaceholder_workout_search_page}">
                             </div>
 
                             <div class="form-group col-md-6">
 
-                                <label for="workoutCoach">Workout coach: </label>
+                                <label for="workoutCoach" th:text="#{workoutCoach_workout_search_page}"></label>
                                 <input type="search" class="form-control" id="workoutCoach" name="workoutCoach"
-                                       placeholder="Workout coach">
+                                       th:placeholder="#{workoutCoachPlaceholder_workout_search_page}">
                             </div>
 
                         </div>
@@ -43,7 +43,7 @@
 
                             <div class="form-group col-md-6">
 
-                                <label for="workoutTypeName">Workout type:</label>
+                                <label for="workoutTypeName" th:text="#{workoutTypeName_workout_search_page}"></label>
 
                                 <select class="form-control text-center" name="workoutTypeName" id="workoutTypeName">
 
@@ -58,7 +58,7 @@
 
                             <div class="form-group col-md-6">
 
-                                <label for="workoutCoach">Workout price: </label>
+                                <label for="workoutCoach" th:text="#{workoutPrice_workout_search_page}"></label>
 
                                 <div class="inlineFlex">
 
@@ -77,14 +77,19 @@
 
                             <div class="form-group col-md-6">
 
-                                <label for="workoutOrganizationType">Workout org. type: </label>
+                                <label for="workoutOrganizationType"
+                                       th:text="#{workoutOrganizationType_workout_search_page}"></label>
 
                                 <select class="form-control text-center" name="workoutOrganizationType"
                                         id="workoutOrganizationType">
 
                                     <option value="" selected> </option>
-                                    <option value="Individual">Individual</option>
-                                    <option value="Group">Group</option>
+                                    <option value="Individual"
+                                            th:text="#{selectWorkoutOrganizationTypeIndividual_workout_search_page}">
+                                    </option>
+                                    <option value="Group"
+                                            th:text="#{selectWorkoutOrganizationTypeGroup_workout_search_page}">
+                                    </option>
 
                                 </select>
 
@@ -92,14 +97,17 @@
 
                             <div class="form-group col-md-6">
 
-                                <label for="workoutLevel">Workout level: </label>
+                                <label for="workoutLevel" th:text="#{workoutLevel_workout_search_page}"></label>
 
                                 <select class="form-control text-center" name="workoutLevel" id="workoutLevel">
 
                                     <option value="" selected> </option>
-                                    <option value="Amateur">Amateur</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Advanced">Advanced</option>
+                                    <option value="Amateur" th:text="#{selectWorkoutLevelAmateur_workout_search_page}">
+                                    </option>
+                                    <option value="Medium" th:text="#{selectWorkoutLevelMedium_workout_search_page}">
+                                    </option>
+                                    <option value="Advanced" th:text="#{selectWorkoutLevelAdvanced_workout_search_page}">
+                                    </option>
 
                                 </select>
 
@@ -111,25 +119,40 @@
 
                             <div class="form-group col-md-12">
 
-                                <label for="workoutSortBy">Sort by: </label>
+                                <label for="workoutSortBy" th:text="#{lblSortBy}"></label>
 
                                 <select class="form-control text-center" name="workoutSortBy" id="workoutSortBy">
 
                                     <option value="" selected> </option>
-                                    <option value="ORDER BY workoutName ASC">Workout Name Ascending</option>
-                                    <option value="ORDER BY workoutName DESC">Workout Name Descending</option>
-                                    <option value="ORDER BY workoutCoaches ASC">Workout Coach Ascending</option>
-                                    <option value="ORDER BY workoutCoaches DESC">Workout Coach Descending</option>
-                                    <option value="ORDER BY workoutPrice ASC">Workout Price Ascending</option>
-                                    <option value="ORDER BY workoutPrice DESC">Workout Price Descending</option>
-                                    <option value="ORDER BY workoutTypeName ASC">Workout Type Ascending</option>
-                                    <option value="ORDER BY workoutTypeName DESC">Workout Type Descending</option>
-                                    <option value="ORDER BY workoutOrganizationType ASC">Workout Org. Type Ascending</option>
-                                    <option value="ORDER BY workoutOrganizationType DESC">Workout Org. Type Descending</option>
-                                    <option value="ORDER BY workoutLevel ASC">Workout Level Ascending</option>
-                                    <option value="ORDER BY workoutLevel DESC">Workout Level Descending</option>
-                                    <option value="ORDER BY workoutAverageRate ASC">Workout Average Ascending</option>
-                                    <option value="ORDER BY workoutAverageRate DESC">Workout Average Descending</option>
+                                    <option value="ORDER BY workoutName ASC"
+                                            th:text="#{orderByWorkoutNameASC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutName DESC"
+                                            th:text="#{orderByWorkoutNameDESC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutCoaches ASC"
+                                            th:text="#{orderByWorkoutCoachesASC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutCoaches DESC"
+                                            th:text="#{orderByWorkoutCoachesDESC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutPrice ASC"
+                                            th:text="#{orderByWorkoutPriceASC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutPrice DESC"
+                                            th:text="#{orderByWorkoutPriceDESC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutTypeName ASC"
+                                            th:text="#{orderByWorkoutTypeASC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutTypeName DESC"
+                                            th:text="#{orderByWorkoutTypeDESC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutOrganizationType ASC"
+                                            th:text="#{orderByWorkoutOrganizationTypeASC_workout_search_page}">
+                                    </option>
+                                    <option value="ORDER BY workoutOrganizationType DESC"
+                                            th:text="#{orderByWorkoutOrganizationTypeDESC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutLevel ASC"
+                                            th:text="#{orderByWorkoutLevelASC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutLevel DESC"
+                                            th:text="#{orderByWorkoutLevelDESC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutAverageRate ASC"
+                                            th:text="#{orderByWorkoutAverageASC_workout_search_page}"></option>
+                                    <option value="ORDER BY workoutAverageRate DESC"
+                                            th:text="#{orderByWorkoutAverageDESC_workout_search_page}"></option>
 
                                 </select>
 
@@ -146,9 +169,10 @@
                                 <div class="inlineFlex w-100">
 
                                     <input type="button" id="btnCancel" class="btn btn-light" data-dismiss="modal"
-                                           value="Cancel"/>
+                                           th:value="#{btnCancel}"/>
 
-                                    <input type="submit" id="btnWorkoutSearch" class="btn btn-light" value="Search"/>
+                                    <input type="submit" id="btnWorkoutSearch" class="btn btn-light"
+                                           th:value="#{btnSearch}"/>
 
                                 </div>
 
@@ -160,12 +184,12 @@
 
                 </div>
 
-
             </div>
 
         </div>
 
         <script src="js/workoutPriceValidation.js" type="text/javascript"></script>
+
     </div>
 
     </body>

@@ -2,10 +2,7 @@ package com.project.gymcenter.controller;
 
 import com.project.gymcenter.dao.form.AddEditWorkoutForm;
 import com.project.gymcenter.model.*;
-import com.project.gymcenter.service.PeriodService;
-import com.project.gymcenter.service.WorkoutIncludedTypesService;
-import com.project.gymcenter.service.WorkoutService;
-import com.project.gymcenter.service.WorkoutTypeService;
+import com.project.gymcenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +17,9 @@ import java.util.Objects;
 
 @Controller
 public class WorkoutDetailsController {
+
+    @Autowired
+    private AuditoriumService auditoriumService;
 
     @Autowired
     private PeriodService periodService;
@@ -37,10 +37,9 @@ public class WorkoutDetailsController {
     NavBarController navBarController = new NavBarController();
 
     @RequestMapping(value="/workoutDetails")
-    public String workoutDetails(@RequestParam Long id, Model model, HttpServletRequest request) {
+    public String workoutDetails(@RequestParam Long id, Model model, HttpServletRequest request, @RequestParam(required = false) String lang) {
 
         if(request.getSession().getAttribute("currentUserRole") != null) {
-
 
             if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                     String.valueOf(UserRole.Customer))) {
@@ -55,22 +54,25 @@ public class WorkoutDetailsController {
         model.addAttribute("workoutIncludedTypes", workoutIncludedTypesService.findById(id));
         model.addAttribute("workoutTypeDetails", workoutTypeService.findAll());
 
-
         model.addAttribute("accessFromWorkoutDetailsPage", true);
 
         String navBarTitle = "Workout details";
 
+        String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                navBarController.getNavBarLanguagePath(lang) + "&id=" + id;
+
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
-            navBarController.setNavBarGuest(navBarTitle, "/workoutDetails?id=" + id, false, model);
+            navBarController.setNavBarGuest(navBarTitle, "/workoutDetails?id=" + id,
+                    navBarLanguagePath, false, true, model);
 
             model.addAttribute("showEditWorkoutButton", false);
 
         } else if (Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Customer))) {
 
-            navBarController.setNavBarCustomer(navBarTitle, "/workoutDetails?id=" + id, false,
-                    model);
+            navBarController.setNavBarCustomer(navBarTitle, "/workoutDetails?id=" + id,
+                    navBarLanguagePath, false, true, model);
 
             model.addAttribute("showReservePeriodButton", true);
             model.addAttribute("showAddToWishListButton", true);
@@ -79,7 +81,7 @@ public class WorkoutDetailsController {
         } else {
 
             navBarController.setNavBarAdministrator(navBarTitle, "/workoutDetails?id=" + id,
-                    false, model);
+                    navBarLanguagePath, false, true, model, workoutService.findAll(), auditoriumService.findAll());
 
             model.addAttribute("showEditWorkoutButton", true);
         }
@@ -88,10 +90,14 @@ public class WorkoutDetailsController {
     }
 
     @RequestMapping (value="/editWorkoutDetails")
-    public String editWorkoutDetails(@RequestParam Long id, Model model) {
+    public String editWorkoutDetails(@RequestParam Long id, @RequestParam(required = false) String lang, Model model,
+                                     HttpServletRequest request) {
+
+        String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                navBarController.getNavBarLanguagePath(lang) + "&id=" + id;
 
         navBarController.setNavBarAdministrator("Edit workout", "/editWorkoutDetails?id=" + id,
-                false, model);
+                navBarLanguagePath, false,  true, model, workoutService.findAll(), auditoriumService.findAll());
 
         Workout workoutForEdit = workoutService.findById(id);
 

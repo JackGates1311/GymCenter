@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>Add new Workout</title>
+    <title th:text="#{title_add_new_workout_page}"></title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -23,12 +23,14 @@
 
                 <div class="col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
 
-                    <label for="newWorkoutName">Workout Name:</label>
+                    <label for="newWorkoutName" th:text="#{newWorkoutName_add_new_workout_page}"></label>
 
                     <input class="form-control" type="text" name="newWorkoutName" id="newWorkoutName"
-                           placeholder="Workout Name" required="true">
+                           th:placeholder="#{newWorkoutNamePlaceholder_add_new_workout_page}" required="true">
 
-                    <label for="newWorkoutIncludedTypes">Workout Types:</label>
+                    <label for="newWorkoutIncludedTypes" th:text="#{newWorkoutIncludedTypes_add_new_workout_page}">
+
+                    </label>
 
                     <select class="select w-100" id="newWorkoutIncludedTypes" name="newWorkoutIncludedTypes"
                             required="true" multiple>
@@ -39,22 +41,20 @@
 
                     </select>
 
-                    <label for="newWorkoutCoaches">Workout Coaches:</label>
+                    <label for="newWorkoutCoaches" th:text="#{newWorkoutCoaches_add_new_workout_page}"></label>
 
                     <input class="form-control" type="text" name="newWorkoutCoaches" id="newWorkoutCoaches"
-                           placeholder="Workout Coaches" required="true">
+                           th:placeholder="#{newWorkoutCoachesPlaceholder_add_new_workout_page}" required="true">
 
-
-                    <label for="newWorkoutImage">Workout Image:</label>
+                    <label for="newWorkoutImage" th:text="#{newWorkoutImage_add_new_workout_page}"></label>
 
                     <div class="custom-file">
 
                         <input type="file" class="custom-file-input" id="newWorkoutImage" name="newWorkoutImage"
                                required="true">
 
-                        <label class="custom-file-label" id="newWorkoutImageLabel" for="newWorkoutImage">
-                            Click here to select image
-                        </label>
+                        <label class="custom-file-label" id="newWorkoutImageLabel" for="newWorkoutImage"
+                            th:text="#{newWorkoutImageLabel_add_new_workout_page}"></label>
 
                     </div>
 
@@ -62,14 +62,15 @@
 
                 <div class="col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
 
-                    <label>Workout Price and Org. Type:</label>
+                    <label th:text="#{workoutPriceAndOrganizationType_add_new_workout_page}"></label>
 
                     <div class="form-row">
 
                         <div class="form-group col-md-6">
 
                             <input type="text" class="form-control" id="newWorkoutPrice" minlength="1" maxlength="6"
-                                   name="newWorkoutPrice" placeholder="Price">
+                                   name="newWorkoutPrice"
+                                   th:placeholder="#{newWorkoutPricePlaceholder_add_new_workout_page}">
 
                         </div>
 
@@ -79,8 +80,11 @@
                                     name="newWorkoutOrganizationType" required="true">
 
                                 <option value="" hidden></option>
-                                <option value="Individual">Individual</option>
-                                <option value="Group">Group</option>
+                                <option value="Individual"
+                                        th:text="#{selectWorkoutOrganizationTypeIndividual_add_new_workout_page}">
+                                </option>
+                                <option value="Group"
+                                        th:text="#{selectWorkoutOrganizationTypeGroup_add_new_workout_page}"></option>
 
                             </select>
 
@@ -88,14 +92,15 @@
 
                     </div>
 
-                    <label>Workout Length and Level:</label>
+                    <label th:text="${workoutLengthAndLevel_add_new_workout_page}"></label>
 
                     <div class="form-row">
 
                         <div class="form-group col-md-6">
 
                             <input type="text" class="form-control" id="newWorkoutLength" minlength="1" maxlength="4"
-                                   name="newWorkoutLength" placeholder="Length (in minutes)">
+                                   name="newWorkoutLength"
+                                   th:placeholder="#{newWorkoutLengthPlaceholder_add_new_workout_page}">
 
                         </div>
 
@@ -104,9 +109,12 @@
                             <select class="form-control" id="newWorkoutLevel" name="newWorkoutLevel" required="true">
 
                                 <option value="" hidden></option>
-                                <option value="Amateur">Amateur</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Advanced">Advanced</option>
+                                <option value="Amateur" th:text="#{selectWorkoutLevelAmateur_add_new_workout_page}">
+                                </option>
+                                <option value="Medium" th:text="#{selectWorkoutLevelMedium_add_new_workout_page}">
+                                </option>
+                                <option value="Advanced" th:text="#{selectWorkoutLevelAdvanced_add_new_workout_page}">
+                                </option>
 
                             </select>
 
@@ -114,7 +122,7 @@
 
                     </div>
 
-                    <label for="newWorkoutDescription">Workout Description:</label>
+                    <label for="newWorkoutDescription" th:text="#{newWorkoutDescription_add_new_workout_page}"></label>
 
                     <textarea class="form-control" id="newWorkoutDescription" name="newWorkoutDescription"
                               rows="5"></textarea>
@@ -124,14 +132,14 @@
                         <div class="form-group col-md-6">
 
                             <input class="btn btn-light btn-sm marginTopDefault w-100" id="cancelAddNewEditWorkoutButton"
-                                   type="button" value="Cancel"/>
+                                   type="button" th:value="#{btnCancel}"/>
 
                         </div>
 
                         <div class="form-group col-md-6">
 
                             <input class="btn btn-light btn-sm marginTopDefault w-100" id="addNewWorkoutButton"
-                                   type="submit" value="Add New Workout">
+                                   type="submit" th:value="#{addNewWorkoutButton_add_new_workout_page}">
 
                         </div>
 

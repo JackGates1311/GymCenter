@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>User settings</title>
+    <title th:text="#{title_user_details_page}"></title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -23,32 +23,31 @@
 
                 <div class="col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
 
-                    <label for="userFirstName">First name:</label>
+                    <label for="userFirstName" th:text="#{userFirstName_user_details_page}"></label>
 
-                    <input class="form-control" type="text" name="userFirstName" id="userFirstName"
-                           placeholder="First name" required="true" th:value="${loggedInUser.userFirstName}"
-                           th:readonly="${inputReadOnly}">
+                    <input class="form-control" type="text" name="userFirstName" id="userFirstName" required="true"
+                           th:value="${loggedInUser.userFirstName}" th:readonly="${inputReadOnly}">
 
-                    <label for="userLastName">Last name:</label>
+                    <label for="userLastName" th:text="#{userLastName_user_details_page}"></label>
 
                     <input class="form-control" type="text" name="userLastName" id="userLastName"
                            placeholder="Last name" required="true" th:value="${loggedInUser.userLastName}"
                            th:readonly="${inputReadOnly}">
 
-                    <label for="userEmail">Email:</label>
+                    <label for="userEmail" th:text="#{userEmail_user_details_page}"></label>
 
                     <input class="form-control" type="email" name="userEmail" id="userEmail" placeholder="Email"
                            required="true" th:value="${loggedInUser.userEmail}" th:readonly="${inputReadOnly}">
 
-                    <label>Date of birth:</label>
+                    <label th:text="#{userDateOfBirthLabel_user_details_page}"></label>
 
                     <div class="form-row">
 
                         <div class="form-group col-md-4">
 
                             <input type="text" class="form-control" id="dayOfUserDateBirth" maxlength="2" minlength="1"
-                                   name="dayOfUserDateBirth" placeholder="Day" required="true"
-                                   th:value="${loggedInUserDayOfBirth}" th:readonly="${inputReadOnly}">
+                                   name="dayOfUserDateBirth" required="true" th:value="${loggedInUserDayOfBirth}"
+                                   th:readonly="${inputReadOnly}">
 
                         </div>
 
@@ -57,7 +56,7 @@
                             <select class="form-control text-center" id="monthOfUserDateBirth"
                                     name="monthOfUserDateBirth" required="true" th:disabled="${inputReadOnly}">
 
-                                <option value="" hidden>Month</option>
+                                <option value="" hidden></option>
                                 <option value="1" th:selected="${loggedInUserMonthOfBirth} eq 1">1</option>
                                 <option value="2" th:selected="${loggedInUserMonthOfBirth} eq 2">2</option>
                                 <option value="3" th:selected="${loggedInUserMonthOfBirth} eq 3">3</option>
@@ -78,8 +77,8 @@
                         <div class="form-group col-md-4">
 
                             <input type="text" class="form-control" id="yearOfUserDateBirth" name="yearOfUserDateBirth"
-                                   placeholder="Year" maxlength="4" minlength="4" required="true"
-                                   th:value="${loggedInUserYearOfBirth}" th:readonly="${inputReadOnly}">
+                                   maxlength="4" minlength="4" required="true" th:value="${loggedInUserYearOfBirth}"
+                                   th:readonly="${inputReadOnly}">
                         </div>
 
                     </div>
@@ -88,46 +87,47 @@
 
                 <div class="col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
 
-                    <label for="userName">Username:</label>
+                    <label for="userName" th:text="#{userName_user_details_page}"></label>
 
-                    <input class="form-control" type="text" name="userName" id="userName" placeholder="Username"
-                           required="true" th:value="${loggedInUser.userName}" th:readonly="${inputReadOnly}">
+                    <input class="form-control" type="text" name="userName" id="userName" required="true"
+                           th:value="${loggedInUser.userName}" th:readonly="${inputReadOnly}">
 
-                    <label for="userPhoneNumber">Phone number:</label>
+                    <label for="userPhoneNumber" th:text="#{userPhoneNumber_user_details_page}"></label>
 
                     <input class="form-control" type="text" name="userPhoneNumber" id="userPhoneNumber"
-                           placeholder="Phone number" minlength="8" maxlength="15" required="true"
-                           th:value="${loggedInUser.userPhoneNumber}" th:readonly="${inputReadOnly}">
-
-                    <label for="userAddress">Address:</label>
-
-                    <input class="form-control" type="text" name="userAddress" id="userAddress"
-                           placeholder="Address" required="true" th:value="${loggedInUser.userAddress}"
+                           minlength="8" maxlength="15" required="true" th:value="${loggedInUser.userPhoneNumber}"
                            th:readonly="${inputReadOnly}">
 
-                    <label for="userPasswordButton" th:if="${userPasswordVisible}">Password:</label>
+                    <label for="userAddress" th:text="#{userAddress_user_details_page}"></label>
+
+                    <input class="form-control" type="text" name="userAddress" id="userAddress" required="true"
+                           th:value="${loggedInUser.userAddress}" th:readonly="${inputReadOnly}">
+
+                    <label for="userPasswordButton" th:if="${userPasswordVisible}"
+                           th:text="#{userPassword_user_details_page}"></label>
 
                     <input class="btn btn-light w-100" type="button" name="userPasswordButton" data-toggle="modal"
                            data-target="#btnChangePassword" id="userPasswordButton" placeholder="Password" required="true"
-                           value="Change Password" th:if="${userPasswordVisible}">
+                           th:value="#{userPasswordButton_user_details_page}" th:if="${userPasswordVisible}">
 
                     <div class="form-row">
 
                         <div class="form-group col-md-6">
 
-                            <label for="userRole" th:if="${userRoleVisible}">User role:</label>
+                            <label for="userRole" th:if="${userRoleVisible}" th:text="#{userRole_user_details_page}">
+                            </label>
 
                             <select class="form-control" id="userRole" name="userRole" required="true"
                                     th:if="${userRoleVisible}">
 
-                                <option value="" hidden>Role</option>
+                                <option value="" hidden></option>
 
-                                <option value="Administrator" th:selected="${#strings.toString(loggedInUser.userRole)} eq 'Administrator'">
-                                    Administrator
+                                <option value="Administrator" th:text="#{selectUserRoleAdministrator_user_details_page}"
+                                        th:selected="${#strings.toString(loggedInUser.userRole)} eq 'Administrator'">
                                 </option>
 
-                                <option value="Customer" th:selected="${#strings.toString(loggedInUser.userRole)} eq 'Customer'">
-                                    Customer
+                                <option value="Customer" th:text="#{selectUserRoleCustomer_user_details_page}"
+                                        th:selected="${#strings.toString(loggedInUser.userRole)} eq 'Customer'">
                                 </option>
 
                             </select>
@@ -136,19 +136,20 @@
 
                         <div class="form-group col-md-6">
 
-                            <label for="userAccountStatus" th:if="${userRoleVisible}">Account status:</label>
+                            <label for="userAccountStatus" th:if="${userRoleVisible}"
+                                   th:text="#{userAccountStatus_user_details_page}"></label>
 
                             <select class="form-control" id="userAccountStatus" name="userAccountStatus" required="true"
                                     th:if="${userRoleVisible}" th:disabled="${userAccountStatusReadOnly}">
 
-                                <option value="" hidden>Status</option>
+                                <option value="" hidden></option>
 
-                                <option value="Active" th:selected="${loggedInUserIsRemoved} == false">
-                                    Active
+                                <option value="Active" th:selected="${loggedInUserIsRemoved} == false"
+                                    th:text="#{selectAccountStatusActive_user_details_page}">
                                 </option>
 
-                                <option value="Blocked" th:selected="${loggedInUserIsRemoved} == true">
-                                    Blocked
+                                <option value="Blocked" th:selected="${loggedInUserIsRemoved} == true"
+                                    th:text="#{selectAccountStatusBlocked_user_details_page}">
                                 </option>
 
                             </select>
@@ -167,17 +168,18 @@
 
                             <input class="btn btn-light btn-sm marginTopDefault w-100" id="cancelAddEditAccount"
                                    onclick="javascript: window.location=document.referrer;" type="button"
-                                   value="Back to all workouts" th:if="${cancelAddEditAccountVisible}"/>
+                                   th:value="#{cancelAddEditAccount_user_details_page}" th:if="${cancelAddEditAccountVisible}"/>
 
                             <input class="btn btn-light btn-sm marginTopDefault w-100" id="cancelUserDetailsAccount"
-                                   type="button" value="Back to all users" th:if="${cancelUserDetailsAccountVisible}"/>
+                                   type="button" th:value="#{btnCancelUserDetailsAccount_user_details_page}"
+                                   th:if="${cancelUserDetailsAccountVisible}"/>
 
                         </div>
 
                         <div class="form-group col-md-6">
 
                             <input class="btn btn-light btn-sm marginTopDefault w-100" id="saveChangesButton"
-                                   type="submit" value="Save Changes">
+                                   type="submit" th:value="#{btnSave}">
 
                         </div>
 

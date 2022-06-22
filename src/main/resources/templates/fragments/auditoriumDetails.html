@@ -12,12 +12,12 @@
 
             <div class="modal-header text-center">
 
-                <h4 class="modal-title w-100" th:if="${tempAuditoriumList.auditoriumId != ''}">
-                    Auditorium details
+                <h4 class="modal-title w-100" th:if="${tempAuditoriumList.auditoriumId != ''}"
+                    th:text="#{modalTitle_show_auditorium_details_page}">
                 </h4>
 
-                <h4 class="modal-title w-100" th:if="${tempAuditoriumList.auditoriumId == ''}">
-                    Add new auditorium
+                <h4 class="modal-title w-100" th:if="${tempAuditoriumList.auditoriumId == ''}"
+                    th:text="#{modalTitle_add_auditorium_details_page}">
                 </h4>
 
             </div>
@@ -31,17 +31,19 @@
 
                         <div class="form-group col-md-6 textAlignLeft">
 
-                            <label for="auditoriumId">Auditorium ID: </label>
+                            <label for="auditoriumId" th:text="#{auditoriumId_auditorium_details_page}"></label>
 
                             <input type="text" class="form-control" id="auditoriumId" name="auditoriumId"
-                                   placeholder="Auditorium ID" th:value="${tempAuditoriumList.auditoriumId}"
+                                   th:placeholder="#{auditoriumIdPlaceholder_auditorium_details_page}"
+                                   th:value="${tempAuditoriumList.auditoriumId}"
                                    th:readonly="${tempAuditoriumList.auditoriumId != ''}" maxlength="5" required>
 
                         </div>
 
                         <div class="form-group col-md-6 textAlignLeft">
 
-                            <label for="auditoriumCapacity">Auditorium capacity: </label>
+                            <label for="auditoriumCapacity" th:text="#{auditoriumCapacity_auditorium_details_page}">
+                                </label>
 
                             <input type="number" class="form-control" id="auditoriumCapacity" name="auditoriumCapacity"
                                    placeholder="Auditorium capacity" th:value="${tempAuditoriumList.capacity}" min="1"
@@ -55,11 +57,13 @@
 
                         <a th:if="${tempAuditoriumList.auditoriumId != ''}"
                            th:href="@{'/removeAuditorium?id=' + ${tempAuditoriumList.auditoriumId}}"
-                           class="btn btn-light w-50 alignRight" id="btnRemove"> Remove auditorium </a>
+                           class="btn btn-light w-50 alignRight" id="btnRemove"
+                           th:text="#{btnRemove_auditorium_details_page}"></a>
 
-                        <input type="submit" id="btnSave" class="btn btn-light w-25 alignRight" value="Save"/>
+                        <input type="submit" id="btnSave" class="btn btn-light w-25 alignRight" th:value="#{btnSave}"/>
 
-                        <input id="btnOk" class="btn btn-light w-25 alignRight" data-dismiss="modal" value="Close"/>
+                        <input id="btnOk" class="btn btn-light w-25 alignRight" data-dismiss="modal"
+                               th:value="#{btnClose}"/>
 
                     </div>
 

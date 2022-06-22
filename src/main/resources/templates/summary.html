@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Workouts summary</title>
+    <title th:text="#{title_summary_page}"></title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -25,10 +25,10 @@
 
                 <tr>
 
-                    <th scope="col"> Workout Name </th>
-                    <th scope="col"> Workout Coaches</th>
-                    <th scope="col"> Reservation Count</th>
-                    <th scope="col"> Workout Salary</th>
+                    <th scope="col" th:text="#{colWorkoutName_summary_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutCoaches_summary_page}"></th>
+                    <th scope="col" th:text="#{colReservationCount_summary_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutSalary_summary_page}"></th>
 
                 </tr>
 

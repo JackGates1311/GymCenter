@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>MagicBoost Gym - Login</title>
+    <title th:text="#{title_login_page}"></title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -14,36 +14,40 @@
 
     <div class="center paddingNormal w-40">
 
-        <h2>MagicBoost Gym Login</h2>
+        <h2 th:text="#{title_login_page}"></h2>
 
-        <p class="center marginTopSmallDefault w-80 red" th:if="${invalidCredentials}"> Username or Password is not correct </p>
-        <p class="center w-80 green" th:if="${registrationSuccessful}"> You have successfully registered your account </p>
-        <p class="center w-80 red" th:if="${permissionDenied}"> You do not have right permissions to access to
-            this page </p>
+        <p class="center marginTopSmallDefault w-80 red" th:if="${invalidCredentials}"
+           th:text="#{invalidCredentials_login_page}"></p>
+        <p class="center w-80 green" th:if="${registrationSuccessful}"
+           th:text="#{registrationSuccessful_login_page}"></p>
+        <p class="center w-80 red" th:if="${permissionDenied}" th:text="#{permissionDenied_login_page}"></p>
 
         <div class="paddingNormal">
 
             <form th:action="@{/}" th:object="${loginForm}" method="post">
 
-                <label for="userName">Username:</label>
+                <label for="userName" th:text="#{userName_login_page}"></label>
 
-                <input class="form-control" type="text" name="userName" id="userName" placeholder="Username">
+                <input class="form-control" type="text" name="userName" id="userName"
+                       th:placeholder="#{userNamePlaceholder_login_page}">
 
-                <label for="password">Password:</label>
+                <label for="password" th:text="#{password_login_page}"></label>
 
-                <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+                <input class="form-control" type="password" name="password" id="password"
+                       th:placeholder="#{passwordPlaceholder_login_page}">
 
-                <input class="btn btn-light btn-sm marginTopDefault" type="submit" value="Login">
+                <input class="btn btn-light btn-sm marginTopDefault" type="submit" th:value="#{btnLogin_login_page}">
 
             </form>
 
-            <a th:if="${showRegisterButton}" class="btn btn-light btn-sm marginTopDefault w-100"  href="/register"> Register </a>
+            <a th:if="${showRegisterButton}" class="btn btn-light btn-sm marginTopDefault w-100" href="/register"
+                th:text="#{btnRegister_login_page}"></a>
 
             <a th:if="${showCancelButton}" class="btn btn-light btn-sm marginTopDefault w-100"
-               href="javascript:history.back()">Cancel</a>
+               href="javascript:history.back()" th:text="#{btnCancel}"></a>
 
             <a th:if="${continueAsGuestButton}" class="btn btn-light btn-sm marginTopDefault w-100"
-               href="/">Continue as Guest</a>
+               href="/" th:text="#{btnGuest_login_page}"></a>
 
         </div>
 

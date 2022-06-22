@@ -13,7 +13,7 @@
 
             <div class="modal-header text-center">
 
-                <h4 class="modal-title w-100">Search for auditoriums</h4>
+                <h4 class="modal-title w-100" th:text="#{modalTitle_auditorium_search_page}"></h4>
 
             </div>
 
@@ -23,24 +23,28 @@
 
                     <div class="form-row">
 
-                        <label for="auditoriumId">Auditorium ID: </label>
+                        <label for="auditoriumId" th:text="#{auditoriumId_auditorium_search_page}"></label>
 
                         <input type="search" class="form-control" id="auditoriumId" name="auditoriumId"
-                               placeholder="Auditorium ID">
+                               th:placeholder="#{auditoriumId_auditorium_search_page}">
 
                     </div>
 
                     <div class="form-row">
 
-                        <label for="auditoriumSortBy">Sort by: </label>
+                        <label for="auditoriumSortBy" th:text="#{lblSortBy}"></label>
 
                         <select class="form-control text-center" name="auditoriumSortBy" id="auditoriumSortBy">
 
                             <option value="" selected> </option>
-                            <option value="ORDER BY auditoriumId ASC">Auditorium ID Ascending</option>
-                            <option value="ORDER BY auditoriumId DESC">Auditorium ID Descending</option>
-                            <option value="ORDER BY capacity ASC">Capacity Ascending</option>
-                            <option value="ORDER BY capacity DESC">Capacity Descending</option>
+                            <option value="ORDER BY auditoriumId ASC"
+                                    th:text="#{orderByAuditoriumIdASC_auditorium_search_page}"></option>
+                            <option value="ORDER BY auditoriumId DESC"
+                                th:text="#{orderByAuditoriumIdDESC_auditorium_search_page}"></option>
+                            <option value="ORDER BY capacity ASC"
+                                th:text="#{orderByCapacityASC_auditorium_search_page}"></option>
+                            <option value="ORDER BY capacity DESC"
+                                th:text="#{orderByCapacityDESC_auditorium_search_page}"></option>
 
                         </select>
 
@@ -51,9 +55,10 @@
                             <div class="inlineFlex w-100 marginTopDefault alignRight">
 
                                 <input type="button" id="btnCancel" class="btn btn-light w-25" data-dismiss="modal"
-                                       value="Cancel"/>
+                                       th:value="#{btnCancel}"/>
 
-                                <input type="submit" id="btnWorkoutSearch" class="btn btn-light w-25" value="Search"/>
+                                <input type="submit" id="btnWorkoutSearch" class="btn btn-light w-25"
+                                       th:value="#{btnSearch}"/>
 
                             </div>
 

@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Reserved workouts</title>
+    <title th:text="#{title_reservation_page}"></title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -24,14 +24,14 @@
 
                 <tr>
 
-                    <th th:if="${isAdministrator}" scope="col"> Customer </th>
-                    <th scope="col"> Workout Name </th>
-                    <th scope="col"> Workout Coaches</th>
-                    <th scope="col"> Workout Org. Type</th>
-                    <th scope="col"> Workout Period Start</th>
-                    <th scope="col"> Workout Time Reservation</th>
-                    <th scope="col"> Workout Price</th>
-                    <th th:if="${isAdministrator} == false" scope="col"> Actions </th>
+                    <th th:if="${isAdministrator}" scope="col" th:text="#{colCustomer_reservation_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutName_reservation_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutCoaches_reservation_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutOrganizationType_reservation_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutPeriodStart_reservation_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutTimeReservation_reservation_page}"></th>
+                    <th scope="col" th:text="#{colWorkoutPrice_reservation_page}"></th>
+                    <th th:if="${isAdministrator} == false" scope="col" th:text="#{colActions_reservation_page}"></th>
 
                 </tr>
 
@@ -63,8 +63,7 @@
                             <a th:href="@{'/cancelReservation?id=' + ${tempWorkoutReservations.periodReservationId}}"
                                th:if="${#temporals.format(tempWorkoutReservations.workoutDateTimeStart,
                                 'dd.MM.yyyy. HH:mm')} > ${#temporals.format(isCancelReservationExpired,
-                                'dd.MM.yyyy. HH:mm')}" >
-                                Cancel reservation </a>
+                                'dd.MM.yyyy. HH:mm')}" th:text="#{btnCancelReservation_reservation_page}"></a>
 
                         </div>
 

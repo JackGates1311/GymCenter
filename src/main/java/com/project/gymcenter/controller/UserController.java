@@ -3,7 +3,9 @@ package com.project.gymcenter.controller;
 import com.project.gymcenter.dao.form.*;
 import com.project.gymcenter.model.RegisteredUser;
 import com.project.gymcenter.model.UserRole;
+import com.project.gymcenter.service.AuditoriumService;
 import com.project.gymcenter.service.RegisteredUserService;
+import com.project.gymcenter.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,12 @@ public class UserController {
 
     @Autowired
     RegisteredUserService registeredUserService;
+
+    @Autowired
+    WorkoutService workoutService;
+
+    @Autowired
+    AuditoriumService auditoriumService;
 
     @Autowired
     NavBarController navBarController = new NavBarController();
@@ -131,7 +139,7 @@ public class UserController {
     }
 
     @RequestMapping("/accountInfo")
-    public String editUserDetails(HttpServletRequest request, Model model) {
+    public String editUserDetails(HttpServletRequest request, Model model, @RequestParam(required = false) String lang) {
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
@@ -140,6 +148,9 @@ public class UserController {
             return "login";
 
         } else {
+
+            String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                    navBarController.getNavBarLanguagePath(lang);
 
             int currentLoggedInUserId = Integer.parseInt(
                     request.getSession().getAttribute("loggedInUserId").toString());
@@ -151,7 +162,7 @@ public class UserController {
 
             FillFormWithUserDataReadOnly(false, model, currentLoggedInUserId); */
 
-            getUserDetailsPageNavBar(request, model, currentLoggedInUserId);
+            getUserDetailsPageNavBar(request, model, currentLoggedInUserId, navBarLanguagePath);
 
             return "userDetails";
         }
@@ -160,7 +171,7 @@ public class UserController {
 
     @RequestMapping(value="/saveAccountInfo", method= RequestMethod.POST)
     public String saveAccountInfo(@ModelAttribute(name="addEditAccountForm") AddEditAccountForm addEditAccountForm,
-                                  HttpServletRequest request, Model model) {
+                                  HttpServletRequest request, Model model, @RequestParam(required = false) String lang) {
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
@@ -184,7 +195,7 @@ public class UserController {
 
                 registeredUserService.update(registeredUser, userId);
 
-                getUserDetailsPageNavBar(request, model, userId);
+                getUserDetailsPageNavBar(request, model, userId, lang);
 
                 model.addAttribute("saveAccountChangesSuccess", true);
 
@@ -194,7 +205,7 @@ public class UserController {
 
                 model.addAttribute("saveAccountChangesFailed", true);
 
-                getUserDetailsPageNavBar(request, model, userId);
+                getUserDetailsPageNavBar(request, model, userId, lang);
 
                 return "userDetails";
             }
@@ -204,7 +215,7 @@ public class UserController {
 
     @RequestMapping(value="/changePassword", method= RequestMethod.POST)
     public String changePassword(@ModelAttribute(name="changePasswordForm") ChangePasswordForm changePasswordForm,
-                                 HttpServletRequest request, Model model) {
+                                 HttpServletRequest request, Model model, @RequestParam(required = false) String lang) {
 
         if(request.getSession().getAttribute("currentUserRole") == null) {
 
@@ -216,11 +227,14 @@ public class UserController {
 
             int userId = Integer.parseInt(request.getSession().getAttribute("loggedInUserId").toString());
 
+            String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                    navBarController.getNavBarLanguagePath(lang);
+
             try {
 
                 registeredUserService.changePassword(changePasswordForm.getUserNewPassword(), userId);
 
-                getUserDetailsPageNavBar(request, model, userId);
+                getUserDetailsPageNavBar(request, model, userId, navBarLanguagePath);
 
                 model.addAttribute("passwordChangeSuccess", true);
 
@@ -228,9 +242,10 @@ public class UserController {
 
             } catch (Exception e) {
 
-                navBarController.setNavBarAdministrator("My account details", "/accountInfo", false, model);
+                navBarController.setNavBarAdministrator("My account details", "/accountInfo",
+                        navBarLanguagePath, false, true, model, workoutService.findAll(), auditoriumService.findAll());
 
-                getUserDetailsPageNavBar(request, model, userId);
+                getUserDetailsPageNavBar(request, model, userId, navBarLanguagePath);
 
                 model.addAttribute("passwordChangeFailed", true);
 
@@ -242,7 +257,10 @@ public class UserController {
     }
 
     @RequestMapping("/manageUsers")
-    public String manageUsers(HttpServletRequest request, Model model) {
+    public String manageUsers(HttpServletRequest request, Model model, @RequestParam(required = false) String lang) {
+
+        String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                navBarController.getNavBarLanguagePath(lang);
 
         if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
                 Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
@@ -256,7 +274,8 @@ public class UserController {
         } else {
 
             navBarController.setNavBarAdministrator("Manage users", "/manageUsers",
-                    true, model);
+                    navBarLanguagePath, true, true, model, workoutService.findAll(),
+                    auditoriumService.findAll());
 
             List<RegisteredUser> registeredUsers = registeredUserService.findAll();
 
@@ -268,8 +287,7 @@ public class UserController {
     }
 
     @RequestMapping(value="/usersSearchResult", method=RequestMethod.POST)
-    public String usersSearchResult(@ModelAttribute(name="userSearchForm") UserSearchForm userSearchForm, Model model,
-                                    HttpServletRequest request) {
+    public String usersSearchResult(@ModelAttribute(name="userSearchForm") UserSearchForm userSearchForm, Model model, HttpServletRequest request, @RequestParam(required = false) String lang) {
 
         List<RegisteredUser> usersFound = registeredUserService.find(userSearchForm.getUserName(),
                 userSearchForm.getUserRole(), userSearchForm.getUserSortBy());
@@ -289,14 +307,18 @@ public class UserController {
         else {
 
             navBarController.setNavBarAdministrator("Manage users", "/manageUsers",
-                    true, model);
+                    "", true, false, model, workoutService.findAll(), auditoriumService.findAll());
 
             return "manageUsers";
         }
     }
 
     @RequestMapping("/userDetails")
-    public String userDetails(@RequestParam int id, Model model, HttpServletRequest request) {
+    public String userDetails(@RequestParam int id, Model model, HttpServletRequest request,
+                              @RequestParam(required = false) String lang) {
+
+        String navBarLanguagePath = request.getRequestURL().toString() + "?" +
+                navBarController.getNavBarLanguagePath(lang) + "&" + "id=" + id;
 
         if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
                 Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
@@ -317,7 +339,7 @@ public class UserController {
             } else {
 
                 navBarController.setNavBarAdministrator("User details", "/userDetails?id=" + id,
-                        false, model);
+                        navBarLanguagePath, false, true, model, workoutService.findAll(), auditoriumService.findAll());
 
                 FillFormWithUserData(model, id);
 
@@ -332,7 +354,8 @@ public class UserController {
 
     @RequestMapping(value="/saveUserDetails", method = RequestMethod.POST)
     public String saveUserDetails(@RequestParam int id, @ModelAttribute(name="addEditAccountForm")
-            AddEditAccountForm addEditAccountForm, HttpServletRequest request, Model model) {
+            AddEditAccountForm addEditAccountForm, HttpServletRequest request, Model model,
+                                  @RequestParam(required = false) String lang) {
 
         if(Objects.isNull(request.getSession().getAttribute("currentUserRole").toString()) ||
                 Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
@@ -366,7 +389,7 @@ public class UserController {
 
                     model.addAttribute("changeUserRoleAccountFailed", true); // ADD ERROR
 
-                    getUserDetails(id, model);
+                    getUserDetails(id, model, lang);
 
                 } else {
 
@@ -374,7 +397,7 @@ public class UserController {
 
                     registeredUserService.updateAccountStatus(registeredUser, id);
 
-                    getUserDetails(id, model);
+                    getUserDetails(id, model, lang);
 
                     model.addAttribute("saveAccountChangesSuccess", true);
 
@@ -386,7 +409,7 @@ public class UserController {
 
                 model.addAttribute("saveAccountChangesFailed", true);
 
-                getUserDetails(id, model);
+                getUserDetails(id, model, lang);
 
                 e.printStackTrace();
 
@@ -406,10 +429,10 @@ public class UserController {
         return "redirect:/";
     }
 
-    private void getUserDetails(int id, Model model) {
+    private void getUserDetails(int id, Model model, String navBarLanguagePath) {
 
         navBarController.setNavBarAdministrator("User details", "/userDetails?id=" + id,
-                false, model);
+                navBarLanguagePath, false, true, model, workoutService.findAll(), auditoriumService.findAll());
 
         FillFormWithUserData(model, id);
 
@@ -488,18 +511,18 @@ public class UserController {
             model.addAttribute("userAccountStatusReadOnly", false);
     }
 
-    private void getUserDetailsPageNavBar(HttpServletRequest request, Model model, int userId) {
+    private void getUserDetailsPageNavBar(HttpServletRequest request, Model model, int userId, String navBarLanguagePath) {
 
         if(Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Customer))) {
 
             navBarController.setNavBarCustomer("My account details",
-                    "/accountInfo", false, model);
+                    "/accountInfo", navBarLanguagePath, false, true, model);
 
         } else {
 
             navBarController.setNavBarAdministrator("My account details",
-                    "/accountInfo", false, model);
+                    "/accountInfo", navBarLanguagePath, false, true, model, workoutService.findAll(), auditoriumService.findAll());
 
         }
 

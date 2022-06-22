@@ -13,7 +13,7 @@
 
             <div class="modal-header text-center">
 
-                <h4 class="modal-title w-100">Search for reservations</h4>
+                <h4 class="modal-title w-100" th:text="#{modalTitle_reservation_search_page}"></h4>
 
             </div>
 
@@ -23,11 +23,12 @@
 
                     <div th:if="${isAdministrator}" class="form-row">
 
-                        <label for="customerFilter">Customer: </label>
+                        <label for="customerFilter" th:text="#{customerFilter_reservation_search_page}"></label>
 
                         <select class="form-control text-center" name="customerFilter" id="customerFilter">
 
-                            <option value="" selected>All customers</option>
+                            <option value="" th:text="#{customerFilterOption_reservation_search_page}" selected>
+                                </option>
                             <option th:each="tempRegisteredUsers:${registeredUsers}"
                                     th:text="${tempRegisteredUsers.userName}"
                                     th:if="${#strings.toString(tempRegisteredUsers.userRole) == 'Customer'}"
@@ -39,32 +40,39 @@
 
                     <div class="form-row">
 
-                        <label for="reservationSortBy">Sort by: </label>
+                        <label for="reservationSortBy" th:text="#{lblSortBy}"></label>
 
                         <select class="form-control text-center" name="reservationSortBy" id="reservationSortBy">
 
-                            <option th:if="${isAdministrator}" value="ORDER BY registereduser.userName ASC">
-                                Customer Ascending</option>
-                            <option th:if="${isAdministrator}" value="ORDER BY registereduser.userName DESC">
-                                Customer Descending</option>
-                            <option value="ORDER BY workout.workoutName ASC">Workout Name Ascending</option>
-                            <option value="ORDER BY workout.workoutName DESC">Workout Name Descending</option>
-                            <option value="ORDER BY workout.workoutCoaches ASC">Workout Coaches Ascending</option>
-                            <option value="ORDER BY workout.workoutCoaches DESC">Workout Coaches Descending</option>
-                            <option value="ORDER BY workout.workoutOrganizationType ASC">
-                                Workout Organization Type Ascending</option>
-                            <option value="ORDER BY workout.workoutOrganizationType DESC">
-                                Workout Organization Type Descending</option>
-                            <option value="ORDER BY period.workoutDateTimeStart ASC">
-                                Workout Period Start Ascending</option>
-                            <option value="ORDER BY period.workoutDateTimeStart DESC">
-                                Workout Period Start Descending</option>
-                            <option value="ORDER BY periodreserved.periodDateTimeReservation ASC">
-                                Workout Time Reservation Ascending</option>
-                            <option value="ORDER BY periodreserved.periodDateTimeReservation DESC" selected>
-                                Workout Time Reservation Descending</option>
-                            <option value="ORDER BY workout.workoutPrice ASC">Workout Price Ascending</option>
-                            <option value="ORDER BY workout.workoutPrice DESC">Workout Price Descending</option>
+                            <option th:if="${isAdministrator}" value="ORDER BY registereduser.userName ASC"
+                                th:text="#{orderByCustomerASC_reservation_search_page}"></option>
+                            <option th:if="${isAdministrator}" value="ORDER BY registereduser.userName DESC"
+                                    th:text="#{orderByCustomerDESC_reservation_search_page}"></option>
+                            <option value="ORDER BY workout.workoutName ASC"
+                                    th:text="#{orderByWorkoutNameASC_reservation_search_page}"></option>
+                            <option value="ORDER BY workout.workoutName DESC"
+                                    th:text="#{orderByWorkoutNameDESC_reservation_search_page}"></option>
+                            <option value="ORDER BY workout.workoutCoaches ASC"
+                                    th:text="#{orderByWorkoutCoachesASC_reservation_search_page}"></option>
+                            <option value="ORDER BY workout.workoutCoaches DESC"
+                                th:text="#{orderByWorkoutCoachesDESC_reservation_search_page}"></option>
+                            <option value="ORDER BY workout.workoutOrganizationType ASC"
+                                th:text="#{orderByWorkoutOrganizationTypeASC_reservation_search_page}"></option>
+                            <option value="ORDER BY workout.workoutOrganizationType DESC"
+                                th:text="#{orderByWorkoutOrganizationTypeDESC_reservation_search_page}"></option>
+                            <option value="ORDER BY period.workoutDateTimeStart ASC"
+                                    th:text="#{orderByWorkoutDateTimeStartASC_reservation_search_page}"></option>
+                            <option value="ORDER BY period.workoutDateTimeStart DESC"
+                                    th:text="#{orderByWorkoutDateTimeStartDESC_reservation_search_page}"></option>
+                            <option value="ORDER BY periodreserved.periodDateTimeReservation ASC"
+                                th:text="#{orderByWorkoutDateTimeReservationASC_reservation_search_page}"></option>
+                            <option value="ORDER BY periodreserved.periodDateTimeReservation DESC"
+                                    th:text="#{orderByWorkoutDateTimeReservationDESC_reservation_search_page}" selected>
+                            </option>
+                            <option value="ORDER BY workout.workoutPrice ASC"
+                                    th:text="#{orderByWorkoutPriceASC_reservation_search_page}"></option>
+                            <option value="ORDER BY workout.workoutPrice DESC"
+                                    th:text="#{orderByWorkoutPriceDESC_reservation_search_page}"></option>
 
                         </select>
 
@@ -75,9 +83,10 @@
                         <div class="inlineFlex w-100 marginTopDefault alignRight">
 
                             <input type="button" id="btnCancel" class="btn btn-light w-25" data-dismiss="modal"
-                                   value="Cancel"/>
+                                   th:value="#{btnCancel}"/>
 
-                            <input type="submit" id="btnWorkoutSearch" class="btn btn-light w-25" value="Search"/>
+                            <input type="submit" id="btnWorkoutSearch" class="btn btn-light w-25"
+                                   th:value="#{btnSearch}"/>
 
                         </div>
 

@@ -82,13 +82,6 @@ public class PeriodController {
         }
     }
 
-    protected void configureAddNewPeriodModal(Model model) {
-
-        model.addAttribute("workoutListForPeriod", workoutService.findAll());
-        model.addAttribute("auditoriumListForPeriod", auditoriumService.findAll());
-
-    }
-
     protected LocalDateTime[] getPeriodDates(AddNewPeriodForm addNewPeriodForm) {
 
         int workoutLength = workoutService.findById(addNewPeriodForm.getWorkoutId()).getWorkoutLength();

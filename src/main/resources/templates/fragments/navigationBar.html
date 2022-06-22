@@ -33,8 +33,19 @@
                         <a th:if="${showAllWorkoutsIconNavBar}" th:href="${showAllWorkoutsIconNavBarLink}"
                            class="nav-item nav-link d-none d-lg-block">
 
-                            <span class="material-icons" data-toggle="tooltip" title="All workouts">
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{showAllWorkoutsIconNavBar}">
                                 home</span>
+
+                        </a>
+
+                        <!--/*@thymesVar id="showTranslateIconNavBar" type=""*/-->
+                        <!--/*@thymesVar id="translateNavBarPath" type=""*/-->
+
+                        <a th:if="${showTranslateIconNavBar}" class="nav-item nav-link d-none d-lg-block"
+                           th:href="${translateNavBarPath}">
+
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{showTranslateIconNavBar}">
+                                translate</span>
 
                         </a>
 
@@ -42,21 +53,24 @@
 
                         <a th:if="${showSearchIconNavBar}" href="#" class="nav-item nav-link d-none d-lg-block"
                            data-toggle="modal" data-target="#btnSearch">
-                            <span class="material-icons" data-toggle="tooltip" title="Search">search</span>
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{showSearchIconNavBar}">
+                                search</span>
                         </a>
 
                         <!--/*@thymesVar id="showWorkoutSummaryIconNavBar" type=""*/-->
 
                         <a th:if="${showWorkoutSummaryIconNavBar}" href="/summary"
                            class="nav-item nav-link d-none d-lg-block">
-                            <span class="material-icons" data-toggle="tooltip" title="Summary">bar_chart</span>
+                            <span class="material-icons" data-toggle="tooltip"
+                                  th:title="#{showWorkoutSummaryIconNavBar}">bar_chart</span>
                         </a>
 
                         <!--/*@thymesVar id="showWorkoutReservationsIconNavBar" type=""*/-->
 
                         <a th:if="${showWorkoutReservationsIconNavBar}" href="/reservations"
                            class="nav-item nav-link d-none d-lg-block">
-                            <span class="material-icons" data-toggle="tooltip" title="Events">event</span>
+                            <span class="material-icons" data-toggle="tooltip"
+                                  th:title="#{showWorkoutReservationsIconNavBar}">event</span>
                         </a>
 
                         <!--/*@thymesVar id="addPeriodIconNavBar" type=""*/-->
@@ -67,7 +81,7 @@
                         <a th:if="${addPeriodIconNavBar}" href="#" class="nav-item nav-link d-none d-lg-block"
                            data-toggle="modal" data-target="#btnAddNewPeriod">
 
-                            <span class="material-icons" data-toggle="tooltip" title="Add new period for workout">
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{addPeriodIconNavBar}">
                                 more_time</span>
                         </a>
 
@@ -76,7 +90,8 @@
                         <a th:if="${showAuditoriumsIconNavBar}" href="/auditoriums"
                            class="nav-item nav-link d-none d-lg-block">
 
-                            <span class="material-icons" data-toggle="tooltip" title="Auditoriums">apartment</span>
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{showAuditoriumsIconNavBar}">
+                                apartment</span>
                         </a>
 
                         <!--/*@thymesVar id="showAddNewWorkoutIconNavBar" type=""*/-->
@@ -84,8 +99,8 @@
                         <a th:if="${showAddNewWorkoutIconNavBar}" href="/addNewWorkout"
                            class="nav-item nav-link d-none d-lg-block">
 
-                            <span class="material-icons" data-toggle="tooltip" title="Add new workout">fitness_center
-                            </span>
+                            <span class="material-icons" data-toggle="tooltip"
+                                  th:title="#{showAddNewWorkoutIconNavBar}">fitness_center</span>
 
                         </a>
 
@@ -94,7 +109,8 @@
                         <a th:if="${showFavoritesIconNavBar}" href="/wishlist"
                            class="nav-item nav-link d-none d-lg-block">
 
-                            <span class="material-icons" data-toggle="tooltip" title="Favorites">favorite_border</span>
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{showFavoritesIconNavBar}">
+                                favorite_border</span>
 
                         </a>
 
@@ -103,7 +119,8 @@
                         <a th:if="${showManageUsersIconNavBar}" href="/manageUsers"
                            class="nav-item nav-link d-none d-lg-block">
 
-                            <span class="material-icons">group</span>
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{showManageUsersIconNavBar}">
+                                group</span>
 
                         </a>
 
@@ -111,8 +128,8 @@
                         <a th:if="${showShoppingCartIconNavBar}" href="/shoppingCart"
                            class="nav-item nav-link d-none d-lg-block">
 
-                            <span class="material-icons" data-toggle="tooltip" title="Show reserved workouts">
-                                shopping_cart</span>
+                            <span class="material-icons" data-toggle="tooltip"
+                                  th:title="#{showShoppingCartIconNavBar}">shopping_cart</span>
 
                         </a>
 
@@ -121,7 +138,7 @@
                         <a th:if="${showManageUserIconNavBar}" href="/accountInfo"
                            class="nav-item nav-link d-none d-lg-block">
 
-                            <span class="material-icons" data-toggle="tooltip" title="My account">
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{showManageUserIconNavBar}">
                                 account_circle</span>
 
                         </a>
@@ -130,7 +147,8 @@
 
                         <a th:if="${showLogoutIconNavBar}" href="/logout" class="nav-item nav-link d-none d-lg-block">
 
-                            <span class="material-icons" data-toggle="tooltip" title="Logout">logout</span>
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{showLogoutIconNavBar}">
+                                logout</span>
 
                         </a>
 
@@ -138,7 +156,8 @@
 
                         <a th:if="${showUserRegisterIconNavBar}" href="/register" class="nav-item nav-link d-none d-lg-block">
 
-                            <span class="material-icons" data-toggle="tooltip" title="Register">person_add_alt</span>
+                            <span class="material-icons" data-toggle="tooltip"
+                                  th:title="#{showUserRegisterIconNavBar}">person_add_alt</span>
 
                         </a>
 
@@ -146,7 +165,8 @@
 
                         <a th:if="${showLoginIconNavBar}" href="/login" class="nav-item nav-link d-none d-lg-block">
 
-                            <span class="material-icons" data-toggle="tooltip" title="Login">login</span>
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{showLoginIconNavBar}">
+                                login</span>
 
                         </a>
 
@@ -158,11 +178,24 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">home</span>
-                                All workouts
+                                <div th:text="#{showAllWorkoutsIconNavBar}"></div>
 
                             </div>
 
                         </a>
+
+                        <a th:if="${showTranslateIconNavBar}" th:href="${translateNavBarPath}"
+                           class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">translate</span>
+                                <div th:text="#{showTranslateIconNavBar}"></div>
+
+                            </div>
+
+                        </a>
+
 
                         <a th:if="${showSearchIconNavBar}" href="#" class="nav-item nav-link d-lg-none"
                            data-toggle="modal" data-target="#btnSearch">
@@ -170,7 +203,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">search</span>
-                                Search for workouts
+                                <div th:text="#{showSearchIconNavBar}"></div>
 
                             </div>
 
@@ -182,7 +215,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">bar_chart</span>
-                                Workout summary
+                                <div th:text="#{showWorkoutSummaryIconNavBar}"></div>
 
                             </div>
 
@@ -194,7 +227,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">event</span>
-                                Reserved workouts
+                                <div th:text="#{showWorkoutReservationsIconNavBar}"></div>
 
                             </div>
 
@@ -206,7 +239,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">more_time</span>
-                                Add new period for workout
+                                <div th:text="#{addPeriodIconNavBar}"></div>
 
                             </div>
 
@@ -217,7 +250,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">apartment</span>
-                                Auditoriums
+                                <div th:text="#{showAuditoriumsIconNavBar}"></div>
 
                             </div>
 
@@ -228,7 +261,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">fitness_center</span>
-                                Add new workout
+                                <div th:text="#{showAddNewWorkoutIconNavBar}"></div>
 
                             </div>
 
@@ -240,7 +273,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">favorite_border</span>
-                                Favorites
+                                <div th:text="#{showFavoritesIconNavBar}"></div>
 
                             </div>
 
@@ -252,7 +285,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">group</span>
-                                Manage users
+                                <div th:text="#{showManageUsersIconNavBar}"></div>
 
                             </div>
 
@@ -264,7 +297,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">shopping_cart</span>
-                                Show workouts in shopping cart
+                                <div th:text="#{showShoppingCartIconNavBar}"></div>
 
                             </div>
 
@@ -276,7 +309,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">account_circle</span>
-                                My account
+                                <div th:text="#{showManageUserIconNavBar}"></div>
 
                             </div>
 
@@ -287,7 +320,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">logout</span>
-                                Logout
+                                <div th:text="#{showLogoutIconNavBar}"></div>
 
                             </div>
 
@@ -298,7 +331,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">person_add_alt</span>
-                                Register
+                                <div th:text="#{showUserRegisterIconNavBar}"></div>
 
                             </div>
 
@@ -309,7 +342,7 @@
                             <div class="inlineFlexNav">
 
                                 <span class="material-icons">login</span>
-                                Login
+                                <div th:text="#{showLoginIconNavBar}"></div>
 
                             </div>
 

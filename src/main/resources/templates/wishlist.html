@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Workouts wishlist</title>
+    <title th:text="#{title_wishlist_page}"></title>
 
     <div th:insert="/fragments/header :: header"></div>
 
@@ -23,8 +23,8 @@
 
                 <tr>
 
-                    <th scope="col"> Workout Name </th>
-                    <th scope="col"> Actions </th>
+                    <th scope="col" th:text="#{colWorkoutName_wishlist_page}"></th>
+                    <th scope="col" th:text="#{colActions_wishlist_page}"></th>
 
                 </tr>
 
@@ -45,8 +45,8 @@
 
                         <div class="inlineFlex alignCenter w-100">
 
-                            <a th:href="@{'/removeWishListItem?id=' + ${tempWishListItems.wishListId}}">
-                                    Remove
+                            <a th:href="@{'/removeWishListItem?id=' + ${tempWishListItems.wishListId}}"
+                                th:text="#{btnRemove_wishlist_page}">
                             </a>
 
                         </div>
