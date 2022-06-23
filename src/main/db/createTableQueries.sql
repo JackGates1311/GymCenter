@@ -93,9 +93,12 @@ CREATE TABLE registeredUser (
 
 CREATE TABLE loyaltyCard (
 
+    loyaltyCardId LONG NOT NULL,
+    workoutId LONG NOT NULL,
 	userId LONG NOT NULL,
 	discount INT NOT NULL,
-    points INT NOT NULL
+    points INT NOT NULL,
+    isApproved BOOLEAN
     
 );
 

@@ -31,6 +31,8 @@ public class NavBarController {
 
         model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
 
+        model.addAttribute("showLoyaltyCardRequestIconNavBar", true);
+        model.addAttribute("showLoyaltyCardIconNavBar", false);
         model.addAttribute("showCommentsIconNavBar", true);
         model.addAttribute("showWorkoutSummaryIconNavBar", true);
         model.addAttribute("showAllWorkoutsIconNavBar", true);
@@ -68,6 +70,8 @@ public class NavBarController {
 
         model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
 
+        model.addAttribute("showLoyaltyCardRequestIconNavBar", false);
+        model.addAttribute("showLoyaltyCardIconNavBar", true);
         model.addAttribute("showCommentsIconNavBar", false);
         model.addAttribute("showWorkoutSummaryIconNavBar", false);
         model.addAttribute("showAllWorkoutsIconNavBar", true);
@@ -104,6 +108,8 @@ public class NavBarController {
 
         model.addAttribute("showSearchIconNavBar", showSearchIconNavBar);
 
+        model.addAttribute("showLoyaltyCardRequestIconNavBar", false);
+        model.addAttribute("showLoyaltyCardIconNavBar", false);
         model.addAttribute("showCommentsIconNavBar", false);
         model.addAttribute("showWorkoutSummaryIconNavBar", false);
         model.addAttribute("showAllWorkoutsIconNavBar", true);

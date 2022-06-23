@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+
+    <title th:text="#{title_loyalty_card_page}"></title>
+
+    <div th:insert="/fragments/header :: header"></div>
+
+</head>
+<body>
+
+    <div th:insert="/fragments/navigationBar :: navBar"></div>
+
+    <div class="center paddingSmall w-90">
+
+        <div class="table-responsive scrollable">
+
+            <table class="table table-bordered w-100">
+
+                <thead class="thead-light">
+
+                <tr>
+
+                    <th scope="col" th:text="#{colUserId_loyalty_card_page}"></th>
+                    <th scope="col" th:text="#{colActions_loyalty_card_page}"></th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="tempLoyaltyCardList:${loyaltyCardList}">
+
+                    <td th:text="${tempLoyaltyCardList.userId}"></td>
+
+                    <td>
+
+                        <div class="inlineFlex w-100">
+
+                            <div class="inlineFlex w-50 alignCenter">
+
+                                <a class="alignRight"
+                                   th:href="@{'/approveLoyaltyCard?id=' + ${tempLoyaltyCardList.loyaltyCardId}}"
+                                   th:text="#{btnApprove_loyalty_card_page}"></a>
+
+                            </div>
+
+                            <div class="inlineFlex w-50 alignCenter">
+
+                                <a th:href="@{'/declineLoyaltyCard?id=' + ${tempLoyaltyCardList.loyaltyCardId}}"
+                                   th:text="#{btnDecline_loyalty_card_page}"></a>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

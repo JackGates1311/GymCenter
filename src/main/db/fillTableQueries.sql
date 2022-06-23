@@ -25,9 +25,10 @@ INSERT INTO registeredUser(userId, userName, userPassword, userEmail, userFirstN
         (7, 'dejan123', 'dejan123', 'dejandejanic@web.com', 'Dejan', 'Dejanic', '1995-10-10', 'Maksut Sadikj 20, Skoplje', '+38942837141', '2022-01-13 17:20:11', 'Customer', false),
         (8, 'ivan123', 'ivan123', 'ivanivanovic@web.com', 'Ivan', 'Ivanovic', '1981-01-01', 'Vasa Raickovica 27, Podgorica', '+38260761683', '2022-01-13 17:33:41', 'Customer', true);
 
-INSERT INTO loyaltyCard(userId, discount, points) VALUES
-	(4, 5, 10),
-    (7, 10, 5);
+INSERT INTO loyaltyCard(loyaltyCardId, workoutId, userId, discount, points, isApproved) VALUES
+	(1, 1, 4, 5, 10, true),
+    (2, 2, 7, 10, 5, true),
+    (3, 0, 5, 0, 0, false);
 
 INSERT INTO workout(workoutId, workoutTypeName, workoutCoaches, workoutDescription, workoutPrice, workoutOrganizationType,
 	workoutLevel, workoutLength, workoutAverageRate, isDeleted, workoutName, workoutImage) VALUES

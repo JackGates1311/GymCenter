@@ -57,6 +57,24 @@
                                 search</span>
                         </a>
 
+                        <!--/*@thymesVar id="showLoyaltyCardIconNavBar" type=""*/-->
+
+                        <a th:if="${showLoyaltyCardIconNavBar}" class="nav-item nav-link d-none d-lg-block"
+                           href="/requestLoyaltyCard">
+
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{showLoyaltyCardIconNavBar}">
+                                add_card</span>
+                        </a>
+
+                        <!--/*@thymesVar id="showLoyaltyCardRequestIconNavBar" type=""*/-->
+
+                        <a th:if="${showLoyaltyCardRequestIconNavBar}" class="nav-item nav-link d-none d-lg-block"
+                           href="/loyaltyCardRequests">
+
+                            <span class="material-icons" data-toggle="tooltip"
+                                  th:title="#{showLoyaltyCardRequestIconNavBar}">credit_card</span>
+                        </a>
+
                         <!--/*@thymesVar id="showCommentsIconNavBar" type=""*/-->
 
                         <a th:if="${showCommentsIconNavBar}" class="nav-item nav-link d-none d-lg-block"
@@ -65,7 +83,6 @@
                             <span class="material-icons" data-toggle="tooltip" th:title="#{showCommentsIconNavBar}">
                                 chat</span>
                         </a>
-
 
                         <!--/*@thymesVar id="showWorkoutSummaryIconNavBar" type=""*/-->
 
@@ -219,7 +236,31 @@
 
                         </a>
 
-                        <a th:if="${showCommentsIconNavBar}" href="//workoutComments?id=-1"
+                        <a th:if="${showLoyaltyCardIconNavBar}" href="/requestLoyaltyCard"
+                           class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">add_card</span>
+                                <div th:text="#{showLoyaltyCardIconNavBar}"></div>
+
+                            </div>
+
+                        </a>
+
+                        <a th:if="${showLoyaltyCardRequestIconNavBar}" href="/loyaltyCardRequests"
+                           class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">credit_card</span>
+                                <div th:text="#{showLoyaltyCardRequestIconNavBar}"></div>
+
+                            </div>
+
+                        </a>
+
+                        <a th:if="${showCommentsIconNavBar}" href="/workoutComments?id=-1"
                            class="nav-item nav-link d-lg-none">
 
                             <div class="inlineFlexNav">
