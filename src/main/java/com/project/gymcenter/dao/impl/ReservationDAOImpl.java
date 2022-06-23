@@ -203,6 +203,27 @@ public class ReservationDAOImpl implements ReservationDAO {
         return jdbcTemplate.query(sqlQuery, new ReservationRowFullMapper());
     }
 
+    @Override
+    public boolean checkUserAbilityToCommentThisWorkout(Long userId, Long workoutId) {
+
+        String sqlQuery = "SELECT periodreserved.periodReservationId, periodreserved.periodId, periodreserved.userId, " +
+                "periodReserved.periodDateTimeReservation FROM periodreserved " +
+                "INNER JOIN period ON periodreserved.periodId = period.periodId WHERE userId = " + userId + "\n" +
+                "AND period.workoutId = " + workoutId + " AND period.workoutDateTimeEnd < NOW();";
+
+        List<PeriodReserved> periodReservedListFound = jdbcTemplate.query(sqlQuery, new ReservationRowMapper());
+
+        if(periodReservedListFound.isEmpty()) {
+
+            return false;
+
+        } else {
+
+            return true;
+        }
+
+    }
+
     private int generatePeriodReservationId() {
 
         String sqlQuery = "SELECT * FROM periodreserved WHERE periodReservationId = " +

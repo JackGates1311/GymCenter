@@ -101,14 +101,15 @@ CREATE TABLE loyaltyCard (
 
 CREATE TABLE workoutComment (
 
-	workoutId LONG NOT NULL,
-    commentAuthorId LONG NOT NULL,
-	commentContent LONGTEXT NOT NULL,
-    commentAverageRate DOUBLE,
+    commentId LONG NOT NULL,
+    userId LONG NOT NULL,
+    workoutId LONG NOT NULL,
+    workoutRate DOUBLE NOT NULL,
     commentDateTimePosted DATETIME NOT NULL,
-    commentAuthorName NVARCHAR(30) NOT NULL,
-    commentStatus ENUM('OnWaiting', 'Approved', 'Declined')
-    
+    commentContent LONGTEXT NOT NULL,
+    commentStatus ENUM('OnWaiting', 'Approved', 'Declined'),
+    postCommentAsGuest BOOLEAN NOT NULL
+
 );
 
 CREATE TABLE shoppingCart (

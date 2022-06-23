@@ -26,4 +26,6 @@ public interface WorkoutDAO {
     public List<Workout> count();
 
     public List<Workout> countBetweenDates(String summaryDateStart, String summaryDateEnd);
+
+    public void updateAverageRate(Workout workout);
 }

@@ -77,6 +77,11 @@ table th, table td {
     width: 40%;
 }
 
+.w-60 {
+
+    width: 60%;
+}
+
 .w-80 {
 
     width: 80%;
@@ -100,6 +105,11 @@ table th, table td {
 .blue {
 
     color: dodgerblue;
+}
+
+.dirty-white {
+
+    background-color: #F8F9FA;
 }
 
 .material-icons {
@@ -179,6 +189,11 @@ table th, table td {
     display: flex;
 }
 
+.card-header {
+
+    height: 45px;
+}
+
 .card-text {
 
     font-size: 12pt;
@@ -247,6 +262,11 @@ table th, table td {
     padding: 3%;
 }
 
+.paddingNone {
+
+    padding:0;
+}
+
 .floatRight {
 
     float: right;
@@ -257,6 +277,12 @@ table th, table td {
 
     display: inline-flex;
     gap: 10px;
+}
+
+.inlineFlexGapSmall {
+
+    display: inline-flex;
+    gap: 5px;
 }
 
 .alignLeft {
@@ -375,3 +401,29 @@ table th, table td {
     scroll-behavior: inherit;
     padding-bottom: 50px;
 }
+
+.commentContainer {
+
+    min-height: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.commentHeader {
+
+    font-size: 11pt;
+    font-style: inherit;
+    font-weight: 500;
+}
+
+.pointerCursor {
+
+    cursor: pointer;
+}
+
+.form-check-label, .form-check-input, .form-check-inline {
+
+    font-size: 12pt;
+    margin:0;
+}
+

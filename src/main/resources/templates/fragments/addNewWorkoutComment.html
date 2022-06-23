@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<body>
+
+    <div th:fragment="addNewWorkoutCommentModal" class="modal fade" tabindex="-1" id="btnAddNewWorkoutComment"
+         role="dialog">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-content">
+
+                <div class="modal-header text-center">
+
+                    <h4 class="modal-title w-100" th:text="#{modalTitle_add_new_workout_comment_page}"></h4>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <form th:action="@{'/postWorkoutComment?id=' + ${workout.workoutId}}"
+                          th:object="${addNewWorkoutCommentForm}" method="post"
+                        id="addNewWorkoutCommentForm" name="addNewWorkoutCommentForm">
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-12 textAlignLeft">
+
+                                <label for="workoutRate" th:text="#{workoutRate_add_new_workout_comment_page}"></label>
+
+                                <select class="form-control text-center" id="workoutRate" name="workoutRate" required="true">
+
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5" selected>5</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-12 textAlignLeft">
+
+                                <label for="workoutCommentContent"
+                                       th:text="#{workoutCommentContent_add_new_workout_comment_page}"></label>
+
+                                <textarea class="form-control" id="workoutCommentContent" name="workoutCommentContent"
+                                          rows="5"></textarea>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-12 textAlignLeft">
+
+                                <label for="userCommentType" th:text="#{userCommentType_add_new_workout_comment_page}">
+                                    </label>
+
+                                <select class="form-control text-center" id="userCommentType" name="userCommentType"
+                                        required="true">
+
+                                    <option value="0"
+                                            th:text="#{selectUserCommentTypePublic_add_new_workout_comment_page}">
+                                    </option>
+
+                                    <option value="1"
+                                            th:text="#{selectUserCommentTypeAnonymous_add_new_workout_comment_page}">
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="col-md-12">
+
+                                <div class="inlineFlex w-100 marginTopDefault">
+
+                                    <input type="button" id="btnCancel" class="btn btn-light"
+                                           data-dismiss="modal" th:value="#{btnCancel}"/>
+
+                                    <input type="submit" id="btnPost" class="btn btn-light"
+                                           th:value="#{btnPostComment_add_new_workout_comment_page}"/>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <script src="js/addNewWorkoutComment.js" type="text/javascript"></script>
+
+    </div>
+
+</body>
+
+</html>

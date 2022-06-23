@@ -57,6 +57,16 @@
                                 search</span>
                         </a>
 
+                        <!--/*@thymesVar id="showCommentsIconNavBar" type=""*/-->
+
+                        <a th:if="${showCommentsIconNavBar}" class="nav-item nav-link d-none d-lg-block"
+                           href="/workoutComments?id=-1">
+
+                            <span class="material-icons" data-toggle="tooltip" th:title="#{showCommentsIconNavBar}">
+                                chat</span>
+                        </a>
+
+
                         <!--/*@thymesVar id="showWorkoutSummaryIconNavBar" type=""*/-->
 
                         <a th:if="${showWorkoutSummaryIconNavBar}" href="/summary"
@@ -204,6 +214,18 @@
 
                                 <span class="material-icons">search</span>
                                 <div th:text="#{showSearchIconNavBar}"></div>
+
+                            </div>
+
+                        </a>
+
+                        <a th:if="${showCommentsIconNavBar}" href="//workoutComments?id=-1"
+                           class="nav-item nav-link d-lg-none">
+
+                            <div class="inlineFlexNav">
+
+                                <span class="material-icons">chat</span>
+                                <div th:text="#{showCommentsIconNavBar}"></div>
 
                             </div>
 

@@ -34,10 +34,18 @@ public class WorkoutDetailsController {
     private WorkoutTypeService workoutTypeService;
 
     @Autowired
+    private ReservationService reservationService;
+
+    @Autowired
+    private WorkoutCommentService workoutCommentService;
+
+    @Autowired
     NavBarController navBarController = new NavBarController();
 
     @RequestMapping(value="/workoutDetails")
     public String workoutDetails(@RequestParam Long id, Model model, HttpServletRequest request, @RequestParam(required = false) String lang) {
+
+        //TODO refactor it
 
         if(request.getSession().getAttribute("currentUserRole") != null) {
 
@@ -45,6 +53,7 @@ public class WorkoutDetailsController {
                     String.valueOf(UserRole.Customer))) {
 
                 Long userId = Long.parseLong(String.valueOf(request.getSession().getAttribute("loggedInUserId")));
+
                 model.addAttribute("workoutListPeriod", periodService.findAvailablePeriodsByWorkoutId(id, userId));
 
             }
@@ -66,13 +75,21 @@ public class WorkoutDetailsController {
             navBarController.setNavBarGuest(navBarTitle, "/workoutDetails?id=" + id,
                     navBarLanguagePath, false, true, model);
 
-            model.addAttribute("showEditWorkoutButton", false);
+            model.addAttribute("showCommentsButton", true);
 
         } else if (Objects.equals(request.getSession().getAttribute("currentUserRole").toString(),
                 String.valueOf(UserRole.Customer))) {
 
             navBarController.setNavBarCustomer(navBarTitle, "/workoutDetails?id=" + id,
                     navBarLanguagePath, false, true, model);
+
+            Long userId = Long.parseLong(String.valueOf(request.getSession().getAttribute("loggedInUserId")));
+
+            if(reservationService.checkUserAbilityToCommentThisWorkout(userId, id) &&
+                    !workoutCommentService.checkIfUserIsAlreadyCommentedOnWorkout(userId, id)) {
+
+                model.addAttribute("showAddCommentButton", true);
+            }
 
             model.addAttribute("showReservePeriodButton", true);
             model.addAttribute("showAddToWishListButton", true);

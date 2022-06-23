@@ -20,4 +20,6 @@ public interface ReservationDAO {
     public List<PeriodReserved> findAll();
 
     public List<PeriodReserved> find(String customerFilter, String reservationSortBy);
+
+    public boolean checkUserAbilityToCommentThisWorkout(Long userId, Long workoutId);
 }

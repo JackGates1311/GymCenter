@@ -18,7 +18,7 @@
 
         <div class="row">
 
-            <div class="center col-lg-6 com-md-6 col-sm-12 col-xs-12 mb-12">
+            <div class="center col-lg-7 com-md-7 col-sm-12 col-xs-12 mb-12">
 
                 <p th:text="@{#{workoutName_workout_details_page} + ' ' + ${workout.workoutName}}"/>
 
@@ -31,7 +31,7 @@
 
                 <p th:text="@{#{workoutLevel_workout_details_page} + ' ' + ${workout.workoutLevel}}"/>
 
-                <p th:text="@{#{workoutLength_workout_details_page} + ' ' + ${workout.workoutLength} + ' minutes'}"/>
+                <p th:text="@{#{workoutLength_workout_details_page} + ' ' + ${workout.workoutLength} + ' min'}"/>
 
                 <p th:text="@{#{workoutAverageRate_workout_details_page} + ' ' + ${workout.workoutAverageRate}}"/>
 
@@ -43,18 +43,22 @@
                        data-target="#btnAddWorkoutToShoppingCart"
                        th:text="#{btnAddWorkoutToShoppingCart_workout_details_page}"></a>
 
-                    <a th:if="${showAddToWishListButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
+                    <a th:if="${showAddToWishListButton}" th:href="@{'/addWorkoutToWishlist?id=' + ${workout.workoutId}}"
                        class="btn btn-light alignCenter" th:text="#{btnAddToWishlist_workout_details_page}"></a>
 
-
-                    <a th:if="${showCommentsButton}" th:href="@{'/editWorkoutDetails?id=' + ${workout.workoutId}}"
+                    <a th:if="${showCommentsButton}" th:href="@{'/workoutComments?id=' + ${workout.workoutId}}"
                            class="btn btn-light alignCenter" th:text="#{btnComments_workout_details_page}"></a>
+
+                    <div th:insert="/fragments/addNewWorkoutComment :: addNewWorkoutCommentModal"></div>
+
+                    <a th:if="${showAddCommentButton}" data-toggle="modal" data-target="#btnAddNewWorkoutComment"
+                       class="btn btn-light alignCenter" th:text="#{btnAddComment_workout_details_page}"></a>
 
                 </div>
 
             </div>
 
-            <div class="col-lg-6 com-md-4 col-sm-12 col-xs-12 mb-12">
+            <div class="col-lg-5 com-md-5 col-sm-12 col-xs-12 mb-12">
 
                 <div class="flexCenter">
 

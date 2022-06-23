@@ -56,4 +56,10 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationDAO.find(customerFilter, reservationSortBy);
     }
+
+    @Override
+    public boolean checkUserAbilityToCommentThisWorkout(Long userId, Long workoutId) {
+
+        return reservationDAO.checkUserAbilityToCommentThisWorkout(userId, workoutId);
+    }
 }

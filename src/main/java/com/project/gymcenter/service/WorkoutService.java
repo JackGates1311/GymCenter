@@ -25,4 +25,5 @@ public interface WorkoutService {
 
     public List<Workout> countBetweenDates(String summaryDateStart, String summaryDateEnd);
 
+    public void updateAverageRate(Workout workout);
 }

@@ -21,4 +21,6 @@ public interface ReservationService {
     public void deleteById(Long id);
 
     public List<PeriodReserved> find(String customerFilter, String reservationSortBy);
+
+    public boolean checkUserAbilityToCommentThisWorkout(Long userId, Long workoutId);
 }

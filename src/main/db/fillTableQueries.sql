@@ -31,14 +31,14 @@ INSERT INTO loyaltyCard(userId, discount, points) VALUES
 
 INSERT INTO workout(workoutId, workoutTypeName, workoutCoaches, workoutDescription, workoutPrice, workoutOrganizationType,
 	workoutLevel, workoutLength, workoutAverageRate, isDeleted, workoutName, workoutImage) VALUES
-        (1, 'Yoga, Step', 'jovana123', 'Yoga helps to relax better', 1200, 'Individual', 'Amateur', 120, NULL, false, 'Workout 1', 'images/yoga.png'),
-		(2, 'Yoga', 'branko123/milan123', 'Yoga helps to relax better', 800, 'Group', 'Medium', 150, 8, false, 'Workout 2', 'images/yoga.png'),
-        (3, 'Fitness', 'branko123', 'Fitness improves your health and mood', 1400, 'Individual', 'Advanced', 240, 9, false, 'Workout 3', 'images/fitness.png'),
+        (1, 'Yoga, Step', 'jovana123', 'Yoga helps to relax better', 1200, 'Individual', 'Amateur', 120, 4, false, 'Workout 1', 'images/yoga.png'),
+		(2, 'Yoga', 'branko123/milan123', 'Yoga helps to relax better', 800, 'Group', 'Medium', 150, 4, false, 'Workout 2', 'images/yoga.png'),
+        (3, 'Fitness', 'branko123', 'Fitness improves your health and mood', 1400, 'Individual', 'Advanced', 240, 4.5, false, 'Workout 3', 'images/fitness.png'),
         (4, 'Fitness, Cardio', 'jovana123/milan123', 'Fitness improves your health and mood', 1000, 'Group', 'Amateur', 120, NULL, false, 'Workout 4', 'images/fitness.png'),
         (5, 'Cardio', 'jovana123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1500, 'Individual', 'Advanced', 240, NULL, false, 'Workout 5', 'images/cardio.png'),
-        (6, 'Cardio', 'jovana123/branko123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1100, 'Group', 'Amateur', 240, 9, false, 'Workout 6', 'images/cardio.png'),
-        (7, 'Yoga', 'branko123', 'Yoga helps to relax better', 1300, 'Individual', 'Medium', 150, 10, true, 'Workout 7', 'images/yoga.png'),
-        (8, 'Cardio', 'jovana123/branko123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1200, 'Group', 'Amateur', 120, NULL, true, 'Workout 8', 'images/cardio.png');
+        (6, 'Cardio', 'jovana123/branko123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1100, 'Group', 'Amateur', 240, 4.5, false, 'Workout 6', 'images/cardio.png'),
+        (7, 'Yoga', 'branko123', 'Yoga helps to relax better', 1300, 'Individual', 'Medium', 150, 5, true, 'Workout 7', 'images/yoga.png'),
+        (8, 'Cardio', 'jovana123/branko123', 'Cardio training is the most effective way to remove fet layers, achieve and maintain condition', 1200, 'Group', 'Amateur', 120, 4.5, true, 'Workout 8', 'images/cardio.png');
 
 INSERT INTO workoutIncludedTypes(workoutId, workoutTypeName) VALUES
     (1, 'Yoga'), (1, 'Step'), (2, 'Yoga'), (3, 'Fitness'), (4, 'Fitness'), (4, 'Cardio'), (5, 'Cardio'), (6, 'Cardio'),
@@ -93,11 +93,13 @@ INSERT INTO periodReserved(periodReservationId, periodId, userId, periodDateTime
     (5, 3, 5, '2022-05-17 14:00:00'),
     (6, 4, 4, '2022-06-18 16:00:00');
     
-INSERT INTO workoutComment(workoutId, commentAuthorId, commentContent, commentAverageRate, commentDateTimePosted, commentAuthorName, commentStatus) VALUES
-    (2, 4, 'Sve kao sto sam i ocekivao', 9, '2022-01-15 19:38:23', 'bojana123', 'Approved'),
-    (2, 6, 'Neke stvari mogu da se unaprede u vezi ovog termina', NULL, '2021-01-19 13:23:33', 'jovan123', 'OnWaiting'),
-    (7, 4, 'Termin uopste nije bio u skladu sa mojim ocekivanjima', NULL, '2022-01-18 20:00:12', 'bojana123', 'Declined'),
-    (5, 7, 'Usluga na nivou', NULL, '2022-01-20 00:00:12', 'dejan123', 'OnWaiting');
+INSERT INTO workoutComment(commentId, userId, workoutId, workoutRate, commentDateTimePosted, commentContent,
+                           commentStatus, postCommentAsGuest) VALUES
+    (1, 9, 14, 4, '2022-06-22 15:37:00', 'I am excited about this workout. Recommendations for this workout',
+     'Approved', 0),
+    (2, 7, 14, 5, '2022-06-20 13:37:00', 'Good service', 'Approved', 0),
+    (3, 4, 10, 4, '2022-06-18 13:02:00', 'Service can be a little bit better', 'Approved', 0),
+    (4, 4, 2, 4, '2022-03-21 21:00:00', 'I hate this workout without any reason', 'Declined', 1);
     
 INSERT INTO shoppingCart(shoppingCartId, periodId, userId) VALUES 
 (1, 1, 6),

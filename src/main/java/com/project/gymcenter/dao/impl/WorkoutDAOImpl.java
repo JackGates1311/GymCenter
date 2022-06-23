@@ -180,6 +180,14 @@ public class WorkoutDAOImpl implements WorkoutDAO {
     }
 
     @Override
+    public void updateAverageRate(Workout workout) {
+
+        String sqlQuery = "UPDATE workout SET workoutAverageRate = ? WHERE workoutId = ?";
+
+        jdbcTemplate.update(sqlQuery, workout.getWorkoutAverageRate(), workout.getWorkoutId());
+    }
+
+    @Override
     public int generateWorkoutId() {
 
         String sqlQuery = "SELECT * FROM workout WHERE workoutId = " +

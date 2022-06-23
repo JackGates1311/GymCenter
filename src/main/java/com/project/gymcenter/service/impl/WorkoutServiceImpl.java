@@ -61,4 +61,10 @@ public class WorkoutServiceImpl implements WorkoutService {
         return workoutDAO.countBetweenDates(summaryDateStart, summaryDateEnd);
     }
 
+    @Override
+    public void updateAverageRate(Workout workout) {
+
+        workoutDAO.updateAverageRate(workout);
+    }
+
 }
